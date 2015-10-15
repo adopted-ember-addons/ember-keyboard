@@ -37,16 +37,25 @@ const gatherKeys = function gatherKeys(event) {
 };
 
 export default function handleKeyEvent(event, responderStack) {
-  let triggeredVariant;
   const keys = gatherKeys(event);
   const variants = gatherEventNameVariants(event, keys);
 
-  // Finds the first responder with a registered listener for one of the variants
-  const responder = responderStack.find((responder) => {
-    return triggeredVariant = variants.find((variant) => hasListeners(responder, variant));
-  });
+  // bug note: would prefer to use `responderStack.get('firstObject')` here, but it's returning the
+  // firstObject prior to sorting
+  const priority = responderStack[0].get('keyboardPriority');
 
-  if (responder) {
-    responder.trigger(triggeredVariant);
-  }
+  // trigger the event on all responders in the priority level
+  const responder = responderStack.find((responder) => {
+    // responders are sorted by priority (ascending). short-circuit `find` once the responders
+    // exceed the initial responder's priority
+    if (responder.get('keyboardPriority') !== priority) {
+      return true;
+    }
+
+    const triggeredVariant = variants.find((variant) => hasListeners(responder, variant));
+
+    if (triggeredVariant) {
+      responder.trigger(triggeredVariant);
+    }
+  });
 }

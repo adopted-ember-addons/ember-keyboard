@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 
+const search = '.input';
 const modal = '.modal';
 const modalCounter = '.modal-counter';
 const standAloneCounter = '.standalone-counter';
@@ -33,5 +34,10 @@ test('run the paces', function(assert) {
   }).then(() => {
     assert.equal(Ember.$(modalCounter).text().trim(), '1', 'modal counter respond to keydown event');
     assert.equal(Ember.$(standAloneCounter).text().trim(), '-1', 'standalone counter is blocked by modal counter');
+
+    // press 's'
+    return keyEvent(document, 'keyup', 83);
+  }).then(() => {
+    assert.ok(!Ember.$(search).is(':focus'), 'event does not bubble after modal');
   });
 });
