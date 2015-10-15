@@ -1,3 +1,20 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class='container'>
+  <h1>Ember Keyboard Demo</h1>
+  <aside>
+    <ul>
+      <li>Press `s` to focus the search-bar</li>
+      <li>Press the left and right arrow keys to adjust the counter</li>
+      <li>Press `ctrl+shift+a` to open the counter modal</li>
+      <li>Note that when you adjust the modal's counter, the stand-alone counter is unchanged</li>
+      <li>Press `Esc` to close the modal</li>
+    </ul>
+  </aside>
 
-{{outlet}}
+  {{search-bar}}
+
+  {{#modal-container}}
+    {{counter-box classNames='modal-counter'}}
+  {{/modal-container}}
+
+  {{counter-box classNames='standalone-counter'}}
+</div>

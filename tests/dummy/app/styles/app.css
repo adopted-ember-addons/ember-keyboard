@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  width: 60vw;
+  margin: 0 auto;
+}
+
+.input {
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+
+  display: inline-block;
+  width: 20vw;
+}
+
+.modal {
+  position: absolute;
+  top: 18vh;
+  left: 18vw;
+  right: 18vw;
+  height: 38vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: white;
+  border: thin solid black;
+  text-align: center;
+}
