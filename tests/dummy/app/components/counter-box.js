@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { keyDown } from 'ember-keyboard';
 
 const {
   Component,
@@ -19,11 +20,11 @@ export default Component.extend({
     this.get('keyboard').deactivate(this);
   }),
 
-  decrementCounter: on('keyDown:ArrowLeft', function() {
+  decrementCounter: keyDown('ArrowLeft', function() {
     this.decrementProperty('counter');
   }),
 
-  incrementCounter: on('keyDown:ArrowRight', function() {
+  incrementCounter: keyDown('ArrowRight', function() {
     this.incrementProperty('counter');
   })
 });

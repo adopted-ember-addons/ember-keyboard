@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { keyUp } from 'ember-keyboard';
 
 const {
   Component,
@@ -14,7 +15,7 @@ export default Component.extend({
     this.get('keyboard').activate(this);
   }),
 
-  openModal: on('keyUp:ctrl+shift+a', function() {
+  openModal: keyUp('ctrl+shift+a', function() {
     this.set('isOpen', true);
   }),
 
