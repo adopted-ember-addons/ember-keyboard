@@ -8,19 +8,26 @@ const {
 } = Ember;
 
 export default Service.extend({
-  responderStack: computed(() => Ember.A()),
+  _responderStack: computed(() => Ember.A()),
 
   activate(responder) {
-    const responderStack = this.get('responderStack');
-
     // ensure the responder appears only once in the stack
-    responderStack.removeObject(responder);
-    responderStack.unshiftObject(responder);
+    this.deactivate(responder);
+    this.get('_responderStack').pushObject(responder);
   },
 
   deactivate(responder) {
-    this.get('responderStack').removeObject(responder);
+    this.get('_responderStack').removeObject(responder);
   },
+
+  sortedResponderStack: computed('_responderStack.@each.keyboardPriority',
+                                 '_responderStack.@each.keyboardFirstResponder', {
+    get() {
+      return this.get('_responderStack').sort((a, b) => {
+        return b.keyboardPriority - a.keyboardPriority;
+      });
+    }
+  }).readOnly(),
 
   _initializeListener: on('init', function() {
     const eventNames = ['keyup', 'keydown'].map(function(name) {
@@ -28,7 +35,7 @@ export default Service.extend({
     }).join(' ');
 
     Ember.$(document).on(eventNames, null, (event) => {
-      handleKeyEvent(event, this.get('responderStack'));
+      handleKeyEvent(event, this.get('sortedResponderStack'));
     });    
   }),
 

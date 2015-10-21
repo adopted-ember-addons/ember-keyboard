@@ -12,8 +12,8 @@
 
   {{search-bar}}
 
-  {{#modal-container}}
-    {{counter-box classNames='modal-counter'}}
+  {{#modal-container modalKeyboardPriority=1}}
+    {{counter-box classNames='modal-counter' keyboardPriority=1}}
   {{/modal-container}}
 
   {{counter-box classNames='standalone-counter'}}

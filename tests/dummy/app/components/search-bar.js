@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { keyUp } from 'ember-keyboard';
 
 const {
   Component,
@@ -17,7 +18,7 @@ export default Component.extend({
     this.get('keyboard').activate(this);
   }),
 
-  focusOnS: on('keyUp:s', function() {
+  focusOnS: keyUp('s', function() {
     this.$().focus();
   })
 });
