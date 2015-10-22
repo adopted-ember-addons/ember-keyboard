@@ -28,3 +28,23 @@
   border: thin solid black;
   text-align: center;
 }
+
+.counter-aside {
+  float: left;
+}
+
+.mixin-test-buttons {
+  float: right;
+}
+
+.mixin-component {
+  margin-top: 1%;
+  border: thin solid black;
+  padding: 1%;
+}
+
+aside {
+  margin-top: 5vh;
+  padding: 1%;
+  border: thin solid black;
+}

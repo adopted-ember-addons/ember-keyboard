@@ -3,15 +3,18 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('service:keyboard', 'Unit | Service | keyboard');
 
-// transforms Ember.Objects and Ember.Arrays into normal objects and arrays
+// transforms EventedObjects and Ember.Arrays into normal objects and arrays
 const normalize = function normalize(data) {
   return JSON.parse(JSON.stringify(data));
 };
 
+// Since `activate` call `.on` on the responder, we need to make sure we're using evented objects
+const EventedObject = Ember.Object.extend(Ember.Evented);
+
 test('`activate` adds the supplied responder to the _responderStack', function(assert) {
   const service = this.subject();
-  const responder = Ember.Object.create({ name: 'foo' });
-  const secondResponder = Ember.Object.create({ name: 'bar' });
+  const responder = EventedObject.create({ name: 'foo' });
+  const secondResponder = EventedObject.create({ name: 'bar' });
 
   service.activate(responder);
   assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder]), 'adds responder to sortedResponderStack');
@@ -25,10 +28,10 @@ test('`activate` adds the supplied responder to the _responderStack', function(a
 
 test('`sortedResponderStack` sorts the sortedResponderStack by priorty', function(assert) {
   const service = this.subject();
-  const responder = Ember.Object.create({ name: 'foo', keyboardPriority: 2 });
-  const secondResponder = Ember.Object.create({ name: 'bar', keyboardPriority: 1 });
-  const thirdResponder = Ember.Object.create({ name: 'baz' });
-  const fourthResponder = Ember.Object.create({ name: 'beetle' });
+  const responder = EventedObject.create({ name: 'foo', keyboardPriority: 2 });
+  const secondResponder = EventedObject.create({ name: 'bar', keyboardPriority: 1 });
+  const thirdResponder = EventedObject.create({ name: 'baz' });
+  const fourthResponder = EventedObject.create({ name: 'beetle' });
 
   service.activate(responder);
   service.activate(secondResponder);
@@ -42,7 +45,7 @@ test('`sortedResponderStack` sorts the sortedResponderStack by priorty', functio
 
 test('`deactivate` removes the supplied responder from the _responderStack', function(assert) {
   const service = this.subject();
-  const responder = Ember.Object.create({ name: 'bar' });
+  const responder = EventedObject.create({ name: 'bar' });
 
   service.activate(responder);
   service.deactivate(responder);
