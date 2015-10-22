@@ -13,6 +13,14 @@
   width: 20vw;
 }
 
+.textarea {
+  clear: both;
+  margin-top: 4%;
+  width: 100%;
+  height: 20vh;
+  resize: none;
+}
+
 .modal {
   position: absolute;
   top: 18vh;

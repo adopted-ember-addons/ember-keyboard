@@ -3,6 +3,7 @@ import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
 
 const search = '.input';
+const textarea = '.textarea';
 const modal = '.modal';
 const modalCounter = '.modal-counter';
 const standAloneCounter = '.standalone-counter';
@@ -34,6 +35,34 @@ test('test standard functionality', function(assert) {
   }).then(() => {
     assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'counter respond to keydown event');
 
+    return triggerEvent(search, 'focus');
+  }).then(() => {
+    // press 'ArrowLeft' from within an input
+    return keyEvent(search, 'keydown', 37);
+  }).then(() => {
+    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'focused input prevents event bubbling');
+
+    return triggerEvent(search, 'blur');
+  }).then(() => {
+    // press 'ArrowLeft' from within an input
+    return keyEvent(document, 'keydown', 37);
+  }).then(() => {
+    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-2', 'bluring an input reenables event bubbling');
+
+    return triggerEvent(textarea, 'focus');
+  }).then(() => {
+    // press 'ArrowLeft' from within an textarea
+    return keyEvent(textarea, 'keydown', 37);
+  }).then(() => {
+    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-2', 'focused textarea prevents event bubbling');
+
+    return triggerEvent(textarea, 'blur');
+  }).then(() => {
+    // press 'ArrowLeft' from within a textarea
+    return keyEvent(textarea, 'keydown', 37);
+  }).then(() => {
+    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-3', 'bluring a textarea reenables event bubbling');
+
     // press 'cltr+shift+a'
     return triggerEvent(document, 'keyup', { keyCode: 65, which: 65, ctrlKey: true, shiftKey: true });
   }).then(() => {
@@ -43,7 +72,7 @@ test('test standard functionality', function(assert) {
     return keyEvent(document, 'keydown', 39); 
   }).then(() => {
     assert.equal(Ember.$(modalCounter).text().trim(), '1', 'modal counter respond to keydown event');
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'standalone counter is blocked by modal counter');
+    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-3', 'standalone counter is blocked by modal counter');
 
     // press 's'
     return keyEvent(document, 'keyup', 83);

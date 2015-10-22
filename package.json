@@ -1,7 +1,7 @@
 {
   "name": "ember-keyboard",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "An Ember.js addon for the painless support of keyboard events",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/null-null-null/ember-keyboard",
   "engines": {
     "node": ">= 0.10.0"
   },

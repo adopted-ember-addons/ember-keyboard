@@ -1,15 +1,14 @@
 import Ember from 'ember';
-import { ActivateKeyboardOnInsertMixin, keyUp } from 'ember-keyboard';
+import { keyUp } from 'ember-keyboard';
 
-const { Component } = Ember;
+const { TextField } = Ember;
 
-export default Component.extend(ActivateKeyboardOnInsertMixin, {
+export default TextField.extend({
   name: 'Search Bar',
 
   attributeBindings: ['placeholder'],
   classNames: ['input'],
-  placeholder: 'search-bar',
-  tagName: 'input',
+  placeholder: 'Events won\'t bubble while inputs and textareas are focused',
 
   focusOnS: keyUp('s', function() {
     this.$().focus();
