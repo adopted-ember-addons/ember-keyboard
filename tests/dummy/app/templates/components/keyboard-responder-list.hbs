@@ -1,0 +1,10 @@
+<ul class='keyboard-responder-list'>
+  {{#each keyboard.sortedResponderStack as |responder|}}
+    {{#if responder.showInMixinList}}
+      <li>
+        name: <span class='responder-name'>{{responder.name}}</span>;
+        keyboardPriority: <span class='keyboard-priority'>{{responder.keyboardPriority}}</span>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>

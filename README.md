@@ -49,16 +49,14 @@ The modifier keys include `ctrl`, `shift`, `alt`, and `meta`. For a full list of
 Finally, when you're ready for a component to leave the `eventStack` you can deactivate it:
 
 ```js
-deactivateKeyboard: on('willDestroyElement', function() {
+deactivateKeyboard: on('arbitraryTrigger', function() {
   this.get('keyboard').deactivate(this);
 })
 ```
 
-## Responder Properties
+Note that components will automatically be deactivated on `willDestroyElement`.
 
-`ember-keyboard` will search the components in its `eventStack` for optional properties. These options provide greater control over `ember-keyboard`'s event bubbling.
-
-### `keyboardPriority`
+## `keyboardPriority`
 
 By default, all activated components are treated as equal. If you have two components that respond to `ctrl+a`, then both will get triggered when there's a `ctrl+a` event. However, this behavior is undesirable in some scenarios. What if you have a modal open, and you only want it and its child components to respond to key events. You can get this behavior by assigning a priority to the modal and its children:
 
@@ -72,19 +70,66 @@ modalChild.set('keyboardPriority', 1);
 
 In this scenario, when a key is pressed both `modal` and `modalChild` will have a chance to respond to it, while the remaining components will not. Once `modal` and `modalChild` are deactivated or their priority is removed, then `lowPriorityComponent` and `noPriorityComponent` will respond to key events.
 
-Note that priority is descending, so higher numbers have precedence.
+Perhaps more convenientally, this property can be passed in through your template:
 
-### `keyboardFirstResponder`
-
-Sometimes you'll want a component to temporarily become the first responder, regardless of its priority. For instance, a user might click or focusIn an unprioritized item. When that happens, you can temporarily give it first responder priority by:
-
-```js
-keyboard.activate(component);
-
-component.set('keyboardFirstPriority', true);
+```hbs
+{{my-component keyboardPriority=1}}
+{{my-dynamic-component keyboardPriority=dynamicPriority}}
 ```
 
-You can later `component.set('keyboardFirstResponder', false)` and the component will automatically return to its original priority. Additionally, if you set another component to `keyboardFirstResponder`, the previous `keyboardFirstResponder` will return to its old priority.
+Note that priority is descending, so higher numbers have precedence.
+
+## Mixins
+
+To reduce boilerplate, `ember-keyboard` includes several mixins with common patterns.
+
+### ActivateKeyboardOnInsertMixin
+
+`import { ActivateKeyboardOnInsertMixin } from 'ember-keyboard';`
+
+This mixin will activate the component on `didInsertElement`, and as per normal, it will deactivate on `illDestroyElement`.
+
+### ActivateKeyboardOnFocusMixin
+
+`import { ActivateKeyboardOnFocusMixin } from 'ember-keyboard';`
+
+This mixin will activate the component whenever it receives focus and deactivate it when it loses focus.
+
+Note that to ensure that the component is focusable, it sets `tabindex` to 0.
+
+### KeyboardFirstResponderMixin
+
+`import { KeyboardFirstResponderMixin } from 'ember-keyboard';`
+
+This mixin does not activate or deactivate the component. Instead, it allows you to make a component the first and only responder, regardless of its initial `keyboardPriority`. This can be useful if you want a low-priority component to temporarily gain precedence over everything else. When it resigns its first responder status, it automatically returns to its previous priority. Note that if you assign a second component first responder status, the first one will in turn lose first responder status.
+
+To make this possible, this mixin adds two functions to the component:
+
+#### becomeFirstResponder
+
+```js
+// from within the component
+this.becomeFirstResponder();
+```
+
+Makes the component the first responder. It will be activated (`ember-keyboard.activate()`) if it has not yet been.
+
+Note: This is accomplished by assigning the component a ridiculously high `keyboardPriority` (9999999999999). If you manually change its priority after it becomes first responder, it will lose first responder status.
+
+#### resignFirstResponder
+
+```js
+// from within the component
+this.resignFirstResponder();
+```
+
+Resigns first responder status, in the process returning to its previous priority.
+
+### KeyboardFirstResponderOnFocusMixin
+
+`import { KeyboardFirstResponderOnFocusMixin } from 'ember-keyboard';`
+
+This mixin grants the component first responder status while it is focused. When it loses focus, it resigns its status.
 
 ## Concepts & Advanced Usage
 

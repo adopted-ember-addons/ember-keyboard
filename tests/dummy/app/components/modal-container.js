@@ -1,19 +1,12 @@
 import Ember from 'ember';
-import { keyUp } from 'ember-keyboard';
+import { ActivateKeyboardOnInsertMixin, keyUp } from 'ember-keyboard';
 
-const {
-  Component,
-  inject,
-  on
-} = Ember;
+const { Component } = Ember;
 
-export default Component.extend({
+export default Component.extend(ActivateKeyboardOnInsertMixin, {
+  name: 'Modal Container',
+
   isOpen: false,
-  keyboard: inject.service(),
-
-  activateKeyboard: on('didInsertElement', function() {
-    this.get('keyboard').activate(this);
-  }),
 
   openModal: keyUp('ctrl+shift+a', function() {
     this.set('isOpen', true);

@@ -1,22 +1,15 @@
 import Ember from 'ember';
-import { keyUp } from 'ember-keyboard';
+import { ActivateKeyboardOnInsertMixin, keyUp } from 'ember-keyboard';
 
-const {
-  Component,
-  inject,
-  on
-} = Ember;
+const { Component } = Ember;
 
-export default Component.extend({
+export default Component.extend(ActivateKeyboardOnInsertMixin, {
+  name: 'Search Bar',
+
   attributeBindings: ['placeholder'],
   classNames: ['input'],
-  keyboard: inject.service(),
   placeholder: 'search-bar',
   tagName: 'input',
-
-  activateKeyboard: on('didInsertElement', function() {
-    this.get('keyboard').activate(this);
-  }),
 
   focusOnS: keyUp('s', function() {
     this.$().focus();

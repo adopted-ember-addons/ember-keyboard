@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import KEY_MAP from 'ember-keyboard/fixtures/key-map';
 
-const { hasListeners } = Ember;
+const {
+  hasListeners,
+  isEmpty
+} = Ember;
 
 // joins and sorts any active modifier keys with the primary key.
 const gatherKeys = function gatherKeys(event) {
@@ -17,6 +20,8 @@ const gatherKeys = function gatherKeys(event) {
 };
 
 export default function handleKeyEvent(event, responderStack) {
+  if (isEmpty(responderStack)) { return; }
+
   const keys = gatherKeys(event);
   const listener = `${event.type}:${keys}`;
 

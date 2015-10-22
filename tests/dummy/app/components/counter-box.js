@@ -1,24 +1,13 @@
 import Ember from 'ember';
-import { keyDown } from 'ember-keyboard';
+import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown } from 'ember-keyboard';
 
-const {
-  Component,
-  inject,
-  on
-} = Ember;
+const { Component } = Ember;
 
-export default Component.extend({
+export default Component.extend(KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, {
+  name: 'Counter Box',
+
   classNames: ['counter-box'],
   counter: 0,
-  keyboard: inject.service(),
-
-  activateKeyboard: on('didInsertElement', function() {
-    this.get('keyboard').activate(this);
-  }),
-
-  deactivateKeyboard: on('willDestroyElement', function() {
-    this.get('keyboard').deactivate(this);
-  }),
 
   decrementCounter: keyDown('ArrowLeft', function() {
     this.decrementProperty('counter');
