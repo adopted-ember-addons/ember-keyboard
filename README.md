@@ -4,10 +4,10 @@
 
 ## Features
 
-* Contextual responders, allowing you to manage multiple components with unique and conflicting key requirements. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
+* Dynamic priority levels allow you to specify which components respond first to key events and under what circumstances. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
 * Human-readable key-mappings. (Thanks to [`ember-keyboard-service`](https://github.com/Fabriquartz/ember-keyboard-service) for the inspiration)
 * Support for both `keyUp` and `keyDown`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
-* Non-invasive, service-based injection.
+* Conventional Ember architecture and service-based injection.
 * Compatible with both Ember 1.13 and 2.0+.
 
 ## Usage
@@ -87,7 +87,7 @@ To reduce boilerplate, `ember-keyboard` includes several mixins with common patt
 
 `import { ActivateKeyboardOnInsertMixin } from 'ember-keyboard';`
 
-This mixin will activate the component on `didInsertElement`, and as per normal, it will deactivate on `illDestroyElement`.
+This mixin will activate the component on `didInsertElement`, and as per normal, it will deactivate on `willDestroyElement`.
 
 ### ActivateKeyboardOnFocusMixin
 
@@ -95,7 +95,7 @@ This mixin will activate the component on `didInsertElement`, and as per normal,
 
 This mixin will activate the component whenever it receives focus and deactivate it when it loses focus.
 
-Note that to ensure that the component is focusable, it sets `tabindex` to 0.
+Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
 
 ### KeyboardFirstResponderMixin
 
@@ -131,7 +131,20 @@ Resigns first responder status, in the process returning to its previous priorit
 
 This mixin grants the component first responder status while it is focused. When it loses focus, it resigns its status.
 
-## Concepts & Advanced Usage
+Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
+
+## Special Cases & Advanced Usage
+
+### `Ember.TextField` && `Ember.TextArea`
+
+To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've included an initializer that reopens `Ember.TextField` and `Ember.TextArea` and applies the `ActivateKeyboardOnInsertMixin` and `KeyboardFirstResponderOnFocusMixin`. Effectively, this means that anytime an input is focused, it will be first responder, preventing other events from firing. So for instance, if you've registered a high-priority listener to `keyUp('a')`, it won't fire every time the user presses 'a'. Nevertheless, if you've created a component extending from either `Ember.TextField` or `Ember.TextArea`, you can assign key listeners to it like any other component and it will respond as expected. This allows, for instance, for rich text editors to italicize text with `keyUp('ctrl+i')`.
+
+You get all this for free when you use the `input` and `textarea` helpers:
+
+```hbs
+{{input}}
+{{textarea}}
+```
 
 ### `keyUp` and `keyDown`
 
