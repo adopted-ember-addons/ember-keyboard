@@ -3,13 +3,18 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('service:keyboard', 'Unit | Service | keyboard');
 
+const {
+  Evented,
+  get
+} = Ember;
+
 // transforms EventedObjects and Ember.Arrays into normal objects and arrays
 const normalize = function normalize(data) {
   return JSON.parse(JSON.stringify(data));
 };
 
 // Since `activate` call `.on` on the responder, we need to make sure we're using evented objects
-const EventedObject = Ember.Object.extend(Ember.Evented);
+const EventedObject = Ember.Object.extend(Evented);
 
 test('`activate` adds the supplied responder to the _responderStack', function(assert) {
   const service = this.subject();
@@ -24,6 +29,9 @@ test('`activate` adds the supplied responder to the _responderStack', function(a
 
   service.activate(secondResponder);
   assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder, secondResponder]), 'adds to the top of the stack');
+
+  service.activate();
+  assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder, secondResponder]), 'passing no arguments will not result in an undefined element');
 });
 
 test('`sortedResponderStack` sorts the sortedResponderStack by priorty', function(assert) {
@@ -50,4 +58,14 @@ test('`deactivate` removes the supplied responder from the _responderStack', fun
   service.activate(responder);
   service.deactivate(responder);
   assert.deepEqual(normalize(service.get('sortedResponderStack')), [], 'removes responder from sortedResponderStack');
+});
+
+test('`_teardownListener` removes the jquery listeners', function(assert) {
+  const service = this.subject();
+
+  service._teardownListener();
+  
+  const listeners = Ember.$._data(document);
+
+  assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
 });

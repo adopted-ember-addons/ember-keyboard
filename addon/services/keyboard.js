@@ -16,7 +16,7 @@ export default Service.extend({
 
   activate(responder) {
     if (isEmpty(responder)) {
-      return error(`ember-keyboard: \`activate\` expects a component as it first argument. You passed '${responder}'`);
+      return error(`ember-keyboard: \`activate\` expects a component as its first argument. You passed '${responder}'`);
     }
 
     // ensure the responder appears once and only once in the stack

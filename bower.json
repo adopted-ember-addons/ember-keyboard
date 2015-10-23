@@ -16,5 +16,8 @@
   },
   "resolutions": {
     "ember": "^2.0.0"
+  },
+  "devDependencies": {
+    "blanket": "~1.1.5"
   }
 }

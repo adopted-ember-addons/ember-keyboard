@@ -28,8 +28,18 @@ module('Acceptance | ember keyboard', {
   }
 });
 
+test('does nothing without responders', function(assert) {
+  assert.expect(0);
+
+  visit('/showcase').then(() => {
+    return visit('/');
+  }).then(() => {
+    keyEvent(document, 'keydown', 37);
+  });
+});
+
 test('test standard functionality', function(assert) {
-  visit('/').then(() => {
+  visit('/showcase').then(() => {
     // press 'ArrowLeft'
     return keyEvent(document, 'keydown', 37); 
   }).then(() => {
@@ -82,7 +92,7 @@ test('test standard functionality', function(assert) {
 });
 
 test('test mixin functionality', function(assert) {
-  visit('/').then(() => {
+  visit('/showcase').then(() => {
     return click(activateOnFocusButton); 
   }).then(() => {
     assert.equal(Ember.$(keyboardResponderList).find('li').length, 0, 'activate-on-focus is not yet activated');
