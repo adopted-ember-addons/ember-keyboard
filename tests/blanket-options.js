@@ -13,7 +13,8 @@ var options = {
       outputFile: 'lcov.info',
       //provide a function to rename es6 modules to a file path
       renamer: function(moduleName){
-        return moduleName.replace('ember-keyboard', 'addon') + '.js';
+        var root = /^ember-keyboard/;
+        return moduleName.replace(root, 'addon') + '.js';
       }
     }
   }
