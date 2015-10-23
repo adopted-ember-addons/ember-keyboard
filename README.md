@@ -14,6 +14,10 @@
 * Conventional Ember architecture and service-based injection.
 * Compatible with both Ember 1.13 and 2.0+.
 
+## Installation
+
+`ember install ember-keyboard`
+
 ## Usage
 
 First, inject `ember-keyboard` into your component:
