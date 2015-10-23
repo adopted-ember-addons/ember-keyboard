@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
+[![Build Status](https://travis-ci.org/null-null-null/ember-keyboard.svg?branch=master)](https://travis-ci.org/null-null-null/ember-keyboard)
 [![Code Climate](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/gpa.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard)
 [![Test Coverage](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/coverage.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard/coverage)
 
