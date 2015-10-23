@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
 [![Code Climate](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/gpa.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard)
 [![Test Coverage](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/coverage.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard/coverage)
 
@@ -140,7 +141,7 @@ Note that to ensure that the component is focusable, this mixin sets the compone
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've included an initializer that reopens `Ember.TextField` and `Ember.TextArea` and applies the `ActivateKeyboardOnInsertMixin` and `KeyboardFirstResponderOnFocusMixin`. Effectively, this means that anytime an input is focused, it will be first responder, preventing other events from firing. So for instance, if you've registered a high-priority listener to `keyUp('a')`, it won't fire every time the user presses 'a'. Nevertheless, if you've created a component extending from either `Ember.TextField` or `Ember.TextArea`, you can assign key listeners to it like any other component and it will respond as expected. This allows, for instance, for rich text editors to italicize text with `keyUp('ctrl+i')`.
+To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've included an initializer that reopens `Ember.TextField` and `Ember.TextArea` and applies the `ActivateKeyboardOnInsertMixin` and `KeyboardFirstResponderOnFocusMixin`. Effectively, this means that anytime an input is focused, it will be first responder, preventing other events from firing. So for instance, if you've registered a high-priority listener to `keyUp('a')`, it won't fire every time the user presses 'a' while an input is focused. Nevertheless, if you've created a component extending from either `Ember.TextField` or `Ember.TextArea`, you can assign key listeners to it like any other component and it will respond as expected. This allows, for instance, for rich text editors to italicize text with `keyUp('ctrl+i')`.
 
 You get all this for free when you use the `input` and `textarea` helpers:
 
