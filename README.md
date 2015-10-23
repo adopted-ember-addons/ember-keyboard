@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/gpa.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard)
+[![Test Coverage](https://codeclimate.com/github/null-null-null/ember-keyboard/badges/coverage.svg)](https://codeclimate.com/github/null-null-null/ember-keyboard/coverage)
 
 # Ember-keyboard
 
