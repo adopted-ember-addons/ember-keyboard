@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { keyUp } from 'ember-keyboard';
 
-const { TextField } = Ember;
+const { on, TextField } = Ember;
 
 export default TextField.extend({
   name: 'Search Bar',
@@ -10,7 +10,7 @@ export default TextField.extend({
   classNames: ['input'],
   placeholder: 'Events won\'t bubble while inputs and textareas are focused',
 
-  focusOnS: keyUp('s', function() {
+  focusOnS: on(keyUp('s'), function() {
     this.$().focus();
   })
 });

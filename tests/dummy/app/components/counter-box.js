@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown } from 'ember-keyboard';
+import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown, onKeyDown } from 'ember-keyboard';
 
-const { Component } = Ember;
+const { Component, on } = Ember;
 
 export default Component.extend(KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, {
   name: 'Counter Box',
@@ -9,11 +9,11 @@ export default Component.extend(KeyboardFirstResponderOnFocusMixin, ActivateKeyb
   classNames: ['counter-box'],
   counter: 0,
 
-  decrementCounter: keyDown('ArrowLeft', function() {
+  decrementCounter: on(keyDown('ArrowLeft'), function() {
     this.decrementProperty('counter');
   }),
 
-  incrementCounter: keyDown('ArrowRight', function() {
+  incrementCounter: onKeyDown('ArrowRight', function() {
     this.incrementProperty('counter');
   })
 });
