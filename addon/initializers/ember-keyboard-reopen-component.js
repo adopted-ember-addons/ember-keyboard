@@ -1,13 +1,13 @@
 import Ember from 'ember';
-import { EKOnInsert, FocusActivatedEKEKFirstResponderOnFocus } from 'ember-keyboard';
+import { EKOnInsert, EKFirstResponderOnFocus } from 'ember-keyboard';
 
 export function initialize() {
   Ember.Component.reopen({
     keyboardPriority: 0
   });
 
-  Ember.TextField.reopen(EKOnInsert, FocusActivatedEKEKFirstResponderOnFocus);
-  Ember.TextArea.reopen(EKOnInsert, FocusActivatedEKEKFirstResponderOnFocus);
+  Ember.TextField.reopen(EKOnInsert, EKFirstResponderOnFocus);
+  Ember.TextArea.reopen(EKOnInsert, EKFirstResponderOnFocus);
 }
 
 export default {

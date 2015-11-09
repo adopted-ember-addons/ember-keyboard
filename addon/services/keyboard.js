@@ -31,9 +31,9 @@ export default Service.extend({
   },
 
   deactivate(responder) {
-    // ensure that deactivated responders are not assigned EKEKFirstResponderOnFocus
-    if (responder.resignEKEKFirstResponderOnFocus) {
-      responder.resignEKEKFirstResponderOnFocus();
+    // ensure that deactivated responders are not assigned EKFirstResponder
+    if (responder.resignFirstResponder) {
+      responder.resignFirstResponder();
     }
 
     this.get('_responderStack').removeObject(responder);
