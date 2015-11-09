@@ -31,9 +31,9 @@ export default Service.extend({
   },
 
   deactivate(responder) {
-    // ensure that deactivated responders are not assigned firstResponder
-    if (responder.resignFirstResponder) {
-      responder.resignFirstResponder();
+    // ensure that deactivated responders are not assigned EKEKFirstResponderOnFocus
+    if (responder.resignEKEKFirstResponderOnFocus) {
+      responder.resignEKEKFirstResponderOnFocus();
     }
 
     this.get('_responderStack').removeObject(responder);
@@ -54,7 +54,7 @@ export default Service.extend({
 
     Ember.$(document).on(eventNames, null, (event) => {
       handleKeyEvent(event, this.get('sortedResponderStack'));
-    });    
+    });
   }),
 
   _teardownListener: on('isDestroying', function() {

@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import { ActivateKeyboardOnInsertMixin, KeyboardFirstResponderOnFocusMixin } from 'ember-keyboard';
+import { EKOnInsert, FocusActivatedEKEKFirstResponderOnFocus } from 'ember-keyboard';
 
 const { Component } = Ember;
 
-export default Component.extend(ActivateKeyboardOnInsertMixin, KeyboardFirstResponderOnFocusMixin, {
+export default Component.extend(EKOnInsert, FocusActivatedEKEKFirstResponderOnFocus, {
   classNames: ['mixin-component', 'first-responder-on-focus'],
   keyboardPriority: 1,
-  name: 'KeyboardFirstResponderOnFocusMixin',
+  name: 'FocusActivatedEKEKFirstResponderOnFocus',
   showInMixinList: true
 });

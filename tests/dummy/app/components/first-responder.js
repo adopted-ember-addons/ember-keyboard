@@ -1,22 +1,22 @@
 import Ember from 'ember';
-import { KeyboardFirstResponderMixin } from 'ember-keyboard';
+import { EKEKFirstResponderOnFocus } from 'ember-keyboard';
 
 const {
   Component,
   on
 } = Ember;
 
-export default Component.extend(KeyboardFirstResponderMixin, {
+export default Component.extend(EKEKFirstResponderOnFocus, {
   classNames: ['mixin-component', 'first-responder'],
-  name: 'KeyboardFirstResponderMixin',
+  name: 'EKEKFirstResponderOnFocus',
   showInMixinList: true,
 
-  becomeFirstResponderOnInsert: on('didInsertElement', function() {
+  becomeEKEKFirstResponderOnFocusOnInsert: on('didInsertElement', function() {
     this.get('keyboard').activate(this);
-    this.becomeFirstResponder();
+    this.becomeEKEKFirstResponderOnFocus();
   }),
 
   resignOnDestroy: on('willDestroyElement', function() {
-    this.resignFirstResponder();
+    this.resignEKEKFirstResponderOnFocus();
   })
 });

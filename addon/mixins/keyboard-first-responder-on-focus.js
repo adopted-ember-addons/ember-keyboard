@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import KeyboardFirstResponderMixin from './keyboard-first-responder';
+import KeyboardEKEKFirstResponderOnFocusMixin from './keyboard-first-responder';
 
 const {
   inject,
@@ -7,17 +7,17 @@ const {
   on
 } = Ember;
 
-export default Mixin.create(KeyboardFirstResponderMixin, {
+export default Mixin.create(KeyboardEKEKFirstResponderOnFocusMixin, {
   attributeBindings: ['tabindex'],
   keyboard: inject.service(),
   tabindex: 0, // ensures that element is focusable
 
-  makeFirstResponderWhenFocused: on('focusIn', function() {
+  makeEKEKFirstResponderOnFocusWhenFocused: on('focusIn', function() {
     this.get('keyboard').activate(this);
-    this.becomeFirstResponder();
+    this.becomeEKEKFirstResponderOnFocus();
   }),
 
-  resignFirstResponderWhenFocusOut: on('focusOut', function() {
-    this.resignFirstResponder();
+  resignEKEKFirstResponderOnFocusWhenFocusOut: on('focusOut', function() {
+    this.resignEKEKFirstResponderOnFocus();
   })
 });

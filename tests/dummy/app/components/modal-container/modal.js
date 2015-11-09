@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { ActivateKeyboardOnInsertMixin, keyUp } from 'ember-keyboard';
+import { EKOnInsert, keyUp } from 'ember-keyboard';
 
 const { Component, on } = Ember;
 
-export default Component.extend(ActivateKeyboardOnInsertMixin, {
-  name: 'Modal', 
+export default Component.extend(EKOnInsert, {
+  name: 'Modal',
 
   classNames: ['modal'],
 

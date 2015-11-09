@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown } from 'ember-keyboard';
+import { FocusActivatedEKEKFirstResponderOnFocus, EKOnInsert, keyDown } from 'ember-keyboard';
 
 const { Component, on } = Ember;
 
-export default Component.extend(KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, {
+export default Component.extend(FocusActivatedEKEKFirstResponderOnFocus, EKOnInsert, {
   name: 'Counter Box',
 
   classNames: ['counter-box'],

@@ -11,8 +11,8 @@
 
 <button id='activate_on_focus_button' {{action 'toggleMixin' 'activateWhenFocused'}}>ActivateKeyboardOnFocus</button>
 <button id='activate_on_insert_button' {{action 'toggleMixin' 'activateWhenPresent'}}>ActivateKeyboardOnInsert</button>
-<button id='first_responder_button' {{action 'toggleMixin' 'firstResponder'}}>KeyboardFirstResponder</button>
-<button id='first_responder_on_focus_button' {{action 'toggleMixin' 'firstResponderWhenFocused'}}>KeyboardFirstResponderOnFocus</button>
+<button id='first_responder_button' {{action 'toggleMixin' 'EKEKFirstResponderOnFocus'}}>KeyboardEKEKFirstResponderOnFocus</button>
+<button id='first_responder_on_focus_button' {{action 'toggleMixin' 'EKEKFirstResponderOnFocusWhenFocused'}}>KeyboardEKEKFirstResponderOnFocusOnFocus</button>
 
 {{#if activateWhenFocused}}
   {{activate-when-focused}}
@@ -22,10 +22,10 @@
   {{activate-when-present}}
 {{/if}}
 
-{{#if firstResponder}}
+{{#if EKEKFirstResponderOnFocus}}
   {{first-responder}}
 {{/if}}
 
-{{#if firstResponderWhenFocused}}
+{{#if EKEKFirstResponderOnFocusWhenFocused}}
   {{first-responder-when-focused}}
 {{/if}}
