@@ -1,4 +1,4 @@
-import { keyDown, keyUp, onKeyDown, onKeyUp } from 'ember-keyboard/listeners/key-events';
+import { keyDown, keyUp } from 'ember-keyboard/listeners/key-events';
 import ActivateKeyboardOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
 import ActivateKeyboardOnInsertMixin from 'ember-keyboard/mixins/activate-keyboard-on-insert';
 import KeyboardFirstResponderMixin from 'ember-keyboard/mixins/keyboard-first-responder';
@@ -10,7 +10,5 @@ export {
   KeyboardFirstResponderMixin,
   KeyboardFirstResponderOnFocusMixin,
   keyDown,
-  keyUp,
-  onKeyDown,
-  onKeyUp
+  keyUp
 };

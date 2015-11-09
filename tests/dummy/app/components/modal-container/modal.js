@@ -1,14 +1,14 @@
 import Ember from 'ember';
-import { ActivateKeyboardOnInsertMixin, onKeyUp } from 'ember-keyboard';
+import { ActivateKeyboardOnInsertMixin, keyUp } from 'ember-keyboard';
 
-const { Component } = Ember;
+const { Component, on } = Ember;
 
 export default Component.extend(ActivateKeyboardOnInsertMixin, {
   name: 'Modal', 
 
   classNames: ['modal'],
 
-  closeModal: onKeyUp('Escape', function() {
+  closeModal: on(keyUp('Escape'), function() {
     this.attrs.closeModal();
   })
 });

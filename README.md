@@ -40,15 +40,15 @@ activateKeyboard: on('didInsertElement', function() {
 This will place the component in the `eventStack`, meaning it'll be able to respond to key events. Let's say you want your component to respond to the key `a` as well as `ctrl+shift+a`. You could do so with:
 
 ```js
-import { onKeyUp } from 'ember-keyboard';
+import { keyUp } from 'ember-keyboard';
 
 . . . .
 
-aFunction: onKeyUp('a', function() {
+aFunction: on(keyUp('a'), function() {
   console.log('`a` was pressed');
 }),
 
-anotherFunction: onKeyUp('ctrl+shift+a', function() {
+anotherFunction: on(keyUp('ctrl+shift+a'), function() {
   console.log('`ctrl+shift+a` was pressed');
 })
 ```
@@ -155,14 +155,6 @@ You get all this for free when you use the `input` and `textarea` helpers:
 {{textarea}}
 ```
 
-### `onKeyUp` and `onKeyDown`
-
-From a UI perspective, you'll usually want to register your listeners with `onKeyUp`. However, there are special scenarios where `onKeyDown` might be more desirable, usually because it fires repeatedly while the key is held. This could allow users to rapidly cycle through modal states or scroll through a custom window pane. You can import either `onKeyUp` or `onKeyDown` from `ember-keyboard`:
-
-```js
-import { onKeyDown, onKeyUp } from 'ember-keyboard';
-```
-
 ### `keyUp` and `keyDown`
 
 If you'd like to dynamically add and remove key listeners on a component, you can do so with the standard `on` and `off` functions. To ensure that the listener is formatted correctly, we encourage you to use the `keyUp` and `keyDown` functions:
@@ -176,4 +168,4 @@ component.on(keyUp('ctrl+s'), someFunction);
 component.off(keyUp('ctrl+s'), someFunction);
 ```
 
-These functions create standardized names for the listeners that look like `keyup:ctrl+s`. The provided key and modifier keys are sorted alphabetically, so: `keyUp('b+ctrl+alt')` becomes `keyup:alt+b+ctrl`. These are the same functions on `onKeyUp` and `onKeyDown` use internally.
+These functions create standardized names for the listeners that look like `keyup:ctrl+s`. The provided key and modifier keys are sorted alphabetically, so: `keyUp('b+ctrl+alt')` becomes `keyup:alt+b+ctrl`.

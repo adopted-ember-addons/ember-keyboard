@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown, onKeyDown } from 'ember-keyboard';
+import { KeyboardFirstResponderOnFocusMixin, ActivateKeyboardOnInsertMixin, keyDown } from 'ember-keyboard';
 
 const { Component, on } = Ember;
 
@@ -13,7 +13,7 @@ export default Component.extend(KeyboardFirstResponderOnFocusMixin, ActivateKeyb
     this.decrementProperty('counter');
   }),
 
-  incrementCounter: onKeyDown('ArrowRight', function() {
+  incrementCounter: on(keyDown('ArrowRight'), function() {
     this.incrementProperty('counter');
   })
 });
