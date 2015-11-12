@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import { EKOnInsert, keyUp } from 'ember-keyboard';
+import { EKOnInsertMixin, keyUp } from 'ember-keyboard';
 
 const { Component, on } = Ember;
 
-export default Component.extend(EKOnInsert, {
+export default Component.extend(EKOnInsertMixin, {
   name: 'Modal',
 
   classNames: ['modal'],

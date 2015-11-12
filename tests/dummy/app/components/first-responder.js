@@ -1,14 +1,14 @@
 import Ember from 'ember';
-import { EKFirstResponder } from 'ember-keyboard';
+import { EKFirstResponderMixin } from 'ember-keyboard';
 
 const {
   Component,
   on
 } = Ember;
 
-export default Component.extend(EKFirstResponder, {
+export default Component.extend(EKFirstResponderMixin, {
   classNames: ['mixin-component', 'first-responder'],
-  name: 'EKFirstResponder',
+  name: 'EKFirstResponderMixin',
   showInMixinList: true,
 
   becomeFirstResponderOnInsert: on('didInsertElement', function() {

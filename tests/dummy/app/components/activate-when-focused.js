@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { EKOnFocus } from 'ember-keyboard';
+import { EKOnFocusMixin } from 'ember-keyboard';
 
 const { Component } = Ember;
 
-export default Component.extend(EKOnFocus, {
+export default Component.extend(EKOnFocusMixin, {
   classNames: ['mixin-component', 'activate-on-focus'],
-  name: 'EKOnFocus',
+  name: 'EKOnFocusMixin',
   showInMixinList: true
 });

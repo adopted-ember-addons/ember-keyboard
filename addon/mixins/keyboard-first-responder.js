@@ -12,7 +12,7 @@ export default Mixin.create({
   keyboard: inject.service(),
 
   becomeFirstResponder() {
-    this._resignAnyEKFirstResponders();
+    this._resignAnyEKFirstResponderMixins();
 
     if (this.get('keyboardPriority') !== FIRST_RESPONDER_PRIORITY) {
       this.setProperties({
@@ -32,7 +32,7 @@ export default Mixin.create({
     this.set('keyboardPriority', formerPriority);
   },
 
-  _resignAnyEKFirstResponders() {
+  _resignAnyEKFirstResponderMixins() {
     this.get('keyboard.sortedResponderStack').filter((responder) => {
       return responder.get('keyboardPriority') === FIRST_RESPONDER_PRIORITY;
     }).forEach((responder) => responder.resignFirstResponder());

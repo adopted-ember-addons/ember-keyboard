@@ -10,11 +10,11 @@ const standAloneCounter = '.standalone-counter';
 
 const activateOnFocusButton = '#activate_on_focus_button'; 
 const activateOnInsertButton = '#activate_on_insert_button'; 
-const EKFirstResponderButton = '#first_responder_button'; 
-const EKFirstResponderOnFocusButton = '#first_responder_on_focus_button'; 
+const EKFirstResponderMixinButton = '#first_responder_button'; 
+const EKFirstResponderOnFocusMixinButton = '#first_responder_on_focus_button'; 
 const keyboardResponderList = '.keyboard-responder-list';
 const activateOnFocus = '.activate-on-focus';
-const EKFirstResponderOnFocus = '.first-responder-on-focus';
+const EKFirstResponderOnFocusMixin = '.first-responder-on-focus';
 const keyboardPriority = '.keyboard-priority';
 const responderName = '.responder-name';
 
@@ -113,20 +113,20 @@ test('test mixin functionality', function(assert) {
   }).then(() => {
     assert.equal(Ember.$(keyboardResponderList).find('li').length, 0, 'activate-on-insert is deactivated');
 
-    return click(EKFirstResponderButton);
+    return click(EKFirstResponderMixinButton);
   }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(keyboardPriority).text().trim(), '9999999999999', 'first-responder has EKFirstResponder priority');
+    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(keyboardPriority).text().trim(), '9999999999999', 'first-responder has EKFirstResponderMixin priority');
 
-    return click(EKFirstResponderOnFocusButton);
+    return click(EKFirstResponderOnFocusMixinButton);
   }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'EKFirstResponder', 'first-responder still at the top of the list');
+    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'EKFirstResponderMixin', 'first-responder still at the top of the list');
 
-    return triggerEvent(EKFirstResponderOnFocus, 'focus');
+    return triggerEvent(EKFirstResponderOnFocusMixin, 'focus');
   }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'FocusActivatedEKFirstResponder', 'first-responder-on-focus becomes first responder');
+    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'FocusActivatedEKFirstResponderMixin', 'first-responder-on-focus becomes first responder');
     assert.equal(Ember.$(keyboardResponderList).find('li').last().find(keyboardPriority).text().trim(), '0', 'first-responder priority returns to default');
 
-    return triggerEvent(EKFirstResponderOnFocus, 'blur');
+    return triggerEvent(EKFirstResponderOnFocusMixin, 'blur');
   }).then(() => {
     assert.equal(Ember.$(keyboardResponderList).find('li').first().find(keyboardPriority).text().trim(), '1', 'first-responder-on-focus priority returns to previous value');
   });

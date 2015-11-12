@@ -31,7 +31,7 @@ export default Service.extend({
   },
 
   deactivate(responder) {
-    // ensure that deactivated responders are not assigned EKFirstResponder
+    // ensure that deactivated responders are not assigned EKFirstResponderMixin
     if (responder.resignFirstResponder) {
       responder.resignFirstResponder();
     }

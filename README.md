@@ -92,23 +92,23 @@ Note that priority is descending, so higher numbers have precedence.
 
 To reduce boilerplate, `ember-keyboard` includes several mixins with common patterns.
 
-### EKOnInsert
+### EKOnInsertMixin
 
-`import { EKOnInsert } from 'ember-keyboard';`
+`import { EKOnInsertMixin } from 'ember-keyboard';`
 
 This mixin will activate the component on `didInsertElement`, and as per normal, it will deactivate on `willDestroyElement`.
 
-### EKOnFocus
+### EKOnFocusMixin
 
-`import { EKOnFocus } from 'ember-keyboard';`
+`import { EKOnFocusMixin } from 'ember-keyboard';`
 
 This mixin will activate the component whenever it receives focus and deactivate it when it loses focus.
 
 Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
 
-### EKFirstResponder
+### EKFirstResponderMixin
 
-`import { EKFirstResponder } from 'ember-keyboard';`
+`import { EKFirstResponderMixin } from 'ember-keyboard';`
 
 This mixin does not activate or deactivate the component. Instead, it allows you to make a component the first and only responder, regardless of its initial `keyboardPriority`. This can be useful if you want a low-priority component to temporarily gain precedence over everything else. When it resigns its first responder status, it automatically returns to its previous priority. Note that if you assign a second component first responder status, the first one will in turn lose first responder status.
 
@@ -134,9 +134,9 @@ this.resignFirstResponder();
 
 Resigns first responder status, in the process returning to its previous priority.
 
-### EKFirstResponderOnFocus
+### EKFirstResponderOnFocusMixin
 
-`import { EKFirstResponderOnFocus } from 'ember-keyboard';`
+`import { EKFirstResponderOnFocusMixin } from 'ember-keyboard';`
 
 This mixin grants the component first responder status while it is focused. When it loses focus, it resigns its status.
 
@@ -146,7 +146,7 @@ Note that to ensure that the component is focusable, this mixin sets the compone
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've included an initializer that reopens `Ember.TextField` and `Ember.TextArea` and applies the `ActivateKeyboardOnInsertMixin` and `KeyboardEKFirstResponderOnFocusMixin`. Effectively, this means that anytime an input is focused, it will be first responder, preventing other events from firing. So for instance, if you've registered a high-priority listener to `keyUp('a')`, it won't fire every time the user presses 'a' while an input is focused. Nevertheless, if you've created a component extending from either `Ember.TextField` or `Ember.TextArea`, you can assign key listeners to it like any other component and it will respond as expected. This allows, for instance, for rich text editors to italicize text with `keyUp('ctrl+i')`.
+To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've included an initializer that reopens `Ember.TextField` and `Ember.TextArea` and applies the `ActivateKeyboardOnInsertMixin` and `KeyboardEKFirstResponderOnFocusMixinMixin`. Effectively, this means that anytime an input is focused, it will be first responder, preventing other events from firing. So for instance, if you've registered a high-priority listener to `keyUp('a')`, it won't fire every time the user presses 'a' while an input is focused. Nevertheless, if you've created a component extending from either `Ember.TextField` or `Ember.TextArea`, you can assign key listeners to it like any other component and it will respond as expected. This allows, for instance, for rich text editors to italicize text with `keyUp('ctrl+i')`.
 
 You get all this for free when you use the `input` and `textarea` helpers:
 
