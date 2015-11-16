@@ -23,7 +23,7 @@ export default function handleKeyEvent(event, responderStack) {
   if (isEmpty(responderStack)) { return; }
 
   const keys = gatherKeys(event);
-  const listener = `${event.type}:${keys}`;
+  const eventName = `${event.type}:${keys}`;
 
   // bug note: would prefer to use `responderStack.get('firstObject')` here, but it's returning the
   // firstObject prior to sorting
@@ -37,8 +37,8 @@ export default function handleKeyEvent(event, responderStack) {
       return true;
     }
 
-    if (hasListeners(responder, listener)) {
-      responder.trigger(listener);
+    if (hasListeners(responder, eventName)) {
+      responder.trigger(eventName, event);
     }
   });
 }

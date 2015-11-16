@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { keyUp } from 'ember-keyboard';
+import { keyDown } from 'ember-keyboard';
 
 const { on, TextField } = Ember;
 
@@ -10,7 +10,8 @@ export default TextField.extend({
   classNames: ['input'],
   placeholder: 'Events won\'t bubble while inputs and textareas are focused',
 
-  focusOnS: on(keyUp('s'), function() {
+  focusOnS: on(keyDown('ctrl+s'), function(event) {
     this.$().focus();
+    event.preventDefault();
   })
 });

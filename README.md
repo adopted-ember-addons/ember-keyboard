@@ -169,3 +169,16 @@ component.off(keyUp('ctrl+s'), someFunction);
 ```
 
 These functions create standardized names for the listeners that look like `keyup:ctrl+s`. The provided key and modifier keys are sorted alphabetically, so: `keyUp('b+ctrl+alt')` becomes `keyup:alt+b+ctrl`.
+
+### `event`
+
+When `ember-keyboard` triggers an observer, it passes in the `event` object as it's first argument:
+
+```js
+saveDocument: Ember.on(keyDown('ctrl+s'), function(event) {
+  this.performSave();
+  event.preventDefault();
+})
+```
+
+Note that if you want `preventDefault` to prevent `window` level events, you'll need to use `keyDown`, as the default event will fire before `keyUp`.
