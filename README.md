@@ -32,7 +32,7 @@ export default Ember.Component.extend({
 Once the `keyboard` service is injected, you need to activate it.
 
 ```js
-activateKeyboard: on('didInsertElement', function() {
+activateKeyboard: Ember.on('didInsertElement', function() {
   this.get('keyboard').activate(this);
 })
 ```
@@ -44,21 +44,21 @@ import { keyUp } from 'ember-keyboard';
 
 . . . .
 
-aFunction: on(keyUp('a'), function() {
+aFunction: Ember.on(keyUp('a'), function() {
   console.log('`a` was pressed');
 }),
 
-anotherFunction: on(keyUp('ctrl+shift+a'), function() {
+anotherFunction: Ember.on(keyUp('ctrl+shift+a'), function() {
   console.log('`ctrl+shift+a` was pressed');
 })
 ```
 
-The modifier keys include `ctrl`, `shift`, `alt`, and `meta`. For a full list of the primary keys (such as `a`, `1`, ` `, `Escape`, and `ArrowLeft`), look [here](https://github.com/Ticketfly/ember-keyboard/blob/master/addon/fixtures/key-map.js).
+The modifier keys include `ctrl`, `shift`, `alt`, and `meta`. For a full list of the primary keys (such as `a`, `1`, ` `, `Escape`, and `ArrowLeft`), look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js).
 
 Finally, when you're ready for a component to leave the `eventStack` you can deactivate it:
 
 ```js
-deactivateKeyboard: on('arbitraryTrigger', function() {
+deactivateKeyboard: Ember.on('arbitraryTrigger', function() {
   this.get('keyboard').deactivate(this);
 })
 ```
@@ -79,7 +79,7 @@ modalChild.set('keyboardPriority', 1);
 
 In this scenario, when a key is pressed both `modal` and `modalChild` will have a chance to respond to it, while the remaining components will not. Once `modal` and `modalChild` are deactivated or their priority is removed, then `lowPriorityComponent` and `noPriorityComponent` will respond to key events.
 
-Perhaps more convenientally, this property can be passed in through your template:
+Perhaps more conveniently, this property can be passed in through your template:
 
 ```hbs
 {{my-component keyboardPriority=1}}
