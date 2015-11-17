@@ -8,7 +8,7 @@ const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
 
 const validateKeys = function validateKeys(keys) {
   keys.forEach((key) => {
-    if (!validKeys.includes(key)) {
+    if (validKeys.indexOf(key) === -1) {
       error(`\`${key}\` is not a valid key name`);
     }
   });
