@@ -3,6 +3,7 @@ import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
 
 const {
   computed,
+  get,
   isEmpty,
   Logger,
   on,
@@ -42,7 +43,7 @@ export default Service.extend({
   sortedResponderStack: computed('_responderStack.@each.keyboardPriority', {
     get() {
       return this.get('_responderStack').sort((a, b) => {
-        return b.keyboardPriority - a.keyboardPriority;
+        return get(b, 'keyboardPriority') - get(a, 'keyboardPriority');
       });
     }
   }).readOnly(),
