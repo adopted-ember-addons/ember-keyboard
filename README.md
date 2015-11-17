@@ -11,7 +11,7 @@
 
 * Dynamic priority levels allow you to specify which components respond first to key events and under what circumstances. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
 * Human-readable key-mappings. (Thanks to [`ember-keyboard-service`](https://github.com/Fabriquartz/ember-keyboard-service) for the inspiration)
-* Support for both `keyUp` and `keyDown`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
+* Support for both `keyup` and `keydown`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
 * Compatible with both Ember 1.13 and 2.0+.
 
 ## Installation
@@ -141,7 +141,7 @@ This mixin grants the component first responder status while it is focused. When
 
 Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
 
-## Special Cases & Advanced Usage
+## Advanced Usage
 
 ### `Ember.TextField` && `Ember.TextArea`
 
@@ -196,6 +196,10 @@ keyMapper: Ember.on(keyDown('a'), keyDown('b'), keyDown('c'), function(event) {
 ```
 
 Just pass in an `event`, and it'll return a human readable key. Look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js) for a full mapping.
+
+### `meta` and `alt`
+
+Macs diverge from other PCs in their naming of `meta` and `alt`. The `alt` key is named `options`, while the `meta` key is named `command`. You don't need to do anything special to get `ember-keyboard` to recognize `options` or `command` keys, just use their generic names `alt` and `meta`. This will ensure that your keys fire across platforms.
 
 ### Dynamically binding events
 
