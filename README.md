@@ -12,7 +12,6 @@
 * Dynamic priority levels allow you to specify which components respond first to key events and under what circumstances. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
 * Human-readable key-mappings. (Thanks to [`ember-keyboard-service`](https://github.com/Fabriquartz/ember-keyboard-service) for the inspiration)
 * Support for both `keyUp` and `keyDown`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
-* Conventional Ember architecture and service-based injection.
 * Compatible with both Ember 1.13 and 2.0+.
 
 ## Installation
@@ -177,6 +176,26 @@ saveDocument: Ember.on(keyDown('ctrl+s'), function(event) {
 ```
 
 Note that if you want `preventDefault` to prevent `window` level events, you'll need to use `keyDown`, as the default event will fire before `keyUp`.
+
+### `getKey`
+
+Did you know that 65 was the keycode for 'a'? Or that 37 was the keycode for the right arrow? If you don't want to litter your code with keycode references, you can use `getKey`, which `ember-keyboard` uses internally:
+
+```js
+import { getKey } from 'ember-keyboard';
+
+. . . .
+
+keyMapper: Ember.on(keyDown('a'), keyDown('b'), keyDown('c'), function(event) {
+  const key = getKey(event);
+  switch (key) {
+    match 'a': console.log('It\'s an a!'); break;
+    . . . .
+  }
+})
+```
+
+Just pass in an `event`, and it'll return a human readable key. Look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js) for a full mapping.
 
 ### Dynamically binding events
 
