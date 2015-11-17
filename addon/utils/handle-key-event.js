@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import KEY_MAP from 'ember-keyboard/fixtures/key-map';
+import getKey from 'ember-keyboard/utils/get-key';
 
 const {
   hasListeners,
@@ -8,7 +8,7 @@ const {
 
 // joins and sorts any active modifier keys with the primary key.
 const gatherKeys = function gatherKeys(event) {
-  const key = event.key || KEY_MAP[event.keyCode];
+  const key = getKey(event);
 
   return ['ctrl', 'meta', 'alt', 'shift'].reduce((keys, keyName) => {
     if (event[`${keyName}Key`]) {
