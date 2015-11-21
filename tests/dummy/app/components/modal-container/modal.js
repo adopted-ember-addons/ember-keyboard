@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { EKOnInsertMixin, keyUp } from 'ember-keyboard';
+import { EKOnInsertMixin, keyUp, getKey } from 'ember-keyboard';
 
 const { Component, on } = Ember;
 
@@ -8,7 +8,11 @@ export default Component.extend(EKOnInsertMixin, {
 
   classNames: ['modal'],
 
-  closeModal: on(keyUp('Escape'), function() {
-    this.attrs.closeModal();
+  triggerCloseModal: on(keyUp(), function(event) {
+    const key = getKey(event);
+
+    if (key === 'Escape' || key === 'q' || key === 'x' || key === 'Backspace') {
+      this.attrs.closeModal();
+    }
   })
 });

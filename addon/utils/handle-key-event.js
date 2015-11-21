@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import getKey from 'ember-keyboard/utils/get-key';
+import listenerName from 'ember-keyboard/utils/listener-name';
 
 const {
   hasListeners,
@@ -12,18 +13,19 @@ const gatherKeys = function gatherKeys(event) {
 
   return ['ctrl', 'meta', 'alt', 'shift'].reduce((keys, keyName) => {
     if (event[`${keyName}Key`]) {
-      keys.pushObject(keyName);
+      keys.push(keyName);
     }
 
     return keys;
-  }, Ember.A([key])).sort().join('+');
+  }, [key]);
 };
 
 export default function handleKeyEvent(event, responderStack) {
   if (isEmpty(responderStack)) { return; }
 
   const keys = gatherKeys(event);
-  const eventName = `${event.type}:${keys}`;
+  const listenerExclusive = listenerName(event.type, keys);
+  const listenerInclusive = listenerName(event.type);
 
   // bug note: would prefer to use `responderStack.get('firstObject')` here, but it's returning the
   // firstObject prior to sorting
@@ -37,8 +39,10 @@ export default function handleKeyEvent(event, responderStack) {
       return true;
     }
 
-    if (hasListeners(responder, eventName)) {
-      responder.trigger(eventName, event);
-    }
+    [listenerExclusive, listenerInclusive].forEach((triggerName) => {
+      if (hasListeners(responder, triggerName)) {
+        responder.trigger(triggerName, event);
+      }
+    });
   });
 }

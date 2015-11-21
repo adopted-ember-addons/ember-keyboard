@@ -197,6 +197,18 @@ keyMapper: Ember.on(keyDown('a'), keyDown('b'), keyDown('c'), function(event) {
 
 Just pass in an `event`, and it'll return a human readable key. Look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js) for a full mapping.
 
+### Key Indifference
+
+If you want an event to fire for every keypress, then simply don't provide a keystring to `keyUp` or `keyDown`. This can be a handy way to trigger events for large ranges of keys, such as on any alphanumeric keypress. For instance:
+
+```js
+triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
+  if (/^\w(?!.)/.test(getKey(event.keyCode)) {
+    this.startEditing();
+  }
+})
+```
+
 ### `meta` and `alt`
 
 Macs diverge from other PCs in their naming of `meta` and `alt`. The `alt` key is named `options`, while the `meta` key is named `command`. You don't need to do anything special to get `ember-keyboard` to recognize `options` or `command` keys, just use their generic names `alt` and `meta`. This will ensure that your keys fire across platforms.

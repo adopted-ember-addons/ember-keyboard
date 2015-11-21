@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import KEY_MAP from 'ember-keyboard/fixtures/key-map';
+import listenerName from 'ember-keyboard/utils/listener-name';
 
+const { isPresent } = Ember;
 const { Logger: { error } } = Ember;
 
 const keyMapValues = [...KEY_MAP.values()];
@@ -14,18 +16,18 @@ const validateKeys = function validateKeys(keys) {
   });
 };
 
-const listenerName = function listenerName(type, keysString) {
-  const keys = keysString.split('+');
+const formattedListener = function formattedListener(type, keysString) {
+  const keys = isPresent(keysString) ? keysString.split('+') : [];
 
   validateKeys(keys);
 
-  return `${type}:${keys.sort().join('+')}`;
+  return listenerName(type, keys);
 };
 
 export function keyDown(keys) {
-  return listenerName('keydown', keys);
+  return formattedListener('keydown', keys);
 }
 
 export function keyUp(keys) {
-  return listenerName('keyup', keys);
+  return formattedListener('keyup', keys);
 }
