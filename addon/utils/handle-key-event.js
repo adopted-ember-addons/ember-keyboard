@@ -20,25 +20,16 @@ const gatherKeys = function gatherKeys(event) {
   }, [key]);
 };
 
-export default function handleKeyEvent(event, responderStack) {
-  if (isEmpty(responderStack)) { return; }
-
+export default function handleKeyEvent(event, responders) {
   const keys = gatherKeys(event);
   const listenerExclusive = listenerName(event.type, keys);
   const listenerInclusive = listenerName(event.type);
 
-  // bug note: would prefer to use `responderStack.get('firstObject')` here, but it's returning the
-  // firstObject prior to sorting
-  const priority = responderStack[0].get('keyboardPriority');
+  const priority = responders.has('firstResponder') ? 'firstResponder' : [...responders.keys()].sort((a, b) => b - a)[0];
 
-  // trigger the event on all responders in the priority level
-  responderStack.find((responder) => {
-    // responders are sorted by priority (descending). short-circuit `find` once the responders
-    // fall beneath the initial responder's priority
-    if (responder.get('keyboardPriority') !== priority) {
-      return true;
-    }
+  if (isEmpty(priority)) { return; }
 
+  responders.get(priority).forEach((responder) => {
     [listenerExclusive, listenerInclusive].forEach((triggerName) => {
       if (hasListeners(responder, triggerName)) {
         responder.trigger(triggerName, event);

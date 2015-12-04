@@ -8,16 +8,6 @@ const modal = '.modal';
 const modalCounter = '.modal-counter';
 const standAloneCounter = '.standalone-counter';
 
-const activateOnFocusButton = '#activate_on_focus_button'; 
-const activateOnInsertButton = '#activate_on_insert_button'; 
-const EKFirstResponderMixinButton = '#first_responder_button'; 
-const EKFirstResponderOnFocusMixinButton = '#first_responder_on_focus_button'; 
-const keyboardResponderList = '.keyboard-responder-list';
-const activateOnFocus = '.activate-on-focus';
-const EKFirstResponderOnFocusMixin = '.first-responder-on-focus';
-const keyboardPriority = '.keyboard-priority';
-const responderName = '.responder-name';
-
 module('Acceptance | ember keyboard', {
   beforeEach() {
     this.application = startApp();
@@ -41,7 +31,7 @@ test('does nothing without responders', function(assert) {
 test('test standard functionality', function(assert) {
   visit('/showcase').then(() => {
     // press 'ArrowLeft'
-    return keyEvent(document, 'keydown', 37); 
+    return keyEvent(document, 'keydown', 37);
   }).then(() => {
     assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'counter respond to keydown event');
 
@@ -79,7 +69,7 @@ test('test standard functionality', function(assert) {
     assert.ok(Ember.$(modal).length > 0, 'modal is present after pressing ctrl+shift+a');
 
     // press 'ArrowRight'
-    return keyEvent(document, 'keydown', 39); 
+    return keyEvent(document, 'keydown', 39);
   }).then(() => {
     assert.equal(Ember.$(modalCounter).text().trim(), '1', 'modal counter respond to keydown event');
     assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-3', 'standalone counter is blocked by modal counter');
@@ -88,46 +78,5 @@ test('test standard functionality', function(assert) {
     return keyEvent(document, 'keyup', 83);
   }).then(() => {
     assert.ok(!Ember.$(search).is(':focus'), 'event does not bubble after modal');
-  });
-});
-
-test('test mixin functionality', function(assert) {
-  visit('/showcase').then(() => {
-    return click(activateOnFocusButton); 
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').length, 0, 'activate-on-focus is not yet activated');
-
-    return triggerEvent(activateOnFocus, 'focus');
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').length, 1, 'activate-on-focus is activated');
-
-    return triggerEvent(activateOnFocus, 'blur');
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').length, 0, 'activate-on-focus is deactivated');
-
-    return click(activateOnInsertButton);
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').length, 1, 'activate-on-insert is activated');
-
-    return click(activateOnInsertButton);
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').length, 0, 'activate-on-insert is deactivated');
-
-    return click(EKFirstResponderMixinButton);
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(keyboardPriority).text().trim(), '9999999999999', 'first-responder has EKFirstResponderMixin priority');
-
-    return click(EKFirstResponderOnFocusMixinButton);
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'EKFirstResponderMixin', 'first-responder still at the top of the list');
-
-    return triggerEvent(EKFirstResponderOnFocusMixin, 'focus');
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(responderName).text().trim(), 'FocusActivatedEKFirstResponderMixin', 'first-responder-on-focus becomes first responder');
-    assert.equal(Ember.$(keyboardResponderList).find('li').last().find(keyboardPriority).text().trim(), '0', 'first-responder priority returns to default');
-
-    return triggerEvent(EKFirstResponderOnFocusMixin, 'blur');
-  }).then(() => {
-    assert.equal(Ember.$(keyboardResponderList).find('li').first().find(keyboardPriority).text().trim(), '1', 'first-responder-on-focus priority returns to previous value');
   });
 });

@@ -3,8 +3,8 @@ import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
 
 const {
   computed,
-  get,
   isEmpty,
+  isPresent,
   Logger,
   on,
   Service
@@ -13,40 +13,57 @@ const {
 const { error } = Logger;
 
 export default Service.extend({
-  _responderStack: computed(() => Ember.A()),
+  responders: computed(() => new Map()),
 
   activate(responder) {
     if (isEmpty(responder)) {
       return error(`ember-keyboard: \`activate\` expects a component as its first argument. You passed '${responder}'`);
     }
 
-    // ensure the responder appears once and only once in the stack
-    const responderStack = this.get('_responderStack');
-    responderStack.removeObject(responder);
-    responderStack.pushObject(responder);
+    const responders = this.get('responders');
+    const priority = responder.get('keyboardPriority');
 
-    // ensure that the responder is removed from the stack upon its destruction
+    if (!responders.has(priority)) {
+      responders.set(priority, new Set());
+    }
+
+    responders.get(priority).add(responder);
+
     responder.on('willDestroyElement', this, function() {
       this.deactivate(responder);
     });
   },
 
   deactivate(responder) {
-    // ensure that deactivated responders are not assigned EKFirstResponderMixin
-    if (responder.resignFirstResponder) {
-      responder.resignFirstResponder();
-    }
+    const responders = this.get('responders');
+    const priority = responder.get('keyboardPriority');
+    const prioritySet = responders.get(priority);
 
-    this.get('_responderStack').removeObject(responder);
+    this.resignFirstResponder(this);
+
+    if (isPresent(prioritySet)) {
+      prioritySet.delete(responder);
+
+      if (prioritySet.size === 0) {
+        responders.delete(priority);
+      }
+    }
   },
 
-  sortedResponderStack: computed('_responderStack.@each.keyboardPriority', {
-    get() {
-      return this.get('_responderStack').sort((a, b) => {
-        return get(b, 'keyboardPriority') - get(a, 'keyboardPriority');
-      });
+  becomeFirstResponder(responder) {
+    const responders = this.get('responders');
+
+    responders.set('firstResponder', new Set([responder]));
+  },
+
+  resignFirstResponder(responder) {
+    const responders = this.get('responders');
+    const firstResponder = responders.get('firstResponder');
+
+    if (isPresent(firstResponder) && firstResponder.values().next().value.get('guid') === responder.get('guid')) {
+      responders.delete('firstResponder');
     }
-  }).readOnly(),
+  },
 
   _initializeListener: on('init', function() {
     const eventNames = ['keyup', 'keydown'].map(function(name) {
@@ -54,7 +71,7 @@ export default Service.extend({
     }).join(' ');
 
     Ember.$(document).on(eventNames, null, (event) => {
-      handleKeyEvent(event, this.get('sortedResponderStack'));
+      handleKeyEvent(event, this.get('responders'));
     });
   }),
 

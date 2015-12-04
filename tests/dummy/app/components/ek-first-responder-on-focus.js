@@ -6,6 +6,6 @@ const { Component } = Ember;
 export default Component.extend(EKOnInsertMixin, EKFirstResponderOnFocusMixin, {
   classNames: ['mixin-component', 'first-responder-on-focus'],
   keyboardPriority: 1,
-  name: 'FocusActivatedEKFirstResponderMixin',
+  name: 'EKFirstResponderOnFocusMixin',
   showInMixinList: true
 });

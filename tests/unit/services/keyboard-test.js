@@ -8,47 +8,29 @@ const {
   get
 } = Ember;
 
-// transforms EventedObjects and Ember.Arrays into normal objects and arrays
-const normalize = function normalize(data) {
-  return JSON.parse(JSON.stringify(data));
-};
-
 // Since `activate` call `.on` on the responder, we need to make sure we're using evented objects
 const EventedObject = Ember.Object.extend(Evented);
 
-test('`activate` adds the supplied responder to the _responderStack', function(assert) {
+test('`activate` adds the supplied responder to `responders`', function(assert) {
   const service = this.subject();
-  const responder = EventedObject.create({ name: 'foo' });
-  const secondResponder = EventedObject.create({ name: 'bar' });
+  const responder = EventedObject.create({ keyboardPriority: 1 });
+  const secondResponder = EventedObject.create({ keyboardPriority: 2 });
+  const thirdResponder = EventedObject.create({ keyboardPriority: 2 });
 
   service.activate(responder);
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder]), 'adds responder to sortedResponderStack');
+  assert.deepEqual([...service.get('responders').keys()], [1], 'creates priortySet');
 
   service.activate(responder);
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder]), 'ensures responder uniquness');
+  assert.deepEqual([...service.get('responders').keys()], [1], 'ensures priortySet uniqueness');
 
   service.activate(secondResponder);
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder, secondResponder]), 'adds to the top of the stack');
+  assert.deepEqual([...service.get('responders').keys()], [1, 2], 'adds new prioritySet');
+
+  service.activate(thirdResponder);
+  assert.deepEqual([...service.get('responders').keys()], [1, 2], 'uses preexisting prioritySet');
 
   service.activate();
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), normalize([responder, secondResponder]), 'passing no arguments will not result in an undefined element');
-});
-
-test('`sortedResponderStack` sorts the sortedResponderStack by priorty', function(assert) {
-  const service = this.subject();
-  const responder = EventedObject.create({ name: 'foo', keyboardPriority: 2 });
-  const secondResponder = EventedObject.create({ name: 'bar', keyboardPriority: 1 });
-  const thirdResponder = EventedObject.create({ name: 'baz' });
-  const fourthResponder = EventedObject.create({ name: 'beetle' });
-
-  service.activate(responder);
-  service.activate(secondResponder);
-  service.activate(thirdResponder);
-  service.activate(fourthResponder);
-  
-  const expected = normalize([responder, secondResponder, thirdResponder, fourthResponder]);
-
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), expected, 'sort by priority ascending, non-priority at the end');
+  assert.deepEqual([...service.get('responders').keys()], [1, 2], 'does not add a blank entry when undefined');
 });
 
 test('`deactivate` removes the supplied responder from the _responderStack', function(assert) {
@@ -57,14 +39,14 @@ test('`deactivate` removes the supplied responder from the _responderStack', fun
 
   service.activate(responder);
   service.deactivate(responder);
-  assert.deepEqual(normalize(service.get('sortedResponderStack')), [], 'removes responder from sortedResponderStack');
+  assert.deepEqual([...service.get('responders').keys()], [], 'destroys priortySet');
 });
 
 test('`_teardownListener` removes the jquery listeners', function(assert) {
   const service = this.subject();
 
   service._teardownListener();
-  
+
   const listeners = Ember.$._data(document);
 
   assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
