@@ -199,7 +199,7 @@ If you want an event to fire for every keypress, then simply don't provide a key
 
 ```js
 triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
-  if (/^\w(?!.)/.test(getKey(event.keyCode)) {
+  if (/^\w(?!.)/.test(getKey(event))) {
     this.startEditing();
   }
 })
