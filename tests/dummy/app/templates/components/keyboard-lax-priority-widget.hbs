@@ -1,0 +1,9 @@
+{{formatMarkdown "
+### `keyboardLaxPriority`
+
+By setting `keyboardLaxPriority` to `true`, you're saying that it will not block lower priority responders. This can help if you want a group of high level responders to always get a chance to handle key events without blocking the rest of your app. Note that all components within a given priority must have `keyboardLaxPriority` set to `true` or else the priority level will still block, as per usual.
+"}}
+
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true laxPriorityToggle=true keyboardPriority=1 hook="lax-priority-counter"}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true laxPriorityToggle=true keyboardFirstResponder=true keyboardLaxPriority=true hook="lax-priority-counter"}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true laxPriorityToggle=true hook="lax-priority-counter"}}

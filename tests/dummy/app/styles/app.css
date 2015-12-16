@@ -1,58 +1,54 @@
+body, input {
+  background-color: #FFFCC4;
+  color: #00585F;
+  font-size: 1vw;
+  line-height: 2vw;
+}
+
+input {
+  padding: 0 0.5vw;
+}
+
 .container {
+  margin: 0 auto;
   position: relative;
   width: 60vw;
-  margin: 0 auto;
 }
 
-.input {
-  position: absolute;
-  top: 5vh;
-  right: 5vw;
+.keyboard-widget {
+  border: thin solid #00585F;
+  margin: 2vw 0;
+  padding: 1vw;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
 
+.keyboard-widget:hover {
+  color: #FFFCC4;
+  background-color: #00585F;
+}
+
+.keyboard-widget.active {
+  color: #FFFCC4;
+  background-color: #00585F;
+}
+
+.counter-container {
+  color: #00585F;
+  background-color: #F0EDBB;
+  border: thin solid #00585F;
+  box-sizing: border-box;
   display: inline-block;
-  width: 20vw;
-}
-
-.textarea {
-  clear: both;
-  margin-top: 4%;
-  width: 100%;
-  height: 20vh;
-  resize: none;
-}
-
-.modal {
-  position: absolute;
-  top: 18vh;
-  left: 18vw;
-  right: 18vw;
-  height: 38vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  background-color: white;
-  border: thin solid black;
+  overflow: hidden;
   text-align: center;
+  width: 33%;
 }
 
-.counter-aside {
-  float: left;
-}
-
-.mixin-test-buttons {
-  float: right;
-}
-
-.mixin-component {
-  margin-top: 1%;
-  border: thin solid black;
-  padding: 1%;
-}
-
-aside {
-  margin-top: 5vh;
-  padding: 1%;
-  border: thin solid black;
+.counter-container .input-field {
+  background-color: #FFFCC4;
+  border: thin solid #00585F;
+  border-top: 0;
+  color: #00585F;
+  width: 20%;
+  text-align: center;
 }

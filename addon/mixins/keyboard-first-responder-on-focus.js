@@ -12,13 +12,10 @@ export default Mixin.create({
   tabindex: 0, // ensures that element is focusable
 
   makeFirstResponderOnFocusIn: on('focusIn', function() {
-    const keyboard = this.get('keyboard');
-
-    keyboard.activate(this);
-    keyboard.becomeFirstResponder(this);
+    this.set('keyboardFirstResponder', true);
   }),
 
   resignFirstResponderOnFocusOut: on('focusOut', function() {
-    this.get('keyboard').resignFirstResponder(this);
+    this.set('keyboardFirstResponder', false);
   })
 });

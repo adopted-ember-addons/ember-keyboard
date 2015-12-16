@@ -12,10 +12,10 @@ export default Mixin.create({
   tabindex: 0, // ensures that element is focusable
 
   activateKeyboardWhenFocused: on('click', 'focusIn', function() {
-    this.get('keyboard').activate(this);
+    this.set('keyboardActivated', true);
   }),
 
   deactivateKeyboardWhenFocusOut: on('focusOut', function() {
-    this.get('keyboard').deactivate(this);
+    this.set('keyboardActivated', false);
   })
 });

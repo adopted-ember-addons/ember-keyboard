@@ -10,6 +10,6 @@ export default Mixin.create({
   keyboard: inject.service(),
 
   activateKeyboardWhenPresent: on('didInsertElement', function() {
-    this.get('keyboard').activate(this);
+    this.set('keyboardActivated', true);
   })
 });

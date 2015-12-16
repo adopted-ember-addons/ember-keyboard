@@ -111,6 +111,16 @@ this.get('keyboard').resignFirstResponder(this);
 
 Resigns first responder status, in the process returning to its previous priority. If the component had not been previously activated, it will instead be deactivated.
 
+## `keyboardAlways`
+
+If you want a component to always be a responder and not to block other components, then:
+
+```js
+this.set('keyboardAlways', true);
+```
+
+This is useful for system-level menu commands, such as `ctrl+s` to save a document. Note that this will fire before the `firstResponder`, meaning that when inputs and textareas are focused, they'll still trigger the `keyboardAlways` event. Because of this, it is advisable to only use keybindings with modifier keys such as `ctrl` and `alt`;
+
 ## Mixins
 
 To reduce boilerplate, `ember-keyboard` includes several mixins with common patterns.

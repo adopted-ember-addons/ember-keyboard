@@ -2,32 +2,24 @@ import Ember from 'ember';
 import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
 
 const {
+  Service,
   computed,
-  isEmpty,
-  isPresent,
-  Logger,
-  on,
-  Service
+  get,
+  on
 } = Ember;
 
-const { error } = Logger;
-
 export default Service.extend({
-  responders: computed(() => new Map()),
+  priorityLevels: computed(() => new Map()),
 
   activate(responder) {
-    if (isEmpty(responder)) {
-      return error(`ember-keyboard: \`activate\` expects a component as its first argument. You passed '${responder}'`);
+    const priorityLevels = get(this, 'priorityLevels');
+    const priority = get(responder, '_keyboardPriorityLevel');
+
+    if (!priorityLevels.has(priority)) {
+      priorityLevels.set(priority, new Set());
     }
 
-    const responders = this.get('responders');
-    const priority = responder.get('keyboardPriority');
-
-    if (!responders.has(priority)) {
-      responders.set(priority, new Set());
-    }
-
-    responders.get(priority).add(responder);
+    priorityLevels.get(priority).add(responder);
 
     responder.on('willDestroyElement', this, function() {
       this.deactivate(responder);
@@ -35,34 +27,17 @@ export default Service.extend({
   },
 
   deactivate(responder) {
-    const responders = this.get('responders');
-    const priority = responder.get('keyboardPriority');
-    const prioritySet = responders.get(priority);
+    const priorityLevels = get(this, 'priorityLevels');
 
-    this.resignFirstResponder(this);
+    priorityLevels.forEach((priorityLevel) => {
+      if (priorityLevel.has(responder)) {
+        priorityLevel.delete(responder);
 
-    if (isPresent(prioritySet)) {
-      prioritySet.delete(responder);
-
-      if (prioritySet.size === 0) {
-        responders.delete(priority);
+        if (priorityLevel.size === 0) {
+          priorityLevels.delete(priorityLevel);
+        }
       }
-    }
-  },
-
-  becomeFirstResponder(responder) {
-    const responders = this.get('responders');
-
-    responders.set('firstResponder', new Set([responder]));
-  },
-
-  resignFirstResponder(responder) {
-    const responders = this.get('responders');
-    const firstResponder = responders.get('firstResponder');
-
-    if (isPresent(firstResponder) && firstResponder.values().next().value.get('guid') === responder.get('guid')) {
-      responders.delete('firstResponder');
-    }
+    });
   },
 
   _initializeListener: on('init', function() {
@@ -71,7 +46,7 @@ export default Service.extend({
     }).join(' ');
 
     Ember.$(document).on(eventNames, null, (event) => {
-      handleKeyEvent(event, this.get('responders'));
+      handleKeyEvent(event, get(this, 'priorityLevels'));
     });
   }),
 

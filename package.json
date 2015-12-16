@@ -1,6 +1,6 @@
 {
   "name": "ember-keyboard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An Ember.js addon for the painless support of keyboard events",
   "directories": {
     "doc": "doc",
@@ -36,8 +36,10 @@
     "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
+    "ember-hook": "0.0.4",
     "ember-logger-test": "0.0.2",
-    "ember-try": "0.0.6"
+    "ember-try": "0.0.6",
+    "markdown-code-highlighting": "0.0.6"
   },
   "keywords": [
     "ember-addon"

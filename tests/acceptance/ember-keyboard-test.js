@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import { module, test } from 'qunit';
 import startApp from '../../tests/helpers/start-app';
+import { hook } from 'ember-hook';
 
-const search = '.input';
-const textarea = '.textarea';
-const modal = '.modal';
-const modalCounter = '.modal-counter';
-const standAloneCounter = '.standalone-counter';
+function getValues() {
+  return find(`${hook('lax-priority-counter')} ${hook('counter-counter')}`).map(function(index, counter) {
+    return parseInt($(counter).text().trim(), 10);
+  }).get();
+}
 
 module('Acceptance | ember keyboard', {
   beforeEach() {
@@ -30,53 +31,36 @@ test('does nothing without responders', function(assert) {
 
 test('test standard functionality', function(assert) {
   visit('/showcase').then(() => {
-    // press 'ArrowLeft'
-    return keyEvent(document, 'keydown', 37);
-  }).then(() => {
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'counter respond to keydown event');
+    click(hook('lax-widget'));
 
-    return triggerEvent(search, 'focus');
-  }).then(() => {
-    // press 'ArrowLeft' from within an input
-    return keyEvent(search, 'keydown', 37);
-  }).then(() => {
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-1', 'focused input prevents event bubbling');
-
-    return triggerEvent(search, 'blur');
-  }).then(() => {
-    // press 'ArrowLeft' from within an input
-    return keyEvent(document, 'keydown', 37);
-  }).then(() => {
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-2', 'bluring an input reenables event bubbling');
-
-    return triggerEvent(textarea, 'focus');
-  }).then(() => {
-    // press 'ArrowLeft' from within an textarea
-    return keyEvent(textarea, 'keydown', 37);
-  }).then(() => {
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-2', 'focused textarea prevents event bubbling');
-
-    return triggerEvent(textarea, 'blur');
-  }).then(() => {
-    // press 'ArrowLeft' from within a textarea
-    return keyEvent(textarea, 'keydown', 37);
-  }).then(() => {
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-3', 'bluring a textarea reenables event bubbling');
-
-    // press 'cltr+shift+a'
-    return triggerEvent(document, 'keyup', { keyCode: 65, which: 65, ctrlKey: true, shiftKey: true });
-  }).then(() => {
-    assert.ok(Ember.$(modal).length > 0, 'modal is present after pressing ctrl+shift+a');
-
-    // press 'ArrowRight'
     return keyEvent(document, 'keydown', 39);
   }).then(() => {
-    assert.equal(Ember.$(modalCounter).text().trim(), '1', 'modal counter respond to keydown event');
-    assert.equal(Ember.$(standAloneCounter).first().text().trim(), '-3', 'standalone counter is blocked by modal counter');
+    const values = getValues();
 
-    // press 's'
-    return keyEvent(document, 'keyup', 83);
+    assert.deepEqual(values, [1, 1, 0], 'default response is correct');
+
+    click(`${hook('lax-priority-counter')}:nth(1) ${hook('counter-lax-priority-toggle')}`);
+
+    return keyEvent(document, 'keydown', 39);
   }).then(() => {
-    assert.ok(!Ember.$(search).is(':focus'), 'event does not bubble after modal');
+    const values = getValues();
+
+    assert.deepEqual(values, [1, 2, 0], 'removing lax responser is correct');
+
+    click(`${hook('lax-priority-counter')}:nth(1) ${hook('counter-first-responder-toggle')}`);
+
+    return keyEvent(document, 'keydown', 39);
+  }).then(() => {
+    const values = getValues();
+
+    assert.deepEqual(values, [2, 2, 0], 'removing first responder is correct');
+
+    click(`${hook('lax-priority-counter')}:nth(0) ${hook('counter-activated-toggle')}`);
+
+    return keyEvent(document, 'keydown', 39);
+  }).then(() => {
+    const values = getValues();
+
+    assert.deepEqual(values, [2, 3, 1], 'deactivating a responder is correct');
   });
 });

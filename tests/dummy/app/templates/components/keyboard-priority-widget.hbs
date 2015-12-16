@@ -1,0 +1,26 @@
+{{formatMarkdown "
+### `keyboardPriority`
+
+By default, all activated components are treated as equal. If you have two components that respond to `ctrl+a`, then both will respond when there's a `ctrl+a` event. However, this behavior is undesirable in some scenarios. What if you have a modal open, and you only want it and its child components to respond to key events. You can get this behavior by assigning a higher priority to the modal and its children:
+
+```hbs
+noPriorityComponent; // priority defaults to 0
+lowPriorityComponent.set('keyboardPriority', 0);
+
+modal.set('keyboardPriority', 1);
+modalChild.set('keyboardPriority', 1);
+```
+
+In this scenario, when a key is pressed both `modal` and `modalChild` will have a chance to respond to it, while the remaining components will not. Once `modal` and `modalChild` are deactivated or their priority is lowered, then `lowPriorityComponent` and `noPriorityComponent` will be able to respond to key events.
+
+Perhaps more conveniently, this property can be passed in through your template:
+
+```hbs
+{{my-component keyboardPriority=1}}
+{{my-dynamic-component keyboardPriority=dynamicPriority}}
+```
+"}}
+
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true keyboardPriority=1}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true}}

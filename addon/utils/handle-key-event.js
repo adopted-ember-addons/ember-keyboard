@@ -4,10 +4,9 @@ import listenerName from 'ember-keyboard/utils/listener-name';
 
 const {
   hasListeners,
-  isEmpty
+  get
 } = Ember;
 
-// joins and sorts any active modifier keys with the primary key.
 const gatherKeys = function gatherKeys(event) {
   const key = getKey(event);
 
@@ -20,20 +19,42 @@ const gatherKeys = function gatherKeys(event) {
   }, [key]);
 };
 
-export default function handleKeyEvent(event, responders) {
-  const keys = gatherKeys(event);
-  const listenerExclusive = listenerName(event.type, keys);
-  const listenerInclusive = listenerName(event.type);
+const sortPriorityLevelKeys = function sortPriorityLevelKeys(priorityLevels) {
+  return [...priorityLevels.keys()].sort((a, b) => {
+    if (a === 'firstResponder') {
+      return -1;
+    } else if (b === 'firstResponder') {
+      return 1;
+    } else {
+      return b - a;
+    }
+  });
+};
 
-  const priority = responders.has('firstResponder') ? 'firstResponder' : [...responders.keys()].sort((a, b) => b - a)[0];
+const triggerListeners = function triggerListeners(event, responders, listenerNames) {
+  let isLax = true;
 
-  if (isEmpty(priority)) { return; }
+  [...responders].forEach((responder) => {
+    if (!get(responder, 'keyboardLaxPriority')) {
+      isLax = false;
+    }
 
-  responders.get(priority).forEach((responder) => {
-    [listenerExclusive, listenerInclusive].forEach((triggerName) => {
+    listenerNames.forEach((triggerName) => {
       if (hasListeners(responder, triggerName)) {
         responder.trigger(triggerName, event);
       }
     });
+  });
+
+  return isLax;
+};
+
+export default function handleKeyEvent(event, priorityLevels) {
+  const keys = gatherKeys(event);
+  const listenerNames = [listenerName(event.type, keys), listenerName(event.type)];
+  const sortedPriorityLevelKeys = sortPriorityLevelKeys(priorityLevels);
+
+  sortedPriorityLevelKeys.every((key) => {
+    return triggerListeners(event, priorityLevels.get(key), listenerNames);
   });
 }

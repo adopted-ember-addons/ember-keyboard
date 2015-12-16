@@ -1,0 +1,21 @@
+{{#if priorityInput}}
+  <label><code>keyboardPriority</code>:</label>
+  {{input value=keyboardPriority classNames="input-field" hook="counter-priority-input"}}
+{{/if}}
+
+{{#if activatedToggle}}
+  <label><code>keyboardActivated</code>:</label>
+  {{input type="checkbox" checked=toggleActivated classNames="checkbox" hook="counter-activated-toggle"}}
+{{/if}}
+
+{{#if firstResponderToggle}}
+  <label><code>keyboardFirstResponder</code>:</label>
+  {{input type="checkbox" checked=keyboardFirstResponder classNames="checkbox" hook="counter-first-responder-toggle"}}
+{{/if}}
+
+{{#if laxPriorityToggle}}
+  <label><code>keyboardLaxPriority</code>:</label>
+  {{input type="checkbox" checked=keyboardLaxPriority classNames="checkbox" hook="counter-lax-priority-toggle"}}
+{{/if}}
+
+<div data-test={{hook "counter-counter"}}>{{counter}}</div>

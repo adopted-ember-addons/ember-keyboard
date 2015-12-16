@@ -1,0 +1,16 @@
+{{formatMarkdown "
+### `keyboardFirstResponder`
+
+Sometimes you'll need a component to be the first responder, regardless of its `keyboardPriority` relative to other components. This can be useful if you want a low-priority component to temporarily gain precedence over everything else. To achieve this, use `keyboardFirstResponder`.
+
+```hbs
+{{my-component keyboardPriority=0 keyboardFirstResponder=true}} <!-- has precedence -->
+{{my-component keyboardPriority=1}}
+```
+
+When a component resigns `keyboardFirstResponder`, it will fall back to using its `keyboardPriority`.
+"}}
+
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true keyboardPriority=1}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true keyboardFirstResponder=true}}
+{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true}}
