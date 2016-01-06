@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('showcase');
+  this.route('test-scenario');
 });
 
 export default Router;

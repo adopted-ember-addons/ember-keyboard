@@ -11,6 +11,7 @@ export default Component.extend(EKMixin, {
   tagName: 'span',
   classNames: 'counter-container',
   toggleActivated: true,
+  hook: 'counter',
 
   counter: 0,
 
