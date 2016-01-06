@@ -5,36 +5,44 @@ const {
   Service,
   computed,
   get,
-  on
+  isEmpty,
+  on,
+  set
 } = Ember;
 
 export default Service.extend({
-  priorityLevels: computed(() => new Map()),
+  priorityLevels: computed(() => Ember.Object.create()),
 
   activate(responder) {
     const priorityLevels = get(this, 'priorityLevels');
-    const priority = get(responder, '_keyboardPriorityLevel');
+    const priority = get(responder, '_keyboardPriorityLevel').toString();
 
-    if (!priorityLevels.has(priority)) {
-      priorityLevels.set(priority, new Set());
+    if (isEmpty(get(priorityLevels, priority))) {
+      set(priorityLevels, priority, Ember.A());
     }
 
-    priorityLevels.get(priority).add(responder);
+    const priorityLevel = get(priorityLevels, priority);
 
-    responder.on('willDestroyElement', this, function() {
-      this.deactivate(responder);
-    });
+    if (!priorityLevel.contains(responder)) {
+      get(priorityLevels, priority).pushObject(responder);
+
+      responder.on('willDestroyElement', this, function() {
+        this.deactivate(responder);
+      });
+    }
   },
 
   deactivate(responder) {
     const priorityLevels = get(this, 'priorityLevels');
 
-    priorityLevels.forEach((priorityLevel) => {
-      if (priorityLevel.has(responder)) {
-        priorityLevel.delete(responder);
+    Object.keys(priorityLevels).forEach((key) => {
+      const priorityLevel = get(priorityLevels, key);
 
-        if (priorityLevel.size === 0) {
-          priorityLevels.delete(priorityLevel);
+      if (priorityLevel.contains(responder)) {
+        priorityLevel.removeObject(responder);
+
+        if (get(priorityLevel, 'length') === 0) {
+          delete priorityLevels[key];
         }
       }
     });

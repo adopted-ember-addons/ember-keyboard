@@ -2,11 +2,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-    babel: {
-      includePolyfill: true
-    }
-  });
+  var app = new EmberApp(defaults);
 
   app.import("bower_components/highlightjs/styles/monokai-sublime.css");
 

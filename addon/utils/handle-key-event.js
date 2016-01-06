@@ -20,7 +20,7 @@ const gatherKeys = function gatherKeys(event) {
 };
 
 const sortPriorityLevelKeys = function sortPriorityLevelKeys(priorityLevels) {
-  return [...priorityLevels.keys()].sort((a, b) => {
+  return Object.keys(priorityLevels).sort((a, b) => {
     if (a === 'firstResponder') {
       return -1;
     } else if (b === 'firstResponder') {
@@ -55,6 +55,6 @@ export default function handleKeyEvent(event, priorityLevels) {
   const sortedPriorityLevelKeys = sortPriorityLevelKeys(priorityLevels);
 
   sortedPriorityLevelKeys.every((key) => {
-    return triggerListeners(event, priorityLevels.get(key), listenerNames);
+    return triggerListeners(event, get(priorityLevels, key), listenerNames);
   });
 }

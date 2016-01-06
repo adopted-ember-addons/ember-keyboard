@@ -4,7 +4,7 @@ import listenerName from 'ember-keyboard/utils/listener-name';
 
 const { isPresent } = Ember;
 
-const keyMapValues = [...KEY_MAP.values()];
+const keyMapValues = Object.keys(KEY_MAP).map((key) => KEY_MAP[key]);
 const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
 
 const validateKeys = function validateKeys(keys) {
