@@ -1,15 +1,13 @@
 import Ember from 'ember';
 
 const {
-  inject,
   Mixin,
-  on
+  on,
+  set
 } = Ember;
 
 export default Mixin.create({
-  keyboard: inject.service(),
-
   activateKeyboardWhenPresent: on('didInsertElement', function() {
-    this.set('keyboardActivated', true);
+    set(this, 'keyboardActivated', true);
   })
 });

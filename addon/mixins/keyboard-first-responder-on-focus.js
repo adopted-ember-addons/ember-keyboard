@@ -1,21 +1,21 @@
 import Ember from 'ember';
 
 const {
-  inject,
   Mixin,
-  on
+  on,
+  set,
+  setProperties
 } = Ember;
 
 export default Mixin.create({
-  attributeBindings: ['tabindex'],
-  keyboard: inject.service(),
-  tabindex: 0, // ensures that element is focusable
-
-  makeFirstResponderOnFocusIn: on('focusIn', function() {
-    this.set('keyboardFirstResponder', true);
+  makeFirstResponderOnFocusIn: on('click', 'focusIn', function() {
+    setProperties(this, {
+      keyboardActivated: true,
+      keyboardFirstResponder: true
+    });
   }),
 
   resignFirstResponderOnFocusOut: on('focusOut', function() {
-    this.set('keyboardFirstResponder', false);
+    set(this, 'keyboardFirstResponder', false);
   })
 });

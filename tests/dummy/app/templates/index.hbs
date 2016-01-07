@@ -96,15 +96,13 @@ This mixin will activate the component on `didInsertElement`, and as per normal,
 
 This mixin will activate the component whenever it receives focus and deactivate it when it loses focus.
 
-Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
-
 ### EKFirstResponderOnFocusMixin
 
 `import { EKFirstResponderOnFocusMixin } from 'ember-keyboard';`
 
 This mixin grants the component first responder status while it is focused. When it loses focus, it resigns its status.
 
-Note that to ensure that the component is focusable, this mixin sets the component's `tabindex` to 0.
+Note that it will also activate the component on focus in, though it does not deactivate the component on focus out.
 
 ## Advanced Usage
 
