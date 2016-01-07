@@ -2,8 +2,6 @@ import Ember from 'ember';
 import KEY_MAP from 'ember-keyboard/fixtures/key-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
 
-const { isPresent } = Ember;
-
 const keyMapValues = Object.keys(KEY_MAP).map((key) => KEY_MAP[key]);
 const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
 
@@ -16,7 +14,7 @@ const validateKeys = function validateKeys(keys) {
 };
 
 const formattedListener = function formattedListener(type, keysString) {
-  const keys = isPresent(keysString) ? keysString.split('+') : [];
+  const keys = keysString !== undefined ? keysString.split('+') : [];
 
   validateKeys(keys);
 
