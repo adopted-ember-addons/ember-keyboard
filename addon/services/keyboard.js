@@ -5,9 +5,9 @@ const {
   Service,
   computed,
   get,
-  isEmpty,
   on,
-  set
+  set,
+  typeOf
 } = Ember;
 
 export default Service.extend({
@@ -17,11 +17,7 @@ export default Service.extend({
     const priorityLevels = get(this, 'priorityLevels');
     const priority = get(responder, '_keyboardPriorityLevel').toString();
 
-    if (isEmpty(get(priorityLevels, priority))) {
-      set(priorityLevels, priority, Ember.A());
-    }
-
-    const priorityLevel = get(priorityLevels, priority);
+    const priorityLevel = get(priorityLevels, priority) || set(priorityLevels, priority, Ember.A());
 
     if (!priorityLevel.contains(responder)) {
       get(priorityLevels, priority).pushObject(responder);
@@ -37,6 +33,8 @@ export default Service.extend({
 
     Object.keys(priorityLevels).forEach((key) => {
       const priorityLevel = get(priorityLevels, key);
+
+      if (typeOf(priorityLevel) !== 'array') { return; }
 
       if (priorityLevel.contains(responder)) {
         priorityLevel.removeObject(responder);
