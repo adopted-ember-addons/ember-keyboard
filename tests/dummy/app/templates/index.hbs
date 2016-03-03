@@ -160,6 +160,21 @@ keyMapper: Ember.on(keyDown('a'), keyDown('b'), keyDown('c'), function(event) {
 })
 ```
 
+### `getKeyCode`
+
+On the other end of things, if you need to convert a key into a keycode, you can use `getKeyCode`. This is particularly useful when testing:
+
+```js
+import { getKeyCode } from 'ember-keyboard';
+
+. . . .
+
+keyEvent(document, 'keydown', getKeyCode('a'));
+keyEvent(document, 'keydown', getKeyCode('ArrowRight'));
+keyEvent(document, 'keydown', getKeyCode('Backspace'));
+keyEvent(document, 'keydown', getKeyCode(' '));
+```
+
 Just pass in an `event`, and it'll return a human readable key. Look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js) for a full mapping.
 
 ### Key Indifference
