@@ -20,8 +20,10 @@ module('Acceptance | ember keyboard', {
 });
 
 test('test standard functionality', function(assert) {
+  assert.expect(7);
+
   visit('/test-scenario').then(() => {
-    return keyEvent(document, 'keydown', 39);
+    return keyDown('ArrowRight');
   }).then(() => {
     const values = getValues();
 
@@ -31,7 +33,7 @@ test('test standard functionality', function(assert) {
 
     triggerEvent(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, 'blur');
 
-    return keyEvent(document, 'keydown', 39);
+    return keyDown('ArrowRight');
   }).then(() => {
     const values = getValues();
 
@@ -39,7 +41,7 @@ test('test standard functionality', function(assert) {
 
     click(`${hook('counter')}:nth(1) ${hook('counter-first-responder-toggle')}`);
 
-    return keyEvent(document, 'keydown', 39);
+    return keyDown('ArrowRight');
   }).then(() => {
     const values = getValues();
 
@@ -47,7 +49,7 @@ test('test standard functionality', function(assert) {
 
     click(`${hook('counter')}:nth(1) ${hook('counter-lax-priority-toggle')}`);
 
-    return keyEvent(document, 'keydown', 39);
+    return keyDown('ArrowRight');
   }).then(() => {
     const values = getValues();
 
@@ -55,16 +57,22 @@ test('test standard functionality', function(assert) {
 
     click(`${hook('counter')}:nth(0) ${hook('counter-activated-toggle')}`);
 
-    return keyEvent(document, 'keydown', 39);
+    return keyDown('ArrowRight');
   }).then(() => {
     const values = getValues();
 
     assert.deepEqual(values, [3, 4, 2], 'deactivating a responder removes it from the stack');
 
-    return triggerEvent(document, 'keydown', { keyCode: 39, which: 39, ctrlKey: true, shiftKey: true });
+    return keyDown('ArrowRight+ctrl+shift');
   }).then(() => {
     const values = getValues();
 
     assert.deepEqual(values, [3, 104, 102], 'modifier keys work');
+
+    return keyUp('r');
+  }).then(() => {
+    const values = getValues();
+
+    assert.deepEqual(values, [3, 0, 0], 'keyUp works');
   });
 });

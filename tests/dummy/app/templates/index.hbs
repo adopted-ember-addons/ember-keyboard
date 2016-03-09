@@ -129,6 +129,49 @@ import { keyUp, keyDown } from 'ember-keyboard';
 
 Note that `keydown` events fire repeatedly while the key is pressed, while `keyup` events fire only once, after the key has been released.
 
+### Testing
+
+`ember-keyboard` comes with some test helpers to help out with your acceptance tests.
+
+```js
+. . . .
+
+test('test my key bindings', function(assert) {
+  . . . .
+
+  keyUp('ArrowRight');
+
+  andThen(() => {
+    . . . .
+  });
+
+  keyDown('ArrowRight+ctrl+shift');
+
+  andThen(() => {
+    . . . .
+  });
+});
+```
+
+To use them, you'll need to import them into `tests/helpers/start-app.js` above `application.injectTestHelpers()`:
+
+```js
+. . . .
+import keyboardRegisterTestHelpers from './ember-keyboard/register-test-helpers';
+
+export default function startApp(attrs) {
+  . . . .
+
+  Ember.run(function() {
+    . . . .
+    keyboardRegisterTestHelpers();
+    application.injectTestHelpers();
+  });
+
+  . . . .
+}
+```
+
 ### `event`
 
 When `ember-keyboard` triggers an event, it passes in the `event` object as its first argument:

@@ -21,7 +21,9 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "keyDown",
+    "keyUp"
   ],
   "node": false,
   "browser": false,
