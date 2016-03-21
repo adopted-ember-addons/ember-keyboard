@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { EKMixin, keyDown, keyUp } from 'ember-keyboard';
+import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
 
 const {
   Component,
@@ -49,5 +49,9 @@ export default Component.extend(EKMixin, {
 
   resetCounter: on(keyUp('r'), function() {
     this.set('counter', 0);
+  }),
+
+  resetCounter: on(keyPress('5'), function() {
+    this.set('counter', 5);
   })
 });

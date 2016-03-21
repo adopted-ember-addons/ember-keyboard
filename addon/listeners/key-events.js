@@ -28,3 +28,7 @@ export function keyDown(keys) {
 export function keyUp(keys) {
   return formattedListener('keyup', keys);
 }
+
+export function keyPress(keys) {
+  return formattedListener('keypress', keys);
+}

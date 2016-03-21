@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from 'ember-get-config';
 import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
 
 const {
@@ -47,8 +48,9 @@ export default Service.extend({
   },
 
   _initializeListener: on('init', function() {
-    const eventNames = ['keyup', 'keydown'].map(function(name) {
-      return `${name}.ember-keyboard-listener`;
+    const listeners = config.emberKeyboard.listeners || ['keyUp', 'keyDown', 'keyPress'];
+    const eventNames = listeners.map(function(name) {
+      return `${name.toLowerCase()}.ember-keyboard-listener`;
     }).join(' ');
 
     Ember.$(document).on(eventNames, null, (event) => {

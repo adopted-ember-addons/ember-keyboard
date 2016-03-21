@@ -1,4 +1,4 @@
-import { keyDown, keyUp } from 'ember-keyboard/listeners/key-events';
+import { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
 import getKey from 'ember-keyboard/utils/get-key';
 import getKeyCode from 'ember-keyboard/utils/get-key-code';
 import EKMixin from 'ember-keyboard/mixins/ember-keyboard';
@@ -13,6 +13,7 @@ export {
   EKOnInsertMixin,
   keyDown,
   keyUp,
+  keyPress,
   getKey,
   getKeyCode
 };

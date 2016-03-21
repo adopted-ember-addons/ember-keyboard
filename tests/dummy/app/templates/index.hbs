@@ -119,12 +119,20 @@ This applies to `input` and `textarea` helpers:
 {{textarea}}
 ```
 
-### `keyUp` and `keyDown`
+### `keyUp`, `keyDown`, and `keyPress`
 
-`ember-keyboard` listens to both `keydown` and `keyup` events, and has corresponding functions:
+By default, `ember-keyboard` listens to `keydown`, `keyup`, and `keypress` events, and has corresponding functions:
 
 ```js
-import { keyUp, keyDown } from 'ember-keyboard';
+import { keyUp, keyDown, keyPress } from 'ember-keyboard';
+```
+
+If you want `ember-keyboard` to listen to fewer events, then you can specify them in your `config/environment.js` file like so:
+
+```js
+ENV.emberKeyboard = {
+  listeners: ['keyUp', 'keyDown'] // use only `keyUp` and `keyDown`
+}
 ```
 
 Note that `keydown` events fire repeatedly while the key is pressed, while `keyup` events fire only once, after the key has been released.
