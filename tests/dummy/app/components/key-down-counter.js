@@ -51,7 +51,7 @@ export default Component.extend(EKMixin, {
     this.set('counter', 0);
   }),
 
-  resetCounter: on(keyPress('5'), function() {
+  setCounterTo5: on(keyPress('5'), function() {
     this.set('counter', 5);
   })
 });
