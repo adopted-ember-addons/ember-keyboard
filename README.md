@@ -11,7 +11,7 @@
 
 * Dynamic priority levels allow you to specify which components respond first to key events and under what circumstances. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
 * Human-readable key-mappings. (Thanks to [`ember-keyboard-service`](https://github.com/Fabriquartz/ember-keyboard-service) for the inspiration)
-* Support for both `keyup` and `keydown`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
+* Support for `keyup`, `keydown`, and `keypress`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
 * Compatible with Ember 2.0+.
 
 ## Installation
