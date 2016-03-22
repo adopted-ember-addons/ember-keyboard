@@ -48,7 +48,7 @@ export default Service.extend({
   },
 
   _initializeListener: on('init', function() {
-    const listeners = config.emberKeyboard.listeners || ['keyUp', 'keyDown', 'keyPress'];
+    const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
     const eventNames = listeners.map(function(name) {
       return `${name.toLowerCase()}.ember-keyboard-listener`;
     }).join(' ');

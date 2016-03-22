@@ -6,9 +6,6 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
-    emberKeyboard: {
-      listeners: ['keyUp', 'keyDown', 'keyPress']
-    },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
