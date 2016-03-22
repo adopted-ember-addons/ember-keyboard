@@ -23,4 +23,8 @@ export default function() {
   Ember.Test.registerAsyncHelper('keyUp', function(app, attributes) {
     return keyEvent(app, attributes, 'keyup');
   });
+
+  Ember.Test.registerAsyncHelper('keyPress', function(app, attributes) {
+    return keyEvent(app, attributes, 'keypress');
+  });
 }
