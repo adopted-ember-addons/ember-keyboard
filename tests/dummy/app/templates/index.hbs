@@ -33,7 +33,7 @@ Or simply activate the component from your template:
 Once it's activated, your component will start listening for key events. Let's say you want your component to respond to the key `s` as well as `ctrl+shift+a`. You could do so with:
 
 ```js
-import { keyUp } from 'ember-keyboard';
+import { keyUp, keyDown } from 'ember-keyboard';
 
 . . . .
 
@@ -41,12 +41,14 @@ aFunction: Ember.on(keyUp('s'), function() {
   console.log('`s` was pressed');
 }),
 
-anotherFunction: Ember.on(keyUp('ctrl+shift+a'), function() {
-  console.log('`ctrl+shift+a` was pressed');
+anotherFunction: Ember.on(keyDown('ctrl+shift+a'), function() {
+  console.log('`ctrl+shift+a` is being held');
 })
 ```
 
-Your component will be able to listen to any combination of modifier keys (`ctrl`, `shift`, `alt`, and `meta`) and one principle key, such as `a` in the example above. For a full list of the primary keys (such as `a`, `1`, ` `, `Escape`, and `ArrowLeft`), look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js).
+Your component will be able to listen to any combination of modifier keys (`ctrl`, `shift`, `alt`, and `meta`) and one principle key, such as `a` in the example above. Note that `keyUp` does not consistently fire on Macs (and possible other OSs) when used in conjunction with modifier keys, so when possible, use `keyDown` with modifier keys.
+
+For a full list of the primary keys (such as `a`, `1`, ` `, `Escape`, and `ArrowLeft`), look [here](https://github.com/null-null-null/ember-keyboard/blob/master/addon/fixtures/key-map.js).
 
 Finally, if you ever want a component to stop listening to key events, you can deactivate it:
 
