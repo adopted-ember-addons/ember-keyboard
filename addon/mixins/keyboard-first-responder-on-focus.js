@@ -16,6 +16,9 @@ export default Mixin.create({
   }),
 
   resignFirstResponderOnFocusOut: on('focusOut', function() {
-    set(this, 'keyboardFirstResponder', false);
+    setProperties(this, {
+      keyboardActivated: false,
+      keyboardFirstResponder: false
+    });
   })
 });
