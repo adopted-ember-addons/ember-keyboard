@@ -7,8 +7,22 @@ const {
 } = Ember;
 
 export function initialize() {
-  TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);
-  TextArea.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+  TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin, {
+    resignFirstResponderOnFocusOut: on('focusOut', function() {
+      setProperties(this, {
+        keyboardActivated: false,
+        keyboardFirstResponder: false
+      });
+    })
+  });
+  TextArea.reopen(EKMixin, EKFirstResponderOnFocusMixin, {
+    resignFirstResponderOnFocusOut: on('focusOut', function() {
+      setProperties(this, {
+        keyboardActivated: false,
+        keyboardFirstResponder: false
+      });
+    })
+  });
 }
 
 export default {
