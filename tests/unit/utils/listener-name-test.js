@@ -14,9 +14,3 @@ test('it returns `_all` if the keys array is empty', function(assert) {
 
   assert.equal(result, 'keydown:_all', 'name is correctly formatted');
 });
-
-test('it converts keys that are in the alt-key-names fixture', function(assert) {
-  const result = listenerName('keydown', ['Down']);
-
-  assert.equal(result, 'keydown:ArrowDown', 'name is converted');
-});

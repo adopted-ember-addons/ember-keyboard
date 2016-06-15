@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import getKey from 'ember-keyboard/utils/get-key';
+import getCode from 'ember-keyboard/utils/get-code';
 import listenerName from 'ember-keyboard/utils/listener-name';
 
 const {
@@ -8,7 +8,7 @@ const {
 } = Ember;
 
 const gatherKeys = function gatherKeys(event) {
-  const key = getKey(event);
+  const key = getCode(event);
 
   return ['ctrl', 'meta', 'alt', 'shift'].reduce((keys, keyName) => {
     if (event[`${keyName}Key`]) {

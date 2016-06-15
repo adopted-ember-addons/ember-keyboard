@@ -5,10 +5,10 @@ const { get } = Ember;
 
 moduleFor('service:keyboard', 'Unit | Service | keyboard');
 
-test('`_teardownListener` removes the jquery listeners', function(assert) {
+test('`isDestroying` removes the jquery listeners', function(assert) {
   const service = this.subject();
 
-  service._teardownListener();
+  service.isDestroying();
 
   const listeners = Ember.$._data(document);
 

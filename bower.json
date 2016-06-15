@@ -1,17 +1,14 @@
 {
   "name": "ember-keyboard",
   "dependencies": {
-    "ember": "~2.4.1",
-    "ember-cli-shims": "0.1.0",
+    "ember": "~2.6.0",
+    "ember-cli-shims": "0.1.1",
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
-    "jquery": "1.11.3",
-    "es5-shim": "^4.0.5",
-    "marked": "~0.3.5",
-    "highlightjs": "~9.0.0"
+    "marked": "^0.3.5",
+    "highlightjs": "^9.4.0"
   },
   "resolutions": {
-    "qunit-notifications": "~0.1.0",
-    "ember": "~2.4.1"
+    "highlightjs": "^9.4.0"
   }
 }
