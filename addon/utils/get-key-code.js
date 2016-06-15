@@ -1,7 +1,7 @@
-import KEY_MAP from 'ember-keyboard/fixtures/key-map';
+import codeMap from 'ember-keyboard/fixtures/code-map';
 
 export default function getKeyCode(key) {
-  return Object.keys(KEY_MAP).filter((keyCode) => {
-    return KEY_MAP[keyCode] === key;
+  return Object.keys(codeMap).filter((keyCode) => {
+    return codeMap[keyCode] === key;
   })[0];
 }

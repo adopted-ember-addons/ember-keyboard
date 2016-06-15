@@ -49,6 +49,25 @@ input {
   border: thin solid #00585F;
   border-top: 0;
   color: #00585F;
-  width: 20%;
   text-align: center;
+  width: 20%;
+}
+
+.ember-expanding-sidebar {
+  border-right: thick dashed #00585F;
+  height: 100vh;
+  left: 0;
+  list-style-type: none;
+  padding: 0;
+  padding-right: 1.5vw;
+  position: fixed;
+  text-align: right;
+  top: 0;
+  width: 15vw;
+}
+
+.ember-expanding-sidebar-section a {
+  color: #00585F;
+  cursor: pointer;
+  text-decoration: none;
 }

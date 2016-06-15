@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import KEY_MAP from 'ember-keyboard/fixtures/key-map';
+import codeMap from 'ember-keyboard/fixtures/code-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
 
-const keyMapValues = Object.keys(KEY_MAP).map((key) => KEY_MAP[key]);
+const keyMapValues = Object.keys(codeMap).map((key) => codeMap[key]);
 const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
 
 const validateKeys = function validateKeys(keys) {

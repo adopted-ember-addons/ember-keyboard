@@ -6,7 +6,7 @@ const {
   Service,
   computed,
   get,
-  on,
+  run,
   set,
   typeOf
 } = Ember;
@@ -47,7 +47,9 @@ export default Service.extend({
     });
   },
 
-  _initializeListener: on('init', function() {
+  init(...args) {
+    this._super(...args);
+
     const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
     const eventNames = listeners.map(function(name) {
       return `${name.toLowerCase()}.ember-keyboard-listener`;
@@ -56,9 +58,13 @@ export default Service.extend({
     Ember.$(document).on(eventNames, null, (event) => {
       handleKeyEvent(event, get(this, 'priorityLevels'));
     });
-  }),
+  },
 
-  _teardownListener: on('isDestroying', function() {
-    Ember.$(document).off('.ember-keyboard-listener');
-  })
+  isDestroying(...args) {
+    this._super(...args);
+
+    run(() => {
+      Ember.$(document).off('.ember-keyboard-listener');
+    });
+  }
 });

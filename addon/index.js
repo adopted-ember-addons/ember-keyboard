@@ -1,5 +1,5 @@
 import { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
-import getKey from 'ember-keyboard/utils/get-key';
+import getCode from 'ember-keyboard/utils/get-code';
 import getKeyCode from 'ember-keyboard/utils/get-key-code';
 import EKMixin from 'ember-keyboard/mixins/ember-keyboard';
 import EKFirstResponderOnFocusMixin from 'ember-keyboard/mixins/keyboard-first-responder-on-focus';
@@ -14,6 +14,6 @@ export {
   keyDown,
   keyUp,
   keyPress,
-  getKey,
+  getCode,
   getKeyCode
 };
