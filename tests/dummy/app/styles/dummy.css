@@ -53,6 +53,18 @@ input {
   width: 20%;
 }
 
+.octocat {
+  height: 2vw;
+  width: 2vw;
+}
+
+.github {
+  left: 83vw;
+  position: fixed;
+  text-align: right;
+  top: 1vw;
+}
+
 .ember-expanding-sidebar {
   border-right: thick dashed #00585F;
   height: 100vh;
