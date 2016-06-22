@@ -1,24 +1,24 @@
 body, input {
   background-color: #FFF;
   color: #00585F;
-  font-size: 1vw;
-  line-height: 2vw;
+  font-size: 22px;
+  line-height: 40px;
 }
 
 input {
-  padding: 0 0.5vw;
+  padding: 0 10px;
 }
 
 .container {
   margin: 0 auto;
   position: relative;
-  width: 60vw;
+  width: 60%;
 }
 
 .keyboard-widget {
   border: thin solid #00585F;
-  margin: 2vw 0;
-  padding: 1vw;
+  margin: 40px 0;
+  padding: 20px;
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
@@ -54,32 +54,35 @@ input {
 }
 
 .octocat {
-  height: 2vw;
-  width: 2vw;
+  height: 40px;
+  width: 40px;
 }
 
 .github {
-  left: 83vw;
+  left: 83%;
   position: fixed;
   text-align: right;
-  top: 1vw;
+  top: 1%;
 }
 
 .ember-expanding-sidebar {
+  box-sizing: border-box;
   border-right: thick dashed #00585F;
-  height: 100vh;
+  height: 100%;
   left: 0;
   list-style-type: none;
+  overflow: hidden;
   padding: 0;
-  padding-right: 1.5vw;
+  padding-right: 30px;
   position: fixed;
   text-align: right;
   top: 0;
-  width: 15vw;
+  width: 15%;
 }
 
 .ember-expanding-sidebar-section a {
   color: #00585F;
   cursor: pointer;
+  font-weight: bold;
   text-decoration: none;
 }
