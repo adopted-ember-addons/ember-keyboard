@@ -3,7 +3,7 @@ import codeMap from 'ember-keyboard/fixtures/code-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
 
 const keyMapValues = Object.keys(codeMap).map((key) => codeMap[key]);
-const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
+const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift', 'cmd']);
 
 const validateKeys = function validateKeys(keys) {
   keys.forEach((key) => {

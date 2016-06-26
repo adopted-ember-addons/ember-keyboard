@@ -10,7 +10,7 @@ const {
 const gatherKeys = function gatherKeys(event) {
   const key = getCode(event);
 
-  return ['ctrl', 'meta', 'alt', 'shift'].reduce((keys, keyName) => {
+  return ['alt', 'ctrl', 'meta', 'shift'].reduce((keys, keyName) => {
     if (event[`${keyName}Key`]) {
       keys.push(keyName);
     }

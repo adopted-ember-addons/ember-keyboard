@@ -120,6 +120,20 @@ triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
 })
 ```
 
+### `cmd` keycode
+
+It is very common for macOS users to expect to use key combinations such as
+Command(⌘)+Key vs. Ctrl+Key. Therefore, we provide a special key definiton,
+`cmd` to allow handling this behavior. For instance this defintion:
+
+```js
+triggerSubmit: Ember.on(keyDown('Enter+cmd'), function() {
+  this.submit();
+});
+```
+
+will trigger on Command(⌘)+Enter on macOS or Ctrl+Enter on all other platforms.
+
 ### `Ember.TextField` && `Ember.TextArea`
 
 To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've reopened `Ember.TextField` and `Ember.TextArea` and applied the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an input is focused, other key responders will not fire. If you want to have responders associated with an input or textarea (such as a rich text editor with `keyUp('ctrl+i')` bindings), you need to extend these components from `Ember.TextField` or `Ember.TextArea` rather than `Ember.component`.
