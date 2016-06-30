@@ -38,6 +38,7 @@ export default {
   188: 'Comma',
   190: 'Period',
   186: 'Semicolon',
+  191: 'Forwardslash',
   222: 'Quote',
   219: 'BracketLeft',
   221: 'BracketRight',
