@@ -1,51 +1,32 @@
 import Ember from 'ember';
 import config from 'ember-get-config';
 import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
+import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 
 const {
   Service,
   computed,
   get,
-  run,
-  set,
-  typeOf
+  run
 } = Ember;
 
+const {
+  filterBy,
+  sort
+} = computed;
+
 export default Service.extend({
-  priorityLevels: computed(() => Ember.Object.create()),
-
-  activate(responder) {
-    const priorityLevels = get(this, 'priorityLevels');
-    const priority = get(responder, '_keyboardPriorityLevel').toString();
-
-    const priorityLevel = get(priorityLevels, priority) || set(priorityLevels, priority, Ember.A());
-
-    if (!priorityLevel.contains(responder)) {
-      get(priorityLevels, priority).pushObject(responder);
-
-      responder.on('willDestroyElement', this, function() {
-        this.deactivate(responder);
-      });
+  registeredResponders: computed(() => Ember.A()),
+  activeResponders: filterBy('registeredResponders', 'keyboardActivated').volatile(),
+  sortedResponders: sort('activeResponders', function(a, b) {
+    if (get(a, 'keyboardFirstResponder')) {
+      return -1;
+    } else if (get(b, 'keyboardFirstResponder')) {
+      return 1;
+    } else {
+      return get(b, 'keyboardPriority') - get(a, 'keyboardPriority');
     }
-  },
-
-  deactivate(responder) {
-    const priorityLevels = get(this, 'priorityLevels');
-
-    Object.keys(priorityLevels).forEach((key) => {
-      const priorityLevel = get(priorityLevels, key);
-
-      if (typeOf(priorityLevel) !== 'array') { return; }
-
-      if (priorityLevel.contains(responder)) {
-        priorityLevel.removeObject(responder);
-
-        if (get(priorityLevel, 'length') === 0) {
-          delete priorityLevels[key];
-        }
-      }
-    });
-  },
+  }).volatile(),
 
   init(...args) {
     this._super(...args);
@@ -56,15 +37,35 @@ export default Service.extend({
     }).join(' ');
 
     Ember.$(document).on(eventNames, null, (event) => {
-      handleKeyEvent(event, get(this, 'priorityLevels'));
+      run(() => {
+        handleKeyEvent(event, get(this, 'sortedResponders'));
+      });
     });
   },
 
   isDestroying(...args) {
     this._super(...args);
 
-    run(() => {
-      Ember.$(document).off('.ember-keyboard-listener');
-    });
+    Ember.$(document).off('.ember-keyboard-listener');
+  },
+
+  register(responder) {
+    get(this, 'registeredResponders').pushObject(responder);
+  },
+
+  unregister(responder) {
+    get(this, 'registeredResponders').removeObject(responder);
+  },
+
+  keyDown(...args) {
+    return keyDown(...args);
+  },
+
+  keyPress(...args) {
+    return keyPress(...args);
+  },
+
+  keyUp(...args) {
+    return keyUp(...args);
   }
 });

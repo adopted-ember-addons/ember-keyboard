@@ -4,7 +4,8 @@ import listenerName from 'ember-keyboard/utils/listener-name';
 
 const {
   hasListeners,
-  get
+  get,
+  getProperties
 } = Ember;
 
 const gatherKeys = function gatherKeys(event) {
@@ -19,42 +20,36 @@ const gatherKeys = function gatherKeys(event) {
   }, [key]);
 };
 
-const sortPriorityLevelKeys = function sortPriorityLevelKeys(priorityLevels) {
-  return Object.keys(priorityLevels).sort((a, b) => {
-    if (a === 'firstResponder') {
-      return -1;
-    } else if (b === 'firstResponder') {
-      return 1;
-    } else {
-      return b - a;
-    }
-  });
-};
-
-const triggerListeners = function triggerListeners(event, responders, listenerNames) {
+export default function handleKeyEvent(event, sortedResponders) {
+  let currentPriorityLevel;
+  let noFirstResponders = true;
   let isLax = true;
 
-  [...responders].forEach((responder) => {
-    if (!get(responder, 'keyboardLaxPriority')) {
-      isLax = false;
-    }
-
-    listenerNames.forEach((triggerName) => {
-      if (hasListeners(responder, triggerName)) {
-        responder.trigger(triggerName, event);
-      }
-    });
-  });
-
-  return isLax;
-};
-
-export default function handleKeyEvent(event, priorityLevels) {
   const keys = gatherKeys(event);
   const listenerNames = [listenerName(event.type, keys), listenerName(event.type)];
-  const sortedPriorityLevelKeys = sortPriorityLevelKeys(priorityLevels);
 
-  sortedPriorityLevelKeys.every((key) => {
-    return triggerListeners(event, get(priorityLevels, key), listenerNames);
+  sortedResponders.every((responder) => {
+    const { keyboardFirstResponder, keyboardPriority } = getProperties(responder, 'keyboardFirstResponder', 'keyboardPriority');
+    if (keyboardFirstResponder || (noFirstResponders && keyboardPriority >= currentPriorityLevel) || isLax) {
+      if (!get(responder, 'keyboardLaxPriority')) {
+        isLax = false;
+      }
+
+      if (keyboardFirstResponder) {
+        if (!isLax) { noFirstResponders = false; }
+      } else {
+        currentPriorityLevel = keyboardPriority;
+      }
+
+      listenerNames.forEach((triggerName) => {
+        if (hasListeners(responder, triggerName)) {
+          responder.trigger(triggerName, event);
+        }
+      });
+
+      return true;
+    } else {
+      return false;
+    }
   });
 }
