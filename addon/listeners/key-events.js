@@ -25,10 +25,10 @@ export function keyDown(keys) {
   return formattedListener('keydown', keys);
 }
 
-export function keyUp(keys) {
-  return formattedListener('keyup', keys);
-}
-
 export function keyPress(keys) {
   return formattedListener('keypress', keys);
+}
+
+export function keyUp(keys) {
+  return formattedListener('keyup', keys);
 }
