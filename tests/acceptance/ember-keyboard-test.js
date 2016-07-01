@@ -25,9 +25,7 @@ test('test standard functionality', function(assert) {
   visit('/test-scenario').then(() => {
     return keyDown('ArrowRight');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [1, 1, 1], 'equal responders all respond');
+    assert.deepEqual(getValues(), [1, 1, 1], 'equal responders all respond');
 
     fillIn(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, '1');
 
@@ -35,44 +33,32 @@ test('test standard functionality', function(assert) {
 
     return keyDown('ArrowRight');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [2, 1, 1], 'highest responder responds first');
+    assert.deepEqual(getValues(), [2, 1, 1], 'highest responder responds first');
 
     click(`${hook('counter')}:nth(1) ${hook('counter-first-responder-toggle')}`);
 
     return keyDown('ArrowRight');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [2, 2, 1], 'first responder responds first');
+    assert.deepEqual(getValues(), [2, 2, 1], 'first responder responds first');
 
     click(`${hook('counter')}:nth(1) ${hook('counter-lax-priority-toggle')}`);
 
     return keyDown('ArrowRight');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [3, 3, 1], 'lax priority does not block lower priority responders');
+    assert.deepEqual(getValues(), [3, 3, 1], 'lax priority does not block lower priority responders');
 
     click(`${hook('counter')}:nth(0) ${hook('counter-activated-toggle')}`);
 
     return keyDown('ArrowRight');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [3, 4, 2], 'deactivating a responder removes it from the stack');
+    assert.deepEqual(getValues(), [3, 4, 2], 'deactivating a responder removes it from the stack');
 
     return keyDown('ArrowRight+ctrl+shift');
   }).then(() => {
-    const values = getValues();
+    assert.deepEqual(getValues(), [3, 104, 102], 'modifier keys work');
 
-    assert.deepEqual(values, [3, 104, 102], 'modifier keys work');
-
-    return keyUp('r');
+    return keyUp('KeyR');
   }).then(() => {
-    const values = getValues();
-
-    assert.deepEqual(values, [3, 0, 0], 'keyUp works');
+    assert.deepEqual(getValues(), [3, 0, 0], 'keyUp works');
   });
 });

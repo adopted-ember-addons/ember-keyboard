@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import KEY_MAP from 'ember-keyboard/fixtures/key-map';
+import codeMap from 'ember-keyboard/fixtures/code-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
 
-const keyMapValues = Object.keys(KEY_MAP).map((key) => KEY_MAP[key]);
-const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift']);
+const keyMapValues = Object.keys(codeMap).map((key) => codeMap[key]);
+const validKeys = keyMapValues.concat(['alt', 'ctrl', 'meta', 'shift', 'cmd']);
 
 const validateKeys = function validateKeys(keys) {
   keys.forEach((key) => {
@@ -25,10 +25,10 @@ export function keyDown(keys) {
   return formattedListener('keydown', keys);
 }
 
-export function keyUp(keys) {
-  return formattedListener('keyup', keys);
-}
-
 export function keyPress(keys) {
   return formattedListener('keypress', keys);
+}
+
+export function keyUp(keys) {
+  return formattedListener('keyup', keys);
 }

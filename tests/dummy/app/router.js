@@ -7,6 +7,10 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('test-scenario');
+  this.route('mixins');
+  this.route('priority');
+  this.route('usage');
+  this.route('testing');
 });
 
 export default Router;

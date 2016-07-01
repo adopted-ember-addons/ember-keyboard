@@ -1,16 +1,14 @@
-import altKeyNames from 'ember-keyboard/fixtures/alt-key-names';
-
-function convertArray(keyArray) {
-  return keyArray.map((key) => altKeyNames[key] || key);
-}
+import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 
 function sortedKeys(keyArray) {
-  const convertedArray = convertArray(keyArray);
-
-  return convertedArray.sort().join('+');
+  return keyArray.sort().join('+');
 }
 
 export default function listenerName(type, keyArray = []) {
+  if (keyArray.indexOf('cmd') > -1) {
+    keyArray[keyArray.indexOf('cmd')] = getCmdKey();
+  }
+
   const keys = keyArray.length === 0 ? '_all' : sortedKeys(keyArray);
 
   return `${type}:${keys}`;

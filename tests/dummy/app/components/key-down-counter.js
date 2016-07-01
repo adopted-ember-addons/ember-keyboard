@@ -47,11 +47,11 @@ export default Component.extend(EKMixin, {
     this.incrementProperty('counter', 100);
   }),
 
-  resetCounter: on(keyUp('r'), function() {
+  resetCounter: on(keyUp('KeyR'), function() {
     this.set('counter', 0);
   }),
 
-  setCounterTo5: on(keyPress('5'), function() {
+  setCounterTo5: on(keyPress('Digit5'), function() {
     this.set('counter', 5);
   })
 });
