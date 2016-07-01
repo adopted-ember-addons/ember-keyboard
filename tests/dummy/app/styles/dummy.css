@@ -65,7 +65,7 @@ input {
   top: 1%;
 }
 
-.ember-expanding-sidebar {
+.menu {
   box-sizing: border-box;
   border-right: thick dashed #00585F;
   height: 100%;
@@ -80,7 +80,7 @@ input {
   width: 15%;
 }
 
-.ember-expanding-sidebar-section a {
+.menu a {
   color: #00585F;
   cursor: pointer;
   font-weight: bold;
