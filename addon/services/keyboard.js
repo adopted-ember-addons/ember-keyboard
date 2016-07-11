@@ -43,7 +43,7 @@ export default Service.extend({
     });
   },
 
-  isDestroying(...args) {
+  willDestroy(...args) {
     this._super(...args);
 
     Ember.$(document).off('.ember-keyboard-listener');
