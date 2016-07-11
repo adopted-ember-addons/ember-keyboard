@@ -43,10 +43,22 @@ test('`sortedResponders` sorts by keyboardFirstResponder and keyboardPriority', 
   assert.deepEqual(service.get('sortedResponders').mapBy('keyboardPriority'), [0, 1, 0, -1], 'correct sorting');
 });
 
-test('`isDestroying` removes the jquery listeners', function(assert) {
+test('`willDestroy` removes the jquery listeners', function(assert) {
   const service = this.subject();
 
-  service.isDestroying();
+  service.willDestroy();
+
+  const listeners = Ember.$._data(document);
+
+  assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
+});
+
+test('`destroy` removes the jquery listeners', function(assert) {
+  const service = this.subject();
+
+  Ember.run(() => {
+    service.destroy();
+  });
 
   const listeners = Ember.$._data(document);
 
