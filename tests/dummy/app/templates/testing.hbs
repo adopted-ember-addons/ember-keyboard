@@ -1,6 +1,23 @@
 {{formatMarkdown "
 ## Testing
 
+### Trigger Key Events
+
+If you need to manually trigger a key event (such as in a component integration test), you can use `triggerKeyDown`, `triggerKeyPress`, and `triggerKeyUp`:
+
+```js
+import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard';
+
+. . . .
+
+test('test my key bindings', function(assert) {
+  triggerKeyDown('KeyA');
+  triggerKeyUp('KeyA+shift+cmd');
+});
+```
+
+### Async Acceptance Test Helpers
+
 `ember-keyboard` comes with some test helpers to help out with your acceptance tests.
 
 ```js
