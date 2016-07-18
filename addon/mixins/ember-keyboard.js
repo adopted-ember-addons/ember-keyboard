@@ -1,13 +1,14 @@
 import Ember from 'ember';
 
 const {
+  Evented,
   Mixin,
   get
 } = Ember;
 
 const { inject: { service } } = Ember;
 
-export default Mixin.create({
+export default Mixin.create(Evented, {
   keyboardPriority: 0,
 
   keyboard: service(),
