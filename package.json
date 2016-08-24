@@ -1,6 +1,6 @@
 {
   "name": "ember-keyboard",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "An Ember.js addon for the painless support of keyboard events",
   "directories": {
     "doc": "doc",
@@ -23,6 +23,7 @@
     "ember-cli": "^2.6.2",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-fastboot": "1.0.0-beta.8",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",

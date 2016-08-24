@@ -4,6 +4,8 @@ export default Ember.Mixin.create({
   activate(...args) {
     this._super(...args);
 
-    window.scrollTo(0,0);
+    if (typeof FastBoot === 'undefined') {
+      window.scrollTo(0,0);
+    }
   }
 });
