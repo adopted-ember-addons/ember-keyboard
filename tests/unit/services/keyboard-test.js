@@ -3,7 +3,9 @@ import { moduleFor, test } from 'ember-qunit';
 
 const { get } = Ember;
 
-moduleFor('service:keyboard', 'Unit | Service | keyboard');
+moduleFor('service:keyboard', 'Unit | Service | keyboard', {
+  integration: true
+});
 
 test('`activeResponders` is a filtered list of registeredResponders with keyboardActivated true', function(assert) {
   const service = this.subject({

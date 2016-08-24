@@ -1,6 +1,6 @@
 {
   "name": "ember-keyboard",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "An Ember.js addon for the painless support of keyboard events",
   "directories": {
     "doc": "doc",
@@ -45,8 +45,7 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.6",
-    "ember-get-config": "0.0.4"
+    "ember-cli-babel": "^5.1.6"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
