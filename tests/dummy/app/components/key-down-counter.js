@@ -31,11 +31,11 @@ export default Component.extend(EKMixin, {
     this.incrementProperty('counter');
   }),
 
-  decrementCounter10: on(keyDown('ctrl+ArrowLeft'), function() {
+  decrementCounter10: on(keyDown('shift+ArrowLeft'), function() {
     this.decrementProperty('counter', 10);
   }),
 
-  incrementCounter10: on(keyDown('ctrl+ArrowRight'), function() {
+  incrementCounter10: on(keyDown('shift+ArrowRight'), function() {
     this.incrementProperty('counter', 10);
   }),
 
