@@ -31,6 +31,10 @@ export default Service.extend({
   init(...args) {
     this._super(...args);
 
+    if (typeof FastBoot !== 'undefined') {
+      return;
+    }
+
     const config = getOwner(this).resolveRegistration('config:environment');
     const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
     const eventNames = listeners.map(function(name) {
@@ -46,6 +50,10 @@ export default Service.extend({
 
   willDestroy(...args) {
     this._super(...args);
+
+    if (typeof FastBoot !== 'undefined') {
+      return;
+    }
 
     Ember.$(document).off('.ember-keyboard-listener');
   },
