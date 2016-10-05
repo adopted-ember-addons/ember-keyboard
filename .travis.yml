@@ -36,3 +36,19 @@ script:
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".
   - ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
+
+addons:
+  code_climate:
+    repo_token: bffc41131db44fd7e279b7549f92270c6a1c9ff939ece4395884da4237610606
+
+after_script:
+  - codeclimate-test-reporter < lcov.info
+
+deploy:
+  provider: npm
+  email: null@midnight.agency
+  api_key:
+    secure: TpatIYVKW0EdhAF0WM0gZ8+MsBqBW2OMjz01H6wPERN5G3uK/aQXhzAUwAqTfb+piM31gpzTrG89oBgS3Nf/AX2FGyEcRwwvzW0YNOPMDEklHKx5sAXCT6rUO4+NcLpv13TZqoPv3nBHG8dOxUrbbwezzmwSVFPkY5ZI8eMMiaIfc8Aa089QCPbKzBkRIST7ZSBJ3s4Jmnrsu+gzTMffGjguS5JAA6Xw3iJYrQwMXAHgO6NbHnlZUtlIOyOTIbshkT+X/SCU72rWAxzB/IZXVs5UeHaiPdxRlRVNoYyfzmVHitNGwaleOebLfp4aqGYZ4TehQPiF1+GUIIfYcpeh9mcRafMuMoCfgjHNeeBNMAZsFfqbH6iwYsuEGdrmUGg9jPwLIO7DuXlSU1KTYh1mME2l4GRt8rSnNnSAjlx06HV6Erxr57PAXiARV/8okY9XCf4wTrksKEiu2cK05oWQoh4G64JW0oGS9q5SVpnm+aqldU1OEaa88LBLu5GmBBg9QUP9pmvVF5tMPTYXe27Nu+aCXkdG2hFfrTfIVKLPOX6M/UYOKIOuRi/iA9lfcDqAeZzohFRQDB9ys0AWQUgRmoWb8m1scPJQ4+vVPeGmULr/Sue01ArtM0jx27XLDNyG7xOr3d3bAwMIRq6/N3lqYcjo3yKz1T0eu3f+8W//xPY=
+  on:
+    tags: true
+    repo: null-null-null/ember-keyboard
