@@ -35,7 +35,7 @@ export default Service.extend({
       return;
     }
 
-    const config = getOwner(this).resolveRegistration('config:environment');
+    const config = getOwner(this).resolveRegistration('config:environment') || {};
     const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
     const eventNames = listeners.map(function(name) {
       return `${name.toLowerCase()}.ember-keyboard-listener`;
