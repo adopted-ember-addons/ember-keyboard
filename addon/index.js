@@ -1,4 +1,5 @@
 import { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
+import { initialize } from 'ember-keyboard/initializers/ember-keyboard-first-responder-inputs';
 import getCode from 'ember-keyboard/utils/get-code';
 import getKeyCode from 'ember-keyboard/utils/get-key-code';
 import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard/utils/trigger-event';
@@ -17,6 +18,7 @@ export {
   keyPress,
   getCode,
   getKeyCode,
+  initialize,
   triggerKeyDown,
   triggerKeyPress,
   triggerKeyUp
