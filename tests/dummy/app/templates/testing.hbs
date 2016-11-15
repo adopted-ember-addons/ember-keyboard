@@ -19,7 +19,7 @@ moduleForComponent('my component', 'Integration | Component | my component', {
 
 ### Trigger Key Events
 
-If you need to manually trigger a key event (such as in a component integration test), you can use `triggerKeyDown`, `triggerKeyPress`, and `triggerKeyUp`:
+If you need to manually trigger a key event (such as in a component integration test), you can use `triggerKeyDown`, `triggerKeyPress`, and `triggerKeyUp`. By default, the event triggers on the `document`, but you can optionally provide a DOM element as the second argument:
 
 ```js
 import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard';
@@ -27,8 +27,8 @@ import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard';
 . . . .
 
 test('test my key bindings', function(assert) {
-  triggerKeyDown('KeyA');
-  triggerKeyUp('KeyA+shift+cmd');
+  triggerKeyDown('KeyA'); // triggers on `document`
+  triggerKeyUp('KeyA+shift+cmd', document.getElementById('foo')); // triggers on `#foo`
 });
 ```
 
@@ -42,13 +42,13 @@ test('test my key bindings', function(assert) {
 test('test my key bindings', function(assert) {
   . . . .
 
-  keyUp('ArrowRight');
+  keyUp('ArrowRight'); // triggers on document
 
   andThen(() => {
     . . . .
   });
 
-  keyDown('ArrowRight+ctrl+shift');
+  keyDown('ArrowRight+ctrl+shift', document.getElementById('foo')); // triggers on `#foo`
 
   andThen(() => {
     . . . .
