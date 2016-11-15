@@ -1,16 +1,20 @@
 <div class="container">
-  <ul class="menu">
-    <li>{{#link-to 'index'}}Overview{{/link-to}}</li>
-    <li>{{#link-to 'usage'}}Usage{{/link-to}}</li>
-    <li>{{#link-to 'priority'}}Priority{{/link-to}}</li>
-    <li>{{#link-to 'mixins'}}Mixins{{/link-to}}</li>
-    <li>{{#link-to 'testing'}}Testing{{/link-to}}</li>
-  </ul>
-  <a href="https://github.com/null-null-null/ember-keyboard" target="_blank" class="github">
-    <img src="./octocat.png" class="octocat">
-  </a>
-  <h1>
-    <code>ember-keyboard</code>
-  </h1>
-  {{outlet}}
+  <nav class="menu">
+    {{#link-to 'index'}}Overview{{/link-to}}
+    {{#link-to 'usage'}}Usage{{/link-to}}
+    {{#link-to 'priority'}}Priority{{/link-to}}
+    {{#link-to 'mixins'}}Mixins{{/link-to}}
+    {{#link-to 'testing'}}Testing{{/link-to}}
+  </nav>
+  <div class="main">
+    <div class="header">
+      <h1>
+        <code>ember-keyboard</code>
+      </h1>
+      <a href="https://github.com/null-null-null/ember-keyboard" target="_blank" class="github">
+        <img src="./octocat.png" class="octocat">
+      </a>
+    </div>
+    {{outlet}}
+  </div>
 </div>
