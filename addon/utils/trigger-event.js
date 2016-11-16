@@ -2,10 +2,13 @@ import Ember from 'ember';
 import assign from './assign-polyfill';
 import getCmdKey from './get-cmd-key';
 import { getKeyCode } from 'ember-keyboard';
+import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 
 const triggerKeyEvent = function triggerKeyEvent(eventType, rawCode, element) {
   const event = Ember.$.Event(eventType);
-  const [code, ...modifiers] = rawCode.split('+');
+  const parts = rawCode.split('+');
+  const [code] = parts.filter((part) => !validModifiers.includes(part));
+  const modifiers = parts.filter((part) => part !== code);
   const properties = modifiers.reduce((properties, modifier) => {
     modifier = modifier === 'cmd' ? getCmdKey() : modifier;
     properties[`${modifier}Key`] = true;

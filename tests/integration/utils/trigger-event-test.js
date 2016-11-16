@@ -55,7 +55,7 @@ test('modifiers can be added', function(assert) {
 
   this.render(hbs`{{trigger-event-test}}`);
 
-  triggerKeyDown('KeyA+shift+cmd');
+  triggerKeyDown('shift+KeyA+cmd');
 
   assert.equal(this.$(hook('key_down')).text().trim(), 'false', 'keyDown was triggered');
   assert.equal(this.$(hook('key_down_with_mods')).text().trim(), 'true', 'keyDown was triggered with mods');
