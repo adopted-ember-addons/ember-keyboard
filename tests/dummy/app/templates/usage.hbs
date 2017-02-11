@@ -144,4 +144,10 @@ This applies to `input` and `textarea` helpers:
 {{input}}
 {{textarea}}
 ```
+
+### Unpropogated Key Events
+
+Some key events get swollowed by the browser well before they reach `ember-keyboard`. Here is a growing (aka incomplete) list of such events:
+
+* Enter: keyUp (keyDown works)
 "}}
