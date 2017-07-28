@@ -1,17 +1,15 @@
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
+/* eslint-env node */
+'use strict';
+
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-    babel: {
-      includePolyfill: true
-    }
+  let app = new EmberAddon(defaults, {
+    // Add options here
   });
 
-  app.import("bower_components/highlightjs/styles/monokai-sublime.css");
-
   /*
-    This build file specifes the options for the dummy test app of this
+    This build file specifies the options for the dummy test app of this
     addon, located in `/tests/dummy`
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
