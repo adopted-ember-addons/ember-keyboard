@@ -1,40 +1,41 @@
+---
 language: node_js
 node_js:
-- '4'
+  # we recommend testing addons with the same minimum supported node version as Ember CLI
+  # so that your addon works for all apps
+  - "4"
+
 sudo: false
+dist: trusty
+
+addons:
+  chrome: stable
+
 cache:
   directories:
-  - node_modules
+    - $HOME/.npm
+
 env:
-- EMBER_TRY_SCENARIO=default
-- EMBER_TRY_SCENARIO=ember-release
-- EMBER_TRY_SCENARIO=ember-beta
-- EMBER_TRY_SCENARIO=ember-canary
+  # we recommend new addons test the current and previous LTS
+  # as well as latest stable release (bonus points to beta/canary)
+  - EMBER_TRY_SCENARIO=ember-lts-2.8
+  - EMBER_TRY_SCENARIO=ember-lts-2.12
+  - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-beta
+  - EMBER_TRY_SCENARIO=ember-canary
+  - EMBER_TRY_SCENARIO=ember-default
+
 matrix:
   fast_finish: true
   allow_failures:
-  - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=ember-canary
+
 before_install:
-- npm config set spin false
-- npm install -g bower
-- bower --version
-- npm install phantomjs-prebuilt
-- node_modules/phantomjs-prebuilt/bin/phantomjs --version
-install:
-- npm install
-- bower install
+  - npm config set spin false
+  - npm install -g npm@4
+  - npm --version
+
 script:
-- ember try:one $EMBER_TRY_SCENARIO test --skip-cleanup
-addons:
-  code_climate:
-    repo_token: bffc41131db44fd7e279b7549f92270c6a1c9ff939ece4395884da4237610606
-after_script:
-- codeclimate-test-reporter < lcov.info
-deploy:
-  provider: npm
-  email: null@affinitygamescollective.org
-  api_key:
-    secure: DFXcVAziObljrwtuUiABafuEvKVJKekTpWGrWonxWlJQ+mx0vdPDZheqadhUpEzeAA+DaeB66fdIvHtpC3WH6bcMO2+UjoDn81Z1Rz3CX1qy1Iz/WNt7pmWv7JbKaor1vZN1p0V7PP7P1nSPK5lcvikw3KANIK8IhLmPNy0XdqNlF4c0VepSqSS0v02SJkwXuv4mUhM4SgUT6PYl/hJjBCD0DZoFwgR3LhkdRcEN2SUiUJfv7rYtGLo7uiE0BP00LymbT9KLlqHnOSVVHrqx/2zyiA0nEYRjy9OPBToIYMAnJiMejMxjj3bVPxMJhLv8xXVWYLje5Dki+6xd0aBiHxqpyfMAjV2qXMg5khKwBIBovLXzLh6PyjtwLYFK3QYuPexA1yFl0w6+LPzadFnrzLSfnINX9dzyI4HkmtaRiZiTCvld9vpJTEqh2JmwPYMntxITWKZyKtDYevbYZip5O8OOpVlJooce7Tf1IF9cXxdz2ZSRBi6tj2knVo2rTCICDpSTk0Lorq98IRVJ1PPTJsaVMi8fiJ2YLYuc73alXIHj4FnSd+llajJpqXwRiUwHmR6EGbXnj3uSJDo+9iQD9xiSow0ZE01Vv35Doi5UJPbrNNwmPmOn6/ZlV3mL/8tbbsvhFP/Tm46Ue95hbUpmxWeTYVpiuoB0cTEx8LXNkB0=
-  on:
-    tags: true
-    repo: null-null-null/ember-keyboard
+  # Usually, it's ok to finish the test scenario without reverting
+  #  to the addon's original dependency state, skipping "cleanup".
+  - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup
