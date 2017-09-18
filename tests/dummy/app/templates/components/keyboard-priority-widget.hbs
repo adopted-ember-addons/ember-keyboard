@@ -1,4 +1,4 @@
-{{formatMarkdown "
+{{format-markdown "
 ### `keyboardPriority`
 
 By default, all activated components are treated as equal. If you have two components that respond to `ctrl+KeyA`, then both will respond when there's a `ctrl+KeyA` event. However, this behavior is undesirable in some scenarios. What if you have a modal open, and you only want it and its child components to respond to key events. You can get this behavior by assigning a higher priority to the modal and its children:
