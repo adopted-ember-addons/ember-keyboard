@@ -14,7 +14,11 @@ function gatherKeys(event) {
   }, [key]);
 }
 
-export default function handleKeyEvent(event, sortedResponders) {
+export function handleKeyEventWithPropagation(event, { firstResponders, normalResponders }) {
+
+}
+
+export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
   let currentPriorityLevel;
   let noFirstResponders = true;
   let isLax = true;

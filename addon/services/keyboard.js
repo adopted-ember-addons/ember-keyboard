@@ -1,32 +1,38 @@
-import Ember from 'ember';
-import handleKeyEvent from 'ember-keyboard/utils/handle-key-event';
+import $ from 'jquery';
+import Service from '@ember/service';
+import { A } from '@ember/array';
+import { getOwner } from '@ember/application';
+import { get, getProperties, set } from '@ember/object';
+import { computed } from '@ember/object';
+import { filter, filterBy, sort } from '@ember/object/computed';
+import { run } from '@ember/runloop';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
-
-const {
-  Service,
-  computed,
-  get,
-  getOwner,
-  run
-} = Ember;
-
-const {
-  filterBy,
-  sort
-} = computed;
+import {
+  handleKeyEventWithPropagation,
+  handleKeyEventWithLaxPriorities
+} from 'ember-keyboard/utils/handle-key-event';
 
 export default Service.extend({
-  registeredResponders: computed(() => Ember.A()),
-  activeResponders: filterBy('registeredResponders', 'keyboardActivated').volatile(),
-  sortedResponders: sort('activeResponders', function(a, b) {
-    if (get(a, 'keyboardFirstResponder')) {
-      return -1;
-    } else if (get(b, 'keyboardFirstResponder')) {
-      return 1;
-    } else {
-      return get(b, 'keyboardPriority') - get(a, 'keyboardPriority');
-    }
-  }).volatile(),
+  isPropagationEnabled: false,
+
+  registeredResponders: computed(() => A()),
+
+  activeResponders: filterBy('registeredResponders', 'keyboardActivated'),
+
+  sortedRespondersSortDefinition: computed('isPropagationEnabled', function() {
+    return get(this, 'isPropagationEnabled') ?
+      ['keyboardPriority:desc'] :
+      ['keyboardFirstResponder:desc', 'keyboardPriority:desc']
+  }),
+
+  sortedResponders: sort('activeResponders', 'sortedRespondersSortDefinition'),
+
+  firstResponders: filterBy('sortedResponders', 'keyboardFirstResponder'),
+
+  normalResponders: filter(
+    'sortedResponders.@each.keyboardFirstResponder',
+    responder => !get(responder, 'keyboardFirstResponder')
+  ),
 
   init(...args) {
     this._super(...args);
@@ -36,14 +42,22 @@ export default Service.extend({
     }
 
     const config = getOwner(this).resolveRegistration('config:environment') || {};
+
+    const isPropagationEnabled = Boolean(get(config, 'emberKeyboard.propagation'));
+    set(this, 'isPropagationEnabled', isPropagationEnabled);
+
     const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
     const eventNames = listeners.map(function(name) {
       return `${name.toLowerCase()}.ember-keyboard-listener`;
     }).join(' ');
 
-    Ember.$(document).on(eventNames, null, (event) => {
+    $(document).on(eventNames, null, (event) => {
       run(() => {
-        handleKeyEvent(event, get(this, 'sortedResponders'));
+        if (get(this, 'isPropagationEnabled')) {
+          handleKeyEventWithPropagation(event, getProperties(this, 'firstResponders', 'normalResponders'));
+        } else {
+          handleKeyEventWithLaxPriorities(event, get(this, 'sortedResponders'));
+        }
       });
     });
   },
@@ -55,7 +69,7 @@ export default Service.extend({
       return;
     }
 
-    Ember.$(document).off('.ember-keyboard-listener');
+    $(document).off('.ember-keyboard-listener');
   },
 
   register(responder) {
