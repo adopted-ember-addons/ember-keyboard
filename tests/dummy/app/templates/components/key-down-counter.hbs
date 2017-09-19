@@ -18,4 +18,14 @@
   {{input type="checkbox" checked=keyboardLaxPriority classNames="checkbox" hook="counter-lax-priority-toggle"}}
 {{/if}}
 
+{{#if stopImmediatePropagationToggle}}
+  <label><code>stopImmediatePropagation()</code>:</label>
+  {{input type="checkbox" checked=stopImmediatePropagation classNames="checkbox" hook="counter-stop-immediate-propagation-toggle"}}
+{{/if}}
+
+{{#if stopPropagationToggle}}
+  <label><code>stopPropagation()</code>:</label>
+  {{input type="checkbox" checked=stopPropagation classNames="checkbox" hook="counter-stop-propagation-toggle"}}
+{{/if}}
+
 <div data-test={{hook "counter-counter"}}>{{counter}}</div>
