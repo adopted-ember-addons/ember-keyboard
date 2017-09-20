@@ -1,0 +1,88 @@
+{{format-markdown "
+### Event propagation
+
+By setting `emberKeyboard.propagate` in the `config/environment.js` to `true`,
+you're opting into the new event propagation semantics that were introduced in
+[issue #63](https://github.com/null-null-null/ember-keyboard/issues/63).
+
+The event propagation is designed to mirror how standard DOM events bubble up
+the parent node chain and supports calling a
+[`stopPropagation()` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)
+and
+[`stopImmediatePropagation()` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation)
+on a second event object pased to your handlers.
+
+```js
+incrementCounter: on(keyDown('RightArrow'), function(event, ekEvent) {
+  const key = getCode(event); // => 'RightArrow'
+  // ekEvent.stopPropagation();
+  // ekEvent.stopImmediatePropagation();
+})
+```
+
+Instead of traversing up the parent node chain, `ember-keyboard` walks down the
+priority list. This means that all responders with `keyboardFirstResponder` set
+to `true` will be called first in descending order of their `keyboardPriority`,
+followed by all normal responders in descending order of their `keyboardPriority`.
+
+Calling `stopPropagation()` during the first responder phase will allow all
+first responders to get triggered, but will prevent all normal responder to get
+triggered.
+
+If you call `stopImmediatePropagation()` during that phase, all following first
+responders that have not been triggered yet will be skipped. Event propagation
+then continues with the normal responders.
+
+You may call both methods.
+
+Calling `stopPropagation()` during the normal responder phase will allow all
+responders of the same priority level to get triggered. Lower priority
+responders will not get triggered.
+
+Calling `stopImmediatePropagation()` during that phase will prevent all
+responders of the same priority level that have not been triggered yet from
+getting triggered. Event propagation then continues with the next lower priority
+level responders.
+
+Again, you may call both methods.
+
+Setting `keyboardLaxPriority` will have no effect, since the semantics are
+fundamentally incompatible. The major advantage of the new event propagation is,
+that higher priority responders get to decide on a per-event basis which events
+to 'catch' and which not as opposed to setting or not setting
+`keyboardLaxPriority` which either 'catches' no or all events.
+"}}
+
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  stopImmediatePropagationToggle=true
+  stopPropagationToggle=true
+  keyboardPriority=2
+  keyboardFirstResponder=true
+  stopImmediatePropagation=true
+  hook="propagation-counter"
+}}
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  stopImmediatePropagationToggle=true
+  stopPropagationToggle=true
+  keyboardPriority=1
+  keyboardFirstResponder=true
+  stopPropagation=true
+  hook="propagation-counter"
+}}
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  stopImmediatePropagationToggle=true
+  stopPropagationToggle=true
+  hook="propagation-counter"
+}}

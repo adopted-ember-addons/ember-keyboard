@@ -1,11 +1,19 @@
-import Ember from 'ember';
+import { get, computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import Component from '@ember/component';
 import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
 
-const {
-  Component,
-  computed,
-  on
-} = Ember;
+function makeEventHandler(stepSize = 1) {
+  return function(event, ekEvent) {
+    if (get(this, 'stopImmediatePropagation')) {
+      ekEvent.stopImmediatePropagation();
+    }
+    if (get(this, 'stopPropagation')) {
+      ekEvent.stopPropagation();
+    }
+    this.incrementProperty('counter', stepSize);
+  }
+}
 
 export default Component.extend(EKMixin, {
   tagName: 'span',
@@ -23,29 +31,17 @@ export default Component.extend(EKMixin, {
     }
   }).readOnly(),
 
-  decrementCounter: on(keyDown('ArrowLeft'), function() {
-    this.decrementProperty('counter');
-  }),
+  decrementCounter: on(keyDown('ArrowLeft'), makeEventHandler(-1)),
 
-  incrementCounter: on(keyDown('ArrowRight'), function() {
-    this.incrementProperty('counter');
-  }),
+  incrementCounter: on(keyDown('ArrowRight'), makeEventHandler(1)),
 
-  decrementCounter10: on(keyDown('shift+ArrowLeft'), function() {
-    this.decrementProperty('counter', 10);
-  }),
+  decrementCounter10: on(keyDown('shift+ArrowLeft'), makeEventHandler(-10)),
 
-  incrementCounter10: on(keyDown('shift+ArrowRight'), function() {
-    this.incrementProperty('counter', 10);
-  }),
+  incrementCounter10: on(keyDown('shift+ArrowRight'), makeEventHandler(10)),
 
-  decrementCounter100: on(keyDown('ctrl+shift+ArrowLeft'), function() {
-    this.decrementProperty('counter', 100);
-  }),
+  decrementCounter100: on(keyDown('ctrl+shift+ArrowLeft'), makeEventHandler(-100)),
 
-  incrementCounter100: on(keyDown('ctrl+shift+ArrowRight'), function() {
-    this.incrementProperty('counter', 100);
-  }),
+  incrementCounter100: on(keyDown('ctrl+shift+ArrowRight'), makeEventHandler(100)),
 
   resetCounter: on(keyUp('KeyR'), function() {
     this.set('counter', 0);
