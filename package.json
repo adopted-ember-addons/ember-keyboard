@@ -1,6 +1,6 @@
 {
   "name": "ember-keyboard",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "An Ember.js addon for the painless support of keyboard events",
   "keywords": [
     "ember-addon"
@@ -11,7 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/null-null-null/ember-keyboard",
+  "repository": "https://github.com/patience-tema-baron/ember-keyboard",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -49,6 +49,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://null-null-null.github.io/ember-keyboard/"
+    "demoURL": "http://patience-tema-baron.github.io/ember-keyboard/"
   }
 }
