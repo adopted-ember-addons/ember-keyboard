@@ -1,13 +1,10 @@
-import Ember from 'ember';
-import assignPolyfill from 'ember-keyboard/utils/assign-polyfill';
+import { assign } from '@ember/polyfills';
 import DEFAULT_CODE_MAP from 'ember-keyboard/fixtures/code-maps/default';
 import MAC_CHROME_AND_SAFARI_CODE_MAP from 'ember-keyboard/fixtures/code-maps/mac-safari-and-chrome';
 import GECKO_CODE_MAP from 'ember-keyboard/fixtures/code-maps/gecko';
 import GECKO_LINUX_CODE_MAP from 'ember-keyboard/fixtures/code-maps/gecko/linux';
 import GECKO_MAC_CODE_MAP from 'ember-keyboard/fixtures/code-maps/gecko/mac';
 import CHROMIUM_LINUX_CODE_MAP from 'ember-keyboard/fixtures/code-maps/chromium/linux';
-
-const assign = Ember.assign || assignPolyfill;
 
 export default function generateCodeMap(platform = '', product = '') {
   const isGecko = product.indexOf('Gecko') > -1;

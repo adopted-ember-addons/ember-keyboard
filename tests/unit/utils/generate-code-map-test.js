@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import { isNone } from '@ember/utils';
 import generateCodeMap from 'ember-keyboard/utils/generate-code-map';
 import { module, test } from 'qunit';
 import defaultCodeMap from 'ember-keyboard/fixtures/code-maps/default';
-
-const { isNone } = Ember;
 
 module('Unit | Utility | generate code map');
 

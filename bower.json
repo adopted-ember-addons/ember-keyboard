@@ -1,7 +1,0 @@
-{
-  "name": "ember-keyboard",
-  "dependencies": {
-    "marked": "^0.3.5",
-    "highlightjs": "^9.4.0"
-  }
-}

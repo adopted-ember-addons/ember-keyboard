@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { registerAsyncHelper } from '@ember/test';
 import { getKeyCode } from 'ember-keyboard';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
@@ -19,15 +19,15 @@ const keyEvent = function keyEvent(app, attributes, type, element) {
 }
 
 export default function() {
-  Ember.Test.registerAsyncHelper('keyDown', function(app, attributes, element) {
+  registerAsyncHelper('keyDown', function(app, attributes, element) {
     return keyEvent(app, attributes, 'keydown', element);
   });
 
-  Ember.Test.registerAsyncHelper('keyUp', function(app, attributes, element) {
+  registerAsyncHelper('keyUp', function(app, attributes, element) {
     return keyEvent(app, attributes, 'keyup', element);
   });
 
-  Ember.Test.registerAsyncHelper('keyPress', function(app, attributes, element) {
+  registerAsyncHelper('keyPress', function(app, attributes, element) {
     return keyEvent(app, attributes, 'keypress', element);
   });
 }

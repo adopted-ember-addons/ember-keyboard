@@ -1,10 +1,9 @@
-import Ember from 'ember';
-import { EKMixin, EKFirstResponderOnFocusMixin } from 'ember-keyboard';
-
-const {
-  TextArea,
-  TextField
-} = Ember;
+import TextArea from '@ember/component/text-area';
+import TextField from '@ember/component/text-field';
+import {
+  EKMixin,
+  EKFirstResponderOnFocusMixin
+} from 'ember-keyboard';
 
 export function initialize() {
   TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);

@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
+import $ from 'jquery';
+import { A } from '@ember/array';
+import { get } from '@ember/object';
 import { moduleFor, test } from 'ember-qunit';
-
-const { get } = Ember;
 
 moduleFor('service:keyboard', 'Unit | Service | keyboard', {
   integration: true
@@ -9,7 +10,7 @@ moduleFor('service:keyboard', 'Unit | Service | keyboard', {
 
 test('`activeResponders` is a filtered list of registeredResponders with keyboardActivated true', function(assert) {
   const service = this.subject({
-    registeredResponders: Ember.A([{
+    registeredResponders: A([{
       keyboardActivated: true
     }, {
       keyboardActivated: false
@@ -23,7 +24,7 @@ test('`activeResponders` is a filtered list of registeredResponders with keyboar
 
 test('`sortedResponders` sorts by keyboardFirstResponder and keyboardPriority', function(assert) {
   const service = this.subject({
-    registeredResponders: Ember.A([{
+    registeredResponders: A([{
       keyboardActivated: true,
       keyboardPriority: 0
     }, {
@@ -50,7 +51,7 @@ test('`willDestroy` removes the jquery listeners', function(assert) {
 
   service.willDestroy();
 
-  const listeners = Ember.$._data(document);
+  const listeners = $._data(document);
 
   assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
 });
@@ -58,11 +59,11 @@ test('`willDestroy` removes the jquery listeners', function(assert) {
 test('`destroy` removes the jquery listeners', function(assert) {
   const service = this.subject();
 
-  Ember.run(() => {
+  run(() => {
     service.destroy();
   });
 
-  const listeners = Ember.$._data(document);
+  const listeners = $._data(document);
 
   assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
 });

@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import Component from '@ember/component';
 import layout from '../templates/components/trigger-event-test';
 import { EKMixin, keyDown, keyPress, keyUp } from 'ember-keyboard';
 
-export default Ember.Component.extend(EKMixin, {
+export default Component.extend(EKMixin, {
   layout,
 
   keyboardActivated: true,
@@ -11,19 +12,19 @@ export default Ember.Component.extend(EKMixin, {
   keyPress: false,
   keyUp: false,
 
-  onKeyDown: Ember.on(keyDown('KeyA'), function() {
+  onKeyDown: on(keyDown('KeyA'), function() {
     this.toggleProperty('keyDown');
   }),
 
-  onKeyDownWithMods: Ember.on(keyDown('KeyA+cmd+shift'), function() {
+  onKeyDownWithMods: on(keyDown('KeyA+cmd+shift'), function() {
     this.toggleProperty('keyDownWithMods');
   }),
 
-  onKeyPress: Ember.on(keyPress('KeyA'), function() {
+  onKeyPress: on(keyPress('KeyA'), function() {
     this.toggleProperty('keyPress');
   }),
 
-  onKeyUp: Ember.on(keyUp('KeyA'), function() {
+  onKeyUp: on(keyUp('KeyA'), function() {
     this.toggleProperty('keyUp');
   })
 });
