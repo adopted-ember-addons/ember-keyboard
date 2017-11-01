@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import codeMap from 'ember-keyboard/fixtures/code-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
@@ -9,7 +8,8 @@ const validKeys = keyMapValues.concat(validModifiers);
 const validateKeys = function validateKeys(keys) {
   keys.forEach((key) => {
     if (validKeys.indexOf(key) === -1) {
-      Ember.Logger.error(`\`${key}\` is not a valid key name`);
+      /* eslint no-console: ["error", { allow: ["error"] }] */
+      console.error(`\`${key}\` is not a valid key name`);
     }
   });
 };

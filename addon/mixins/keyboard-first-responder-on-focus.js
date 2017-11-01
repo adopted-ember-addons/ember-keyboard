@@ -1,11 +1,6 @@
-import Ember from 'ember';
-
-const {
-  Mixin,
-  on,
-  set,
-  setProperties
-} = Ember;
+import Mixin from '@ember/object/mixin';
+import { on } from '@ember/object/evented';
+import { setProperties, set } from '@ember/object';
 
 export default Mixin.create({
   makeFirstResponderOnFocusIn: on('click', 'focusIn', function() {

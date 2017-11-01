@@ -1,6 +1,11 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { triggerKeyDown, triggerKeyPress, triggerKeyUp, initialize } from 'ember-keyboard';
+import {
+  triggerKeyDown,
+  triggerKeyPress,
+  triggerKeyUp,
+  initialize
+} from 'ember-keyboard';
 import { hook } from 'ember-hook';
 
 moduleForComponent('trigger-event-test', 'Integration | Util | triggerEvent', {

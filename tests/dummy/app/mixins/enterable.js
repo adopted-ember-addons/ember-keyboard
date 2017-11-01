@@ -1,7 +1,5 @@
-import Ember from 'ember';
-
-const { Mixin } = Ember;
-const { inject: { service } } = Ember;
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
 export default Mixin.create( {
   classNames: ['keyboard-widget'],

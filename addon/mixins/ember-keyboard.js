@@ -1,12 +1,7 @@
-import Ember from 'ember';
-
-const {
-  Evented,
-  Mixin,
-  get
-} = Ember;
-
-const { inject: { service } } = Ember;
+import { inject as service } from '@ember/service';
+import Evented from '@ember/object/evented';
+import Mixin from '@ember/object/mixin';
+import { get } from '@ember/object';
 
 export default Mixin.create(Evented, {
   keyboardPriority: 0,

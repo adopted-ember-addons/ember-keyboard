@@ -1,6 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import EnterableMixin from 'dummy/mixins/enterable';
-
-const { Component } = Ember;
 
 export default Component.extend(EnterableMixin);
