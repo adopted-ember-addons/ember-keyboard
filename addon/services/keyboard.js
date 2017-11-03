@@ -46,7 +46,7 @@ export default Service.extend({
     const isPropagationEnabled = Boolean(get(config, 'emberKeyboard.propagation'));
     set(this, 'isPropagationEnabled', isPropagationEnabled);
 
-    const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
+    const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress', 'click', 'mouseDown', 'mouseUp', 'touchStart', 'touchEnd'];
     const eventNames = listeners.map(function(name) {
       return `${name.toLowerCase()}.ember-keyboard-listener`;
     }).join(' ');

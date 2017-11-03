@@ -5,6 +5,8 @@ module.exports = {
   globals: {
     '$': true,
     'keyDown': true,
-    'keyUp': true
+    'keyUp': true,
+    'mouseDown': true,
+    'touchStart': true
   }
 };

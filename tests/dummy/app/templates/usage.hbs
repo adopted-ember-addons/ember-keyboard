@@ -56,12 +56,12 @@ will trigger on Command(⌘)+Enter on macOS or Ctrl+Enter on all other platforms
 
 Note that `ctrl` should be used with caution, as MacOSs will swollow some `ctrl` events before `ember-keyboard` can observe them.
 
-### `keyUp`, `keyDown`, and `keyPress`
+### `keyUp`, `keyDown`, `keyPress`, `mouseDown`, `mouseUp`, `click`, `touchStart`, and `touchEnd`
 
-By default, `ember-keyboard` listens to `keydown`, `keyup`, and `keypress` events, and has corresponding functions:
+By default, `ember-keyboard` listens to `keydown`, `keyup`, `keypress`, `mousedown`, `mouseup`, `click`, `touchstart`, and `touchend` events, and has corresponding functions:
 
 ```js
-import { keyUp, keyDown, keyPress } from 'ember-keyboard';
+import { keyUp, keyDown, keyPress, mouseDown, mouseUp, click, touchStart, touchEnd } from 'ember-keyboard';
 ```
 
 If you want `ember-keyboard` to listen to fewer events, then you can specify them in your `config/environment.js` file like so:
@@ -73,6 +73,24 @@ ENV.emberKeyboard = {
 ```
 
 Note that `keydown` events fire repeatedly while the key is pressed, while `keyup` events fire only once, after the key has been released.
+
+### Mouse Events
+
+Mouse events can listen for the `left`, `right`, and `middle` buttons like so:
+
+```js
+triggerSubmit: Ember.on(mouseUp('left'), function() {
+  this.submit();
+});
+```
+
+You can also combine it with the standard modifier keys:
+
+```js
+triggerSubmit: Ember.on(mouseUp('left+cmd'), function() {
+  this.submit();
+});
+```
 
 ### `event`
 

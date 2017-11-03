@@ -10,6 +10,18 @@ function getValues() {
   }).get();
 }
 
+function getMouseValues() {
+  return find(`${hook('mouse-counter-counter')}`).map(function(index, counter) {
+    return parseInt($(counter).text().trim(), 10);
+  }).get();
+}
+
+function getTouchValues() {
+  return find(`${hook('touch-counter-counter')}`).map(function(index, counter) {
+    return parseInt($(counter).text().trim(), 10);
+  }).get();
+}
+
 module('Acceptance | ember keyboard', {
   beforeEach() {
     this.application = startApp();
@@ -21,9 +33,25 @@ module('Acceptance | ember keyboard', {
 });
 
 test('test standard functionality', function(assert) {
-  assert.expect(7);
+  assert.expect(11);
 
   visit('/test-scenario').then(() => {
+    return mouseDown('left');
+  }).then(() => {
+    assert.deepEqual(getMouseValues(), [1], 'left mouse');
+
+    return mouseDown('right');
+  }).then(() => {
+    assert.deepEqual(getMouseValues(), [11], 'right mouse');
+
+    return mouseDown('middle');
+  }).then(() => {
+    assert.deepEqual(getMouseValues(), [1], 'middle mouse');
+
+    return touchStart();
+  }).then(() => {
+    assert.deepEqual(getTouchValues(), [1], 'touch event');
+
     return keyDown('ArrowRight');
   }).then(() => {
     assert.deepEqual(getValues(), [1, 1, 1], 'equal responders all respond');
