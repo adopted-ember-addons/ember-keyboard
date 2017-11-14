@@ -5,12 +5,14 @@ import EKMixin from 'ember-keyboard/mixins/ember-keyboard';
 import EKFirstResponderOnFocusMixin from 'ember-keyboard/mixins/keyboard-first-responder-on-focus';
 import EKOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
 import EKOnInsertMixin from 'ember-keyboard/mixins/activate-keyboard-on-insert';
+import EKOnInitMixin from 'ember-keyboard/mixins/activate-keyboard-on-init';
 
 export {
   EKMixin,
   EKFirstResponderOnFocusMixin,
   EKOnFocusMixin,
   EKOnInsertMixin,
+	EKOnInitMixin,
   getCode,
   getKeyCode,
   getMouseCode
