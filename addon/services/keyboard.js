@@ -1,11 +1,11 @@
-import $ from 'jquery';
+
 import Service from '@ember/service';
 import { A } from '@ember/array';
 import { getOwner } from '@ember/application';
 import { get, getProperties, set } from '@ember/object';
 import { computed } from '@ember/object';
 import { filter, filterBy, sort } from '@ember/object/computed';
-import { run } from '@ember/runloop';
+import { bind, run } from '@ember/runloop';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 import {
   handleKeyEventWithPropagation,
@@ -46,19 +46,12 @@ export default Service.extend({
     const isPropagationEnabled = Boolean(get(config, 'emberKeyboard.propagation'));
     set(this, 'isPropagationEnabled', isPropagationEnabled);
 
-    const listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress', 'click', 'mouseDown', 'mouseUp', 'touchStart', 'touchEnd'];
-    const eventNames = listeners.map(function(name) {
-      return `${name.toLowerCase()}.ember-keyboard-listener`;
-    }).join(' ');
+    this._boundRespond = bind(this, this._respond);
+    this._listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
+    this._listeners = this._listeners.map((listener) => listener.toLowerCase());
 
-    $(document).on(eventNames, null, (event) => {
-      run(() => {
-        if (get(this, 'isPropagationEnabled')) {
-          handleKeyEventWithPropagation(event, getProperties(this, 'firstResponders', 'normalResponders'));
-        } else {
-          handleKeyEventWithLaxPriorities(event, get(this, 'sortedResponders'));
-        }
-      });
+    this._listeners.forEach((type) => {
+      document.addEventListener(type, this._boundRespond);
     });
   },
 
@@ -69,7 +62,19 @@ export default Service.extend({
       return;
     }
 
-    $(document).off('.ember-keyboard-listener');
+    this._listeners.forEach((type) => {
+      document.removeEventListener(type, this._boundRespond);
+    });
+  },
+
+  _respond(event) {
+    run(() => {
+      if (get(this, 'isPropagationEnabled')) {
+        handleKeyEventWithPropagation(event, getProperties(this, 'firstResponders', 'normalResponders'));
+      } else {
+        handleKeyEventWithLaxPriorities(event, get(this, 'sortedResponders'));
+      }
+    });
   },
 
   register(responder) {

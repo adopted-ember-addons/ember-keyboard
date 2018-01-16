@@ -1,11 +1,10 @@
-import $ from 'jquery';
 import { assign } from '@ember/polyfills';
 import getCmdKey from './get-cmd-key';
 import { getKeyCode } from 'ember-keyboard';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 
 const triggerKeyEvent = function triggerKeyEvent(eventType, rawCode, element) {
-  const event = $.Event(eventType);
+  const event = new Event(eventType);
   const parts = rawCode.split('+');
   const [code] = parts.filter((part) => !validModifiers.includes(part));
   const modifiers = parts.filter((part) => part !== code);
@@ -18,7 +17,7 @@ const triggerKeyEvent = function triggerKeyEvent(eventType, rawCode, element) {
 
   assign(event, { code, keyCode: getKeyCode(code) }, properties);
 
-  $(element || document).trigger(event);
+  (element || document).dispatchEvent(event);
 };
 
 const triggerKeyDown = function triggerKeyDown(code, element) {

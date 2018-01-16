@@ -58,17 +58,17 @@ Note that `ctrl` should be used with caution, as MacOSs will swollow some `ctrl`
 
 ### `keyUp`, `keyDown`, `keyPress`, `mouseDown`, `mouseUp`, `click`, `touchStart`, and `touchEnd`
 
-By default, `ember-keyboard` listens to `keydown`, `keyup`, `keypress`, `mousedown`, `mouseup`, `click`, `touchstart`, and `touchend` events, and has corresponding functions:
+By default, `ember-keyboard` listens to `keydown`, `keyup`, and `keypress`. It can optionally listen to `mousedown`, `mouseup`, `click`, `touchstart`, and `touchend` as well. Each has corresponding functions:
 
 ```js
 import { keyUp, keyDown, keyPress, mouseDown, mouseUp, click, touchStart, touchEnd } from 'ember-keyboard';
 ```
 
-If you want `ember-keyboard` to listen to fewer events, then you can specify them in your `config/environment.js` file like so:
+If you want `ember-keyboard` to listen to fewer events or to add any of the mouse/touch event, then you can specify them in your `config/environment.js` file like so:
 
 ```js
 ENV.emberKeyboard = {
-  listeners: ['keyUp', 'keyDown'] // use only `keyUp` and `keyDown`
+  listeners: ['keyUp', 'keyDown', 'click'] // use only `keyUp`, `keyDown`, and `click`
 }
 ```
 
