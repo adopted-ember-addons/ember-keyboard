@@ -1,7 +1,5 @@
 [![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
 [![Build Status](https://travis-ci.org/patience-tema-baron/ember-keyboard.svg?branch=master)](https://travis-ci.org/patience-tema-baron/ember-keyboard)
-[![Code Climate](https://codeclimate.com/github/patience-tema-baron/ember-keyboard/badges/gpa.svg)](https://codeclimate.com/github/patience-tema-baron/ember-keyboard)
-[![Test Coverage](https://codeclimate.com/github/patience-tema-baron/ember-keyboard/badges/coverage.svg)](https://codeclimate.com/github/patience-tema-baron/ember-keyboard/coverage)
 
 # ember-keyboard
 
