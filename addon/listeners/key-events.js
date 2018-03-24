@@ -1,9 +1,5 @@
-import codeMap from 'ember-keyboard/fixtures/code-map';
 import listenerName from 'ember-keyboard/utils/listener-name';
-import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
-
-const keyMapValues = Object.keys(codeMap).map((key) => codeMap[key]);
-const validKeys = keyMapValues.concat(validModifiers);
+import validKeys from 'ember-keyboard/fixtures/valid-keys';
 
 const validateKeys = function validateKeys(keys) {
   keys.forEach((key) => {
