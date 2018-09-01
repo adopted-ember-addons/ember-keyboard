@@ -1,154 +1,116 @@
-import { run } from '@ember/runloop';
+import { click, fillIn, blur, visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
 import { set } from '@ember/object';
 import { module, test } from 'qunit';
-import startApp from '../../tests/helpers/start-app';
-import { hook } from 'ember-hook';
 
-function getValues() {
-  return find(`${hook('counter-counter')}`).map(function(index, counter) {
-    return parseInt($(counter).text().trim(), 10);
-  }).get();
-}
+import {
+  mouseDown,
+  keyUp, keyDown,
+  touchStart
+} from 'ember-keyboard/test-support/test-helpers';
 
-function getMouseValues() {
-  return find(`${hook('mouse-counter-counter')}`).map(function(index, counter) {
-    return parseInt($(counter).text().trim(), 10);
-  }).get();
-}
+import { hook } from '../helpers/hook';
 
-function getTouchValues() {
-  return find(`${hook('touch-counter-counter')}`).map(function(index, counter) {
-    return parseInt($(counter).text().trim(), 10);
-  }).get();
-}
+import { getService } from '../helpers/get-service';
+import { getValues, getMouseValues, getTouchValues } from '../helpers/get-values';
 
-module('Acceptance | ember keyboard', {
-  beforeEach() {
-    this.application = startApp();
-  },
+module('Acceptance | ember keyboard', function(hooks) {
+  setupApplicationTest(hooks);
 
-  afterEach() {
-    run(this.application, 'destroy');
-  }
-});
+  test('test standard functionality', async function(assert) {
+    assert.expect(11);
 
-test('test standard functionality', function(assert) {
-  assert.expect(11);
+    await visit('/test-scenario')
 
-  visit('/test-scenario').then(() => {
-    return mouseDown('left');
-  }).then(() => {
+    await mouseDown('left');
     assert.deepEqual(getMouseValues(), [1], 'left mouse');
 
-    return mouseDown('right');
-  }).then(() => {
+    await mouseDown('right');
     assert.deepEqual(getMouseValues(), [11], 'right mouse');
 
-    return mouseDown('middle');
-  }).then(() => {
+    await mouseDown('middle');
     assert.deepEqual(getMouseValues(), [1], 'middle mouse');
 
-    return touchStart();
-  }).then(() => {
+    await touchStart();
     assert.deepEqual(getTouchValues(), [1], 'touch event');
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [1, 1, 1], 'equal responders all respond');
 
-    fillIn(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, '1');
+    await fillIn(`${hook('counter-first')} ${hook('counter-priority-input')}`, '1');
 
-    triggerEvent(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, 'blur');
+    await blur(`${hook('counter-first')} ${hook('counter-priority-input')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [2, 1, 1], 'highest responder responds first');
 
-    click(`${hook('counter')}:nth(1) ${hook('counter-first-responder-toggle')}`);
+    await click(`${hook('counter-second')} ${hook('counter-first-responder-toggle')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [2, 2, 1], 'first responder responds first');
 
-    click(`${hook('counter')}:nth(1) ${hook('counter-lax-priority-toggle')}`);
+    await click(`${hook('counter-second')} ${hook('counter-lax-priority-toggle')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [3, 3, 1], 'lax priority does not block lower priority responders');
 
-    click(`${hook('counter')}:nth(0) ${hook('counter-activated-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-activated-toggle')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [3, 4, 2], 'deactivating a responder removes it from the stack');
 
-    return keyDown('ArrowRight+ctrl+shift');
-  }).then(() => {
+    await keyDown('ArrowRight+ctrl+shift');
     assert.deepEqual(getValues(), [3, 104, 102], 'modifier keys work');
 
-    return keyUp('KeyR');
-  }).then(() => {
+    await keyUp('KeyR');
     assert.deepEqual(getValues(), [3, 0, 0], 'keyUp works');
   });
-});
 
-test('test event propagation', function(assert) {
-  assert.expect(6);
+  test('test event propagation', async function(assert) {
+    assert.expect(6);
 
-  const keyboardService = this.application.__container__.lookup('service:keyboard');
-  set(keyboardService, 'isPropagationEnabled', true);
+    const keyboardService = getService('keyboard');
+    set(keyboardService, 'isPropagationEnabled', true);
 
-  visit('/test-scenario').then(() => {
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await visit('/test-scenario');
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [1, 1, 1], 'equal responders all respond');
 
-    fillIn(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, '1');
+    await fillIn(`${hook('counter-first')} ${hook('counter-priority-input')}`, '1');
+    await blur(`${hook('counter-first')} ${hook('counter-priority-input')}`);
 
-    triggerEvent(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, 'blur');
-
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [2, 2, 2], 'highest responder responds first, lower responders follow');
 
-    fillIn(`${hook('counter')}:nth(1) ${hook('counter-priority-input')}`, '1');
+    await fillIn(`${hook('counter-second')} ${hook('counter-priority-input')}`, '1');
+    await blur(`${hook('counter-second')} ${hook('counter-priority-input')}`);
+    await click(`${hook('counter-first')} ${hook('counter-stop-immediate-propagation-toggle')}`);
 
-    triggerEvent(`${hook('counter')}:nth(1) ${hook('counter-priority-input')}`, 'blur');
-
-    click(`${hook('counter')}:nth(0) ${hook('counter-stop-immediate-propagation-toggle')}`);
-
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [3, 2, 3], 'highest responder responds first and stops immediate propagation, lower responders follow');
 
-    click(`${hook('counter')}:nth(0) ${hook('counter-stop-immediate-propagation-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-stop-immediate-propagation-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-stop-propagation-toggle')}`);
 
-    click(`${hook('counter')}:nth(0) ${hook('counter-stop-propagation-toggle')}`);
-
-
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [4, 3, 3], 'highest responders responds first and block propagation to lower priority responders');
 
-    click(`${hook('counter')}:nth(0) ${hook('counter-activated-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-activated-toggle')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [4, 4, 4], 'deactivating a responder removes it from the stack, deactivated responders do not block propagation');
 
-    fillIn(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, '2');
-    triggerEvent(`${hook('counter')}:nth(0) ${hook('counter-priority-input')}`, 'blur');
-    click(`${hook('counter')}:nth(0) ${hook('counter-stop-propagation-toggle')}`);
-    click(`${hook('counter')}:nth(0) ${hook('counter-activated-toggle')}`);
-    click(`${hook('counter')}:nth(0) ${hook('counter-first-responder-toggle')}`)
-    ;
-    click(`${hook('counter')}:nth(1) ${hook('counter-first-responder-toggle')}`);
-    click(`${hook('counter')}:nth(1) ${hook('counter-stop-immediate-propagation-toggle')}`);
+    await fillIn(`${hook('counter-first')} ${hook('counter-priority-input')}`, '2');
+    await blur(`${hook('counter-first')} ${hook('counter-priority-input')}`);
+    await click(`${hook('counter-first')} ${hook('counter-stop-propagation-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-activated-toggle')}`);
+    await click(`${hook('counter-first')} ${hook('counter-first-responder-toggle')}`);
+    await click(`${hook('counter-second')} ${hook('counter-first-responder-toggle')}`);
+    await click(`${hook('counter-second')} ${hook('counter-stop-immediate-propagation-toggle')}`);
 
-    click(`${hook('counter')}:nth(2) ${hook('counter-first-responder-toggle')}`);
+    await click(`${hook('counter-third')} ${hook('counter-first-responder-toggle')}`);
 
-    return keyDown('ArrowRight');
-  }).then(() => {
+    await keyDown('ArrowRight');
     assert.deepEqual(getValues(), [5, 5, 4], 'first responders get called in priority order.');
   });
 });

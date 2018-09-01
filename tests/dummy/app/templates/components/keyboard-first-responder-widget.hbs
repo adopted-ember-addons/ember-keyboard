@@ -11,6 +11,25 @@ Sometimes you'll need a component to be the first responder, regardless of its `
 When a component resigns `keyboardFirstResponder`, it will fall back to using its `keyboardPriority`.
 "}}
 
-{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true keyboardPriority=1}}
-{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true keyboardFirstResponder=true}}
-{{key-down-counter parentActivated=keyboardActivated priorityInput=true activatedToggle=true firstResponderToggle=true}}
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  keyboardPriority=1
+  data-test-counter=true}}
+
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  keyboardFirstResponder=true
+  data-test-counter=true}}
+
+{{key-down-counter
+  parentActivated=keyboardActivated
+  priorityInput=true
+  activatedToggle=true
+  firstResponderToggle=true
+  data-test-counter=true}}

@@ -7,7 +7,12 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('test-scenario');
+  this.route('test-scenario', function() {
+    this.route('mouse-down');
+    this.route('touch');
+    this.route('keyboard');
+  });
+
   this.route('mixins');
   this.route('priority');
   this.route('usage');

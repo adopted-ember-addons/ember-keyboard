@@ -1,31 +1,37 @@
 {{#if priorityInput}}
   <label><code>keyboardPriority</code>:</label>
-  {{input value=keyboardPriority classNames="input-field" hook="counter-priority-input"}}
+  {{input value=keyboardPriority classNames="input-field"
+    data-test-counter-priority-input=true}}
 {{/if}}
 
 {{#if activatedToggle}}
   <label><code>keyboardActivated</code>:</label>
-  {{input type="checkbox" checked=toggleActivated classNames="checkbox" hook="counter-activated-toggle"}}
+  {{input type="checkbox" checked=toggleActivated classNames="checkbox"
+    data-test-counter-activated-toggle=true}}
 {{/if}}
 
 {{#if firstResponderToggle}}
   <label><code>keyboardFirstResponder</code>:</label>
-  {{input type="checkbox" checked=keyboardFirstResponder classNames="checkbox" hook="counter-first-responder-toggle"}}
+  {{input type="checkbox" checked=keyboardFirstResponder classNames="checkbox"
+    data-test-counter-first-responder-toggle=true}}
 {{/if}}
 
 {{#if laxPriorityToggle}}
   <label><code>keyboardLaxPriority</code>:</label>
-  {{input type="checkbox" checked=keyboardLaxPriority classNames="checkbox" hook="counter-lax-priority-toggle"}}
+  {{input type="checkbox" checked=keyboardLaxPriority classNames="checkbox"
+    data-test-counter-lax-priority-toggle=true}}
 {{/if}}
 
 {{#if stopImmediatePropagationToggle}}
   <label><code>stopImmediatePropagation()</code>:</label>
-  {{input type="checkbox" checked=stopImmediatePropagation classNames="checkbox" hook="counter-stop-immediate-propagation-toggle"}}
+  {{input type="checkbox" checked=stopImmediatePropagation classNames="checkbox"
+    data-test-counter-stop-immediate-propagation-toggle=true}}
 {{/if}}
 
 {{#if stopPropagationToggle}}
   <label><code>stopPropagation()</code>:</label>
-  {{input type="checkbox" checked=stopPropagation classNames="checkbox" hook="counter-stop-propagation-toggle"}}
+  {{input type="checkbox" checked=stopPropagation classNames="checkbox"
+    data-test-counter-stop-propagation-toggle=true}}
 {{/if}}
 
-<div data-test={{hook "counter-counter"}}>{{counter}}</div>
+<div data-test-counter-counter>{{counter}}</div>

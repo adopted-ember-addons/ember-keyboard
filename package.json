@@ -5,50 +5,62 @@
   "keywords": [
     "ember-addon"
   ],
+  "repository": "https://github.com/patience-tema-baron/ember-keyboard",
   "license": "MIT",
   "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "https://github.com/patience-tema-baron/ember-keyboard",
   "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember try:each",
-    "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -"
+    "build": "yarn ember build",
+    "lint:js": "eslint .",
+    "start": "ember serve",
+    "test": "ember test",
+    "test:all": "ember try:each",
+    "deploy": "yarn ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -",
+    "ember": "node_modules/.bin/ember",
+    "ember:update": "node_modules/.bin/ember-cli-update"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "ember-cli-babel": "^6.6.0"
   },
   "devDependencies": {
-    "broccoli-asset-rev": "^2.4.5",
+    "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
-    "ember-cli": "~2.16.2",
+    "ember-cli": "~3.3.0",
     "ember-cli-dependency-checker": "^2.0.0",
-    "ember-cli-eslint": "^4.0.0",
+    "ember-cli-eslint": "^4.2.1",
     "ember-cli-github-pages": "0.1.2",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-qunit": "^4.0.0",
-    "ember-cli-shims": "^1.1.0",
+    "ember-cli-qunit": "^4.3.2",
+    "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
+    "ember-cli-update": "^0.23.0",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.0",
-    "ember-hook": "^1.4.2",
-    "ember-load-initializers": "^1.0.0",
+    "ember-load-initializers": "^1.1.0",
     "ember-logger-test": "0.0.3",
+    "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
-    "ember-source": "~2.16.1",
+    "ember-source": "~3.3.0",
+    "ember-source-channel-url": "^1.0.1",
+    "ember-test-selectors": "^1.0.0",
+    "ember-try": "^0.2.23",
+    "eslint-plugin-ember": "^5.0.0",
+    "eslint-plugin-node": "^6.0.1",
     "highlightjs": "^9.10.0",
     "loader.js": "^4.2.3",
+    "markdown-code-highlighting": "^0.2.0",
     "marked": "^0.3.6",
-    "markdown-code-highlighting": "^0.2.0"
+    "qunit-dom": "^0.6.2"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": "6.* || 8.* || >= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",

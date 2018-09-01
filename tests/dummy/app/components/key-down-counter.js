@@ -1,5 +1,4 @@
 import { get, computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import Component from '@ember/component';
 import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
 
@@ -19,7 +18,6 @@ export default Component.extend(EKMixin, {
   tagName: 'span',
   classNames: 'counter-container',
   toggleActivated: true,
-  hook: 'counter',
 
   counter: 0,
 
@@ -31,23 +29,24 @@ export default Component.extend(EKMixin, {
     }
   }).readOnly(),
 
-  decrementCounter: on(keyDown('ArrowLeft'), makeEventHandler(-1)),
+  didInsertElement() {
+    this._super(...arguments);
 
-  incrementCounter: on(keyDown('ArrowRight'), makeEventHandler(1)),
+    this.on(keyDown('ArrowLeft'), makeEventHandler(-1));
+    this.on(keyDown('ArrowRight'), makeEventHandler(1));
+    this.on(keyDown('shift+ArrowLeft'), makeEventHandler(-10));
+    this.on(keyDown('shift+ArrowRight'), makeEventHandler(10));
+    this.on(keyDown('ctrl+shift+ArrowLeft'), makeEventHandler(-100));
+    this.on(keyDown('ctrl+shift+ArrowRight'), makeEventHandler(100));
 
-  decrementCounter10: on(keyDown('shift+ArrowLeft'), makeEventHandler(-10)),
+    this.on(keyUp('KeyR'), function() {
+      this.set('counter', 0);
+    });
 
-  incrementCounter10: on(keyDown('shift+ArrowRight'), makeEventHandler(10)),
+    this.on(keyPress('Digit5'), function() {
+      this.set('counter', 5);
+    });
+  }
 
-  decrementCounter100: on(keyDown('ctrl+shift+ArrowLeft'), makeEventHandler(-100)),
 
-  incrementCounter100: on(keyDown('ctrl+shift+ArrowRight'), makeEventHandler(100)),
-
-  resetCounter: on(keyUp('KeyR'), function() {
-    this.set('counter', 0);
-  }),
-
-  setCounterTo5: on(keyPress('Digit5'), function() {
-    this.set('counter', 5);
-  })
 });

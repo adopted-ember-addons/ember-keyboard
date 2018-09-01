@@ -1,5 +1,4 @@
 import { get, computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import Component from '@ember/component';
 import { EKMixin, touchStart } from 'ember-keyboard';
 
@@ -20,7 +19,6 @@ export default Component.extend(EKMixin, {
   tagName: 'span',
   classNames: 'counter-container',
   toggleActivated: true,
-  hook: 'touch-start-counter',
 
   counter: 0,
 
@@ -32,5 +30,10 @@ export default Component.extend(EKMixin, {
     }
   }).readOnly(),
 
-  incrementCounter: on(touchStart(), makeEventHandler(1))
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.on(touchStart(), makeEventHandler(1))
+  }
+
 });
