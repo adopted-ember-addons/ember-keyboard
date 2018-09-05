@@ -68,11 +68,6 @@ export default Service.extend({
   },
 
   _respond(event) {
-    // if (!this.isPropagationEnabled) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-
     run(() => {
       if (get(this, 'isPropagationEnabled')) {
         handleKeyEventWithPropagation(event, getProperties(this, 'firstResponders', 'normalResponders'));
