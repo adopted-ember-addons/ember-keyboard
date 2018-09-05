@@ -1,5 +1,4 @@
 import { get, computed } from '@ember/object';
-import { on } from '@ember/object/evented';
 import Component from '@ember/component';
 import { EKMixin, mouseDown } from 'ember-keyboard';
 
@@ -19,7 +18,6 @@ export default Component.extend(EKMixin, {
   tagName: 'span',
   classNames: 'counter-container',
   toggleActivated: true,
-  hook: 'mouse-down-counter',
 
   counter: 0,
 
@@ -31,7 +29,12 @@ export default Component.extend(EKMixin, {
     }
   }).readOnly(),
 
-  incrementCounterLeft: on(mouseDown('left'), makeEventHandler(1)),
-  incrementCounterRight: on(mouseDown('right'), makeEventHandler(10)),
-  incrementCounterMiddle: on(mouseDown('middle'), makeEventHandler(-10)),
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.on(mouseDown('left'), makeEventHandler(1));
+    this.on(mouseDown('right'), makeEventHandler(10));
+    this.on(mouseDown('middle'), makeEventHandler(-10));
+  }
+
 });
