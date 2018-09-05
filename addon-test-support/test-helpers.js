@@ -3,7 +3,7 @@ import { keyEvent } from './key-event';
 export function mouseDown(attributes) {
   return keyEvent(attributes, 'mousedown');
 }
-  
+
 export function mouseUp(attributes) {
   return keyEvent(attributes, 'mouseup');
 }

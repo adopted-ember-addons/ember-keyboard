@@ -1,0 +1,34 @@
+<span data-test-ctrl-k>
+  {{if wasCtrlKPressed 'Ctrl+K pressed' 'Ctrl+K not pressed'}}
+</span>
+
+{{keyboard-press
+  key='ctrl+KeyK'
+  onPress=(action 'onCtrlK')
+  onDown=(action 'onCtrlK')
+  onUp=(action 'onCtrlK')
+}}
+
+<hr />
+
+
+<span data-test-s>
+  {{if wasSPressed 'S pressed' 'S not pressed'}}
+</span>
+
+{{keyboard-press
+  key='KeyS'
+  onPress=(action 'onS')
+}}
+
+
+
+<span data-test-slash>
+  {{if wasSlashPressed 'slash pressed' 'slash not pressed'}}
+</span>
+
+{{keyboard-press
+  key='Slash'
+  onDown=(action 'onSlash')
+}}
+
