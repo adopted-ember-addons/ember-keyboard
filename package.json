@@ -64,6 +64,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://patience-tema-baron.github.io/ember-keyboard/"
+    "demoURL": "https://patience-tema-baron.github.io/ember-keyboard/"
   }
 }
