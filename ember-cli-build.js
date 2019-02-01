@@ -5,12 +5,12 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     babel: {
-      plugins: ['transform-object-rest-spread']
+      plugins: ['@babel/plugin-proposal-object-rest-spread']
     },
     'ember-cli-babel': {
       includePolyfill: true,
       plugins: [
-        'transform-object-rest-spread'
+        '@babel/plugin-proposal-object-rest-spread'
       ]
     },
     'ember-test-selectors': {
