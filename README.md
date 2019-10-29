@@ -21,4 +21,4 @@ In order to avoid adding keyboard shortcuts to your application that are already
 
 ## Documentation & Demo
 
-You can find interactive documentation [here](http://patience-tema-baron.github.io/ember-keyboard/).
+You can find interactive documentation [here](http://briarsweetbriar.github.io/ember-keyboard/).
