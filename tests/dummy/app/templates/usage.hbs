@@ -1,7 +1,6 @@
 {{format-markdown "
 ## Usage
 
-First, add `EKMixin` to a component or route:
 ### Using ember-keyboard in templates
 
 To declaratively attach an action to a keyboard event while a particular template is rendered, use the `keyboard-press` component. In this example, when a user presses the '/' key, the onSlash action is triggered.
@@ -14,6 +13,14 @@ To declaratively attach an action to a keyboard event while a particular templat
 ```
 
 Note that the listener is active for the lifecycle of the template. When the template is unrendered, the listener is removed.
+
+Another option for templates is the `keyboard-shortcut` element modifier. This allows a keyboard event to simulate clicking the element the modifier is attached to. In the following example, we trigger a click on the button when the B key is pressed together with the Alt key:
+
+```hbs
+<button {{action 'onButtonClick'}} {{keyboard-shortcut 'alt+KeyB'}}>
+  Press me or press 'Alt-B'
+</button>
+```
 
 ### Using ember-keyboard in routes and classic components
 

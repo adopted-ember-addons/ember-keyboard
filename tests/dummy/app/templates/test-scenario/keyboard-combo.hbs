@@ -32,3 +32,9 @@
   key='Slash'
   onDown=(action 'onSlash')
 }}
+
+<button {{action (action 'onTriggerButton')}} {{keyboard-shortcut 'KeyB'}}>Press me or press "B"</button>
+
+<span data-test-button>
+  {{if wasButtonTriggered 'button press triggered' 'button press not triggered'}}
+</span>

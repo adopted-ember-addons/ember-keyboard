@@ -46,8 +46,20 @@ module('Acceptance | ember keyboard | keyboard combos', function(hooks) {
           beforeValue: 'slash not pressed',
           afterValue: 'slash pressed'
         });
+    });
 
-    })
+    test('KeyB button shortcut', async function(assert) {
+      assert.expect(3);
+
+      await textChanged(
+        assert,
+        () => keyPress('KeyB'), {
+          selectorName: 'button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press triggered'
+        });
+    });
+
   });
 
   module('With Modifiers', function() {
