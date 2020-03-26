@@ -1,7 +1,4 @@
-import { run } from '@ember/runloop';
-import $ from 'jquery';
 import { A } from '@ember/array';
-import { get } from '@ember/object';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
@@ -46,25 +43,7 @@ module('Unit | Service | keyboard', function(hooks) {
     assert.deepEqual(service.get('sortedResponders').mapBy('keyboardPriority'), [0, 1, 0, -1], 'correct sorting');
   });
 
-  test('`willDestroy` removes the jquery listeners', function(assert) {
-    const service = this.owner.lookup('service:keyboard');
-
-    service.willDestroy();
-
-    const listeners = $._data(document);
-
-    assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
-  });
-
-  test('`destroy` removes the jquery listeners', function(assert) {
-    const service = this.owner.lookup('service:keyboard');
-
-    run(() => {
-      service.destroy();
-    });
-
-    const listeners = $._data(document);
-
-    assert.ok(!get(listeners, 'events.keyup'), 'listeners have been removed');
-  });
+  // It would be nice to test that tearing down this service removes the installed
+  // event listeners. However, DOM does not have a way to get a collection of
+  // attached event listeners.
 });

@@ -13,7 +13,7 @@
 * Compatible with Ember 2.0+.
 
 ## Accessibility Considerations
-In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/. 
+In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
 
 ## Installation
 
