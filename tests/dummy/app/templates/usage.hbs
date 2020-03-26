@@ -54,7 +54,7 @@ triggerSubmit: Ember.on(keyDown('Enter+cmd'), function() {
 
 will trigger on Command(⌘)+Enter on macOS or Ctrl+Enter on all other platforms.
 
-Note that `ctrl` should be used with caution, as MacOSs will swollow some `ctrl` events before `ember-keyboard` can observe them.
+Note that `ctrl` should be used with caution, as MacOSs will swallow some `ctrl` events before `ember-keyboard` can observe them.
 
 ### `keyUp`, `keyDown`, `keyPress`, `mouseDown`, `mouseUp`, `click`, `touchStart`, and `touchEnd`
 
@@ -154,7 +154,7 @@ triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've reopened `Ember.TextField` and `Ember.TextArea` and applied the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an input is focused, other key responders will not fire. If you want to have responders associated with an input or textarea (such as a rich text editor with `keyUp('ctrl+i')` bindings), you need to extend these components from `Ember.TextField` or `Ember.TextArea` rather than `Ember.component`.
+To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've reopened `Ember.TextField` and `Ember.TextArea` and applied the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an input is focused, other key responders will not fire. If you want to have responders associated with an input or textarea (such as a rich text editor with `keyUp('ctrl+i')` bindings), you need to extend these components from `Ember.TextField` or `Ember.TextArea` rather than `Ember.Component`.
 
 This applies to `input` and `textarea` helpers:
 
@@ -163,9 +163,9 @@ This applies to `input` and `textarea` helpers:
 {{textarea}}
 ```
 
-### Unpropogated Key Events
+### Unpropagated Key Events
 
-Some key events get swollowed by the browser well before they reach `ember-keyboard`. Here is a growing (aka incomplete) list of such events:
+Some key events get swallowed by the browser well before they reach `ember-keyboard`. Here is a growing (aka incomplete) list of such events:
 
 * Enter: keyUp (keyDown works)
 "}}
