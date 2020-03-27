@@ -1,0 +1,14 @@
+<button {{action (action 'onTriggerButton')}} {{keyboard-shortcut 'KeyB'}}>Press me or press "B"</button>
+
+<span data-test-button>
+  {{if wasButtonTriggered 'button press triggered' 'button press not triggered'}}
+</span>
+
+<input type="text"
+  oninput={{action (mut this.textFieldValue) value="target.value"}}
+  {{on-keyboard "Enter" (action 'onEnterPressedInInput')}}
+>
+
+<span data-test-text-field>
+  {{if wasEnterPressedInInput 'enter pressed while input focused' 'enter not pressed while input focused'}}
+</span>
