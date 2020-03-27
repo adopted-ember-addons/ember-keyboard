@@ -8,6 +8,7 @@ export default class extends Controller {
     this.wasSPressed = false;
     this.wasSlashPressed = false;
     this.wasButtonTriggered = false;
+    this.wasEnterPressedInInput = false;
 
     this.actions = {
       onCtrlK() {
@@ -21,6 +22,9 @@ export default class extends Controller {
       },
       onTriggerButton() {
         this.set('wasButtonTriggered', true);
+      },
+      onEnterPressedInInput() {
+        this.set('wasEnterPressedInInput', true);
       }
     }
   }

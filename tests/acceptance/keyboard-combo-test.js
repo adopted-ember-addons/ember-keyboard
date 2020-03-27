@@ -1,9 +1,8 @@
-
-import { visit, currentURL, triggerEvent } from '@ember/test-helpers';
+import { focus, visit, currentURL, triggerEvent } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-import { keyPress } from 'ember-keyboard/test-support/test-helpers';
+import { keyDown, keyPress } from 'ember-keyboard/test-support/test-helpers';
 
 import { textChanged } from '../helpers/text-changed';
 
@@ -57,6 +56,27 @@ module('Acceptance | ember keyboard | keyboard combos', function(hooks) {
           selectorName: 'button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
+        });
+    });
+
+    test('Enter text input shortcut', async function(assert) {
+      assert.expect(5);
+
+      await textChanged(
+        assert,
+        () => keyDown('Enter'), {
+          selectorName: 'text-field',
+          beforeValue: 'enter not pressed while input focused',
+          afterValue: 'enter not pressed while input focused'
+        });
+
+      await focus('input[type="text"]');
+      await textChanged(
+        assert,
+        () => keyDown('Enter'), {
+          selectorName: 'text-field',
+          beforeValue: 'enter not pressed while input focused',
+          afterValue: 'enter pressed while input focused'
         });
     });
 

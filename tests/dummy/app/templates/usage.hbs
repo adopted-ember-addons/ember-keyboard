@@ -14,7 +14,16 @@ To declaratively attach an action to a keyboard event while a particular templat
 
 Note that the listener is active for the lifecycle of the template. When the template is unrendered, the listener is removed.
 
-Another option for templates is the `keyboard-shortcut` element modifier. This allows a keyboard event to simulate clicking the element the modifier is attached to. In the following example, we trigger a click on the button when the B key is pressed together with the Alt key:
+Another option for templates is the `on-keyboard` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
+
+```hbs
+<input type='text'
+  oninput={{action (mut this.textFieldValue) value='target.value'}}
+  {{on-keyboard 'Enter' (action 'onEnterPressedInInput')}}
+>
+```
+
+If you want a shortcut for triggering a click on an element when a key is pressed, look no further than the `keyboard-shortcut` element modifier. This allows a keyboard event to simulate clicking the element the modifier is attached to. In the following example, we trigger a click on the button when the B key is pressed together with the Alt key:
 
 ```hbs
 <button {{action 'onButtonClick'}} {{keyboard-shortcut 'alt+KeyB'}}>
