@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/patience-tema-baron/ember-keyboard",
+  "repository": "https://github.com/adopted-ember-addons/ember-keyboard",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -64,6 +64,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://patience-tema-baron.github.io/ember-keyboard/"
+    "demoURL": "http://adopted-ember-addons.github.io/ember-keyboard/"
   }
 }

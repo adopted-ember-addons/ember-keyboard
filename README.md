@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
-[![Build Status](https://travis-ci.org/patience-tema-baron/ember-keyboard.svg?branch=master)](https://travis-ci.org/patience-tema-baron/ember-keyboard)
+[![Build Status](https://travis-ci.org/adopted-ember-addons/ember-keyboard.svg?branch=master)](https://travis-ci.org/adopted-ember-addons/ember-keyboard)
 
 # ember-keyboard
 
@@ -13,7 +13,7 @@
 * Compatible with Ember 2.0+.
 
 ## Accessibility Considerations
-In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/. 
+In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
 
 ## Installation
 
@@ -21,4 +21,4 @@ In order to avoid adding keyboard shortcuts to your application that are already
 
 ## Documentation & Demo
 
-You can find interactive documentation [here](http://briarsweetbriar.github.io/ember-keyboard/).
+You can find interactive documentation [here](http://adopted-ember-addons.github.io/ember-keyboard/).
