@@ -37,7 +37,6 @@ if (gte('3.12.0')) {
       // keyboardPriority, and keyboardFirstResponder via named arguments.
       // This should be straightforward, just needs test coverage and some API
       // decisions.
-
     }
 
     didInstall() {

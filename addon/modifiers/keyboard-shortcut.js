@@ -20,14 +20,24 @@ if (gte('3.12.0')) {
     keyboardFirstResponder = false;
     keyboardEventType = 'keypress';
 
-
     didReceiveArguments() {
       this.key = this.args.positional[0];
 
-      // Future TODO: support specifying keyboardEventType, keyboardActivated,
-      // keyboardPriority, and keyboardFirstResponder via named arguments.
-      // This should be straightforward, just needs test coverage.
+      if ('keyboardActivated' in this.args.named) {
+        this.keyboardActivated = this.args.named.keyboardActivated
+      }
 
+      if ('keyboardPriority' in this.args.named) {
+        this.keyboardPriority = this.args.named.keyboardPriority
+      }
+
+      if ('keyboardFirstResponder' in this.args.named) {
+        this.keyboardFirstResponder = this.args.named.keyboardFirstResponder
+      }
+
+      if ('keyboardEventType' in this.args.named) {
+        this.keyboardEventType = this.args.named.keyboardEventType
+      }
     }
 
     didInstall() {
@@ -46,11 +56,11 @@ if (gte('3.12.0')) {
     }
 
     has(triggerName) {
-      return triggerName === this.keyboardEventName;
+      return triggerName === this.keyboardEventName && this.keyboardActivated
     }
 
     trigger(listenerName) {
-      if (listenerName === this.keyboardEventName) {
+      if (this.keyboardActivated && listenerName === this.keyboardEventName) {
         this.element.click();
       }
     }

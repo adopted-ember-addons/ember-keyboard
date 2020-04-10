@@ -1,14 +1,70 @@
-<button {{action (action 'onTriggerButton')}} {{keyboard-shortcut 'KeyB'}}>Press me or press "B"</button>
+<div>
+  <button type="button" 
+    {{on "click" (fn (mut this.bButtonTriggered) true)}} 
+    {{keyboard-shortcut 'KeyB'}}>
+    Press me or press "B"
+  </button>
 
-<span data-test-button>
-  {{if wasButtonTriggered 'button press triggered' 'button press not triggered'}}
-</span>
+  <div data-test-b-button>
+    {{if this.bButtonTriggered 'button press triggered' 'button press not triggered'}}
+  </div>
+</div>
 
-<input type="text"
-  oninput={{action (mut this.textFieldValue) value="target.value"}}
-  {{on-keyboard "Enter" (action 'onEnterPressedInInput')}}
+<div>
+  <label>
+    <input data-test-checkbox type="checkbox" value={{this.keyboardActivated}} 
+      {{on 'change' (fn this.changeSetting 'keyboardActivated')}} 
+    />Enable "C" keyboard shortcut
+  </label>
+
+  <button type="button"
+    {{on "click" (fn (mut this.cButtonTriggered) true)}} 
+    {{keyboard-shortcut 'KeyC' keyboardActivated=this.keyboardActivated}}>
+    Press me or press "C" (if the checkbox is checked)
+  </button>
+
+  <div data-test-c-button>
+    {{if this.cButtonTriggered 'button press triggered' 'button press not triggered'}}
+  </div>
+</div>
+
+<div>
+  <button type="button" 
+    {{on "click" (fn (mut this.dButtonTriggered) true)}} 
+    {{keyboard-shortcut 'KeyD' keyboardEventType='keydown'}}>
+    Press me or press "D"
+  </button>
+
+  <div data-test-d-button>
+    {{if this.dButtonTriggered 'button press triggered' 'button press not triggered'}}
+  </div>
+</div>
+
+<input type="text" 
+  {{on "input" (fn this.changeSetting 'textFieldValue')}} 
+  {{on-keyboard "Enter" this.onEnterPressedInInput}}
 >
-
 <span data-test-text-field>
-  {{if wasEnterPressedInInput 'enter pressed while input focused' 'enter not pressed while input focused'}}
+  {{if this.wasEnterPressedInInput 'enter pressed while input focused' 'enter not pressed while input focused'}}
 </span>
+
+<div>
+  Priority:
+    <label for="">
+    <input data-test-priority type="text" value={{this.priority}} 
+      {{on 'input' this.changePriority}} 
+    />
+      Take Priority
+    </label>
+  <div>
+    <button type="button" 
+      {{on "click" (fn (mut this.priorityKeyFired) true)}} 
+      {{keyboard-shortcut 'KeyP' keyboardPriority=this.priority}}>
+      Press me or press "P"
+    </button>
+    <div data-test-p-button>
+      {{if this.priorityKeyFired 'button press triggered' 'button press not triggered'}}
+    </div>
+  </div>
+</div>
+

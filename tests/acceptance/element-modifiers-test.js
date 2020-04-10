@@ -1,4 +1,4 @@
-import { focus, visit, currentURL } from '@ember/test-helpers';
+import { focus, visit, currentURL, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { gte } from 'ember-compatibility-helpers';
@@ -23,11 +23,76 @@ if (gte('3.12.0')) {
       await textChanged(
         assert,
         () => keyPress('KeyB'), {
-          selectorName: 'button',
+          selectorName: 'b-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
         });
     });
+
+    test('KeyC button shortcut should only fire when keyboard is activated', async function(assert) {
+      assert.expect(5);
+
+      await textChanged(
+        assert,
+        () => keyPress('KeyC'), {
+          selectorName: 'c-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press not triggered'
+        });
+
+      await click('[data-test-checkbox]')
+      await textChanged(
+        assert,
+        () => keyPress('KeyC'), {
+          selectorName: 'c-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press triggered'
+        });
+    });
+
+    test('KeyD button shortcut for keydown should fire', async function(assert) {
+      assert.expect(5);
+
+      await textChanged(
+        assert,
+        () => keyPress('KeyD'), {
+          selectorName: 'd-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press not triggered'
+        });
+
+      await textChanged(
+        assert,
+        () => keyDown('KeyD'), {
+          selectorName: 'd-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press triggered'
+        });
+    });
+
+    test('KeyP button shortcut should only fire highest priority', async function(assert) {
+      assert.expect(5);
+
+      await fillIn('[data-test-priority]', 1);
+
+      await textChanged(
+        assert,
+        () => keyDown('KeyD'), {
+          selectorName: 'd-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press not triggered'
+        });
+
+      await textChanged(
+        assert,
+        () => keyPress('KeyP'), {
+          selectorName: 'p-button',
+          beforeValue: 'button press not triggered',
+          afterValue: 'button press triggered'
+        });
+
+    });
+
 
     test('Enter text input shortcut', async function(assert) {
       assert.expect(5);
