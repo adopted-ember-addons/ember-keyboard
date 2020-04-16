@@ -6,9 +6,9 @@
 
 {{keyboard-press
   key='ctrl+KeyK'
-  onPress=(action 'onCtrlK')
-  onDown=(action 'onCtrlK')
-  onUp=(action 'onCtrlK')
+  onPress=this.onCtrlK
+  onDown=this.onCtrlK
+  onUp=this.onCtrlK
 }}
 
 <hr />
@@ -20,7 +20,7 @@
 
 {{keyboard-press
   key='KeyS'
-  onPress=(action 'onS')
+  onPress=this.onS
 }}
 
 
@@ -30,5 +30,5 @@
 
 {{keyboard-press
   key='Slash'
-  onDown=(action 'onSlash')
+  onDown=this.onSlash
 }}
