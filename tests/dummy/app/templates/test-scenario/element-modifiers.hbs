@@ -12,8 +12,8 @@
 
 <div>
   <label>
-      {{on 'change' (fn this.changeSetting 'keyboardActivated')}} 
     <input data-test-checkbox type="checkbox" value={{this.keyboardActivated}}
+      {{on 'change' (fn this.applyCheckedValue 'keyboardActivated')}} 
     />Enable "C" keyboard shortcut
   </label>
 

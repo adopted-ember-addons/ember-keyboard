@@ -13,6 +13,11 @@ export default class extends Controller {
   }
 
   @action
+  applyCheckedValue(name, e) {
+    this.set(name, e.target.checked);
+  }
+
+  @action
   changePriority(e) {
     this.set('priority', e.target.value);
   }
