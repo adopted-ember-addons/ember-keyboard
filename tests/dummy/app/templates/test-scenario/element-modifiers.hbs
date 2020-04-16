@@ -1,6 +1,6 @@
 <div>
-  <button type="button" 
-    {{on "click" (fn (mut this.bButtonTriggered) true)}} 
+  <button type="button"
+    {{on "click" (fn (mut this.bButtonTriggered) true)}}
     {{keyboard-shortcut 'KeyB'}}>
     Press me or press "B"
   </button>
@@ -12,13 +12,13 @@
 
 <div>
   <label>
-    <input data-test-checkbox type="checkbox" value={{this.keyboardActivated}} 
       {{on 'change' (fn this.changeSetting 'keyboardActivated')}} 
+    <input data-test-checkbox type="checkbox" value={{this.keyboardActivated}}
     />Enable "C" keyboard shortcut
   </label>
 
   <button type="button"
-    {{on "click" (fn (mut this.cButtonTriggered) true)}} 
+    {{on "click" (fn (mut this.cButtonTriggered) true)}}
     {{keyboard-shortcut 'KeyC' keyboardActivated=this.keyboardActivated}}>
     Press me or press "C" (if the checkbox is checked)
   </button>
@@ -29,8 +29,8 @@
 </div>
 
 <div>
-  <button type="button" 
-    {{on "click" (fn (mut this.dButtonTriggered) true)}} 
+  <button type="button"
+    {{on "click" (fn (mut this.dButtonTriggered) true)}}
     {{keyboard-shortcut 'KeyD' keyboardEventType='keydown'}}>
     Press me or press "D"
   </button>
@@ -40,8 +40,8 @@
   </div>
 </div>
 
-<input type="text" 
-  {{on "input" (fn this.changeSetting 'textFieldValue')}} 
+<input type="text"
+  {{on "input" (fn this.changeSetting 'textFieldValue')}}
   {{on-keyboard "Enter" this.onEnterPressedInInput}}
 >
 <span data-test-text-field>
@@ -51,14 +51,14 @@
 <div>
   Priority:
     <label for="">
-    <input data-test-priority type="text" value={{this.priority}} 
-      {{on 'input' this.changePriority}} 
+    <input data-test-priority type="text" value={{this.priority}}
+      {{on 'input' this.changePriority}}
     />
       Take Priority
     </label>
   <div>
-    <button type="button" 
-      {{on "click" (fn (mut this.priorityKeyFired) true)}} 
+    <button type="button"
+      {{on "click" (fn (mut this.priorityKeyFired) true)}}
       {{keyboard-shortcut 'KeyP' keyboardPriority=this.priority}}>
       Press me or press "P"
     </button>
@@ -67,4 +67,3 @@
     </div>
   </div>
 </div>
-

@@ -9,16 +9,16 @@ export default class extends Controller {
 
   @action
   changeSetting(name, e) {
-    this.set(name, e.target.value)
+    this.set(name, e.target.value);
   }
 
   @action
   changePriority(e) {
-    this.set('priority', e.target.value)
+    this.set('priority', e.target.value);
   }
 
   @action
   onEnterPressedInInput() {
-    this.set('wasEnterPressedInInput', true)
+    this.set('wasEnterPressedInInput', true);
   }
 }
