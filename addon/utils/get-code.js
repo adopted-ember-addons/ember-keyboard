@@ -11,7 +11,12 @@ export default function getCode(event) {
 
   if (!code.includes('Key') || !key) {
     return codeMap[keyCode] || code;
-  }
+	}
+	
+	// Handle software map keyboards that do include KeyX
+	if (code.includes('Key')) {
+		return code;
+	}
 
   // If we have a software-applied key-remapping
   // For example:
@@ -19,9 +24,9 @@ export default function getCode(event) {
   //     pressing 'k'
   //       will give a code of 'KeyV'
   //       and a key of 'k'
-  const codeLetter = code.charAt(code.length - 1);
-  const keyboardLetter = codeLetter.toLowerCase();
-  const typedLetter = key.toLowerCase();
+	const codeLetter = code.charAt(code.length - 1);
+	const keyboardLetter = codeLetter.toLowerCase();
+	const typedLetter = key.toLowerCase();
 
   if (typedLetter === keyboardLetter) {
     return code;
