@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-new-mixins */
 import Route from '@ember/routing/route';
 import ResetScrollPositionMixin from '../mixins/reset-scroll-position';
 

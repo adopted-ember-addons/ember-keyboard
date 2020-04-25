@@ -1,18 +1,18 @@
 <div class="container">
   <nav class="menu">
-    {{#link-to 'index'}}Overview{{/link-to}}
-    {{#link-to 'usage'}}Usage{{/link-to}}
-    {{#link-to 'priority'}}Priority{{/link-to}}
-    {{#link-to 'mixins'}}Mixins{{/link-to}}
-    {{#link-to 'testing'}}Testing{{/link-to}}
+    <LinkTo @route='index'>Overview</LinkTo>
+    <LinkTo @route='usage'>Usage</LinkTo>
+    <LinkTo @route='priority'>Priority</LinkTo>
+    <LinkTo @route='mixins'>Mixins</LinkTo>
+    <LinkTo @route='testing'>Testing</LinkTo>
   </nav>
   <div class="main">
     <div class="header">
       <h1>
         <code>ember-keyboard</code>
       </h1>
-      <a href="https://github.com/patience-tema-baron/ember-keyboard" target="_blank" class="github">
-        <img src="./octocat.png" class="octocat">
+      <a href="https://github.com/patience-tema-baron/ember-keyboard" target="_blank" class="github" rel="noopener noreferrer">
+        <img src="./octocat.png" class="octocat" alt="octocat">
       </a>
     </div>
     {{outlet}}

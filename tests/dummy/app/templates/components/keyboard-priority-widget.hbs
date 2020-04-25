@@ -21,22 +21,22 @@ Perhaps more conveniently, this property can be passed in through your template:
 ```
 "}}
 
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  keyboardPriority=1
-  data-test-counter=true
-  }}
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  data-test-counter=true
-  }}
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  data-test-counter=true
-  }}
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  @keyboardPriority={{1}}
+  data-test-counter
+/>
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  data-test-counter
+/>
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  data-test-counter
+/>
