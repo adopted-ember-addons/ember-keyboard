@@ -35,7 +35,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
       isPropagationStopped = true;
     }
   }
-
+  /* eslint-disable no-unused-vars */
   for (const responder of firstResponders) {
     for (const listenerName of listenerNames) {
       responder.trigger(listenerName, event, ekEvent);
@@ -73,6 +73,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
       responder.trigger(listenerName, event, ekEvent);
     }
   }
+  /* eslint-enable no-unused-vars */
 }
 
 export function handleKeyEventWithLaxPriorities(event, sortedResponders) {

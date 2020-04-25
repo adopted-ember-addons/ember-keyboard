@@ -1,41 +1,49 @@
-
 import Service from '@ember/service';
 import { A } from '@ember/array';
 import { getOwner } from '@ember/application';
-import { get, getProperties, set } from '@ember/object';
-import { computed } from '@ember/object';
-import { filter, filterBy, sort } from '@ember/object/computed';
+import { get } from '@ember/object';
 import { bind, run } from '@ember/runloop';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 import {
   handleKeyEventWithPropagation,
   handleKeyEventWithLaxPriorities
 } from 'ember-keyboard/utils/handle-key-event';
+import { reverseCompareProp } from 'ember-keyboard/utils/sort';
 
-export default Service.extend({
-  isPropagationEnabled: false,
+export default class KeyboardService extends Service {
+  isPropagationEnabled = false;
 
-  registeredResponders: computed(function() { return A(); }),
+  registeredResponders = null;
 
-  activeResponders: filterBy('registeredResponders', 'keyboardActivated'),
+  get activeResponders() {
+    let registeredResponders = this.registeredResponders || A([]);
+    return A(registeredResponders.filterBy('keyboardActivated'));
+  }
 
-  sortedRespondersSortDefinition: computed('isPropagationEnabled', function() {
-    return get(this, 'isPropagationEnabled') ?
-      ['keyboardPriority:desc'] :
-      ['keyboardFirstResponder:desc', 'keyboardPriority:desc']
-  }),
+  get sortedResponders() {
+    return A(this.activeResponders.toArray().sort((a, b) => {
+      if (this.isPropagationEnabled) {
+        return reverseCompareProp(a, b, 'keyboardPriority');
+      } else {
+        let compareValue = reverseCompareProp(a, b, 'keyboardFirstResponder', Boolean);
+        if (compareValue === 0) {
+          return reverseCompareProp(a, b, 'keyboardPriority');
+        }
+        return compareValue;
+      }
+    }));
+  }
 
-  sortedResponders: sort('activeResponders', 'sortedRespondersSortDefinition'),
+  get firstResponders() {
+    return this.sortedResponders.filterBy('keyboardFirstResponder');
+  }
 
-  firstResponders: filterBy('sortedResponders', 'keyboardFirstResponder'),
+  get normalResponders() {
+    return this.sortedResponders.rejectBy('keyboardFirstResponder');
+  }
 
-  normalResponders: filter(
-    'sortedResponders.@each.keyboardFirstResponder',
-    responder => !get(responder, 'keyboardFirstResponder')
-  ),
-
-  init(...args) {
-    this._super(...args);
+  constructor(...args) {
+    super(...args);
 
     if (typeof FastBoot !== 'undefined') {
       return;
@@ -44,7 +52,8 @@ export default Service.extend({
     const config = getOwner(this).resolveRegistration('config:environment') || {};
 
     const isPropagationEnabled = Boolean(get(config, 'emberKeyboard.propagation'));
-    set(this, 'isPropagationEnabled', isPropagationEnabled);
+    this.isPropagationEnabled = isPropagationEnabled;
+    this.registeredResponders = A(this.registeredResponders || []);
 
     this._boundRespond = bind(this, this._respond);
     this._listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
@@ -53,10 +62,10 @@ export default Service.extend({
     this._listeners.forEach((type) => {
       document.addEventListener(type, this._boundRespond);
     });
-  },
+  }
 
   willDestroy(...args) {
-    this._super(...args);
+    super.willDestroy(...args);
 
     if (typeof FastBoot !== 'undefined') {
       return;
@@ -65,35 +74,40 @@ export default Service.extend({
     this._listeners.forEach((type) => {
       document.removeEventListener(type, this._boundRespond);
     });
-  },
+  }
 
   _respond(event) {
     run(() => {
-      if (get(this, 'isPropagationEnabled')) {
-        handleKeyEventWithPropagation(event, getProperties(this, 'firstResponders', 'normalResponders'));
+      if (this.isPropagationEnabled) {
+        let { firstResponders, normalResponders } = this;
+        handleKeyEventWithPropagation(event, { firstResponders, normalResponders });
       } else {
-        handleKeyEventWithLaxPriorities(event, get(this, 'sortedResponders'));
+        let { sortedResponders } = this;
+        handleKeyEventWithLaxPriorities(event, sortedResponders);
       }
     });
-  },
+  }
 
   register(responder) {
-    get(this, 'registeredResponders').pushObject(responder);
-  },
+    this.registeredResponders.push(responder);
+  }
 
   unregister(responder) {
-    get(this, 'registeredResponders').removeObject(responder);
-  },
+    const index = this.registeredResponders.indexOf(responder);
+    if (index > -1) {
+      this.registeredResponders.splice(index, 1);
+    }
+  }
 
   keyDown(...args) {
     return keyDown(...args);
-  },
+  }
 
   keyPress(...args) {
     return keyPress(...args);
-  },
+  }
 
   keyUp(...args) {
     return keyUp(...args);
   }
-});
+}

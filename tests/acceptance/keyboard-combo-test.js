@@ -1,4 +1,3 @@
-
 import { visit, currentURL, triggerEvent } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
@@ -46,8 +45,7 @@ module('Acceptance | ember keyboard | keyboard combos', function(hooks) {
           beforeValue: 'slash not pressed',
           afterValue: 'slash pressed'
         });
-
-    })
+    });
   });
 
   module('With Modifiers', function() {

@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('touch');
     this.route('keyboard');
     this.route('keyboard-combo');
+    this.route('element-modifiers');
   });
 
   this.route('mixins');
