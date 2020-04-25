@@ -53,36 +53,36 @@ to 'catch' and which not as opposed to setting or not setting
 `keyboardLaxPriority` which either 'catches' no or all events.
 "}}
 
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  firstResponderToggle=true
-  stopImmediatePropagationToggle=true
-  stopPropagationToggle=true
-  keyboardPriority=2
-  keyboardFirstResponder=true
-  stopImmediatePropagation=true
-  data-test-propagation-counter=true
-}}
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  firstResponderToggle=true
-  stopImmediatePropagationToggle=true
-  stopPropagationToggle=true
-  keyboardPriority=1
-  keyboardFirstResponder=true
-  stopPropagation=true
-  data-test-propagation-counter=true
-}}
-{{key-down-counter
-  parentActivated=keyboardActivated
-  priorityInput=true
-  activatedToggle=true
-  firstResponderToggle=true
-  stopImmediatePropagationToggle=true
-  stopPropagationToggle=true
-  data-test-propagation-counter=true
-}}
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  @firstResponderToggle={{true}}
+  @stopImmediatePropagationToggle={{true}}
+  @stopPropagationToggle={{true}}
+  @keyboardPriority={{2}}
+  @keyboardFirstResponder={{true}}
+  @stopImmediatePropagation={{true}}
+  data-test-propagation-counter
+/>
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  @firstResponderToggle={{true}}
+  @stopImmediatePropagationToggle={{true}}
+  @stopPropagationToggle={{true}}
+  @keyboardPriority={{1}}
+  @keyboardFirstResponder={{true}}
+  @stopPropagation={{true}}
+  data-test-propagation-counter
+/>
+<KeyDownCounter
+  @parentActivated={{this.keyboardActivated}}
+  @priorityInput={{true}}
+  @activatedToggle={{true}}
+  @firstResponderToggle={{true}}
+  @stopImmediatePropagationToggle={{true}}
+  @stopPropagationToggle={{true}}
+  data-test-propagation-counter
+/>
