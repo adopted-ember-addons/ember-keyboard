@@ -15,7 +15,7 @@ import {
 export default Service.extend({
   isPropagationEnabled: false,
 
-  registeredResponders: computed(() => A()),
+  registeredResponders: computed(function() { return A(); }),
 
   activeResponders: filterBy('registeredResponders', 'keyboardActivated'),
 
