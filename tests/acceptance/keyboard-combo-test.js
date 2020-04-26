@@ -82,5 +82,18 @@ module('Acceptance | ember keyboard | keyboard combos', function(hooks) {
           });
       });
     });
+    module('shift', function() {
+      test('shift+Slash', async function(assert) {
+        assert.expect(3);
+
+        await textChanged(
+          assert,
+          () => keyPress('shift+Slash'), {
+            selectorName: 'question-mark',
+            beforeValue: 'question mark not pressed',
+            afterValue: 'question mark pressed'
+          });
+      });
+    });
   });
 });

@@ -23,7 +23,6 @@
   onPress=(action 'onS')
 }}
 
-
 <span data-test-slash>
   {{if this.wasSlashPressed 'slash pressed' 'slash not pressed'}}
 </span>
@@ -31,4 +30,13 @@
 {{keyboard-press
   key='Slash'
   onDown=(action 'onSlash')
+}}
+
+<span data-test-question-mark>
+  {{if this.wasQuestionMarkPressed 'question mark pressed' 'question mark not pressed'}}
+</span>
+
+{{keyboard-press
+  key='shift+Slash'
+  onPress=(action 'onQuestionMark')
 }}
