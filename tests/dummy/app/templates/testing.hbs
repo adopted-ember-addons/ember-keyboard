@@ -37,41 +37,14 @@ test('test my key bindings', function(assert) {
 `ember-keyboard` comes with some test helpers to help out with your acceptance tests.
 
 ```js
+import { keyDown, keyUp, keyPress } from 'ember-keyboard/test-support/test-helpers';
 . . . .
 
 test('test my key bindings', function(assert) {
   . . . .
-
-  keyUp('ArrowRight'); // triggers on document
-
-  andThen(() => {
-    . . . .
-  });
-
-  keyDown('ArrowRight+ctrl+shift', document.getElementById('foo')); // triggers on `#foo`
-
-  andThen(() => {
-    . . . .
-  });
+  await keyUp('ArrowRight'); // triggers on document
+  await keyDown('ArrowRight+ctrl+shift', document.getElementById('foo')); // triggers on `#foo`
+  . . . .
 });
-```
-
-To use them, you'll need to import them into `tests/helpers/start-app.js` above `application.injectTestHelpers()`:
-
-```js
-. . . .
-import keyboardRegisterTestHelpers from './ember-keyboard/register-test-helpers';
-
-export default function startApp(attrs) {
-  . . . .
-
-  Ember.run(function() {
-    . . . .
-    keyboardRegisterTestHelpers();
-    application.injectTestHelpers();
-  });
-
-  . . . .
-}
 ```
 "}}
