@@ -95,5 +95,38 @@ module('Acceptance | ember keyboard | keyboard combos', function(hooks) {
           });
       });
     });
+    module('alt', function() {
+      test('alt+KeyB', async function(assert) {
+        assert.expect(3);
+
+        await textChanged(
+          assert,
+          () => keyPress('alt+KeyB'), {
+            selectorName: 'alt-b',
+            beforeValue: 'Alt + B not pressed',
+            afterValue: 'Alt + B pressed'
+          });
+      });
+
+      test('alt+KeyB on a Mac', async function(assert) {
+        assert.expect(3);
+
+        const altBDownProperties = {
+          code: 'KeyB',
+          key: '∫',
+          keyCode: 66,
+          which: 66,
+          altKey: true
+        };
+
+        await textChanged(
+          assert,
+          () => triggerEvent(document.body, 'keypress', altBDownProperties), {
+            selectorName: 'alt-b',
+            beforeValue: 'Alt + B not pressed',
+            afterValue: 'Alt + B pressed'
+          });
+      });
+    });
   });
 });

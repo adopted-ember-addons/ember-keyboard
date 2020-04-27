@@ -5,6 +5,7 @@ export default Controller.extend({
   wasSPressed: false,
   wasSlashPressed: false,
   wasQuestionMarkPressed: false,
+  wasAltBPressed: false,
   actions: {
     onCtrlK() {
       this.set('wasCtrlKPressed', true);
@@ -17,6 +18,9 @@ export default Controller.extend({
     },
     onQuestionMark() {
       this.set('wasQuestionMarkPressed', true);
+    },
+    onAltB() {
+      this.set('wasAltBPressed', true);
     }
   }
 });

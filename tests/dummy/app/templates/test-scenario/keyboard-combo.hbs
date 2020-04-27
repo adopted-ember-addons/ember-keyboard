@@ -40,3 +40,12 @@
   key='shift+Slash'
   onPress=(action 'onQuestionMark')
 }}
+
+<span data-test-alt-b>
+  {{if this.wasAltBPressed 'Alt + B pressed' 'Alt + B not pressed'}}
+</span>
+
+{{keyboard-press
+  key='alt+KeyB'
+  onPress=(action 'onAltB')
+}}
