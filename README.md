@@ -9,8 +9,13 @@
 
 * Dynamic priority levels allow you to specify which components respond first to key events and under what circumstances. (Thanks to [`ember-key-responder`](https://github.com/yapplabs/ember-key-responder) for the inspiration)
 * Human-readable key-mappings. (Thanks to [`ember-keyboard-service`](https://github.com/Fabriquartz/ember-keyboard-service) for the inspiration)
+* Glimmer-friendly template declarations for keyboard shortcuts (requires Ember 3.12 or higher)
 * Support for `keyup`, `keydown`, and `keypress`, as well as the modifier keys: `ctrl`, `alt`, `shift`, and `meta`.
-* Compatible with Ember 2.0+.
+
+## Compatibility
+
+* ember-keyboard 6.x requires Ember 3.8 or higher
+* For use with Ember 2.0 up to 3.8, use ember-keyboard 5.x.
 
 ## Accessibility Considerations
 In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
