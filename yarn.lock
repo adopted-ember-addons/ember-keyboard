@@ -5130,10 +5130,10 @@ ember-cli-get-component-path-option@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz#0d7b595559e2f9050abed804f1d8eff1b08bc771"
 
-ember-cli-github-pages@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-github-pages/-/ember-cli-github-pages-0.2.0.tgz#2789d178936d8a1350ebbb1a300ab90760a111da"
-  integrity sha512-jUDv1i3P9IvBeAAiNns9Yc4EkS0nkfbuedl9e8GRYVh7WOi5eR0SDi/7cYHXT5UnGkAe+eTBjjZkDKthL/DLPQ==
+ember-cli-github-pages@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-github-pages/-/ember-cli-github-pages-0.2.2.tgz#cef01ed1de9ddd82863b310fef05e7f5b55beb9e"
+  integrity sha512-pFtruVBZ5OW1O1MiGQRQSQewW9DSBx6ZbRcbVpcpTlZqeDyWs5nyvhOm4qRFwK6m+jQPe2l52cYtf1rUAkBNxA==
   dependencies:
     ember-cli-version-checker "^2.1.0"
     rsvp "^4.7.0"
@@ -5280,14 +5280,7 @@ ember-cli-update@^0.23.0:
     update-notifier "^2.5.0"
     yargs "^12.0.0"
 
-ember-cli-version-checker@^2.0.0, ember-cli-version-checker@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.1.2.tgz#305ce102390c66e4e0f1432dea9dc5c7c19fed98"
-  dependencies:
-    resolve "^1.3.3"
-    semver "^5.3.0"
-
-ember-cli-version-checker@^2.1.0, ember-cli-version-checker@^2.1.1:
+ember-cli-version-checker@^2.0.0, ember-cli-version-checker@^2.1.0, ember-cli-version-checker@^2.1.1, ember-cli-version-checker@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.2.0.tgz#47771b731fe0962705e27c8199a9e3825709f3b3"
   integrity sha512-G+KtYIVlSOWGcNaTFHk76xR4GdzDLzAS4uxZUKdASuFX0KJE43C6DaqL+y3VTpUFLI2FIkAS6HZ4I1YBi+S3hg==
@@ -10918,11 +10911,7 @@ rsvp@^3.0.14, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
 
-rsvp@^4.7.0, rsvp@^4.8.2:
-  version "4.8.3"
-  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.3.tgz#25d4b9fdd0f95e216eb5884d9b3767d3fbfbe2cd"
-
-rsvp@^4.8.1, rsvp@^4.8.4, rsvp@^4.8.5:
+rsvp@^4.7.0, rsvp@^4.8.1, rsvp@^4.8.2, rsvp@^4.8.4, rsvp@^4.8.5:
   version "4.8.5"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
