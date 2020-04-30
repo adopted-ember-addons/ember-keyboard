@@ -65,6 +65,101 @@ By making clear whether a keyboard event handler is using `code` or `key`, we ca
 
 ```
 
+### API Proposal 3: Default to `key` mode, and listening on `keydown`, mostly positional args
+
+#### on-keyboard component
+```hbs
+// Rename the `keyboard-press` component in 6.0.0-beta to `on-keyboard`
+
+// Fires DoThing on keydown of the key that generates "c" on their computer
+// while Alt is pressed
+{{on-keyboard this.DoThing "Alt+c"}}
+
+// Fires DoThing on KEYUP of the key that generates "c" on their computer
+// while Alt is pressed
+{{on-keyboard this.DoThing "Alt+c" on="keyup"}}
+
+// Fires DoThing on keydown of the key that generates "c" on their computer
+// while Alt is pressed, or on keydown of the key that generates "t" while
+// Ctrl and Shift are pressed
+{{on-keyboard this.DoThing "Alt+c" "Ctrl+Shift+t"}}
+
+// Fires DoThing on keydown of the key at the standard position of the C key
+// while Alt is pressed
+{{on-keyboard this.DoThing "Alt+KeyC" mode="code"}}
+
+// Fires DoThing on keyup of the key at the standard position of the C key
+// while Alt is pressed
+{{on-keyboard this.DoThing "Alt+KeyC" on="keyup" mode="code"}}
+
+// To use with angle-bracket notation
+<OnKeyboard action={{this.DoThing}} @value="Alt+c" />
+<OnKeyboard action={{this.DoThing}} @value="Alt+KeyC" @on='keyup' @mode="code" />
+
+```
+
+#### on-keyboard modifier
+
+```hbs
+// same signature as on-keyboard component, fires only when element has focus
+<input type='text' {{on-keyboard this.DoThing "Alt+c"}}>
+<input type='text' {{on-keyboard this.DoThing "Alt+c" on="keyup"}}>
+<input type='text' {{on-keyboard this.DoThing "Alt+c" "Ctrl+Shift+t"}}>
+<input type='text' {{on-keyboard this.DoThing "Alt+KeyC" mode="code"}}>
+<input type='text' {{on-keyboard this.DoThing "Alt+KeyC" on="keyup" mode="code"}}>
+```
+
+#### keyboard-shortcut modifier
+
+```hbs
+// same signature as on-keyboard component but without action
+
+<button {{keyboard-shortcut "Alt+c"}}></button>
+<button {{keyboard-shortcut "Alt+c" on="keyup"}}></button>
+<button {{keyboard-shortcut "Alt+c" "Ctrl+Shift+t"}}></button>
+<button {{keyboard-shortcut "Alt+KeyC" mode="code"}}></button>
+<button {{keyboard-shortcut "Alt+KeyC" on="keyup" mode="code"}}></button>
+```
+
+#### Setting up handlers in Javascript
+
+```js
+import Component from '@ember/component';
+import { onKeyboard } from 'ember-keyboard';
+
+export default class Foo extends Component {
+  //...
+  @onKeyboard('Alt+c')
+  doSomethingA() { ... }
+
+  @onKeyboard('Alt+c', { on: 'keyup' })
+  doSomethingB() { ... }
+
+  @onKeyboard('Alt+c', 'Ctrl+Shift+t')
+  doSomethingC() { ... }
+
+  @onKeyboard('Alt+KeyC', { mode: 'code' })
+  doSomethingD() { ... }
+
+  @onKeyboard('Alt+c', 'Ctrl+Shift+t', { on: 'keyup', mode: 'code' })
+  doSomethingE() { ... }
+  //...
+}
+```
+
+```js
+import { onKeyboard } from 'ember-keyboard';
+
+export default Component.extends({
+  //...
+  doSomethingA: onKeyboard('Alt+c', function() { ... }),
+  doSomethingB: onKeyboard('Alt+c', { on: 'keyup' }, function() { ... }),
+  doSomethingC: onKeyboard('Alt+c', 'Ctrl+Shift+t', function() { ... }),
+  doSomethingD: onKeyboard('Alt+KeyC', { mode: 'code' }, function() { ... }),
+  doSomethingE: onKeyboard('Alt+c', 'Ctrl+Shift+t', { on: 'keyup', mode: 'code' }, function() { ... }),
+  //...
+});
+```
 
 ## How we teach this
 
@@ -94,3 +189,5 @@ users?
 Because `key` is the generated value including the effect of modifiers, `Shift+2` has a key value of `@` on common English layouts. Should a keyboard shortcut of `key='@'` be equivalent to one of `modifier='Shift' key='2'`? If so, how do we encode the mapping of `@` to `2` necessary to support the latter?
 
 Alt-key combos on OS X bring a similar set of challenges. `Alt+c` on OS X has a `key` value of `ç` since that is the character normally generated on Macs when pressing Alt/Option and C together. To support `modifier='Alt' key='c'` on Macs, we would need to map `ç` back to `c` somehow.
+
+### How do these API changes the priority and propagation features of ember-keyboard, if at all?
