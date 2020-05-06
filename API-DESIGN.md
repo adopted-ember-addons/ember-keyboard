@@ -70,55 +70,57 @@ By making clear whether a keyboard event handler is using `code` or `key`, we ca
 #### on-keyboard component
 ```hbs
 // Rename the `keyboard-press` component in 6.0.0-beta to `on-keyboard`
+// Should this be a helper instead of a component?
 
 // Fires DoThing on keydown of the key that generates "c" on their computer
 // while Alt is pressed
-{{on-keyboard this.DoThing "Alt+c"}}
+{{on-keyboard this.DoThing "alt+c"}}
 
 // Fires DoThing on KEYUP of the key that generates "c" on their computer
 // while Alt is pressed
-{{on-keyboard this.DoThing "Alt+c" on="keyup"}}
+{{on-keyboard this.DoThing "alt+c" event="keyup"}}
 
 // Fires DoThing on keydown of the key that generates "c" on their computer
 // while Alt is pressed, or on keydown of the key that generates "t" while
 // Ctrl and Shift are pressed
-{{on-keyboard this.DoThing "Alt+c" "Ctrl+Shift+t"}}
+{{on-keyboard this.DoThing "alt+c" "ctrl+shift+t"}}
 
 // Fires DoThing on keydown of the key at the standard position of the C key
 // while Alt is pressed
-{{on-keyboard this.DoThing "Alt+KeyC" mode="code"}}
+{{on-keyboard this.DoThing "alt+KeyC" mode="code"}}
 
 // Fires DoThing on keyup of the key at the standard position of the C key
 // while Alt is pressed
-{{on-keyboard this.DoThing "Alt+KeyC" on="keyup" mode="code"}}
+{{on-keyboard this.DoThing "alt+KeyC" event="keyup" mode="code"}}
 
 // To use with angle-bracket notation
-<OnKeyboard action={{this.DoThing}} @value="Alt+c" />
-<OnKeyboard action={{this.DoThing}} @value="Alt+KeyC" @on='keyup' @mode="code" />
+<OnKeyboard action={{this.DoThing}} @value="alt+c" />
+<OnKeyboard action={{this.DoThing}} @value="alt+KeyC" @event='keyup' @mode="code" />
 
 ```
 
 #### on-keyboard modifier
 
 ```hbs
-// same signature as on-keyboard component, fires only when element has focus
-<input type='text' {{on-keyboard this.DoThing "Alt+c"}}>
-<input type='text' {{on-keyboard this.DoThing "Alt+c" on="keyup"}}>
-<input type='text' {{on-keyboard this.DoThing "Alt+c" "Ctrl+Shift+t"}}>
-<input type='text' {{on-keyboard this.DoThing "Alt+KeyC" mode="code"}}>
-<input type='text' {{on-keyboard this.DoThing "Alt+KeyC" on="keyup" mode="code"}}>
+// Same signature as on-keyboard component, fires only when element has focus
+<input type='text' {{on-keyboard this.DoThing "alt+c"}}>
+<input type='text' {{on-keyboard this.DoThing "alt+c" event="keyup"}}>
+<input type='text' {{on-keyboard this.DoThing "alt+c" "ctrl+shift+t"}}>
+<input type='text' {{on-keyboard this.DoThing "alt+KeyC" mode="code"}}>
+<input type='text' {{on-keyboard this.DoThing "alt+KeyC" event="keyup" mode="code"}}>
 ```
 
 #### keyboard-shortcut modifier
 
 ```hbs
-// same signature as on-keyboard component but without action
+// Triggers a click on the element it is attached to when the key combo is triggered
+// Same signature as on-keyboard component but without the action
 
-<button {{keyboard-shortcut "Alt+c"}}></button>
-<button {{keyboard-shortcut "Alt+c" on="keyup"}}></button>
-<button {{keyboard-shortcut "Alt+c" "Ctrl+Shift+t"}}></button>
-<button {{keyboard-shortcut "Alt+KeyC" mode="code"}}></button>
-<button {{keyboard-shortcut "Alt+KeyC" on="keyup" mode="code"}}></button>
+<button {{keyboard-shortcut "alt+c"}}></button>
+<button {{keyboard-shortcut "alt+c" event="keyup"}}></button>
+<button {{keyboard-shortcut "alt+c" "ctrl+shift+t"}}></button>
+<button {{keyboard-shortcut "alt+KeyC" mode="code"}}></button>
+<button {{keyboard-shortcut "alt+KeyC" event="keyup" mode="code"}}></button>
 ```
 
 #### Setting up handlers in Javascript
@@ -129,19 +131,19 @@ import { onKeyboard } from 'ember-keyboard';
 
 export default class Foo extends Component {
   //...
-  @onKeyboard('Alt+c')
+  @onKeyboard('alt+c')
   doSomethingA() { ... }
 
-  @onKeyboard('Alt+c', { on: 'keyup' })
+  @onKeyboard('alt+c', { event: 'keyup' })
   doSomethingB() { ... }
 
-  @onKeyboard('Alt+c', 'Ctrl+Shift+t')
+  @onKeyboard('alt+c', 'ctrl+shift+t')
   doSomethingC() { ... }
 
-  @onKeyboard('Alt+KeyC', { mode: 'code' })
+  @onKeyboard('alt+KeyC', { mode: 'code' })
   doSomethingD() { ... }
 
-  @onKeyboard('Alt+c', 'Ctrl+Shift+t', { on: 'keyup', mode: 'code' })
+  @onKeyboard('alt+c', 'ctrl+shift+t', { event: 'keyup', mode: 'code' })
   doSomethingE() { ... }
   //...
 }
@@ -152,11 +154,11 @@ import { onKeyboard } from 'ember-keyboard';
 
 export default Component.extends({
   //...
-  doSomethingA: onKeyboard('Alt+c', function() { ... }),
-  doSomethingB: onKeyboard('Alt+c', { on: 'keyup' }, function() { ... }),
-  doSomethingC: onKeyboard('Alt+c', 'Ctrl+Shift+t', function() { ... }),
-  doSomethingD: onKeyboard('Alt+KeyC', { mode: 'code' }, function() { ... }),
-  doSomethingE: onKeyboard('Alt+c', 'Ctrl+Shift+t', { on: 'keyup', mode: 'code' }, function() { ... }),
+  doSomethingA: onKeyboard('alt+c', function() { ... }),
+  doSomethingB: onKeyboard('alt+c', { event: 'keyup' }, function() { ... }),
+  doSomethingC: onKeyboard('alt+c', 'ctrl+shift+t', function() { ... }),
+  doSomethingD: onKeyboard('alt+KeyC', { mode: 'code' }, function() { ... }),
+  doSomethingE: onKeyboard('alt+c', 'ctrl+shift+t', { event: 'keyup', mode: 'code' }, function() { ... }),
   //...
 });
 ```
@@ -176,13 +178,13 @@ users?
 
 ## Alternatives
 
-> What other designs have been considered? What is the impact of not doing this?
-
-> This section could also include prior art, that is, how other frameworks in the same domain have solved this problem.
+One idea is to back ember-keyboard by a widely used Javascript keyboard handling library. @lukemelia looked into mousetrap and keymaster to see how they handled key vs code and whether we could/should use them. In both cases, he found that they rely on now-deprecated keyboard event properties (`which` and `keyCode`). e.g. ccampbell/mousetrap#474. For that reason, his conclusion is that taking a dependency on one of them is not a good idea.
 
 ## Unresolved questions
 
 ### Should ember-keyboard bring an opinion about whether most developers should be using `code` or `key`-based shortcuts for common types of apps targeted by Ember?
+
+Proposals 1 and 2 are agnostic. Proposal 3 has the opinion that `key` should be the default.
 
 ### Challenges with mapping `key` values
 
@@ -191,3 +193,5 @@ Because `key` is the generated value including the effect of modifiers, `Shift+2
 Alt-key combos on OS X bring a similar set of challenges. `Alt+c` on OS X has a `key` value of `ç` since that is the character normally generated on Macs when pressing Alt/Option and C together. To support `modifier='Alt' key='c'` on Macs, we would need to map `ç` back to `c` somehow.
 
 ### How do these API changes the priority and propagation features of ember-keyboard, if at all?
+
+No need for this functionality to change
