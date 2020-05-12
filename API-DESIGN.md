@@ -24,7 +24,7 @@ The W3C UI Events spec includes instructive [examples of `code` and `key` values
 
 For keyboard shortcuts that are based on physical location on the keyboard (e.g. `WASD` game or cursor controls), the `code` property should be used. For mnemonic-based shortcuts (e.g. `Ctrl+B` to Bold text), the `key` property should be used. ember-keyboard should provide an API to make both of these possible.
 
-By making clear whether a keyboard event handler is using `code` or `key`, we can avoid a class of bugs that were present in previous versions of ember-keyboard.
+By making providing clear semantics about whether a keyboard event handler is using `code` or `key`, we can avoid a class of bugs and confusion that were present in previous versions of ember-keyboard.
 
 ## Detailed design
 
@@ -65,7 +65,7 @@ By making clear whether a keyboard event handler is using `code` or `key`, we ca
 
 ```
 
-### API Proposal 3: Default to `key` mode, and listening on `keydown`, mostly positional args
+### API Proposal 3: Default to `key` mode, and listening on `keydown`, mostly positional args, explicit mode property
 
 #### on-keyboard component
 ```hbs
@@ -94,8 +94,8 @@ By making clear whether a keyboard event handler is using `code` or `key`, we ca
 {{on-keyboard this.DoThing "alt+KeyC" event="keyup" mode="code"}}
 
 // To use with angle-bracket notation
-<OnKeyboard action={{this.DoThing}} @value="alt+c" />
-<OnKeyboard action={{this.DoThing}} @value="alt+KeyC" @event='keyup' @mode="code" />
+<OnKeyboard @action={{this.DoThing}} @value="alt+c" />
+<OnKeyboard @action={{this.DoThing}} @value="alt+KeyC" @event='keyup' @mode="code" />
 
 ```
 
@@ -163,6 +163,105 @@ export default Component.extends({
 });
 ```
 
+### API Proposal 4: Infer `key` vs `code` mode, default to listening on `keydown`, try to match `{{on ...}}` semantics more closely, use on-key for shortcuts too
+
+#### on-key component
+```hbs
+// Rename the `keyboard-press` component in 6.0.0-beta to `on-key`
+// Should this be a helper instead of a component?
+
+// Fires DoThing on keydown of the key that generates "c" on their computer
+// while Alt is pressed
+{{on-key "alt+c" this.DoThing}}
+
+// Fires DoThing on KEYUP of the key that generates "c" on their computer
+// while Alt is pressed
+{{on-key "alt+c" this.DoThing event="keyup"}}
+
+// Fires DoThing on keydown of the key that generates "c" on their computer
+// while Alt is pressed, or on keydown of the key that generates "t" while
+// Ctrl and Shift are pressed (i.e. no API support for binding multiple keys,
+// just include on-key twice)
+{{on-key "alt+c" this.DoThing}}
+{{on-key "ctrl+shift+t" this.DoThing}}
+
+// Fires DoThing on keydown of the key at the standard position of the C key
+// while Alt is pressed. This is inferred from the use of "KeyC" rather than "c"
+{{on-key "alt+KeyC" this.DoThing}}
+
+// Fires DoThing on keyup of the key at the standard position of the C key
+// while Alt is pressed
+{{on-key "alt+KeyC" this.DoThing event="keyup"}}
+
+// To use with angle-bracket notation (we will recommend curly usage)
+<OnKey @keys="alt+c" @action={{this.DoThing}} />
+<OnKey @keys="alt+KeyC" @action={{this.DoThing}} @event='keyup' />
+
+```
+
+#### on-key element modifier
+
+```hbs
+<!-- Same signature as on-key component -->
+
+<!-- When used with a form element input, textarea, or select, the action fires only when element has focus: -->
+
+<input type='text' {{on-key "alt+c" this.DoThing}}> <!-- `key` mode -->
+<input type='text' {{on-key "alt+c" this.DoThing event="keyup"}}> <!-- `key` mode -->
+<input type='text' {{on-key "alt+KeyC" this.DoThing}}> <!-- `code` mode -->
+<input type='text' {{on-key "alt+KeyC" this.DoThing event="keyup"}}> <!-- `code` mode -->
+
+<!-- When used with another element type and leaving off the action, it will trigger a `click` on the element if no action is passed. This allows for easy declaration of keyboard shortcuts for anything clickable: -->
+
+<button {{on-key "alt+c"}}></button> <!-- `key` mode -->
+<button {{on-key "alt+c" event="keyup"}}></button> <!-- `key` mode -->
+<button {{on-key "alt+KeyC"}}></button> <!-- `code` mode -->
+<button {{on-key "alt+KeyC" event="keyup"}}></button> <!-- `code` mode -->
+```
+
+#### Setting up handlers in Javascript
+
+Decorator usage:
+
+```js
+import Component from '@ember/component';
+import { onKey } from 'ember-keyboard';
+
+export default class Foo extends Component {
+  //...
+  
+  @onKey('alt+c') // `key` mode 
+  doSomethingA() { ... }
+
+  @onKey('alt+c', { event: 'keyup' }) // `key` mode
+  doSomethingB() { ... }
+
+  @onKey('alt+c') // Binding multiple combos. This one is `key` mode...
+  @onKey('ctrl+shift+KeyT') // ...and this one is `code` mode
+  doSomethingC() { ... }
+
+  @onKeyboard('alt+KeyC') // `code` mode
+  doSomethingD() { ... }
+
+  //...
+}
+```
+
+Non-decorator usage:
+
+```js
+import { onKey } from 'ember-keyboard';
+
+export default Component.extends({
+  //...
+  doSomethingA: onKey('alt+c', function() { ... }), // `key` mode
+  doSomethingB: onKey('alt+c', { event: 'keyup' }, function() { ... }), // `key` mode
+  doSomethingC: onKey('alt+c', onKey('ctrl+shift+t', function() { ... })), // Binding multiple combos
+  doSomethingD: onKey('alt+KeyC', function() { ... }) // `code` mode
+  //...
+});
+```
+
 ## How we teach this
 
 > What names and terminology work best for these concepts and why? How is this
@@ -184,7 +283,7 @@ One idea is to back ember-keyboard by a widely used Javascript keyboard handling
 
 ### Should ember-keyboard bring an opinion about whether most developers should be using `code` or `key`-based shortcuts for common types of apps targeted by Ember?
 
-Proposals 1 and 2 are agnostic. Proposal 3 has the opinion that `key` should be the default.
+Proposals 1, 2 and 4 are agnostic. Proposal 3 has the opinion that `key` should be the default.
 
 ### Challenges with mapping `key` values
 
@@ -195,3 +294,7 @@ Alt-key combos on OS X bring a similar set of challenges. `Alt+c` on OS X has a 
 ### How do these API changes the priority and propagation features of ember-keyboard, if at all?
 
 No need for this functionality to change
+
+## Acknowlegements
+
+Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, and @seanCodes for helping to shape this document.
