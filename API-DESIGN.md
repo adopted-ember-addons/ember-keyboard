@@ -262,18 +262,30 @@ export default Component.extends({
 });
 ```
 
-## How we teach this
+### Low-level key-combo matching API
 
-> What names and terminology work best for these concepts and why? How is this
-idea best presented? As a continuation of existing Ember patterns, or as a
-wholly new one?
+All the proposals above could include a low level API that exposes the matching engine that determines whether a particular keyboard event is considered to match a specified key-combo. Examples:
 
-> Would the acceptance of this proposal mean the Ember guides must be
-re-organized or altered? Does it change how Ember is taught to new users
-at any level?
+```hbs
+{{!-- attach your own event handler using the {{on}} modifier --}}
+<div {{on "keydown" (if-key "alt+c" this.doThing)}}></div>
 
-> How should this feature be introduced and taught to existing Ember
-users?
+{{! combining with the ember-on-helper addon }}
+{{on-document "keydown" (if-key "alt+KeyX" this.doThing)}}
+
+{{! use some third-party component API }}
+<SomeComponent @onKey={{if-key "alt+x" this.doThing}}/>
+```
+
+```js
+import { isKey } from 'ember-keyboard';
+
+function onEvent(e) {
+  if (isKey(e, 'alt+x')) {
+    this.handleAltX();
+  }
+}
+```
 
 ## Alternatives
 
@@ -295,6 +307,14 @@ Alt-key combos on OS X bring a similar set of challenges. `Alt+c` on OS X has a 
 
 No need for this functionality to change
 
+### What about key sequences, a la gmail's `g` followed by `i` to go to the inbox?
+
+Many of the proposal's APIs seem like they could be readily enhanced to support key sequences in a future release.
+
+### This would be a whole new API from version 5. What is the migration path? Is a codemod possible?
+
+The issue that prompted this API rethink was that the addon was conceptually mixing `key` and `code` in a confusing and inconsistent way, so the existing behavior is not something that we would want to bring forward. It seems, therefore, that a codemod would be inadvisable since we would not be preserving behavior. Is should be possible to leave the existing API in place with the existing behavior and deprecate it. This would allow people to upgrade and incrementally move to the new API. The deprecated API could then be dropped in the next major release.
+
 ## Acknowlegements
 
-Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, and @seanCodes for helping to shape this document.
+Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, @seanCodes, and @bendemboski for helping to shape this document.
