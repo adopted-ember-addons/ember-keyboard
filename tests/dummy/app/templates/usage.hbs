@@ -3,16 +3,52 @@
 
 ### Using ember-keyboard in templates
 
-To declaratively attach an action to a keyboard event while a particular template is rendered, use the `keyboard-press` component. In this example, when a user presses the '/' key, the onSlash action is triggered.
+To declaratively attach an action to a keyboard event while a particular template
+is rendered, use the `on-key` helper. In this example, when a user presses the '/'
+key, the onSlash action is triggered.
 
 ```htmlbars
-{{keyboard-press
-  key='Slash'
-  onPress=(action 'onSlash')
-}}
+{{on-key '/' this.onSlash}}
 ```
 
-Note that the listener is active for the lifecycle of the template. When the template is unrendered, the listener is removed.
+Note that the listener is active for the lifecycle of the helper. When the helper is unrendered, the listener is removed.
+
+Modifiers are supported, too:
+
+```hbs
+{{on-key 'alt+c' this.doThing}}
+```
+
+By default, actions will be triggered on the `keydown` event. To fire it on
+`keyup` or (the deprecated) `keypress`, specify the `event`:
+
+```hbs
+{{on-key 'alt+c' this.doThing event='keyup'}}
+```
+
+To bind multiple key combos, including to the same action, include the helper multiple times:
+
+```hbs
+{{on-key 'alt+c' this.doThing}}
+{{on-key 'ctrl+shift+t' this.doThing}}
+```
+
+In the examples above, 'c', 't', and '/' are interpreted to mean “the key that
+was pressed produces the specified character under normal circumstances.” In
+the W3C's specifications for DOM keyboard events, this is known as the `key`
+property. There is another property, called `code`, which is based on the
+”standard position“ of a key regardless of what remapping may be in place.
+Values for `code` look like `KeyC`, `Digit1`, `Backspace`, etc. [You can find a
+full list here.](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values)
+Values for `code` and `key` don't overlap, so if `ember-keyboard` will
+automatically infer which property you care about based on how you specify your
+key combo. For example,
+
+```hbs
+<!-- Fires DoThing on keydown of the key at the standard position of the C key
+     while Alt is pressed. This is inferred from the use of `KeyC` rather than `c` -->
+{{on-key 'alt+KeyC' this.doThing}}
+```
 
 Another option (supported in Ember 3.12+) for templates is the `on-keyboard` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
 

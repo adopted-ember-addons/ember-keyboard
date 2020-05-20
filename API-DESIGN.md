@@ -40,33 +40,33 @@ Replaces the `keyboard-press` component in 6.0.0-beta.0. Since nothing is output
 helper is more appropriate than a component.
 
 ```hbs
-<!-- Fires DoThing on keydown of the key that generates "c" on their computer
+<!-- Fires `doThing` on keydown of the key that generates "c" on their computer
      while Alt is pressed -->
-     
-{{on-key "alt+c" this.DoThing}}
 
-<!-- Fires DoThing on KEYUP of the key that generates "c" on their computer
+{{on-key "alt+c" this.doThing}}
+
+<!-- Fires `doThing` on KEYUP of the key that generates "c" on their computer
      while Alt is pressed -->
-     
-{{on-key "alt+c" this.DoThing event="keyup"}}
 
-<!-- Fires DoThing on keydown of the key that generates "c" on their computer
+{{on-key "alt+c" this.doThing event="keyup"}}
+
+<!-- Fires `doThing` on keydown of the key that generates "c" on their computer
      while Alt is pressed, or on keydown of the key that generates "t" while
      Ctrl and Shift are pressed (i.e. no API support for binding multiple keys,
      just include on-key twice) -->
-     
-{{on-key "alt+c" this.DoThing}}
-{{on-key "ctrl+shift+t" this.DoThing}}
 
-<!-- Fires DoThing on keydown of the key at the standard position of the C key
+{{on-key "alt+c" this.doThing}}
+{{on-key "ctrl+shift+t" this.doThing}}
+
+<!-- Fires `doThing` on keydown of the key at the standard position of the C key
      while Alt is pressed. This is inferred from the use of "KeyC" rather than "c" -->
-     
-{{on-key "alt+KeyC" this.DoThing}}
 
-<!-- Fires DoThing on keyup of the key at the standard position of the C key
+{{on-key "alt+KeyC" this.doThing}}
+
+<!-- Fires `doThing` on keyup of the key at the standard position of the C key
      while Alt is pressed -->
-     
-{{on-key "alt+KeyC" this.DoThing event="keyup"}}
+
+{{on-key "alt+KeyC" this.doThing event="keyup"}}
 ```
 
 #### on-key element modifier
@@ -79,10 +79,10 @@ Uses the same signature as the `on-key` helper.
 <!-- When used with a form element input, textarea, or select, the action fires only
      when element has focus: -->
 
-<input type='text' {{on-key "alt+c" this.DoThing}}> <!-- `key` mode -->
-<input type='text' {{on-key "alt+c" this.DoThing event="keyup"}}> <!-- `key` mode -->
-<input type='text' {{on-key "alt+KeyC" this.DoThing}}> <!-- `code` mode -->
-<input type='text' {{on-key "alt+KeyC" this.DoThing event="keyup"}}> <!-- `code` mode -->
+<input type='text' {{on-key "alt+c" this.doThing}}> <!-- `key` mode -->
+<input type='text' {{on-key "alt+c" this.doThing event="keyup"}}> <!-- `key` mode -->
+<input type='text' {{on-key "alt+KeyC" this.doThing}}> <!-- `code` mode -->
+<input type='text' {{on-key "alt+KeyC" this.doThing event="keyup"}}> <!-- `code` mode -->
 
 <!-- When used with another element type and leaving off the action, it will trigger a
      `click` on the element if no action is passed. This allows for easy declaration of
@@ -104,8 +104,8 @@ import { onKey } from 'ember-keyboard';
 
 export default class Foo extends Component {
   //...
-  
-  @onKey('alt+c') // `key` mode 
+
+  @onKey('alt+c') // `key` mode
   doSomethingA() { ... }
 
   @onKey('alt+c', { event: 'keyup' }) // `key` mode
