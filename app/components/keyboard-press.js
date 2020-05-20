@@ -1,1 +1,1 @@
-export { default } from 'ember-keyboard/components/keyboard-press';
+export { default } from 'ember-keyboard/deprecated/components/keyboard-press';

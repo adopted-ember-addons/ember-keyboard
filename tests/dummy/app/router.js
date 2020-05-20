@@ -11,7 +11,7 @@ Router.map(function() {
     this.route('mouse-down');
     this.route('touch');
     this.route('keyboard');
-    this.route('keyboard-combo');
+    this.route('deprecated/keyboard-combo');
     this.route('element-modifiers');
   });
 
