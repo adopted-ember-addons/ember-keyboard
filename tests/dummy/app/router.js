@@ -11,9 +11,10 @@ Router.map(function() {
     this.route('mouse-down');
     this.route('touch');
     this.route('keyboard');
+    this.route('on-key-helper-examples');
+    this.route('on-key-modifier-examples');
     this.route('deprecated/keyboard-combo');
-    this.route('on-key-examples');
-    this.route('element-modifiers');
+    this.route('deprecated/element-modifiers');
   });
 
   this.route('mixins');

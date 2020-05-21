@@ -1,1 +1,1 @@
-export { default } from 'ember-keyboard/modifiers/keyboard-shortcut';
+export { default } from 'ember-keyboard/deprecated/modifiers/keyboard-shortcut';

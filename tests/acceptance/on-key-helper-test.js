@@ -10,8 +10,8 @@ module('Acceptance | on-key helper ', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function(assert) {
-    await visit('/test-scenario/on-key-examples');
-    assert.equal(currentURL(), '/test-scenario/on-key-examples');
+    await visit('/test-scenario/on-key-helper-examples');
+    assert.equal(currentURL(), '/test-scenario/on-key-helper-examples');
   });
 
   test('KeyS, no modifiers', async function(assert) {

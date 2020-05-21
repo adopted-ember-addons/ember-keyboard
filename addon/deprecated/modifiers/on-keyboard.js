@@ -2,6 +2,7 @@ import Modifier from 'ember-modifier';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { gte } from 'ember-compatibility-helpers';
+import { deprecate } from '@ember/debug';
 
 let Klass;
 if (gte('3.12.0')) {
@@ -40,6 +41,16 @@ if (gte('3.12.0')) {
     }
 
     didInstall() {
+      deprecate(
+        'The `on-keyboard` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier instead.',
+        false,
+        {
+            id: 'ember-keyboard.on-keyboard',
+            until: '7.0.0',
+            url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-on-keyboard'
+        }
+      );
+
       this.keyboard.register(this);
       if (this.onlyWhenFocused) {
         this.keyboardActivated = false;

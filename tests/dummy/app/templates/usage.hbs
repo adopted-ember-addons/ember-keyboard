@@ -13,7 +13,7 @@ key, the onSlash action is triggered.
 
 Note that the listener is active for the lifecycle of the helper. When the helper is unrendered, the listener is removed.
 
-Modifiers are supported, too:
+Modifiers like alt, shift, and ctrl are supported, too:
 
 ```hbs
 {{on-key 'alt+c' this.doThing}}
@@ -50,19 +50,23 @@ key combo. For example,
 {{on-key 'alt+KeyC' this.doThing}}
 ```
 
-Another option (supported in Ember 3.12+) for templates is the `on-keyboard` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
+Another option (supported in Ember 3.12+) for templates is the `on-key` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
 
 ```htmlbars
 <input type='text'
   oninput={{action (mut this.textFieldValue) value='target.value'}}
-  {{on-keyboard 'Enter' (action 'onEnterPressedInInput')}}
+  {{on-key 'Enter' (action 'onEnterPressedInInput')}}
 >
 ```
 
-If you want a shortcut for triggering a click on an element when a key is pressed, look no further than the `keyboard-shortcut` element modifier  (also Ember 3.12+). This allows a keyboard event to simulate clicking the element the modifier is attached to. In the following example, we trigger a click on the button when the B key is pressed together with the Alt key:
+If you want a shortcut for triggering a click on an element when a key is pressed,
+you can use the same modifier without an action (also Ember 3.12+). This allows a
+keyboard event to simulate clicking the element the modifier is attached to.
+In the following example, we trigger a click on the button when the B key is
+pressed together with the Alt key:
 
 ```htmlbars
-<button {{action 'onButtonClick'}} {{keyboard-shortcut 'alt+KeyB'}}>
+<button {{on 'click' @onButtonClick}} {{on-key 'alt+b'}}>
   Press me or press 'Alt-B'
 </button>
 ```
@@ -255,6 +259,61 @@ Recommended:
 
 ```hbs
 {{on-key 'alt+KeyC' (action 'onSlash')}}
+```
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regard `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+#### <a name='deprecations-keyboard-shortcut'></a> keyboard-shortcut
+
+ember-keyboard 6.0.0-beta.0 included the `keyboard-shortcut` modifier as public API.
+It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
+the `on-key` modifier instead, with no action:
+
+Deprecated:
+
+```hbs
+<!-- Keydown with the B key triggers a click of the button -->
+<button {{keyboard-shortcut 'KeyB'}}>Press me or 'B'</button>
+```
+
+Recommended:
+
+```hbs
+<!-- Keydown with the B key triggers a click of the button -->
+<button {{on-key 'KeyB'}}>Press me or 'B'</button>
+```
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regard `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+#### <a name='deprecations-on-keyboard'></a> on-keyboard
+
+ember-keyboard 6.0.0-beta.0 included the `on-keyboard` modifier as public API.
+It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
+the `on-key` modifier instead:
+
+Deprecated:
+
+```hbs
+<!-- Keydown of Enter key triggers @onEnterPressedInInput when the input field is focused -->
+<input type='text'
+  oninput={{action (mut this.textFieldValue) value='target.value'}}
+  {{on-keyboard 'Enter' @onEnterPressedInInput}}
+>
+```
+
+Recommended:
+
+```hbs
+<input type='text'
+  oninput={{action (mut this.textFieldValue) value='target.value'}}
+  {{on-key 'Enter' @onEnterPressedInInput}}
+>
 ```
 
 Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came

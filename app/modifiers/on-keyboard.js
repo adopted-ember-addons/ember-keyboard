@@ -1,1 +1,1 @@
-export { default } from 'ember-keyboard/modifiers/on-keyboard';
+export { default } from 'ember-keyboard/deprecated/modifiers/on-keyboard';

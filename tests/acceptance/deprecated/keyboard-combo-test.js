@@ -1,9 +1,7 @@
 import { visit, currentURL, triggerEvent } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-
 import { keyPress } from 'ember-keyboard/test-support/test-helpers';
-
 import { textChanged } from '../../helpers/text-changed';
 import { registerDeprecationHandler } from '@ember/debug';
 
@@ -16,7 +14,7 @@ module('Acceptance | ember keyboard | deprecated | keyboard combos', function(ho
     registerDeprecationHandler((message, options, next) => {
       deprecations.push({ message, options });
       next(message, options);
-    })
+    });
     await visit('/test-scenario/deprecated/keyboard-combo');
 
     assert.equal(currentURL(), '/test-scenario/deprecated/keyboard-combo');

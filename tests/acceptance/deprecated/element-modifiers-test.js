@@ -2,20 +2,38 @@ import { focus, visit, currentURL, click, fillIn } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { gte } from 'ember-compatibility-helpers';
-
 import { keyDown, keyPress } from 'ember-keyboard/test-support/test-helpers';
-
-import { textChanged } from '../helpers/text-changed';
+import { textChanged } from '../../helpers/text-changed';
+import { registerDeprecationHandler } from '@ember/debug';
 
 if (gte('3.12.0')) {
-  module('Acceptance | ember keyboard | element modifiers', function(hooks) {
+  module('Acceptance | ember keyboard | deprecated | element modifiers', function(hooks) {
     setupApplicationTest(hooks);
 
+    let deprecations;
     hooks.beforeEach(async function(assert) {
-      await visit('/test-scenario/element-modifiers');
+      deprecations = [];
+      registerDeprecationHandler((message, options, next) => {
+        deprecations.push({ message, options });
+        next(message, options);
+      });
+      await visit('/test-scenario/deprecated/element-modifiers');
 
-      assert.equal(currentURL(), '/test-scenario/element-modifiers');
+      assert.equal(currentURL(), '/test-scenario/deprecated/element-modifiers');
     });
+
+    test('issues deprecation warnings', function(assert) {
+      assert.ok(deprecations.length > 0);
+      assert.equal(deprecations[0].message, "The `keyboard-shortcut` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier with no action instead.");
+      assert.equal(deprecations[0].options.id, "ember-keyboard.keyboard-shortcut");
+      assert.equal(deprecations[0].options.until, "7.0.0");
+      assert.equal(deprecations[0].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-keyboard-shortcut");
+      assert.equal(deprecations[3].message, "The `on-keyboard` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier instead.");
+      assert.equal(deprecations[3].options.id, "ember-keyboard.on-keyboard");
+      assert.equal(deprecations[3].options.until, "7.0.0");
+      assert.equal(deprecations[3].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-on-keyboard");
+    });
+
 
     test('KeyB button shortcut', async function(assert) {
       assert.expect(3);
