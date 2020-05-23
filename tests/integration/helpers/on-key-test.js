@@ -46,6 +46,16 @@ module('Integration | Helper | on-key', function(hooks) {
     });
   });
 
+  test('called with event', async function(assert) {
+    let onTriggerCalledWith;
+    this.set('onTrigger', (ev) => {
+      onTriggerCalledWith = ev;
+    });
+    await render(hbs`{{on-key 'shift+c' onTrigger}}`);
+    await keyDown('shift+c');
+    assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
+  });
+
   module('unspecified event param', function(hooks) {
     hooks.beforeEach(async function() {
       await render(hbs`{{on-key 'shift+c' onTrigger}}`);

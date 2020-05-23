@@ -36,6 +36,14 @@ module('Integration | Modifier | on-key', function(hooks) {
           await keyPress('shift+c');
           assert.ok(!onTriggerCalled, 'does not trigger action');
         });
+        test('called with event', async function(assert) {
+          let onTriggerCalledWith;
+          this.set('onTrigger', (ev) => {
+            onTriggerCalledWith = ev;
+          });
+          await keyDown('shift+c');
+          assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
+        });
       });
       module('when element does not have focus', function(/* hooks */) {
         test('does not trigger on keydown, keyup, or keypress', async function(assert) {
@@ -324,6 +332,15 @@ module('Integration | Modifier | on-key', function(hooks) {
 
           await keyPress('shift+c');
           assert.ok(!onTriggerCalled, 'does not trigger action');
+        });
+
+        test('called without keyboard event', async function(assert) {
+          let onTriggerCalledWith;
+          this.set('onTrigger', (ev) => {
+            onTriggerCalledWith = ev;
+          });
+          await keyDown('shift+c');
+          assert.ok(onTriggerCalledWith instanceof MouseEvent);
         });
       });
       module('with event="keydown"', function(hooks) {

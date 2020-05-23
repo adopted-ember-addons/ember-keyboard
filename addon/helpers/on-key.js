@@ -30,10 +30,10 @@ export default class extends Helper {
     return triggerName === this.listenerName;
   }
 
-  trigger(triggerName) {
+  trigger(triggerName, event) {
     if (triggerName === this.listenerName) {
       if (this.callback) {
-        this.callback();
+        this.callback(event);
       }
     }
   }

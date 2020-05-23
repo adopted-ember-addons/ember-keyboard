@@ -97,12 +97,12 @@ if (gte('3.12.0')) {
       return triggerName === this.listenerName;
     }
 
-    trigger(triggerName) {
+    trigger(triggerName, event) {
       if (triggerName === this.listenerName) {
         if (this.callback) {
-          this.callback();
+          this.callback(event);
         } else {
-          this.element.click();
+          this.element.click(event);
         }
       }
     }

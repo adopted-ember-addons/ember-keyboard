@@ -69,6 +69,9 @@ helper is more appropriate than a component.
 {{on-key "alt+KeyC" this.doThing event="keyup"}}
 ```
 
+In all these cases, the keyboard event is passed to the action so that you could
+consult it or call `preventDefault`.
+
 #### on-key element modifier
 
 Uses the same signature as the `on-key` helper.
@@ -93,6 +96,9 @@ Uses the same signature as the `on-key` helper.
 <button {{on-key "alt+KeyC"}}></button> <!-- `code` mode -->
 <button {{on-key "alt+KeyC" event="keyup"}}></button> <!-- `code` mode -->
 ```
+
+One thing to note is that the original keyboard event is not passed to the action
+handler when leaving off the action to trigger the click event.
 
 #### Setting up handlers in Javascript
 
