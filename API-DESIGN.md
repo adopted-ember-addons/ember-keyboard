@@ -146,6 +146,75 @@ export default Component.extend({
 
 TODO: Determine how registration with the ember-keyboard service will occur. Do we need to continue use of the existing mixins? Is there an alternative besides explicit register/unregister calls?
 
+### Responder API
+
+In ember-keyboard, each modifier and helper instance is a "responder", as is any component or other object is registered with the service. Responders do not have a base class, but they must conform to an API that allows
+the ember-keyboard service to interact with them.
+
+The most important property is `keyboardHandlers`, a dictionary mapping zero or more key-combo strings to functions. The service will check each key-combo string against the keyboard event being processed and call the mapped handler function if a match is found. A responder can opt to determine matches and handling itself by instead implementing `canHandleKeyboardEvent(event)` and `handleKeyboardEvent(event)`.
+
+Previous versions of ember-keyboard relied on the API provided by the `Ember.Evented` mixin: `has(listenerName)` and `trigger(listenerName, event)`. Version 6.x of ember-keyboard will fallback to to `has`/`trigger` with a deprecation warning.
+
+Here are the details of the responder API, using Typescript interface notation for convenience:
+
+```ts
+interface IResponder { 
+  
+  // Implement this for low-level control over whether the service considers this responder capable of
+  // handling a specific keyboard event.
+  // If not specified, but `handleKeyboardEvent` is specified, service acts as if it returns true.
+  canHandleKeyboardEvent?: (event?:KeyboardEvent) => boolean,
+
+
+  // Implement this for low-level control over the invocation of a handling a specific keyboard event.
+  // If not specified, will try to use `keyboardHandlers` dictionary instead.
+  handleKeyboardEvent?: (event?:KeyboardEvent, ekEvent?:IEmberKeyboardEvent) => boolean,
+
+  // The service will check each entry in this dictionary and use ember-keyboard's `isKey` function to check
+  // whether the key combo matches the current keyboard event. If so, it will call the
+  // mapped handler function.
+  // If not specified, the service will fallback to has/trigger.
+  keyboardHandlers?:IKeyComboHandlerDictionary,
+
+  // deprecated
+  has?: (listenerName:string) => boolean,
+
+  // deprecated
+  trigger?: (event:KeyboardEvent, ekEvent:IEmberKeyboardEvent) => void,
+
+  // When false, responder will not receive events.
+  // Service assumes a true value if unspecified.
+  keyboardActivated?: boolean,
+  
+  // Responders with a higher value are consulted sooner for event handling (and a chance to stop propagation).
+  // Service assumes a zero value if unspecified.
+  keyboardPriority?: number,
+
+  // Only applicable when the service's `isPropagationEnabled` is false.
+  // In that mode, a true value indicates that this responder should not block lower priority responders.
+  // This can help if you want a group of high level responders to always get a chance to handle key
+  // events without blocking the rest of your app. Note that all responders within a given priority must have
+  // `keyboardLaxPriority` set to `true` or else the priority level will still block, as per usual.
+  // Service assumes a false value if unspecified.
+  keyboardLaxPriority?: boolean,
+  
+  // A true value makes this responder treated as part of the highest priority tier, regardless of its
+  // `keyboardPriority` relative to other components. This can be useful if you want a low-priority
+  // component to temporarily gain precedence over everything else.
+  // Service assumes false if unspecified.
+  keyboardFirstResponder?: boolean
+}
+
+interface IKeyComboHandlerDictionary {
+  index[keyCombo:string]: function
+}
+
+interface IEmberKeyboardEvent {
+  stopPropagation: ()=>void     
+  stopImmediatePropagation: ()=>void     
+}
+```
+
 ### Low-level key-combo matching API
 
 A low-level API for the matching engine that determines whether a particular keyboard event is considered to match a specified key-combo will also be exposed.
