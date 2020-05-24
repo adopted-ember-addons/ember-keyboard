@@ -77,8 +77,6 @@ consult it or call `preventDefault`.
 Uses the same signature as the `on-key` helper.
 
 ```hbs
-<!-- Same signature as on-key component -->
-
 <!-- When used with a form element input, textarea, or select, the action fires only
      when element has focus: -->
 
