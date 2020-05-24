@@ -1,9 +1,6 @@
 import { visit, currentURL, triggerEvent } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-
-import { keyDown } from 'ember-keyboard/test-support/test-helpers';
-
 import { textChanged } from '../helpers/text-changed';
 
 module('Acceptance | on-key helper ', function(hooks) {
@@ -19,19 +16,19 @@ module('Acceptance | on-key helper ', function(hooks) {
 
     await textChanged(
       assert,
-      () => keyDown('KeyS'), {
+      () => triggerEvent(document.body, 'keydown', { code: 'KeyS', key: 's' }), {
         selectorName: 's',
         beforeValue: 'S not pressed',
         afterValue: 'S pressed'
       });
   });
 
-  test('Ctrl+KeyK', async function(assert) {
+  test('Ctrl+k', async function(assert) {
     assert.expect(3);
 
     await textChanged(
       assert,
-      () => keyDown('ctrl+KeyK'), {
+      () => triggerEvent(document.body, 'keydown', { code: 'KeyK', key: 'k', ctrlKey: true }), {
         selectorName: 'ctrl-k',
         beforeValue: 'Ctrl+K not pressed',
         afterValue: 'Ctrl+K pressed'
@@ -63,7 +60,7 @@ module('Acceptance | on-key helper ', function(hooks) {
 
     await textChanged(
       assert,
-      () => keyDown('shift+Slash'), {
+      () => triggerEvent(document.body, 'keydown', { code: 'Slash', key: '?', shiftKey: true }), {
         selectorName: 'question-mark',
         beforeValue: 'question mark not pressed',
         afterValue: 'question mark pressed'

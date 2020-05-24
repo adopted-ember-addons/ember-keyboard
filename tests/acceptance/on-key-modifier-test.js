@@ -1,10 +1,7 @@
-import { focus, visit, currentURL, click, fillIn } from '@ember/test-helpers';
+import { currentURL, click, fillIn, focus, triggerEvent, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 import { gte } from 'ember-compatibility-helpers';
-
-import { keyDown, keyPress, keyUp } from 'ember-keyboard/test-support/test-helpers';
-
 import { textChanged } from '../helpers/text-changed';
 
 if (gte('3.12.0')) {
@@ -21,7 +18,7 @@ if (gte('3.12.0')) {
       assert.expect(3);
       await textChanged(
         assert,
-        () => keyDown('KeyB'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyB', key: 'b' }), {
           selectorName: 'b-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
@@ -33,7 +30,7 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyDown('KeyC'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyC', key: 'c' }), {
           selectorName: 'c-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press not triggered'
@@ -42,7 +39,7 @@ if (gte('3.12.0')) {
       await click('[data-test-checkbox]')
       await textChanged(
         assert,
-        () => keyDown('KeyC'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyC', key: 'c' }), {
           selectorName: 'c-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
@@ -54,7 +51,7 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyUp('d'), {
+        () => triggerEvent(document.body, 'keyup', { code: 'KeyD', key: 'd' }), {
           selectorName: 'd-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press not triggered'
@@ -62,7 +59,7 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyDown('d'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyD', key: 'd' }), {
           selectorName: 'd-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
@@ -76,7 +73,7 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyDown('KeyD'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyD', key: 'd' }), {
           selectorName: 'd-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press not triggered'
@@ -84,12 +81,11 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyDown('KeyP'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'KeyP', key: 'p' }), {
           selectorName: 'p-button',
           beforeValue: 'button press not triggered',
           afterValue: 'button press triggered'
         });
-
     });
 
 
@@ -98,7 +94,7 @@ if (gte('3.12.0')) {
 
       await textChanged(
         assert,
-        () => keyDown('Enter'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'Enter', key: 'Enter' }), {
           selectorName: 'text-field',
           beforeValue: 'enter not pressed while input focused',
           afterValue: 'enter not pressed while input focused'
@@ -107,7 +103,7 @@ if (gte('3.12.0')) {
       await focus('input[type="text"]');
       await textChanged(
         assert,
-        () => keyDown('Enter'), {
+        () => triggerEvent(document.body, 'keydown', { code: 'Enter', key: 'Enter' }), {
           selectorName: 'text-field',
           beforeValue: 'enter not pressed while input focused',
           afterValue: 'enter pressed while input focused'

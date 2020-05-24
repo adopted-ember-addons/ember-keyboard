@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { gte } from 'ember-compatibility-helpers';
 import listenerName from 'ember-keyboard/utils/listener-name';
+import isKey from 'ember-keyboard/utils/is-key';
 
 const ONLY_WHEN_FOCUSED_TAG_NAMES = ['input', 'select', 'textarea'];
 
@@ -42,7 +43,7 @@ if (gte('3.12.0')) {
       this.eventName = event || 'keydown';
       this.activatedParamValue = Object.keys(this.args.named).includes('activated') ? !!activated : undefined;
       this.keyboardPriority = priority ? parseInt(priority, 10) : 0;
-      this.listenerName = listenerName(this.eventName, this.keyCombo.split('+'));
+      this.listenerName = listenerName(this.eventName, this.keyCombo);
       if (this.args.named.onlyWhenFocused !== undefined) {
         this.onlyWhenFocused = this.args.named.onlyWhenFocused;
       } else {
@@ -93,12 +94,12 @@ if (gte('3.12.0')) {
       return false;
     }
 
-    has(triggerName) {
-      return triggerName === this.listenerName;
+    canHandleKeyboardEvent(event) {
+      return isKey(this.listenerName, event);
     }
 
-    trigger(triggerName, event) {
-      if (triggerName === this.listenerName) {
+    handleKeyboardEvent(event /* , ekEvent */) {
+      if (isKey(this.listenerName, event)) {
         if (this.callback) {
           this.callback(event);
         } else {

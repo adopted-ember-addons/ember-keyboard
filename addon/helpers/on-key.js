@@ -9,7 +9,7 @@ export default class extends Helper {
   keyboardActivated = true;
   keyboardPriority = 0;
   eventName = 'keydown';
-  listenerName;
+  keyboardHandlers;
 
   compute([keyCombo, callback], { event = 'keydown', activated = true, priority = 0 }) {
     this.keyCombo = keyCombo;
@@ -17,24 +17,15 @@ export default class extends Helper {
     this.eventName = event;
     this.keyboardActivated = activated;
     this.keyboardPriority = priority;
-    this.listenerName = listenerName(this.eventName, this.keyCombo.split('+'));
+    this.keyboardHandlers = {};
+    this.keyboardHandlers[listenerName(event, keyCombo)] = callback;
+
+    this.keyboard.unregister(this);
     this.keyboard.register(this);
   }
 
   destroy() {
     this.keyboard.unregister(this);
     super.destroy(...arguments);
-  }
-
-  has(triggerName) {
-    return triggerName === this.listenerName;
-  }
-
-  trigger(triggerName, event) {
-    if (triggerName === this.listenerName) {
-      if (this.callback) {
-        this.callback(event);
-      }
-    }
   }
 }
