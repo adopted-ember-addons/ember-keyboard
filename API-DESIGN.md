@@ -171,10 +171,10 @@ interface IResponder {
   handleKeyboardEvent?: (event?:KeyboardEvent, ekEvent?:IEmberKeyboardEvent) => boolean,
 
   // The service will check each entry in this dictionary and use ember-keyboard's `isKey` function to check
-  // whether the key combo matches the current keyboard event. If so, it will call the
+  // whether the keyboard listener is a match for the current keyboard event. If so, it will call the
   // mapped handler function.
   // If not specified, the service will fallback to has/trigger.
-  keyboardHandlers?:IKeyComboHandlerDictionary,
+  keyboardHandlers?:IKeyboardHandlerDictionary,
 
   // deprecated
   has?: (listenerName:string) => boolean,
@@ -205,8 +205,8 @@ interface IResponder {
   keyboardFirstResponder?: boolean
 }
 
-interface IKeyComboHandlerDictionary {
-  index[keyCombo:string]: function
+interface IKeyboardHandlerDictionary {
+  index[listenerName:string]: function
 }
 
 interface IEmberKeyboardEvent {
@@ -240,8 +240,8 @@ It will also be available as an `isKey` JS function:
 ```js
 import { isKey } from 'ember-keyboard';
 
-function onEvent(e) {
-  if (isKey(e, 'alt+x')) {
+function onEvent(ev) {
+  if (isKey('keydown:alt+x', ev)) {
     this.handleAltX();
   }
 }
