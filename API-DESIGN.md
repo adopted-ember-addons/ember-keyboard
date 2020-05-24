@@ -250,6 +250,10 @@ There may be undue complexity in this area of the addon, but changing it is out 
 
 We plan to retain the present approach of ember-keyboard, which is to pass a second event to the handler. This "ember-keyboard" event allows for `stopPropagation` or `stopImmediatePropagation` to be called. This solution may not be ideal, but changing it is out of scope for this release.
 
+### Is there a way in the new API to bind to any key?
+
+The previous API supports `_all` as a magic specifier for this, and the new version will support this as well.
+
 ### _What about key sequences, a la gmail's `g` followed by `i` to go to the inbox?_
 
 Out of scope for now, but this API could be readily enhanced to support key sequences in a future release.
