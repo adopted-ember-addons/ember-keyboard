@@ -34,7 +34,7 @@ Concepts:
 * default to listening on `keydown`, allow specifying to listen on other valid event names
 * generally try to match ember's `{{on ...}}` modifier semantics, to make usage intuitive
 
-#### on-key helper
+### on-key helper
 
 Replaces the `keyboard-press` component in 6.0.0-beta.0. Since nothing is output, a
 helper is more appropriate than a component.
@@ -72,7 +72,7 @@ helper is more appropriate than a component.
 In all these cases, the keyboard event is passed to the action so that you could
 consult it or call `preventDefault`.
 
-#### on-key element modifier
+### on-key element modifier
 
 Uses the same signature as the `on-key` helper.
 
@@ -98,12 +98,12 @@ Uses the same signature as the `on-key` helper.
 One thing to note is that the original keyboard event is not passed to the action
 handler when leaving off the action to trigger the click event.
 
-#### Setting up handlers in Javascript
+### Setting up handlers in Javascript
 
 Decorator usage:
 
 ```js
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { onKey } from 'ember-keyboard';
 
 export default class Foo extends Component {
@@ -126,12 +126,15 @@ export default class Foo extends Component {
 }
 ```
 
+TODO: Determine how registration with the ember-keyboard service will occur. Does it need a class decorator? Manual register/unregister calls?
+
 Non-decorator usage:
 
 ```js
+import Component from '@ember/component';
 import { onKey } from 'ember-keyboard';
 
-export default Component.extends({
+export default Component.extend({
   //...
   doSomethingA: onKey('alt+c', function() { ... }), // `key` mode
   doSomethingB: onKey('alt+c', { event: 'keyup' }, function() { ... }), // `key` mode
@@ -140,6 +143,8 @@ export default Component.extends({
   //...
 });
 ```
+
+TODO: Determine how registration with the ember-keyboard service will occur. Do we need to continue use of the existing mixins? Is there an alternative besides explicit register/unregister calls?
 
 ### Low-level key-combo matching API
 
@@ -177,28 +182,82 @@ function onEvent(e) {
 
 One idea is to back ember-keyboard by a widely used Javascript keyboard handling library. @lukemelia looked into mousetrap and keymaster to see how they handled key vs code and whether we could/should use them. In both cases, he found that they rely on now-deprecated keyboard event properties (`which` and `keyCode`). e.g. ccampbell/mousetrap#474. For that reason, his conclusion is that taking a dependency on one of them is not a good idea.
 
-### Does ember-keyboard bring an opinion about whether most developers should be using `code` or `key`-based shortcuts for common types of apps targeted by Ember?
+## Questions & Answers
+
+### _Does ember-keyboard bring an opinion about whether most developers should be using `code` or `key`-based shortcuts for common types of apps targeted by Ember?_
 
 No, it is agnostic.
 
-### Challenges with mapping `key` values
+### _What are the challenges with mapping `key` values?_
 
-Because `key` is the generated value including the effect of modifiers, `Shift+2` has a key value of `@` on common English layouts. Should a keyboard shortcut of `key='@'` be equivalent to one of `modifier='Shift' key='2'`? If so, how do we encode the mapping of `@` to `2` necessary to support the latter? *This remains an open question.*
+Because `key` matches the generated would-be output of a keyboard event, including the effect of modifiers, `Shift+2` has a `key` equal to `@` on common English layouts. Should a `{{on-key '@' ...}}` be equivalent to `{{on-key 'shift+2' ...}}`? ember-keyboard says ideally, yes. The implementation therefore will need a way to map of `@` to `2` to support the latter. This will accomplished via a mapping document. *This is likely one of the riskier areas of this design.*
 
-Alt-key combos on OS X bring a similar set of challenges. `Alt+c` on OS X has a `key` value of `ç` since that is the character normally generated on Macs when pressing Alt/Option and C together. To support `modifier='Alt' key='c'` on Macs, we would need to map `ç` back to `c` somehow.
+Alt-key combos on OS X bring a similar set of challenges. Pressing `alt+c` on OS X results in an event with a `key` value of `ç`, since that is the character normally generated on Macs when pressing Alt/Option and C together. To support `{{on-key 'alt+c' ...}}` on OS X, we will need to map `ç` back to `c`.
 
-### How do these API changes the priority and propagation features of ember-keyboard, if at all?
+### _How do these API changes affect the `activated`, `priority`, `laxPriority`, and `firstResponder` features of ember-keyboard, if at all?_
 
-No need for this functionality to change. The helpers, modifiers and functions shown above will all allow for priority and/or propagation to be set.
+No need for this functionality to change. The helpers, modifiers and functions shown above will all allow for these options to be set. Examples:
 
-### What about key sequences, a la gmail's `g` followed by `i` to go to the inbox?
+```hbs
+{{on-key 'shift+c' this.doThing activated=false}}
+{{on-key 'shift+c' this.doThing priority=1}}
+{{on-key 'shift+c' this.doThing laxPriority=true}}
+{{on-key 'shift+c' this.doThing firstResponder=true}}
+
+ <!-- same APIs for the modifier version of on-key -->
+```
+
+```js
+import Component from '@glimmer/component';
+import { onKey } from 'ember-keyboard';
+
+export default class Foo extends Component {
+  //...
+
+  keyboardActivated = true;
+  keyboardPriority = 1;
+  keyboardLaxPriority = true;
+  keyboardFirstResponder = true;
+
+  @onKey('alt+c') 
+  doSomething() { ... }
+
+  //...
+}
+```
+
+```js
+import Component from '@ember/component';
+import { onKey } from 'ember-keyboard';
+
+export default Component.extend({
+  //...
+
+  keyboardActivated: true,
+  keyboardPriority: 1,
+  keyboardLaxPriority: true,
+  keyboardFirstResponder: true,
+
+  doSomething: onKey('alt+c', function() { ... })
+
+  //...
+}
+```
+
+There may be undue complexity in this area of the addon, but changing it is out of scope for this release.
+
+### _How do these API changes affect the propagation and stopImmediatePropagation features of ember-keyboard, if at all?_
+
+We plan to retain the present approach of ember-keyboard, which is to pass a second event to the handler. This "ember-keyboard" event allows for `stopPropagation` or `stopImmediatePropagation` to be called. This solution may not be ideal, but changing it is out of scope for this release.
+
+### _What about key sequences, a la gmail's `g` followed by `i` to go to the inbox?_
 
 Out of scope for now, but this API could be readily enhanced to support key sequences in a future release.
 
-### This would be a whole new API from version 5. What is the migration path? Is a codemod possible?
+### _This would be a whole new API from version 5. What is the migration path? Is a codemod possible?_
 
 The issue that prompted this API rethink was that the addon was conceptually mixing `key` and `code` in a confusing and inconsistent way, so the existing behavior is not something that we would want to bring forward. It seems, therefore, that a codemod would be inadvisable since we would not be preserving behavior. Is should be possible to leave the existing API in place with the existing behavior and deprecate it. This would allow people to upgrade and incrementally move to the new API. The deprecated API could then be dropped in the next major release.
 
-## Acknowlegements
+## Acknowledgements
 
 Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, @seanCodes, and @bendemboski for helping to shape this document.
