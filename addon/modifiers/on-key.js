@@ -98,12 +98,12 @@ if (gte('3.12.0')) {
       return isKey(this.listenerName, event);
     }
 
-    handleKeyboardEvent(event /* , ekEvent */) {
+    handleKeyboardEvent(event, ekEvent) {
       if (isKey(this.listenerName, event)) {
         if (this.callback) {
-          this.callback(event);
+          this.callback(event, ekEvent);
         } else {
-          this.element.click(event);
+          this.element.click();
         }
       }
     }

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { focus, render } from '@ember/test-helpers';
+import { focus, render, triggerEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/test-support/test-helpers';
 
@@ -586,6 +586,59 @@ module('Integration | Modifier | on-key', function(hooks) {
             assert.ok(!onTriggerCalled, 'does not trigger action');
             assert.ok(!onTriggerClickCalled, 'does not trigger click');
           });
+        });
+      });
+      module('stopping propagation', function(hooks) {
+        let triggered;
+        hooks.beforeEach(function() {
+          const keyboardService = this.owner.lookup('service:keyboard');
+          keyboardService.set('isPropagationEnabled', true);
+          triggered = [];
+          this.set('trigger', (letter, stop, stopImmediate, event, ekEvent) => {
+            triggered.push(letter);
+            if (stop) {
+              ekEvent.stopPropagation();
+            }
+            if (stopImmediate) {
+              ekEvent.stopImmediatePropagation();
+            }
+          });
+         });
+         test('stopPropagation+stopImmediatePropagation', async function(assert) {
+          await render(hbs`
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2a' true true) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2b' true true) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A1' true true) priority=1}}></button>
+          `);
+          await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+          assert.deepEqual(triggered, ['A2a']);
+        });
+        test('stopPropagation', async function(assert) {
+          await render(hbs`
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2a' true false) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2b' true false) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A1' true false) priority=1}}></button>
+          `);
+          await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+          assert.deepEqual(triggered, ['A2a', 'A2b']);
+        });
+        test('stopImmediatePropagation', async function(assert) {
+          await render(hbs`
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2a' false true) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2b' false true) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A1' false true) priority=1}}></button>
+          `);
+          await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+          assert.deepEqual(triggered, ['A2a', 'A1']);
+        });
+        test('no stopping', async function(assert) {
+          await render(hbs`
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2a' false false) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A2b' false false) priority=2}}></button>
+            <button type="button" {{on 'click' onTriggerClick}} {{on-key 'alt+a' (fn trigger 'A1' false false) priority=1}}></button>
+          `);
+          await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+          assert.deepEqual(triggered, ['A2a', 'A2b', 'A1']);
         });
       });
     });

@@ -56,6 +56,60 @@ module('Integration | Helper | on-key', function(hooks) {
     assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
   });
 
+  module('stopping propagation', function(hooks) {
+    let triggered;
+    hooks.beforeEach(function() {
+      const keyboardService = this.owner.lookup('service:keyboard');
+      keyboardService.set('isPropagationEnabled', true);
+      triggered = [];
+      this.set('trigger', (letter, stop, stopImmediate, event, ekEvent) => {
+        triggered.push(letter);
+        if (stop) {
+          ekEvent.stopPropagation();
+        }
+        if (stopImmediate) {
+          ekEvent.stopImmediatePropagation();
+        }
+      });
+     });
+     test('stopPropagation+stopImmediatePropagation', async function(assert) {
+      await render(hbs`
+        {{on-key 'alt+a' (fn trigger 'A2a' true true) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A2b' true true) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A1' true true) priority=1}}
+      `);
+      await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+      assert.deepEqual(triggered, ['A2a']);
+    });
+    test('stopPropagation', async function(assert) {
+      await render(hbs`
+        {{on-key 'alt+a' (fn trigger 'A2a' true false) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A2b' true false) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A1' true false) priority=1}}
+      `);
+      await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+      assert.deepEqual(triggered, ['A2a', 'A2b']);
+    });
+    test('stopImmediatePropagation', async function(assert) {
+      await render(hbs`
+        {{on-key 'alt+a' (fn trigger 'A2a' false true) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A2b' false true) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A1' false true) priority=1}}
+      `);
+      await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+      assert.deepEqual(triggered, ['A2a', 'A1']);
+    });
+    test('no stopping', async function(assert) {
+      await render(hbs`
+        {{on-key 'alt+a' (fn trigger 'A2a' false false) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A2b' false false) priority=2}}
+        {{on-key 'alt+a' (fn trigger 'A1' false false) priority=1}}
+      `);
+      await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
+      assert.deepEqual(triggered, ['A2a', 'A2b', 'A1']);
+    });
+  });
+
   module('unspecified event param', function(hooks) {
     hooks.beforeEach(async function() {
       await render(hbs`{{on-key 'shift+c' onTrigger}}`);
