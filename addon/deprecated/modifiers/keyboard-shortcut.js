@@ -5,7 +5,7 @@ import { gte } from 'ember-compatibility-helpers';
 import { deprecate } from '@ember/debug';
 
 let Klass;
-if (gte('3.12.0')) {
+if (gte('3.8.0')) {
 
   /* This is an element modifier to trigger a click on the element when
    * the specified key is pressed. In the following example, we trigger a
@@ -55,8 +55,8 @@ if (gte('3.12.0')) {
       try {
         this.keyboard.register(this);
       } catch(e) {
-        if (lte('3.12.0')) {
-          console.warn('ember-keyboard\'s modifiers are only supported in Ember 3.12+');
+        if (lte('3.8.0')) {
+          console.warn('ember-keyboard\'s modifiers are only supported in Ember 3.8+');
         }
         throw e;
       }
@@ -84,7 +84,7 @@ if (gte('3.12.0')) {
 } else {
   Klass = class OnKeyboardModifier extends Modifier {
     didInstall() {
-      throw new Error('ember-keyboard only supports the keyboard-shortcut element modifier in Ember 3.12 and higher.');
+      throw new Error('ember-keyboard only supports the keyboard-shortcut element modifier in Ember 3.8 and higher.');
     }
   }
 }

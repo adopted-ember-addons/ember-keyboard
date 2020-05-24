@@ -6,7 +6,7 @@ import { keyDown, keyPress } from 'ember-keyboard/test-support/test-helpers';
 import { textChanged } from '../../helpers/text-changed';
 import { registerDeprecationHandler } from '@ember/debug';
 
-if (gte('3.12.0')) {
+if (gte('3.8.0')) {
   module('Acceptance | ember keyboard | deprecated | element modifiers', function(hooks) {
     setupApplicationTest(hooks);
 

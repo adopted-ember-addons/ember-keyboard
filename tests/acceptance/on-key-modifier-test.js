@@ -4,7 +4,7 @@ import { module, test } from 'qunit';
 import { gte } from 'ember-compatibility-helpers';
 import { textChanged } from '../helpers/text-changed';
 
-if (gte('3.12.0')) {
+if (gte('3.8.0')) {
   module('Acceptance | ember keyboard | on-key modifier', function(hooks) {
     setupApplicationTest(hooks);
 

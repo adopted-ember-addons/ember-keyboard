@@ -8,7 +8,7 @@ import isKey from 'ember-keyboard/utils/is-key';
 const ONLY_WHEN_FOCUSED_TAG_NAMES = ['input', 'select', 'textarea'];
 
 let Klass;
-if (gte('3.12.0')) {
+if (gte('3.8.0')) {
 
   /* This is an element modifier to trigger some behavior when
    * specified key combo is pressed. When used with a form element
@@ -112,7 +112,7 @@ if (gte('3.12.0')) {
 } else {
   Klass = class OnKeyModifier extends Modifier {
     didInstall() {
-      throw new Error('ember-keyboard only supports the on-key element modifier in Ember 3.12 and higher.');
+      throw new Error('ember-keyboard only supports the on-key element modifier in Ember 3.8 and higher.');
     }
   }
 }
