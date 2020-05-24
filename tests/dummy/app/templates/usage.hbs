@@ -320,4 +320,32 @@ Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it ca
 to specifying key combos. Read the docs regard `key` vs. `code` properties and
 be sure you are specifying the key combo to `on-key` consistent with your
 intended behavior.
+
+#### <a name='deprecations-responder-trigger'></a> responders handling keyboard events via trigger
+
+ember-keyboard versions before 6.0 used the Ember.Evented API as the mechanism for
+triggering handlers on a responder. In particular the methods are `has(listenerName)`
+and `trigger(listenerName, event)`. This approach has been deprecated for two reasons.
+First, like all mixins in Ember, the `Evented` mixin is discouraged at this point. Second,
+we're providing a new API that allows the service to more flexibly determine whether a
+responder is a match for an event.
+
+In most cases using ember-keyboard, you don't need to be familiar with this part of the
+ember-keyboard responder API. If you're seeing this message, it may be due to a custom responder
+implementation or to a deprecated mixin.
+
+The recommended way to resolve this warning is to adopt one of the two following APIs in the
+responder in question:
+
+The first is a declarative API, in which the responder implements a
+property named `keyboardHandlers` returning a dictionary mapping listenerNames to handler
+functions. In this case, the ember-keyboard service will determine if you the dictionary
+includes a match for a specific KeryboardEvent and invoke the respective handler if so.
+See the implementation of the `on-key` helper for an example.
+
+The second is an imperative API, where your responder will have control over whether it
+should be considered capable of handling a given KeyboardEvent, and exactly how to handle
+it. This is accomplished by implementing the `handleKeyboardEvent(event, ekEvent)` method
+and optionally the `canHandleKeyboardEvent(event)` method. See the `on-key` modifer for
+an example.  
 "}}

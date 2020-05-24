@@ -3,6 +3,8 @@ import { isPresent } from '@ember/utils';
 import getMouseName from 'ember-keyboard/utils/get-mouse-name';
 import getCode from 'ember-keyboard/utils/get-code';
 import listenerName from 'ember-keyboard/utils/listener-name';
+import isKey from 'ember-keyboard/utils/is-key';
+import { deprecate } from '@ember/debug';
 
 function gatherKeys(event) {
   const key = getCode(event);
@@ -38,7 +40,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
   /* eslint-disable no-unused-vars */
   for (const responder of firstResponders) {
     for (const listenerName of listenerNames) {
-      responder.trigger(listenerName, event, ekEvent);
+      triggerResponderListener(responder, listenerName, event, ekEvent);
     }
 
     if (isImmediatePropagationStopped) {
@@ -70,7 +72,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
     }
 
     for (const listenerName of listenerNames) {
-      responder.trigger(listenerName, event, ekEvent);
+      triggerResponderListener(responder, listenerName, event, ekEvent);
     }
   }
   /* eslint-enable no-unused-vars */
@@ -101,10 +103,8 @@ export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
         currentPriorityLevel = keyboardPriority;
       }
 
-      listenerNames.forEach((triggerName) => {
-        if (responder.has(triggerName)) {
-          responder.trigger(triggerName, event);
-        }
+      listenerNames.forEach((listenerName) => {
+        triggerResponderListener(responder, listenerName, event);
       });
 
       return true;
@@ -112,4 +112,49 @@ export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
       return false;
     }
   });
+}
+
+function triggerResponderListener(responder, listenerName, event, ekEvent = null) {
+  if (responder.handleKeyboardEvent) {
+    if (responder.canHandleKeyboardEvent && !responder.canHandleKeyboardEvent(event)) {
+      return;
+    }
+    responder.handleKeyboardEvent(event, ekEvent);
+    return;
+  }
+
+  if (responder.keyboardHandlers) {
+    Object.keys(responder.keyboardHandlers).forEach((responderListenerName) => {
+      if (isKey(responderListenerName, event)) {
+        if (ekEvent) {
+          responder.keyboardHandlers[responderListenerName](event, ekEvent);
+        } else {
+          responder.keyboardHandlers[responderListenerName](event);
+        }
+      }
+    });
+    return;
+  }
+  
+  if (responder.trigger) {
+    deprecate(
+      'ember-keyboard registered responders handling events via `trigger(listerName, event)` is deprecated. A responder should have either `keyboardHandlers` (a property returning a dictionary of listernNames to handler functions), or `handleKeyboardEvent(event)`.',
+      false,
+      {
+          id: 'ember-keyboard.responder-trigger',
+          until: '7.0.0',
+          url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-responder-trigger'
+      }
+    );
+    if (responder.has && !responder.has(listenerName)) {
+      return;
+    }
+    if (ekEvent) {
+      responder.trigger(listenerName, event, ekEvent);
+    } else {
+      responder.trigger(listenerName, event);
+    }
+    return;
+  }
+  throw new Error('A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listernNames to handler functions), or `handleKeyboardEvent(event)`)');
 }
