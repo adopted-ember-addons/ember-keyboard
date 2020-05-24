@@ -4,6 +4,18 @@ import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 
 module('Unit | Utility | listener name', function() {
   test('it returns a sorted list of keys after the event name', function(assert) {
+    const result = listenerName('keydown', ['c', 'alt', 'shift']);
+
+    assert.equal(result, 'keydown:alt+c+shift', 'name is correctly formatted');
+  });
+
+  test('it can be passed a string instead of an array of keys', function(assert) {
+    const result = listenerName('keydown', 'shift+alt+c');
+    
+    assert.equal(result, 'keydown:alt+c+shift', 'name is correctly formatted');
+  });
+
+  test('it returns a sorted list of keys after the event name', function(assert) {
     const result = listenerName('keydown', ['c', 'a', 'b']);
 
     assert.equal(result, 'keydown:a+b+c', 'name is correctly formatted');
