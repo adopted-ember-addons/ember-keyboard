@@ -19,8 +19,6 @@ export default class extends Helper {
     this.keyboardPriority = priority;
     this.keyboardHandlers = {};
     this.keyboardHandlers[listenerName(event, keyCombo)] = callback;
-
-    this.keyboard.unregister(this);
     this.keyboard.register(this);
   }
 

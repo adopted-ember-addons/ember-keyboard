@@ -2,7 +2,7 @@
 
 ## Summary
 
-This document explains and memorializes the API design decisions ember-keyboard has made, for the benefit of consumers of the addon as well as contributors.
+This document explains and memorializes the API design decisions ember-keyboard has made for 6.0, for the benefit of consumers of the addon as well as contributors.
 
 ## Motivation
 
@@ -25,6 +25,8 @@ The W3C UI Events spec includes instructive [examples of `code` and `key` values
 For keyboard shortcuts that are based on physical location on the keyboard (e.g. `WASD` game or cursor controls), the `code` property should be used. For mnemonic-based shortcuts (e.g. `Ctrl+B` to Bold text), the `key` property should be used. ember-keyboard should provide an API to make both of these possible.
 
 By making providing clear semantics about whether a keyboard event handler is using `code` or `key`, we can avoid a class of bugs and confusion that were present in previous versions of ember-keyboard.
+
+Browser support should be modern browsers. For the avoidance of doubt, this does not include IE 11.
 
 ## Detailed design
 
