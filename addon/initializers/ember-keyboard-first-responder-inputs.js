@@ -20,9 +20,9 @@ deprecate(
     'The `ember-keyboard-first-responder-inputs` initializer is deprecated and will be removed in 7.0. Please use the `on-key` modifier with your text fields instead.',
     false,
     {
-        id: 'ember-keyboard.ember-keyboard-first-responder-inputs',
+        id: 'ember-keyboard.first-responder-inputs',
         until: '7.0.0',
-        url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-ember-keyboard-first-responder-inputs'
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-first-responder-inputs'
     }
   );
   TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);
