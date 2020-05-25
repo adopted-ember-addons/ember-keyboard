@@ -219,9 +219,23 @@ interface IEmberKeyboardEvent {
 
 ### Low-level key-combo matching API
 
-A low-level API for the matching engine that determines whether a particular keyboard event is considered to match a specified key-combo will also be exposed.
+A low-level API for the matching engine that determines whether a particular keyboard event is
+considered to match a specified key-combo will also be exposed.
 
-It will be available as an `if-key` helper:
+It will be available (and used internally) as an `isKey` JS function:
+
+```js
+import { isKey } from 'ember-keyboard';
+
+function onEvent(ev) {
+  if (isKey('keydown:alt+x', ev)) {
+    this.handleAltX();
+  }
+}
+```
+
+A variation will also be available as an `if-key` helper that can be used
+any place a function that received a KeyboardEvent would be used:
 
 ```hbs
 {{!-- attach your own event handler using the {{on}} modifier --}}
@@ -237,17 +251,9 @@ It will be available as an `if-key` helper:
 <SomeComponent @onKey={{if-key "alt+x" this.doThing}}/>
 ```
 
-It will also be available as an `isKey` JS function:
-
-```js
-import { isKey } from 'ember-keyboard';
-
-function onEvent(ev) {
-  if (isKey('keydown:alt+x', ev)) {
-    this.handleAltX();
-  }
-}
-```
+Note that usage like this will not participate in the wider ember-keyboard functionality
+(responders, priority, etc), but can be useful if you just want to leverage the key combo
+matching code.
 
 ## Alternatives
 

@@ -71,6 +71,44 @@ pressed together with the Alt key:
 </button>
 ```
 
+### Low-level key-matching API
+
+A low-level API for the matching engine that determines whether a particular keyboard event is
+considered to match a specified key-combo will also be exposed.
+
+It will be available (and used internally) as an `isKey` JS function:
+
+```js
+import { isKey } from 'ember-keyboard';
+
+function onEvent(ev) {
+  if (isKey('keydown:alt+x', ev)) {
+    this.handleKeydownWithAltX();
+  }
+}
+```
+
+A variation will also be available as an `if-key` helper that can be used
+any place a function that received a KeyboardEvent would be used:
+
+```hbs
+{{!-- attach your own event handler using the {{on}} modifier --}}
+
+<div {{on 'keydown' (if-key 'alt+c' this.doThing)}}></div>
+
+{{!-- combining with the ember-on-helper addon --}}
+
+{{on-document 'keydown' (if-key 'alt+KeyX' this.doThing)}}
+
+{{!-- use some third-party component API --}}
+
+<SomeComponent @onKey={{if-key 'alt+x' this.doThing}}/>
+```
+
+Note that low-level usage like this will not participate in the wider ember-keyboard functionality
+(responders, priority, etc), but can be useful if you just want to leverage the key combo
+matching code of ember-keyboard.
+
 ### Using ember-keyboard in routes and classic components
 
 First, add `EKMixin` to a route or a classic Ember component:
