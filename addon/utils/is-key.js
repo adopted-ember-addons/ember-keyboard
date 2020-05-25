@@ -1,12 +1,13 @@
 import KeyboardListener from "./keyboard-listener";
+import getPlatform from "./platform";
 const ALL_SYMBOL = '_all';
 
-export default function isKey(listenerOrListenerName, keyboardEvent) {
+export default function isKey(listenerOrListenerName, keyboardEvent, platform=getPlatform()) {
   let keyboardListener;
   if (listenerOrListenerName instanceof KeyboardListener) {
     keyboardListener = listenerOrListenerName;
   } else if (typeof listenerOrListenerName === 'string') {
-    keyboardListener = KeyboardListener.parse(listenerOrListenerName);
+    keyboardListener = KeyboardListener.parse(listenerOrListenerName, platform);
   } else {
     throw new Error('Expected a `string` or `KeyCombo` as `keyComboOrKeyComboString` argument to `isKey`');
   }
