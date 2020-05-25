@@ -14,13 +14,11 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
   });
 
   module('left clicking', function() {
-    const clickButton = 'left';
-
     test('clicking once adjusts the counter by 1', async function(assert) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton), {
+        () => mouseDown('left'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '1',
@@ -31,7 +29,7 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton) && mouseDown(clickButton), {
+        () => mouseDown('left') && mouseDown('left'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '2',
@@ -40,13 +38,11 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
   });
 
   module('middle clicking', function() {
-    const clickButton = 'middle';
-
     test('clicking once adjusts the counter by 1', async function(assert) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton), {
+        () => mouseDown('middle'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '-10',
@@ -57,7 +53,7 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton) && mouseDown(clickButton), {
+        () => mouseDown('middle') && mouseDown('middle'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '-20',
@@ -66,13 +62,11 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
   });
 
   module('right clicking', function() {
-    const clickButton = 'right';
-
     test('clicking once adjusts the counter by 1', async function(assert) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton), {
+        () => mouseDown('right'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '10',
@@ -83,7 +77,7 @@ module('Acceptance | ember keyboard | mouseDown', function(hooks) {
       assert.expect(2);
 
       await textChanged(assert,
-        () => mouseDown(clickButton) && mouseDown(clickButton), {
+        () => mouseDown('right') && mouseDown('right'), {
           selectorName: 'mouse-down-counter',
           beforeValue: '0',
           afterValue: '20',

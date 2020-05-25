@@ -19,7 +19,7 @@ export default class KeyboardListener {
     this.platform = platform;
   }
 
-  static parse(s, platform) {
+  static parse(s, platform = getPlatform()) {
     let keyboardListener = new KeyboardListener(platform);
     let [eventType, keyCombo] = s.split(':');
     keyboardListener.type = eventType;
@@ -43,5 +43,19 @@ export default class KeyboardListener {
       }
     });
     return keyboardListener;
+  }
+
+  createMatchingKeyboardEvent(opts = {}) {
+    return new KeyboardEvent(this.type, Object.assign({
+      // one of these next two will be incorrect. For test usage, if usually
+      // doesn't matter, but you can pass in correct values via opts if needed.
+      key: this.keyOrCode,
+      code: this.keyOrCode,
+
+      altKey: this.altKey,
+      ctrlKey: this.ctrlKey,
+      metaKey: this.metaKey,
+      shiftKey: this.shiftKey
+    }, opts));
   }
 }

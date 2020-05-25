@@ -23,6 +23,24 @@ function gatherKeys(event) {
   }, primaryEvent);
 }
 
+function modifierStrings(event) {
+  if (event instanceof KeyboardEvent) {
+    return ['alt', 'ctrl', 'meta', 'shift'].reduce((result, keyName) => {
+      if (event[`${keyName}Key`]) {
+        result.push(keyName);
+      }
+
+      return result;
+    }, []);
+  } else if (event instanceof MouseEvent) {
+    let mouseButton = getMouseName(event.button);
+    if (mouseButton) {
+      return [mouseButton];
+    }
+    return []
+  }
+}
+
 export function handleKeyEventWithPropagation(event, { firstResponders, normalResponders }) {
   let isImmediatePropagationStopped = false;
   let isPropagationStopped = false;
@@ -140,14 +158,23 @@ function triggerResponderListener(responder, event, ekEvent = null) {
 }
 
 export function getListenerNames(event) {
-  let keys = gatherKeys(event);
-  let listenerNames = [];
-  if (keys.length) {
-    listenerNames.push(listenerName(event.type, keys));
+  let result = [];
+  if (event instanceof KeyboardEvent) {
+    if (event.key) {
+      result.push(listenerName(event.type, modifierStrings(event).concat([event.key]).join('+')));
+    }
+    if (event.code && (event.key !== event.code)) {
+      result.push(listenerName(event.type, modifierStrings(event).concat([event.code]).join('+')));
+    }  
+  } else if (event instanceof MouseEvent) {
+    let modifiers = modifierStrings(event);
+    if (modifiers.length) {
+      result.push(listenerName(event.type, modifierStrings(event).join('+')));
+    }
   }
-  listenerNames.push(listenerName(event.type));
-  return listenerNames;
-}
+  result.push(listenerName(event.type));
+  return result;
+}   
 
 export function triggerViaLegacyResponderApi(responder, event, ekEvent) {
   for (const listenerName of getListenerNames(event)) {
