@@ -68,7 +68,7 @@ module('Acceptance | ember keyboard | deprecated | keyboard combos', function(ho
 
         await textChanged(
           assert,
-          () => keyPress('ctrl+KeyK'), {
+          () => keyPress('ctrl+k'), {
             selectorName: 'ctrl-k',
             beforeValue: 'Ctrl+K not pressed',
             afterValue: 'Ctrl+K pressed'

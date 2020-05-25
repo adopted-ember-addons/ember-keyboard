@@ -337,7 +337,15 @@ Out of scope for now, but this API could be readily enhanced to support key sequ
 
 ### _This would be a whole new API from version 5. What is the migration path? Is a codemod possible?_
 
-The issue that prompted this API rethink was that the addon was conceptually mixing `key` and `code` in a confusing and inconsistent way, so the existing behavior is not something that we would want to bring forward. It seems, therefore, that a codemod would be inadvisable since we would not be preserving behavior. Is should be possible to leave the existing API in place with the existing behavior and deprecate it. This would allow people to upgrade and incrementally move to the new API. The deprecated API could then be dropped in the next major release.
+The issue that prompted this API rethink was that the addon was conceptually mixing `key` and `code` in a confusing and inconsistent way, so the existing behavior is not something that we would want to bring forward. We will have a breaking change in certain key matching behavior between version 5 and 6.
+
+Upgrade guide:
+
+Version 6 of ember-keyboard brings a change to how key combo strings are matched against events. You will need to review the key combos used your app. The behavior of version 5 of ember-keyboard was primarily around matching the physical key location with some code to try to accomodate key remapping like the Dvorak keyboard layout. The key combo strings supported looked like `ctrl+KeyS` or `shift+ctrl+Digit2`. Those strings will continue to work but they now *exclusively* match based on the physical location of the key (i.e. the `code` property of the keyboard event). Alternatively, you may now choose instead to specify the character that the pressed key would normally generate. For example, `ctrl+s` or `shift+ctrl+2`. These strings will match based on the `key` property of the keyboard event. If you're not sure whether to use the `code` style (`ctrl+KeyS`) or the `key` style (`ctrl+s`), ask yourself whether your shortcut is based on a mnemonic of the pressed key (e.g. "s" for "save") or the layout of the keys (e.g. `WASD` as cursor controls). For mnemonic shortcuts, use the `key` style. For physical layout shortcuts, use the `code` style.
+
+ * For a full list of `code` property values, see the W3C spec: https://www.w3.org/TR/uievents-code/#key-alphanumeric-writing-system
+ * For information about the `key` property, see this MDN doc: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+ * For a useful interactive KeyboardEvent viewer tool, see https://w3c.github.io/uievents/tools/key-event-viewer.html
 
 ## Acknowledgements
 
