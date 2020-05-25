@@ -133,24 +133,31 @@ function triggerResponderListener(responder, event, ekEvent = null) {
       }
     );
     
-    let keys = gatherKeys(event);
-    let listenerNames = [];
-    if (keys.length) {
-      listenerNames.push(listenerName(event.type, keys));
-    }
-    listenerNames.push(listenerName(event.type));
-
-    for (const listenerName of listenerNames) {
-      if (responder.has && !responder.has(listenerName)) {
-        return;
-      }
-      if (ekEvent) {
-        responder.trigger(listenerName, event, ekEvent);
-      } else {
-        responder.trigger(listenerName, event);
-      }
-    }
+    triggerViaLegacyResponderApi(responder, event, ekEvent);
     return;
   }
   throw new Error('A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)');
+}
+
+export function getListenerNames(event) {
+  let keys = gatherKeys(event);
+  let listenerNames = [];
+  if (keys.length) {
+    listenerNames.push(listenerName(event.type, keys));
+  }
+  listenerNames.push(listenerName(event.type));
+  return listenerNames;
+}
+
+export function triggerViaLegacyResponderApi(responder, event, ekEvent) {
+  for (const listenerName of getListenerNames(event)) {
+    if (responder.has && !responder.has(listenerName)) {
+      continue;
+    }
+    if (ekEvent) {
+      responder.trigger(listenerName, event, ekEvent);
+    } else {
+      responder.trigger(listenerName, event);
+    }
+  }
 }

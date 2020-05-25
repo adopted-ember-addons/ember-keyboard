@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import Evented from '@ember/object/evented';
 import Mixin from '@ember/object/mixin';
 import { get } from '@ember/object';
+import { getListenerNames, triggerViaLegacyResponderApi } from 'ember-keyboard/utils/handle-key-event';
 
 export default Mixin.create(Evented, {
   keyboardPriority: 0,
@@ -25,5 +26,22 @@ export default Mixin.create(Evented, {
     this._super(...args);
 
     get(this, 'keyboard').unregister(this);
+  },
+
+  // These next two methods adapt this mixin to conform to the new responder API.
+  // In the future, once we have good alternatives, we expect all of this addon's
+  // mixins to be deprecated and removed, but for now this will let it execute
+  // without triggering deprecation warnings.
+  canHandleKeyboardEvent(event) {
+    for (let listenerName of getListenerNames(event)) {
+      if (this.has(listenerName)) {
+        return true;
+      }
+    }
+    return false;
+  },
+
+  handleKeyboardEvent(event, ekEvent) {
+    triggerViaLegacyResponderApi(this, event, ekEvent);
   }
 });
