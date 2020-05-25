@@ -225,48 +225,13 @@ saveDocument: Ember.on(keyDown('ctrl+KeyS'), function(event) {
 
 Note that if you want `preventDefault` to prevent `window` level events, you'll need to use `keyDown`, as the default event will fire before `keyUp`.
 
-### `getCode`
-
-Did you know that 65 was the keycode for 'KeyA'? Or that 37 was the keycode for the right arrow? If you don't want to litter your code with keycode references, you can use `getCode`, which `ember-keyboard` uses internally:
-
-```js
-import { getCode } from 'ember-keyboard';
-
-. . . .
-
-keyMapper: Ember.on(keyDown('KeyA'), keyDown('KeyB'), keyDown('KeyC'), function(event) {
-  const key = getCode(event);
-  switch (key) {
-    match 'KeyA': console.log('It\'s an a!'); break;
-    . . . .
-  }
-})
-```
-
-### `getKeyCode`
-
-On the other end of things, if you need to convert a code into a keycode, you can use `getKeyCode`. This is particularly useful when testing:
-
-```js
-import { getKeyCode } from 'ember-keyboard';
-
-. . . .
-
-keyEvent(document, 'keydown', getKeyCode('KeyA'));
-keyEvent(document, 'keydown', getKeyCode('ArrowRight'));
-keyEvent(document, 'keydown', getKeyCode('Backspace'));
-keyEvent(document, 'keydown', getKeyCode('Space'));
-```
-
-Just pass in an `event`, and it'll return a human readable key. Look [here](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code) for a full mapping.
-
 ### Key Indifference
 
 If you want an event to fire for every keypress, then simply don't provide a keystring to `keyUp` or `keyDown`. This can be a handy way to trigger events for large ranges of keys, such as on any alphanumeric keypress. For instance:
 
 ```js
 triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
-  if (/^Key\w(?!.)/.test(getCode(event))) {
+  if (/^Key\w(?!.)/.test(event.code)) {
     this.startEditing();
   }
 })
@@ -274,14 +239,17 @@ triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to key strokes while an input/textarea is focused, we've reopened `Ember.TextField` and `Ember.TextArea` and applied the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an input is focused, other key responders will not fire. If you want to have responders associated with an input or textarea (such as a rich text editor with `keyUp('ctrl+i')` bindings), you need to extend these components from `Ember.TextField` or `Ember.TextArea` rather than `Ember.Component`.
-
-This applies to `input` and `textarea` helpers:
+To prevent `ember-keyboard` from responding to keystrokes while an input/textarea is focused, previous versions of ember-keyboard used an intializers
+to reopen `Ember.TextField` and `Ember.TextArea` and apply the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an
+input is focused, other key responders will not fire. This applies to `input` and `textarea` helpers:
 
 ```htmlbars
 {{input}}
 {{textarea}}
 ```
+
+This initializer is now deprecated. We recommend using the `on-key` modifier and regular `<input>` and `<textarea>` elements. See the entry in the
+deprecations section below for information on how to suppress the deprecation warning.
 
 ### Unpropagated Key Events
 

@@ -1,29 +1,29 @@
 import { keyEvent } from './key-event';
 
-export function mouseDown(attributes) {
-  return keyEvent(attributes, 'mousedown');
+export function mouseDown(keyCombo) {
+  return keyEvent(keyCombo, 'mousedown');
 }
 
-export function mouseUp(attributes) {
-  return keyEvent(attributes, 'mouseup');
+export function mouseUp(keyCombo) {
+  return keyEvent(keyCombo, 'mouseup');
 }
 
-export function keyDown(attributes) {
-  return keyEvent(attributes, 'keydown');
+export function keyDown(keyCombo) {
+  return keyEvent(keyCombo, 'keydown');
 }
 
-export function keyUp(attributes) {
-  return keyEvent(attributes, 'keyup');
+export function keyUp(keyCombo) {
+  return keyEvent(keyCombo, 'keyup');
 }
 
-export function keyPress(attributes) {
-  return keyEvent(attributes, 'keypress');
+export function keyPress(keyCombo) {
+  return keyEvent(keyCombo, 'keypress');
 }
 
-export function touchStart(attributes) {
-  return keyEvent(attributes, 'touchstart');
+export function touchStart(keyCombo) {
+  return keyEvent(keyCombo, 'touchstart');
 }
 
-export function touchEnd(attributes) {
-  return keyEvent(attributes, 'touchend');
+export function touchEnd(keyCombo) {
+  return keyEvent(keyCombo, 'touchend');
 }

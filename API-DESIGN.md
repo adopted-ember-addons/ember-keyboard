@@ -347,6 +347,8 @@ Version 6 of ember-keyboard brings a change to how key combo strings are matched
  * For information about the `key` property, see this MDN doc: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
  * For a useful interactive KeyboardEvent viewer tool, see https://w3c.github.io/uievents/tools/key-event-viewer.html
 
+The re-exports of utils/get-cmd-key and utils/listener-name have been removed. Import them directly from ember-keyboard if you need them.
+
 ## Acknowledgements
 
 Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, @seanCodes, and @bendemboski for helping to shape this document.

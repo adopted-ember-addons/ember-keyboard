@@ -14,7 +14,7 @@ on a second event object pased to your handlers.
 
 ```js
 incrementCounter: on(keyDown('RightArrow'), function(event, ekEvent) {
-  const key = getCode(event); // => 'RightArrow'
+  const key = event.code; // => 'RightArrow'
   // ekEvent.stopPropagation();
   // ekEvent.stopImmediatePropagation();
 })

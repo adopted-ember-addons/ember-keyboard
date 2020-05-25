@@ -1,1 +1,0 @@
-export { default } from 'ember-keyboard/utils/listener-name';

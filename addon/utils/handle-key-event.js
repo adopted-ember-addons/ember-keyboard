@@ -1,27 +1,9 @@
 import { get } from '@ember/object';
-import { isPresent } from '@ember/utils';
 import getMouseName from 'ember-keyboard/utils/get-mouse-name';
-import getCode from 'ember-keyboard/utils/get-code';
 import listenerName from 'ember-keyboard/utils/listener-name';
 import isKey from 'ember-keyboard/utils/is-key';
 import { deprecate } from '@ember/debug';
 
-function gatherKeys(event) {
-  const key = getCode(event);
-  const mouseButton = getMouseName(event.button);
-  const primaryEvent = [];
-
-  if (isPresent(key)) primaryEvent.push(key);
-  if (isPresent(mouseButton)) primaryEvent.push(mouseButton)
-
-  return ['alt', 'ctrl', 'meta', 'shift'].reduce((keys, keyName) => {
-    if (event[`${keyName}Key`]) {
-      keys.push(keyName);
-    }
-
-    return keys;
-  }, primaryEvent);
-}
 
 function modifierStrings(event) {
   if (event instanceof KeyboardEvent) {

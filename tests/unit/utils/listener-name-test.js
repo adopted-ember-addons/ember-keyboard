@@ -1,5 +1,5 @@
-import listenerName from '../../../utils/listener-name';
 import { module, test } from 'qunit';
+import listenerName from 'ember-keyboard/utils/listener-name';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 
 module('Unit | Utility | listener name', function() {
