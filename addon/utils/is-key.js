@@ -1,4 +1,5 @@
 import KeyboardListener from "./keyboard-listener";
+const ALL_SYMBOL = '_all';
 
 export default function isKey(listenerOrListenerName, keyboardEvent) {
   let keyboardListener;
@@ -9,9 +10,20 @@ export default function isKey(listenerOrListenerName, keyboardEvent) {
   } else {
     throw new Error('Expected a `string` or `KeyCombo` as `keyComboOrKeyComboString` argument to `isKey`');
   }
+  if (isAll(keyboardListener)) {
+    return true;
+  }
 
   return modifiersMatch(keyboardListener, keyboardEvent)
       && keyOrCodeMatches(keyboardListener, keyboardEvent);
+}
+
+function isAll(keyboardListener) {
+  return keyboardListener.keyOrCode === ALL_SYMBOL
+      && keyboardListener.altKey === false
+      && keyboardListener.ctrlKey === false
+      && keyboardListener.metaKey === false
+      && keyboardListener.shiftKey === false;
 }
 
 function modifiersMatch(keyboardListener, keyboardEvent) {
@@ -22,6 +34,9 @@ function modifiersMatch(keyboardListener, keyboardEvent) {
       && keyboardListener.shiftKey === keyboardEvent.shiftKey;
 }
 
-function keyOrCodeMatches(keyCombo, keyboardEvent) {
-  return keyCombo.keyOrCode === keyboardEvent.code || keyCombo.keyOrCode === keyboardEvent.key;
+function keyOrCodeMatches(keyboardListener, keyboardEvent) {
+  if (keyboardListener.keyOrCode === ALL_SYMBOL) {
+    return true;
+  }
+  return keyboardListener.keyOrCode === keyboardEvent.code || keyboardListener.keyOrCode === keyboardEvent.key;
 }

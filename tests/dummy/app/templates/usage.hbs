@@ -50,6 +50,16 @@ key combo. For example,
 {{on-key 'alt+KeyC' this.doThing}}
 ```
 
+There is a 'magic' key combo to match any key: `_all`. 
+
+```hbs
+<!-- Fires DoThing on keydown of alt plus any key -->
+{{on-key 'alt+_all' this.doThing}}
+
+<!-- Fires DoThing on keyup of any key, irrespective of modifier keys -->
+{{on-key '_all' this.doThing event='keyup'}}
+```
+
 Another option (supported in Ember 3.8+) for templates is the `on-key` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
 
 ```htmlbars

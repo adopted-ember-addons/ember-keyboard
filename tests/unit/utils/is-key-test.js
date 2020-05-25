@@ -32,6 +32,9 @@ module('Unit | Utility | isKey', function() {
   keydown:/                |  F   F    F    F     /    Slash    |  T         F         slash key with us language
   keydown:/                |  F   F    F    F     -    Slash    |  F         F         same key with german language
   keydown:/                |  F   F    F    F     /    Digit7   |  T         F         slash key on german keyboard
+  keydown:_all             |  F   F    F    F     /    Digit7   |  T         F         
+  keydown:_all             |  T   F    F    F     c    KeyC     |  T         F         
+  keydown:_all             |  F   T    F    F     ç    KeyC     |  T         F         
   `;
   for (let line of table.split("\n").map(line => line.trim().replace(/\|/g, ''))) {
     if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
