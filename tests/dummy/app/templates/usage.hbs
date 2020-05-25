@@ -347,5 +347,16 @@ The second is an imperative API, where your responder will have control over whe
 should be considered capable of handling a given KeyboardEvent, and exactly how to handle
 it. This is accomplished by implementing the `handleKeyboardEvent(event, ekEvent)` method
 and optionally the `canHandleKeyboardEvent(event)` method. See the `on-key` modifer for
-an example.  
+an example.
+
+#### <a name='deprecations-ember-keyboard-first-responder-inputs'></a> `ember-keyboard-first-responder-inputs` initializer
+
+ember-keyboard includes an initialize that reopens ember's TextArea and TextField components and mixes in
+EKMixin and EKFirstResponderOnFocusMixin. The `on-key` modifier added in 6.0 accomplishes a similar goal
+in a less intrusive and less hidden way. This initializer will be removed in 7.0. To opt out of it now
+and remove the deprecation warning, disable the initializer by setting `emberKeyboard.disableInputsInitializer`
+in the `config/environment.js` to `true`.
+
+Related to this, if you were importing `{ initializer } from 'ember-keyboard'` in any integration tests, this should no
+longer be necessary as Ember integration tests now run initializers themselves. This export will be removed in 7.0 as well.
 "}}

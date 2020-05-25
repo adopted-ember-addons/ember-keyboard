@@ -6,17 +6,12 @@ import {
   triggerKeyDown,
   triggerKeyPress,
   triggerKeyUp,
-  initialize
 } from 'ember-keyboard';
 
 import { hook } from '../../helpers/hook';
 
 module('Integration | Util | triggerEvent', function(hooks) {
   setupRenderingTest(hooks);
-
-  hooks.beforeEach(function() {
-    initialize();
-  });
 
   test('`keyDown` triggers a keydown event', async function(assert) {
     assert.expect(4);
