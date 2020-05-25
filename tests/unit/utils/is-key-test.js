@@ -12,7 +12,8 @@ module('Unit | Utility | isKey', function() {
   keypress:alt+c            win    |  T   F    F    F     c    KeyC     |  F         F
   keydown:alt+c             win    |  T   F    F    F     j    KeyC     |  F         F         simulates dvorak j
   keydown:alt+c             linux  |  T   F    F    F     c    KeyI     |  T         F         simulates dvorak c
-  keydown:alt+c             mac    |  T   F    F    F     ç    KeyC     |  T         T         simulates Mac alt+c
+  keydown:alt+c             mac    |  T   F    F    F     ç    KeyC     |  T         F         simulates Mac alt+c
+  keydown:shift+alt+7       mac    |  T   F    F    T     ‡    Digit1   |  T         F         simulates Mac shift+alt+7
   keydown:alt+KeyC          win    |  T   F    F    F     c    KeyC     |  T         F
   keydown:alt+c             win    |  F   F    F    F     c    KeyC     |  F         F         alt not pressed
   keydown:alt+c             win    |  T   F    F    T     c    KeyC     |  F         F         alt+shift pressed
@@ -24,10 +25,10 @@ module('Unit | Utility | isKey', function() {
   keydown:ctrl+shift+KeyT   win    |  F   T    F    T     t    KeyT     |  T         F
   keydown:alt+Digit2        win    |  T   F    F    F     2    Digit2   |  T         F
   keydown:shift+Digit2      win    |  F   F    F    T     @    Digit2   |  T         F
-  keydown:shift+2           win    |  F   F    F    T     @    Digit2   |  T         T
+  keydown:shift+2           win    |  F   F    F    T     @    Digit2   |  T         F
   keydown:@                 win    |  F   F    F    F     @    Digit2   |  T         F
-  keydown:?                 win    |  F   F    F    T     ?    Slash    |  T         T
-  keydown:ctrl+?            win    |  F   T    F    T     ?    Slash    |  T         T
+  keydown:?                 win    |  F   F    F    T     ?    Slash    |  T         F
+  keydown:ctrl+shift+?      win    |  F   T    F    T     ?    Slash    |  T         F
   keydown:ctrl+Slash        win    |  F   T    F    F     /    Slash    |  T         F
   keydown:ctrl+Slash        win    |  F   T    F    T     ?    Slash    |  F         F
   keydown:/                 win    |  F   F    F    F     /    Slash    |  T         F         slash key with us language
@@ -44,7 +45,8 @@ module('Unit | Utility | isKey', function() {
   keydown:CTRL+Slash        win    |  F   T    F    F     /    Slash    |  T         F
   keydown:meta+c            win    |  F   F    T    F     c    KeyC     |  T         F
   keydown:cmd+c             mac    |  F   F    T    F     c    KeyC     |  T         F
-  keydown:cmd+c             win    |  F   T    F    F     c    KeyC     |  F         F
+  keydown:cmd+c             win    |  F   T    F    F     c    KeyC     |  T         F
+  keydown:cmd+c             win    |  F   F    F    T     c    KeyC     |  F         F
   `;
   for (let line of table.split("\n").map(line => line.trim().replace(/\|/g, ''))) {
     if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
@@ -89,7 +91,7 @@ function buildTestFromLine(line) {
   let userAgent;
   switch(plat) {
     case 'win':
-      userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36';
+      userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';
       break;
     case 'mac':
       userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36';
@@ -98,7 +100,7 @@ function buildTestFromLine(line) {
       userAgent = 'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36';
       break;
   }
-  testDescription += modifiers.join('+');
+  testDescription += modifiers.join('+') + ` on ${plat}`;
   let testFunc = isPending ? skip : test;
   testFunc(testDescription, async function(assert) {
     let fakeEvent = new KeyboardEvent('keydown', { key, code, altKey, ctrlKey, metaKey, shiftKey });
