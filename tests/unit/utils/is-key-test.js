@@ -35,6 +35,12 @@ module('Unit | Utility | isKey', function() {
   keydown:_all             |  F   F    F    F     /    Digit7   |  T         F         
   keydown:_all             |  T   F    F    F     c    KeyC     |  T         F         
   keydown:_all             |  F   T    F    F     ç    KeyC     |  T         F         
+  keydown:Alt+c            |  T   F    F    F     c    KeyC     |  T         F       
+  keydown:ALT+c            |  T   F    F    F     c    KeyC     |  T         F       
+  keydown:SHIFT+c          |  F   F    F    T     c    KeyC     |  T         F       
+  keydown:Shift+KeyC       |  F   F    F    T     c    KeyC     |  T         F
+  keydown:Ctrl+Shift+t     |  F   T    F    T     t    KeyT     |  T         F
+  keydown:CTRL+Slash       |  F   T    F    F     /    Slash    |  T         F
   `;
   for (let line of table.split("\n").map(line => line.trim().replace(/\|/g, ''))) {
     if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
