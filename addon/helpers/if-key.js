@@ -16,6 +16,6 @@ export default helper(function ifKey([keyCombo, callback]/*, hash*/) {
 
     if (isKey(listenerName(event.type, keyCombo), event)) {
       callback(event);
-    };
+    }
   };
 });

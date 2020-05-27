@@ -5,15 +5,6 @@ import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Helper | if-key', function(hooks) {
   setupRenderingTest(hooks);
-
-  let onTriggerCalled;
-  hooks.beforeEach(function() {
-    onTriggerCalled = false;
-    this.set('onTrigger', () => {
-      onTriggerCalled = true;
-    });
-  });
-
   
   module('error cases', function(hooks) {
     hooks.afterEach(() => resetOnerror());
