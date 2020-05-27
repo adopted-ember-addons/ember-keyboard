@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, triggerEvent } from '@ember/test-helpers';
+import { render, resetOnerror, setupOnerror, triggerEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/test-support/test-helpers';
 
@@ -207,5 +207,23 @@ module('Integration | Helper | on-key', function(hooks) {
       await keyDown('shift+c');
       assert.ok(!onTriggerCalled, 'does not trigger action');
     });
+  });
+
+  module('error cases', function(hooks) {
+    hooks.afterEach(() => resetOnerror());
+
+    // This doesn't work. I wish it did, but can't figure out why not.
+    test('errors if invoked without a handler', async function(assert) {
+      assert.expect(1);
+      setupOnerror(function(error) {
+        assert.strictEqual(
+          error.message,
+          "Assertion Failed: ember-keyboard: You must pass a function as the second argument to the `on-key` helper",
+          'error is thrown'
+        );
+      });  
+      await render(hbs`{{on-key "alt+a" doesNotExist}}`);
+      await triggerEvent(document.body, 'keydown', { altKey: true, key: 'c' });
+    });  
   });
 });
