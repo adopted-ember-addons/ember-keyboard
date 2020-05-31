@@ -47,7 +47,7 @@ if (gte('3.8.0')) {
         {
             id: 'ember-keyboard.on-keyboard',
             until: '7.0.0',
-            url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-on-keyboard'
+            url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#on-keyboard'
         }
       );
 

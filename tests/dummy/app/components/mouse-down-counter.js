@@ -1,40 +1,30 @@
-import { get, computed } from '@ember/object';
-import Component from '@ember/component';
-import { EKMixin, mouseDown } from 'ember-keyboard';
+import Component from '@glimmer/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+import { tracked } from '@glimmer/tracking';
 
 function makeEventHandler(stepSize = 1) {
-  return function(event, ekEvent) {
-    if (get(this, 'stopImmediatePropagation')) {
+  return function(_event, ekEvent) {
+    if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }
-    if (get(this, 'stopPropagation')) {
+    if (this.stopPropagation) {
       ekEvent.stopPropagation();
     }
-    this.incrementProperty('counter', stepSize);
+    this.counter = this.counter + stepSize;
   }
 }
 
-export default Component.extend(EKMixin, {
-  tagName: 'span',
-  classNames: 'counter-container',
-  toggleActivated: true,
+@keyResponder
+export default class extends Component {
+  @tracked toggleActivated = true;
+  @tracked counter = 0;
 
-  counter: 0,
-
-  keyboardActivated: computed('parentActivated', 'toggleActivated', 'activatedToggle', {
-    get() {
-      const toggleActivated = this.get('activatedToggle') ? this.get('toggleActivated') : true;
-
-      return toggleActivated && this.get('parentActivated');
-    }
-  }).readOnly(),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.on(mouseDown('left'), makeEventHandler(1));
-    this.on(mouseDown('right'), makeEventHandler(10));
-    this.on(mouseDown('middle'), makeEventHandler(-10));
+  get keyboardActivated() {
+    let toggleActivated = this.args.activatedToggle ? this.toggleActivated : true;
+    return toggleActivated && this.args.parentActivated;
   }
 
-});
+  @onKey('left', { event: 'mousedown' }) inc1 = makeEventHandler(1);
+  @onKey('right', { event: 'mousedown' }) inc10 = makeEventHandler(10);
+  @onKey('middle', { event: 'mousedown' }) dec10 = makeEventHandler(-10);
+}

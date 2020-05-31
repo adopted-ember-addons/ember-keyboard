@@ -4,6 +4,7 @@ import Evented from '@ember/object/evented';
 import Mixin from '@ember/object/mixin';
 import { get } from '@ember/object';
 import { getListenerNames, triggerViaLegacyResponderApi } from 'ember-keyboard/utils/handle-key-event';
+import { deprecate } from '@ember/debug';
 
 export default Mixin.create(Evented, {
   keyboardPriority: 0,
@@ -11,6 +12,15 @@ export default Mixin.create(Evented, {
   keyboard: service(),
 
   init(...args) {
+    deprecate(
+      '`EKMixin` of ember-keyboard is deprecated. Please use the @keyResponder decorator instead.',
+      false,
+      {
+          id: 'ember-keyboard.ember-keyboard-mixin',
+          until: '7.0.0',
+          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#ember-keyboard-mixin'
+      }
+    );
     get(this, 'keyboard').register(this);
 
     return this._super(...args);

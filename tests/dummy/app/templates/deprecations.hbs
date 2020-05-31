@@ -1,0 +1,364 @@
+{{format-markdown "
+## Deprecated APIs
+
+ember-keyboard 6 sports a brand new API that is friendlier to template usage and ES6 classes.
+The old API is deprecated and will emit warnings when used. This page lists each deprecation
+with suggested approaches to migrating to the new APIs.
+
+### <a name='ember-keyboard-mixin'></a> ember-keyboard mixin
+
+The mixin API of ember-keyboard is now deprecated and will be removed in ember-keyboard 7.0.0. The
+most direct translation to the new API is to use the `@keyResponder` decorator, but our recommendation
+is to adopt the `on-key` helper and `on-key` element modifier to accomplish in templates what you
+previously did in your Javascript files.
+
+Deprecated:
+
+```js
+import Component from '@ember/component';
+import { EKMixin, keyDown } from 'ember-keyboard';
+
+export default Component.extend(EKMixin, {
+  triggerSubmit: Ember.on(keyDown('cmd+Enter'), function() {
+    this.submit();
+  })
+});
+```
+
+Recommended:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+
+export default keyResponder(Component.extend({
+  triggerSubmit: onKey('cmd+Enter', { event: 'keydown' }, function() {
+    this.submit();
+  })
+});
+```
+
+Note that by default, the EKMixin would not set `keyboardActivated` to true, while
+`keyResponder` does.
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+### <a name='activate-keyboard-on-init-mixin'></a> activate-keyboard-on-init mixin
+
+The mixin API of ember-keyboard is now deprecated and will be removed in ember-keyboard 7.0.0.
+This particular mixin set keyboardActivated to true during initialization of the class.
+
+This behavior is now the default when using the `keyResponder` decorator.
+
+Deprecated:
+
+```js
+import Component from '@ember/component';
+import { EKMixin, EKOnInitMixin, keyDown } from 'ember-keyboard';
+
+export default Component.extend(EKMixin, EKOnInitMixin, {
+  triggerSubmit: Ember.on(keyDown('cmd+Enter'), function() {
+    this.submit();
+  })
+});
+```
+
+Replacement:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+
+export default keyResponder(Component.extend({
+  triggerSubmit: onKey('cmd+Enter', { event: 'keydown' }, function() {
+    this.submit();
+  })
+});
+```
+
+### <a name='activate-keyboard-on-insert-mixin'></a> activate-keyboard-on-insert mixin
+
+The mixin API of ember-keyboard is now deprecated and will be removed in ember-keyboard 7.0.0.
+This particular mixin set keyboardActivated to true on didInsertElement of a component.
+
+By default `keyboardActivated` now starts off set to true when using `keyResponder` decorator.
+
+Usage including this mixin can usually be refactored nicely to use the `on-key` helper in the
+component's template.
+
+Deprecated:
+
+```js
+import Component from '@ember/component';
+import { EKMixin, EKOnInsertMixin, keyDown } from 'ember-keyboard';
+
+export default Component.extend(EKMixin, EKOnInsertMixin, {
+  triggerSubmit: Ember.on(keyDown('cmd+Enter'), function() {
+    this.submit();
+  })
+});
+```
+
+Replacement:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+
+export default keyResponder(Component.extend({
+  keyboardActivated: false,
+  triggerSubmit: onKey('cmd+Enter', { event: 'keydown' }, function() {
+    this.submit();
+  }),
+  didInsertElement() {
+    this._super(...arguments);
+    this.set('keyboardActivated', true);
+  }
+});
+```
+
+### <a name='activate-keyboard-on-focus-mixin'></a> activate-keyboard-on-focus mixin
+
+The mixin API of ember-keyboard is now deprecated and will be removed in ember-keyboard 7.0.0.
+This particular mixin set keyboardActivated to true whenever it receives focus and to false
+when it loses focus.
+
+This was primarily useful for input components. This behavior is now automatic when using the
+`on-key` modifier with a text field. For other use cases, you implement manually.
+
+Deprecated:
+
+```js
+import Component from '@ember/component';
+import { EKMixin, EKOnFocusMixin, keyDown } from 'ember-keyboard';
+
+export default Component.extend(EKMixin, EKOnFocusMixin, {
+  triggerSubmit: Ember.on(keyDown('cmd+Enter'), function() {
+    this.submit();
+  })
+});
+```
+
+Replacement:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+import action from '@ember/object';
+
+export default keyResponder(Component.extend({
+  keyboardActivated: false,
+  triggerSubmit: onKey('cmd+Enter', { event: 'keydown' }, function() {
+    this.submit();
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.element.addEventListener('click', this.activateKeyboardWhenFocused);
+    this.element.addEventListener('focusin', this.activateKeyboardWhenFocused);
+    this.element.addEventListener('focusout', this.deactivateKeyboardWhenFocusOut);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.element.removeEventListener('click', this.activateKeyboardWhenFocused);
+    this.element.removeEventListener('focusin', this.activateKeyboardWhenFocused);
+    this.element.removeEventListener('focusout', this.deactivateKeyboardWhenFocusOut);
+  },
+
+  @action
+  activateKeyboardWhenFocused() {
+    set(this, 'keyboardActivated', true);
+  }),
+
+  @action
+  deactivateKeyboardWhenFocusOut() {
+    set(this, 'keyboardActivated', false);
+  })
+});
+```
+
+
+### <a name='keyboard-first-responder-on-focus-mixin'></a> keyboard-first-responder-on-focus mixin
+
+The mixin API of ember-keyboard is now deprecated and will be removed in ember-keyboard 7.0.0.
+This particular mixin set keyboardActivated and keyboardFirstResponder to true whenever it
+receives focus and to false when it loses focus.
+
+This was primarily useful for input components. This behavior is now automatic when using the
+`on-key` modifier with a text field. For other use cases, you implement manually.
+
+Deprecated:
+
+```js
+import Component from '@ember/component';
+import { EKMixin, EKFirstResponderOnFocusMixin, keyDown } from 'ember-keyboard';
+
+export default Component.extend(EKMixin, EKFirstResponderOnFocusMixin, {
+  triggerSubmit: Ember.on(keyDown('cmd+Enter'), function() {
+    this.submit();
+  })
+});
+```
+
+Replacement:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+import action from '@ember/object';
+
+export default keyResponder(Component.extend({
+  keyboardActivated: false,
+  keyboardFirstResponder: false,
+  triggerSubmit: onKey('cmd+Enter', { event: 'keydown' }, function() {
+    this.submit();
+  }),
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.element.addEventListener('click', this.activateKeyboardWhenFocused);
+    this.element.addEventListener('focusin', this.activateKeyboardWhenFocused);
+    this.element.addEventListener('focusout', this.deactivateKeyboardWhenFocusOut);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.element.removeEventListener('click', this.activateKeyboardWhenFocused);
+    this.element.removeEventListener('focusin', this.activateKeyboardWhenFocused);
+    this.element.removeEventListener('focusout', this.deactivateKeyboardWhenFocusOut);
+  },
+
+  @action
+  activateKeyboardWhenFocused() {
+    set(this, 'keyboardActivated', true);
+    set(this, 'keyboardFirstResponder', true);
+  }),
+
+  @action
+  deactivateKeyboardWhenFocusOut() {
+    set(this, 'keyboardActivated', false);
+    set(this, 'keyboardFirstResponder', false);
+  })
+});
+```
+### <a name='keyboard-press'></a> keyboard-press
+
+ember-keyboard 6.0.0-beta.0 included the `keyboard-press` component as public API.
+It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
+the `on-key` helper instead:
+
+Deprecated:
+
+```hbs
+{{keyboard-press key='alt+Slash' onPress=(action 'onSlash')}}
+```
+
+Recommended:
+
+```hbs
+{{on-key 'alt+Slash' (action 'onSlash')}}
+```
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+### <a name='keyboard-shortcut'></a> keyboard-shortcut
+
+ember-keyboard 6.0.0-beta.0 included the `keyboard-shortcut` modifier as public API.
+It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
+the `on-key` modifier instead, with no action:
+
+Deprecated:
+
+```hbs
+<!-- Keydown with the B key triggers a click of the button -->
+<button {{keyboard-shortcut 'KeyB'}}>Press me or 'B'</button>
+```
+
+Recommended:
+
+```hbs
+<!-- Keydown with the B key triggers a click of the button -->
+<button {{on-key 'KeyB'}}>Press me or 'B'</button>
+```
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+### <a name='on-keyboard'></a> on-keyboard
+
+ember-keyboard 6.0.0-beta.0 included the `on-keyboard` modifier as public API.
+It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
+the `on-key` modifier instead:
+
+Deprecated:
+
+```hbs
+<!-- Keydown of Enter key triggers @onEnterPressedInInput when the input field is focused -->
+<input type='text'
+  oninput={{action (mut this.textFieldValue) value='target.value'}}
+  {{on-keyboard 'Enter' @onEnterPressedInInput}}
+>
+```
+
+Recommended:
+
+```hbs
+<input type='text'
+  oninput={{action (mut this.textFieldValue) value='target.value'}}
+  {{on-key 'Enter' @onEnterPressedInInput}}
+>
+```
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
+### <a name='responder-trigger'></a> responders handling keyboard events via trigger
+
+ember-keyboard versions before 6.0 used the Ember.Evented API as the mechanism for
+triggering handlers on a responder. In particular the methods are `has(listenerName)`
+and `trigger(listenerName, event)`. This approach has been deprecated for two reasons.
+First, like all mixins in Ember, the `Evented` mixin is discouraged at this point. Second,
+we're providing a new API that allows the service to more flexibly determine whether a
+responder is a match for an event.
+
+In most cases using ember-keyboard, you don't need to be familiar with this part of the
+ember-keyboard responder API. If you're seeing this message, it may be due to a custom responder
+implementation or to a deprecated mixin.
+
+The recommended way to resolve this warning is to adopt one of the two following APIs in the
+responder in question:
+
+The first is a declarative API, in which the responder implements a
+property named `keyboardHandlers` returning a dictionary mapping listenerNames to handler
+functions. In this case, the ember-keyboard service will determine if you the dictionary
+includes a match for a specific KeryboardEvent and invoke the respective handler if so.
+See the implementation of the `on-key` helper for an example.
+
+The second is an imperative API, where your responder will have control over whether it
+should be considered capable of handling a given KeyboardEvent, and exactly how to handle
+it. This is accomplished by implementing the `handleKeyboardEvent(event, ekEvent)` method
+and optionally the `canHandleKeyboardEvent(event)` method. See the `on-key` modifer for
+an example.
+
+### <a name='first-responder-inputs'></a> `ember-keyboard-first-responder-inputs` initializer
+
+ember-keyboard includes an initialize that reopens ember's TextArea and TextField components and mixes in
+EKMixin and EKFirstResponderOnFocusMixin. The `on-key` modifier added in 6.0 accomplishes a similar goal
+in a less intrusive and less hidden way. This initializer will be removed in 7.0. To opt out of it now
+and remove the deprecation warning, disable the initializer by setting `emberKeyboard.disableInputsInitializer`
+in the `config/environment.js` to `true`.
+
+Related to this, if you were importing `{ initializer } from 'ember-keyboard'` in any integration tests, this should no
+longer be necessary as Ember integration tests now run initializers themselves. This export will be removed in 7.0 as well.
+"}}

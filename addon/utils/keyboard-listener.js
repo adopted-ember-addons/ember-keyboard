@@ -14,7 +14,7 @@ export default class KeyboardListener {
   metaKey = false;
   keyOrCode;
   platform;
-  
+
   constructor(platform = getPlatform()) {
     this.platform = platform;
   }

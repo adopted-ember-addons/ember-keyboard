@@ -13,11 +13,16 @@ Router.map(function() {
     this.route('keyboard');
     this.route('on-key-helper-examples');
     this.route('on-key-modifier-examples');
-    this.route('deprecated/keyboard-combo');
-    this.route('deprecated/element-modifiers');
+    this.route('deprecated', function() {
+      this.route('element-modifiers');
+      this.route('keyboard');
+      this.route('keyboard-combo');
+      this.route('mouse-down');
+      this.route('touch');
+      });
   });
 
-  this.route('mixins');
+  this.route('deprecations');
   this.route('priority');
   this.route('usage');
   this.route('testing');

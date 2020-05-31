@@ -2,6 +2,10 @@ import { module, skip, test } from 'qunit';
 import isKey from 'ember-keyboard/utils/is-key';
 import getPlatform from "ember-keyboard/utils/platform";
 
+const WINDOWS_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';
+const MAC_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36';
+const LINUX_UA = 'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36';
+
 module('Unit | Utility | isKey', function() {
   let table = `
                                    |    keydown event                   |    result
@@ -34,12 +38,12 @@ module('Unit | Utility | isKey', function() {
   keydown:/                 win    |  F   F    F    F     /    Slash    |  T         F         slash key with us language
   keydown:/                 win    |  F   F    F    F     -    Slash    |  F         F         same key with german language
   keydown:/                 win    |  F   F    F    F     /    Digit7   |  T         F         slash key on german keyboard
-  keydown:_all              win    |  F   F    F    F     /    Digit7   |  T         F         
-  keydown:_all              win    |  T   F    F    F     c    KeyC     |  T         F         
-  keydown:_all              win    |  F   T    F    F     ç    KeyC     |  T         F         
-  keydown:Alt+c             win    |  T   F    F    F     c    KeyC     |  T         F       
-  keydown:ALT+c             win    |  T   F    F    F     c    KeyC     |  T         F       
-  keydown:SHIFT+c           win    |  F   F    F    T     c    KeyC     |  T         F       
+  keydown:_all              win    |  F   F    F    F     /    Digit7   |  T         F
+  keydown:_all              win    |  T   F    F    F     c    KeyC     |  T         F
+  keydown:_all              win    |  F   T    F    F     ç    KeyC     |  T         F
+  keydown:Alt+c             win    |  T   F    F    F     c    KeyC     |  T         F
+  keydown:ALT+c             win    |  T   F    F    F     c    KeyC     |  T         F
+  keydown:SHIFT+c           win    |  F   F    F    T     c    KeyC     |  T         F
   keydown:Shift+KeyC        win    |  F   F    F    T     c    KeyC     |  T         F
   keydown:Ctrl+Shift+t      win    |  F   T    F    T     t    KeyT     |  T         F
   keydown:CTRL+Slash        win    |  F   T    F    F     /    Slash    |  T         F
@@ -52,8 +56,23 @@ module('Unit | Utility | isKey', function() {
     if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
     buildTestFromLine(line);
   }
+
+  test('should match mousedown event for alt+right with right button mousedown and modifiers alt on win', async function(assert) {
+    let fakeEvent = new MouseEvent('mousedown', { button: 2, altKey: true });
+    assert.ok(isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
+  });
+
+  test('should not match mousedown event for alt+right with left button mousedown and modifiers alt on win', async function(assert) {
+    let fakeEvent = new MouseEvent('mousedown', { button: 0, altKey: true });
+    assert.ok(!isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
+  });
+
+  test('should match mousedown event for cmd+middle with middle button mousedown and modifiers meta on mac', async function(assert) {
+    let fakeEvent = new MouseEvent('mouseup', { button: 1, metaKey: true });
+    assert.ok(isKey('mouseup:cmd+middle', fakeEvent, getPlatform(MAC_UA)));
+  });
 });
-    
+
 function stringToBoolean(s) {
   if (s === 'T') return true;
   if (s === 'F') return false;
@@ -91,13 +110,13 @@ function buildTestFromLine(line) {
   let userAgent;
   switch(plat) {
     case 'win':
-      userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';
+      userAgent = WINDOWS_UA;
       break;
     case 'mac':
-      userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36';
+      userAgent = MAC_UA;
       break;
     case 'linux':
-      userAgent = 'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36';
+      userAgent = LINUX_UA;
       break;
   }
   testDescription += modifiers.join('+') + ` on ${plat}`;

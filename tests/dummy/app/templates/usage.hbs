@@ -1,7 +1,7 @@
 {{format-markdown "
 ## Usage
 
-### Using ember-keyboard in templates
+### Using ember-keyboard in templates (recommended!)
 
 To declaratively attach an action to a keyboard event while a particular template
 is rendered, use the `on-key` helper. In this example, when a user presses the '/'
@@ -50,7 +50,7 @@ key combo. For example,
 {{on-key 'alt+KeyC' this.doThing}}
 ```
 
-There is a 'magic' key combo to match any key: `_all`. 
+There is a 'magic' key combo to match any key: `_all`.
 
 ```hbs
 <!-- Fires DoThing on keydown of alt plus any key -->
@@ -79,6 +79,75 @@ pressed together with the Alt key:
 <button {{on 'click' @onButtonClick}} {{on-key 'alt+b'}}>
   Press me or press 'Alt-B'
 </button>
+```
+
+### Using ember-keyboard with your Javascript classes
+
+ember-keyboard also offers an API for making your own object a “responder”, in
+the library's parlance. This means the object gets registered with the `keyboard`
+service, and can handle one or more key combos.
+
+For ES6 classes, this accomplished by using the class decorator `@keyResponder`
+and the method decorator `@onKey`. For example:
+
+```js
+import Component from '@glimmer/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+
+@keyResponder
+export default class extends Component {
+  //...
+
+  @onKey('alt+c')
+  doSomethingA() { ... }
+
+  @onKey('alt+c', { event: 'keyup' })
+  doSomethingB() { ... }
+
+  @onKey('ctrl+2') // Binding multiple combos to one method
+  @onKey('ctrl+shift+KeyT')
+  doSomethingC() { ... }
+
+  //...
+}
+```
+
+As shown in the example code above, the `@onKey` decorator accepts a key combo as
+the first argument, and a optional `options` argument, allowing you to specify an
+alternate event (default is `keydown`).
+
+The `@keyResponder` decorator accepts an optional `options` argument to allow
+a shortcut for setting the `keyboardPriority` of this responder.
+
+```js
+@keyResponder({ priority: 2 })
+export default class extends Component {
+  //...
+}
+```
+
+In addition to Glimmer Component classes, you can use these decorators on services,
+routes, controllers, etc, provided that they are ES6 classes.
+
+For “classic” Ember classes, the usage of the decorator imports is a little different:
+
+```js
+import Component from '@ember/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+
+export default keyResponder(Component.extend({
+  //...
+  doSomethingA: onKey('alt+c', function() { ... }),
+
+  doSomethingB: onKey('alt+c', { event: 'keyup' }, function() { ... })
+
+  // Binding multiple combos.
+  doSomethingC: onKey('alt+c', onKey('ctrl+shift+KeyT'), function() {
+    ...
+  }),
+
+//...
+}));
 ```
 
 ### Low-level key-matching API
@@ -119,70 +188,29 @@ Note that low-level usage like this will not participate in the wider ember-keyb
 (responders, priority, etc), but can be useful if you just want to leverage the key combo
 matching code of ember-keyboard.
 
-### Using ember-keyboard in routes and classic components
-
-First, add `EKMixin` to a route or a classic Ember component:
-
-```js
-import Ember from 'ember';
-import { EKMixin } from 'ember-keyboard';
-
-export default Ember.Component.extend(EKMixin, {
-  . . . .
-});
-```
-
-Now this component observes several new properties that'll help it determine when and if it should respond to key events. These properties are outlined in greater detail below, but to simply get things started, you'll need to set `keyboardActivated` to true:
-
-```js
-activateKeyboard: Ember.on('init', function() {
-  this.set('keyboardActivated', true);
-})
-```
-
-Or simply activate the component from your template:
-
-```htmlbars
-{{my-component keyboardActivated=true}}
-```
-
-Once it's activated, this component will start listening for key events. Let's say you want this component to respond to the key `s` as well as `ctrl+shift+a`. You could do so with:
-
-```js
-import { keyUp, keyDown } from 'ember-keyboard';
-
-. . . .
-
-aFunction: Ember.on(keyUp('KeyS'), function() {
-  console.log('`KeyS` was pressed');
-}),
-
-anotherFunction: Ember.on(keyDown('ctrl+shift+KeyA'), function() {
-  console.log('`ctrl+shift+KeyA` is being held');
-})
-```
-
 ### Modifier Keys
 
-As mentioned above, you can augment your key bindings with modifier keys, including `ctrl`, `shift`, `alt`, and `meta`. In addition, `ember-keyboard` supports a special key definition called `cmd`. It is very common for macOS users to expect to use key combinations such as Command(⌘)+Key, where a PC or Linux user would use Ctrl+Key. `cmd` handles this behavior. For instance this defintion:
+As you have seen from the example code above, you can augment your key bindings with modifier keys,
+including `ctrl`, `shift`, `alt`, and `meta`. In addition, `ember-keyboard` supports a special key
+definition called `cmd`. It is very common for MacOS users to expect to use key combinations such
+as Command(⌘)+Key, where a PC or Linux user would use Ctrl+Key. `cmd` handles this behavior.
+For instance this defintion:
 
 ```js
-triggerSubmit: Ember.on(keyDown('Enter+cmd'), function() {
-  this.submit();
+@onKey('cmd+Enter')
+triggerSubmit() {
+  ...
 });
 ```
 
 will trigger on Command(⌘)+Enter on macOS or Ctrl+Enter on all other platforms.
 
-Note that `ctrl` should be used with caution, as MacOSs will swallow some `ctrl` events before `ember-keyboard` can observe them.
+Note that `ctrl` should be used with caution, as MacOS will swallow some `ctrl` events before `ember-keyboard` can observe them.
 
 ### `keyUp`, `keyDown`, `keyPress`, `mouseDown`, `mouseUp`, `click`, `touchStart`, and `touchEnd`
 
-By default, `ember-keyboard` listens to `keydown`, `keyup`, and `keypress`. It can optionally listen to `mousedown`, `mouseup`, `click`, `touchstart`, and `touchend` as well. Each has corresponding functions:
-
-```js
-import { keyUp, keyDown, keyPress, mouseDown, mouseUp, click, touchStart, touchEnd } from 'ember-keyboard';
-```
+By default, `ember-keyboard` listens to `keydown`, `keyup`, and `keypress`. It can optionally listen
+to `mousedown`, `mouseup`, `click`, `touchstart`, and `touchend` as well.
 
 If you want `ember-keyboard` to listen to fewer events or to add any of the mouse/touch event, then you can specify them in your `config/environment.js` file like so:
 
@@ -192,23 +220,26 @@ ENV.emberKeyboard = {
 }
 ```
 
-Note that `keydown` events fire repeatedly while the key is pressed, while `keyup` events fire only once, after the key has been released.
+Note that `keydown` events fire repeatedly while the key is pressed, while `keyup` events fire only once,
+after the key has been released.
 
 ### Mouse Events
 
 Mouse events can listen for the `left`, `right`, and `middle` buttons like so:
 
 ```js
-triggerSubmit: Ember.on(mouseUp('left'), function() {
-  this.submit();
+@onKey('left', { event='mouseup'})
+triggerSubmit() {
+  ...
 });
 ```
 
 You can also combine it with the standard modifier keys:
 
 ```js
-triggerSubmit: Ember.on(mouseUp('left+cmd'), function() {
-  this.submit();
+@onKey('cmd+left', { event='mouseup'})
+triggerSubmit() {
+  ...
 });
 ```
 
@@ -217,24 +248,28 @@ triggerSubmit: Ember.on(mouseUp('left+cmd'), function() {
 When `ember-keyboard` triggers an event, it passes in the `event` object as its first argument:
 
 ```js
-saveDocument: Ember.on(keyDown('ctrl+KeyS'), function(event) {
+@onKey('ctrl+s')
+saveDocument(event) {
   this.performSave();
   event.preventDefault();
-})
+}
 ```
 
-Note that if you want `preventDefault` to prevent `window` level events, you'll need to use `keyDown`, as the default event will fire before `keyUp`.
+Note that if you want `preventDefault` to prevent `window` level events, you'll need to use `keydown`,
+as the default event will fire before `keyup`.
 
 ### Key Indifference
 
-If you want an event to fire for every keypress, then simply don't provide a keystring to `keyUp` or `keyDown`. This can be a handy way to trigger events for large ranges of keys, such as on any alphanumeric keypress. For instance:
+If you want an event to fire for every keypress, you can use the magic specified `_all`. This can be a
+handy way to trigger events for large ranges of keys, such as on any alphanumeric keypress. For instance:
 
 ```js
-triggerOnAlphaNumeric: Ember.on(keyUp(), function(event) {
-  if (/^Key\w(?!.)/.test(event.code)) {
+@onKey('_all')
+triggerOnAlphaNumeric(event) {
+  if (/^\w/.test(event.key)) {
     this.startEditing();
   }
-})
+}
 ```
 
 ### `Ember.TextField` && `Ember.TextArea`
@@ -256,123 +291,13 @@ deprecations section below for information on how to suppress the deprecation wa
 Some key events get swallowed by the browser well before they reach `ember-keyboard`. Here is a growing (aka incomplete) list of such events:
 
 * Enter: keyUp (keyDown works)
-
-### Deprecated APIs
-
-#### <a name='deprecations-keyboard-press'></a> keyboard-press
-
-ember-keyboard 6.0.0-beta.0 included the `keyboard-press` component as public API.
-It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
-the `on-key` helper instead:
-
-Deprecated:
-
-```hbs
-{{keyboard-press key='alt+KeyC' onPress=(action 'onSlash')}}
-```
-
-Recommended:
-
-```hbs
-{{on-key 'alt+KeyC' (action 'onSlash')}}
-```
-
-Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
-to specifying key combos. Read the docs regard `key` vs. `code` properties and
-be sure you are specifying the key combo to `on-key` consistent with your
-intended behavior.
-
-#### <a name='deprecations-keyboard-shortcut'></a> keyboard-shortcut
-
-ember-keyboard 6.0.0-beta.0 included the `keyboard-shortcut` modifier as public API.
-It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
-the `on-key` modifier instead, with no action:
-
-Deprecated:
-
-```hbs
-<!-- Keydown with the B key triggers a click of the button -->
-<button {{keyboard-shortcut 'KeyB'}}>Press me or 'B'</button>
-```
-
-Recommended:
-
-```hbs
-<!-- Keydown with the B key triggers a click of the button -->
-<button {{on-key 'KeyB'}}>Press me or 'B'</button>
-```
-
-Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
-to specifying key combos. Read the docs regard `key` vs. `code` properties and
-be sure you are specifying the key combo to `on-key` consistent with your
-intended behavior.
-
-#### <a name='deprecations-on-keyboard'></a> on-keyboard
-
-ember-keyboard 6.0.0-beta.0 included the `on-keyboard` modifier as public API.
-It has been deprecated and will be removed in ember-keyboard 7.0.0. You should use
-the `on-key` modifier instead:
-
-Deprecated:
-
-```hbs
-<!-- Keydown of Enter key triggers @onEnterPressedInInput when the input field is focused -->
-<input type='text'
-  oninput={{action (mut this.textFieldValue) value='target.value'}}
-  {{on-keyboard 'Enter' @onEnterPressedInInput}}
->
-```
-
-Recommended:
-
-```hbs
-<input type='text'
-  oninput={{action (mut this.textFieldValue) value='target.value'}}
-  {{on-key 'Enter' @onEnterPressedInInput}}
->
-```
-
-Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
-to specifying key combos. Read the docs regard `key` vs. `code` properties and
-be sure you are specifying the key combo to `on-key` consistent with your
-intended behavior.
-
-#### <a name='deprecations-responder-trigger'></a> responders handling keyboard events via trigger
-
-ember-keyboard versions before 6.0 used the Ember.Evented API as the mechanism for
-triggering handlers on a responder. In particular the methods are `has(listenerName)`
-and `trigger(listenerName, event)`. This approach has been deprecated for two reasons.
-First, like all mixins in Ember, the `Evented` mixin is discouraged at this point. Second,
-we're providing a new API that allows the service to more flexibly determine whether a
-responder is a match for an event.
-
-In most cases using ember-keyboard, you don't need to be familiar with this part of the
-ember-keyboard responder API. If you're seeing this message, it may be due to a custom responder
-implementation or to a deprecated mixin.
-
-The recommended way to resolve this warning is to adopt one of the two following APIs in the
-responder in question:
-
-The first is a declarative API, in which the responder implements a
-property named `keyboardHandlers` returning a dictionary mapping listenerNames to handler
-functions. In this case, the ember-keyboard service will determine if you the dictionary
-includes a match for a specific KeryboardEvent and invoke the respective handler if so.
-See the implementation of the `on-key` helper for an example.
-
-The second is an imperative API, where your responder will have control over whether it
-should be considered capable of handling a given KeyboardEvent, and exactly how to handle
-it. This is accomplished by implementing the `handleKeyboardEvent(event, ekEvent)` method
-and optionally the `canHandleKeyboardEvent(event)` method. See the `on-key` modifer for
-an example.
-
-#### <a name='deprecations-first-responder-inputs'></a> `ember-keyboard-first-responder-inputs` initializer
-
-ember-keyboard includes an initialize that reopens ember's TextArea and TextField components and mixes in
-EKMixin and EKFirstResponderOnFocusMixin. The `on-key` modifier added in 6.0 accomplishes a similar goal
-in a less intrusive and less hidden way. This initializer will be removed in 7.0. To opt out of it now
-and remove the deprecation warning, disable the initializer by setting `emberKeyboard.disableInputsInitializer`
-in the `config/environment.js` to `true`.
-
-Related to this, if you were importing `{ initializer } from 'ember-keyboard'` in any integration tests, this should no
-longer be necessary as Ember integration tests now run initializers themselves. This export will be removed in 7.0 as well.
+* On MacOS
+  * alt+e
+  * alt+i
+  * alt+n
+  * alt+u
+  * alt+`
+  * shift+alt+c
+  * shift+alt+e
+  * shift+alt+p
 "}}

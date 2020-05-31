@@ -121,7 +121,7 @@ function triggerResponderListener(responder, event, ekEvent = null) {
     });
     return;
   }
-  
+
   if (responder.trigger) {
     deprecate(
       'ember-keyboard registered responders handling events via `trigger(listenerName, event)` is deprecated. A responder should have either `keyboardHandlers` (a property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`.',
@@ -129,10 +129,10 @@ function triggerResponderListener(responder, event, ekEvent = null) {
       {
           id: 'ember-keyboard.responder-trigger',
           until: '7.0.0',
-          url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-responder-trigger'
+          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#responder-trigger'
       }
     );
-    
+
     triggerViaLegacyResponderApi(responder, event, ekEvent);
     return;
   }
@@ -147,7 +147,7 @@ export function getListenerNames(event) {
     }
     if (event.code && (event.key !== event.code)) {
       result.push(listenerName(event.type, modifierStrings(event).concat([event.code]).join('+')));
-    }  
+    }
   } else if (event instanceof MouseEvent) {
     let modifiers = modifierStrings(event);
     if (modifiers.length) {
@@ -156,7 +156,7 @@ export function getListenerNames(event) {
   }
   result.push(listenerName(event.type));
   return result;
-}   
+}
 
 export function triggerViaLegacyResponderApi(responder, event, ekEvent) {
   for (const listenerName of getListenerNames(event)) {

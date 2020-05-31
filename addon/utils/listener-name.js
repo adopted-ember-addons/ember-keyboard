@@ -14,7 +14,10 @@ export default function listenerName(type, keyArrayOrString = []) {
     keyArray[keyArray.indexOf('cmd')] = getCmdKey();
   }
 
-  const keys = keyArray.length === 0 ? '_all' : sortedKeys(keyArray);
+  let keys = sortedKeys(keyArray || []);
+  if (keys === '') {
+    keys = '_all';
+  }
 
   return `${type}:${keys}`;
 }

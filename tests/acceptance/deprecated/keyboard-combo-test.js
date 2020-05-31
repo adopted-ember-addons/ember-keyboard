@@ -22,10 +22,11 @@ module('Acceptance | ember keyboard | deprecated | keyboard combos', function(ho
 
   test('issues deprecation warnings', function(assert) {
     assert.ok(deprecations.length > 0);
-    assert.equal(deprecations[0].message, "The `keyboard-press` component of ember-keyboard is deprecated. Please use the `on-key` helper instead.");
-    assert.equal(deprecations[0].options.id, "ember-keyboard.keyboard-press");
-    assert.equal(deprecations[0].options.until, "7.0.0");
-    assert.equal(deprecations[0].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-keyboard-press");
+    let deprecation = deprecations.filter(d => d.options.id === "ember-keyboard.keyboard-press")[0];
+    assert.equal(deprecation.message, "The `keyboard-press` component of ember-keyboard is deprecated. Please use the `on-key` helper instead.");
+    assert.equal(deprecation.options.id, "ember-keyboard.keyboard-press");
+    assert.equal(deprecation.options.until, "7.0.0");
+    assert.equal(deprecation.options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-press");
   });
 
   module('Without Modifiers', function() {

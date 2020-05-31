@@ -2,54 +2,69 @@ import KeyboardListener from "./keyboard-listener";
 import getPlatform from "./platform";
 import { SHIFT_KEY_MAP, MAC_ALT_KEY_MAP, MAC_SHIFT_ALT_KEY_MAP } from 'ember-keyboard/fixtures/key-maps';
 import ALL_MODIFIERS from 'ember-keyboard/fixtures/modifiers-array';
+import getMouseName from 'ember-keyboard/utils/get-mouse-name';
+
 const ALL_SYMBOL = '_all';
 
-export default function isKey(listenerOrListenerName, keyboardEvent, platform = getPlatform()) {
-  let keyboardListener;
+export default function isKey(listenerOrListenerName, event, platform = getPlatform()) {
+  let listener;
   if (listenerOrListenerName instanceof KeyboardListener) {
-    keyboardListener = listenerOrListenerName;
+    listener = listenerOrListenerName;
   } else if (typeof listenerOrListenerName === 'string') {
-    keyboardListener = KeyboardListener.parse(listenerOrListenerName, platform);
+    listener = KeyboardListener.parse(listenerOrListenerName, platform);
   } else {
     throw new Error('Expected a `string` or `KeyCombo` as `keyComboOrKeyComboString` argument to `isKey`');
   }
 
-  if (keyboardListener.type !== keyboardEvent.type) {
+  if (listener.type !== event.type) {
     return false;
   }
 
-  if (isAll(keyboardListener)) {
+  if (isAll(listener)) {
     return true;
   }
 
-  if (modifiersMatch(keyboardListener, keyboardEvent) && keyOrCodeMatches(keyboardListener, keyboardEvent)) {
+  if (modifiersMatch(listener, event) && (keyOrCodeMatches(listener, event) || mouseButtonMatches(listener, event))) {
     return true;
   }
 
-  return specialCaseMatches(keyboardListener, keyboardEvent, platform);
+  return specialCaseMatches(listener, event, platform);
 }
 
-function isAll(keyboardListener) {
-  return keyboardListener.keyOrCode === ALL_SYMBOL
-    && keyboardListener.altKey === false
-    && keyboardListener.ctrlKey === false
-    && keyboardListener.metaKey === false
-    && keyboardListener.shiftKey === false;
+function isAll(listener) {
+  return listener.keyOrCode === ALL_SYMBOL
+    && listener.altKey === false
+    && listener.ctrlKey === false
+    && listener.metaKey === false
+    && listener.shiftKey === false;
 }
 
-function modifiersMatch(keyboardListener, keyboardEvent) {
-  return keyboardListener.type === keyboardEvent.type
-    && keyboardListener.altKey === keyboardEvent.altKey
-    && keyboardListener.ctrlKey === keyboardEvent.ctrlKey
-    && keyboardListener.metaKey === keyboardEvent.metaKey
-    && keyboardListener.shiftKey === keyboardEvent.shiftKey;
+function modifiersMatch(listener, keyboardEvent) {
+  return listener.type === keyboardEvent.type
+    && listener.altKey === keyboardEvent.altKey
+    && listener.ctrlKey === keyboardEvent.ctrlKey
+    && listener.metaKey === keyboardEvent.metaKey
+    && listener.shiftKey === keyboardEvent.shiftKey;
 }
 
-function keyOrCodeMatches(keyboardListener, keyboardEvent) {
-  if (keyboardListener.keyOrCode === ALL_SYMBOL) {
+function keyOrCodeMatches(listener, keyboardEvent) {
+  if (!(keyboardEvent instanceof KeyboardEvent)) {
+    return false;
+  }
+  if (listener.keyOrCode === ALL_SYMBOL) {
     return true;
   }
-  return keyboardListener.keyOrCode === keyboardEvent.code || keyboardListener.keyOrCode === keyboardEvent.key;
+  return listener.keyOrCode === keyboardEvent.code || listener.keyOrCode === keyboardEvent.key;
+}
+
+function mouseButtonMatches(listener, mouseEvent) {
+  if (!(mouseEvent instanceof MouseEvent)) {
+    return false;
+  }
+  if (listener.keyOrCode === ALL_SYMBOL) {
+    return true;
+  }
+  return listener.keyOrCode === getMouseName(mouseEvent.button);
 }
 
 function specialCaseMatches(keyboardListener, keyboardEvent, platform) {

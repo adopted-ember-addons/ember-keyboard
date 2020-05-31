@@ -4,6 +4,8 @@ import EKFirstResponderOnFocusMixin from 'ember-keyboard/mixins/keyboard-first-r
 import EKOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
 import EKOnInsertMixin from 'ember-keyboard/mixins/activate-keyboard-on-insert';
 import EKOnInitMixin from 'ember-keyboard/mixins/activate-keyboard-on-init';
+import { default as keyResponder } from 'ember-keyboard/decorators/key-responder';
+import { default as onKey } from 'ember-keyboard/decorators/on-key';
 
 function getCode() {
   throw new Error('ember-keyboard: `getCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values');
@@ -21,8 +23,11 @@ export {
 	EKOnInitMixin,
   getCode,
   getKeyCode,
-  getMouseCode
+  getMouseCode,
+  keyResponder,
+  onKey
 };
+
 
 export { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
 export { click, mouseDown, mouseUp } from 'ember-keyboard/listeners/mouse-events';

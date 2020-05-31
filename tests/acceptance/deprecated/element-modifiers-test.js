@@ -27,11 +27,11 @@ if (gte('3.8.0')) {
       assert.equal(deprecations[0].message, "The `keyboard-shortcut` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier with no action instead.");
       assert.equal(deprecations[0].options.id, "ember-keyboard.keyboard-shortcut");
       assert.equal(deprecations[0].options.until, "7.0.0");
-      assert.equal(deprecations[0].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-keyboard-shortcut");
+      assert.equal(deprecations[0].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-shortcut");
       assert.equal(deprecations[3].message, "The `on-keyboard` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier instead.");
       assert.equal(deprecations[3].options.id, "ember-keyboard.on-keyboard");
       assert.equal(deprecations[3].options.until, "7.0.0");
-      assert.equal(deprecations[3].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-on-keyboard");
+      assert.equal(deprecations[3].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#on-keyboard");
     });
 
 

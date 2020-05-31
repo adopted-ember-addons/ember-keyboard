@@ -22,7 +22,7 @@ deprecate(
     {
         id: 'ember-keyboard.first-responder-inputs',
         until: '7.0.0',
-        url: 'https://adopted-ember-addons.github.io/ember-keyboard/usage#deprecations-first-responder-inputs'
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#first-responder-inputs'
     }
   );
   TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);

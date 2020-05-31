@@ -12,7 +12,7 @@ In April of 2020, @optikalefx opened PR #117 to fix a bug related to Alt key com
 
 The web platform's handling of keyboard events has a messy history, with several now-deprecated properties, including `char`, `charCode`, `which` and `keyCode`, and a now-deprecated event `keypress`
 
-The current supported events are `keydown` and `keyup`, each with a consistent set of supported properties, including two we'll need to understand in detail for this document: `key` and `code`.
+The current supported (and not deprecated) types for KeyboardEvents in modern browsers are `keydown` and `keyup`, each with a consistent set of supported properties, including two we'll need to understand in detail for this document: `key` and `code`.
 
 The `key` attribute is intended for users who are interested in the meaning of the key being pressed, taking into account the current keyboard layout, and any software remapping the end-user may have in effect.
 
@@ -102,12 +102,15 @@ handler when leaving off the action to trigger the click event.
 
 ### Setting up handlers in Javascript
 
-Decorator usage:
+The primary API for setting up handlers on JS classes is via the `@keyResponder` and `@onKey` decorators.
+
+Example usage with a glimmer component:
 
 ```js
 import Component from '@glimmer/component';
-import { onKey } from 'ember-keyboard';
+import { keyResponder, onKey } from 'ember-keyboard';
 
+@keyResponder({ priority: 2 }) // passing options object is optional 
 export default class Foo extends Component {
   //...
 
@@ -121,37 +124,53 @@ export default class Foo extends Component {
   @onKey('ctrl+shift+KeyT') // ...and this one is `code` mode
   doSomethingC() { ... }
 
-  @onKeyboard('alt+KeyC') // `code` mode
+  @onKey('alt+KeyC') // `code` mode
   doSomethingD() { ... }
 
   //...
 }
 ```
 
-TODO: Determine how registration with the ember-keyboard service will occur. Does it need a class decorator? Manual register/unregister calls?
-
-Non-decorator usage:
+The decorators can be used on classic Ember classes as well.
 
 ```js
 import Component from '@ember/component';
-import { onKey } from 'ember-keyboard';
+import { keyResponder, onKey } from 'ember-keyboard';
 
-export default Component.extend({
+export default keyResponder(Component.extend({
   //...
-  doSomethingA: onKey('alt+c', function() { ... }), // `key` mode
-  doSomethingB: onKey('alt+c', { event: 'keyup' }, function() { ... }), // `key` mode
-  doSomethingC: onKey('alt+c', onKey('ctrl+shift+t', function() { ... })), // Binding multiple combos
-  doSomethingD: onKey('alt+KeyC', function() { ... }) // `code` mode
-  //...
-});
+  doSomethingA: onKey('alt+c', function() { ... }),
+
+  doSomethingB: onKey('alt+c', { event: 'keyup' }, function() { ... })
+
+  // Binding multiple combos.
+  doSomethingC: onKey('alt+c', onKey('ctrl+shift+KeyT'), function() {
+    ...
+  }),
+
+//...
+}));
 ```
 
-TODO: Determine how registration with the ember-keyboard service will occur. Do we need to continue use of the existing mixins? Is there an alternative besides explicit register/unregister calls?
+The breakdown of responsibilities between the decorators is as follows:
+
+#### `@keyHandler` class decorator
+
+* sets up a `keyboardActivated` property with a default value of `true` (adjust this default value via the `activated` option in the argument to the decorator)
+* sets up a `keyboardPriority` property with a default value of `0` (adjust this default value via the `priority` option in the argument to the decorator)
+* injects the `keyboard` service onto the object
+* registers the object with the keyboard service during object construction
+* unregisters the object with the keyboard service during object destruction
+* checks for methods decorated with `@onKey` and adds entries to the object's `keyboardHandlers` dictionary (see the Responder API section below to see how this is consulted by the keyboard service)
+
+#### `@onKey` method decorator
+
+* flags the decorated method to be called when then specified keyCombo/event occurs
 
 ### Responder API
 
 In ember-keyboard, each modifier and helper instance is a "responder", as is any component or other object is registered with the service. Responders do not have a base class, but they must conform to an API that allows
-the ember-keyboard service to interact with them.
+the ember-keyboard service to interact with them. This API is *low-level*. Most consumers of ember-keyboard will not encounter a need to learn it.
 
 The most important property is `keyboardHandlers`, a dictionary mapping zero or more key-combo strings to functions. The service will check each key-combo string against the keyboard event being processed and call the mapped handler function if a match is found. A responder can opt to determine matches and handling itself by instead implementing `canHandleKeyboardEvent(event)` and `handleKeyboardEvent(event)`.
 
@@ -255,6 +274,18 @@ Note that usage like this will not participate in the wider ember-keyboard funct
 (responders, priority, etc), but can be useful if you just want to leverage the key combo
 matching code.
 
+### Mouse and Touch support
+
+ember-keyboard offers opt-in handling of mouse and touch events to support doing things like setting up handlers for when a user presses their right mouse button down while holding shift. This is supported like so:
+
+```hbs
+{{on-key 'shift+right' this.doThing event="mousedown"}}
+{{on-key 'middle' this.doThing event="mouseup"}}
+{{on-key 'shift+ctrl' this.doThing event="touchstart"}}
+```
+
+The supported key combo strings to match mouse buttons are `left`, `right`, and `middle`. The `event` param is required. A possible future enhancement could be a string to match a certain number of touches (e.g. a 2-finger tap).
+
 ## Alternatives
 
 One idea is to back ember-keyboard by a widely used Javascript keyboard handling library. @lukemelia looked into mousetrap and keymaster to see how they handled key vs code and whether we could/should use them. In both cases, he found that they rely on now-deprecated keyboard event properties (`which` and `keyCode`). e.g. ccampbell/mousetrap#474. For that reason, his conclusion is that taking a dependency on one of them is not a good idea.
@@ -263,7 +294,7 @@ One idea is to back ember-keyboard by a widely used Javascript keyboard handling
 
 ### _Does ember-keyboard bring an opinion about whether most developers should be using `code` or `key`-based shortcuts for common types of apps targeted by Ember?_
 
-No, it is agnostic.
+No, it is agnostic. Recent versions of ember-keyboard only allowed `code` values. In hindsight, this was a mistake.
 
 ### _What are the challenges with mapping `key` values?_
 
@@ -286,13 +317,12 @@ No need for this functionality to change. The helpers, modifiers and functions s
 
 ```js
 import Component from '@glimmer/component';
-import { onKey } from 'ember-keyboard';
+import { keyResponder, onKey } from 'ember-keyboard';
 
+@keyResponder({ activated: false, priority: 1 )
 export default class Foo extends Component {
   //...
 
-  keyboardActivated = true;
-  keyboardPriority = 1;
   keyboardLaxPriority = true;
   keyboardFirstResponder = true;
 
@@ -305,20 +335,20 @@ export default class Foo extends Component {
 
 ```js
 import Component from '@ember/component';
-import { onKey } from 'ember-keyboard';
+import { keyResponder, onKey } from 'ember-keyboard';
 
-export default Component.extend({
+export default keyResponder(Component.extend({
   //...
 
-  keyboardActivated: true,
+  keyboardActivated: false,
   keyboardPriority: 1,
   keyboardLaxPriority: true,
   keyboardFirstResponder: true,
 
-  doSomething: onKey('alt+c', function() { ... })
+  doSomething: onKey('alt+c', function() { ... }
 
   //...
-}
+});
 ```
 
 There may be undue complexity in this area of the addon, but changing it is out of scope for this release.
@@ -348,6 +378,8 @@ Version 6 of ember-keyboard brings a change to how key combo strings are matched
  * For a useful interactive KeyboardEvent viewer tool, see https://w3c.github.io/uievents/tools/key-event-viewer.html
 
 The re-exports of utils/get-cmd-key and utils/listener-name have been removed. Import them directly from ember-keyboard if you need them.
+
+TODO: section on moving from mixins to decorators
 
 ## Acknowledgements
 
