@@ -28,6 +28,8 @@ export default function keyResponder(DecoratedClass, opts = {}) {
   }
 
   return class ClassAsKeyResponder extends DecoratedClass {
+    static name = `${DecoratedClass.name}WithKeyResponder`;
+
     @service keyboard;
 
     get keyboardPriority() {
