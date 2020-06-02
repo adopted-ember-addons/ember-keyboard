@@ -8731,7 +8731,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-markdown-code-highlighting@^0.2.0:
+markdown-code-highlighting@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/markdown-code-highlighting/-/markdown-code-highlighting-0.2.1.tgz#3a239c581de5a6cfbcfc531cb3ddf1059f47e209"
   integrity sha512-Z32VBPAdgd9xOBWoqn0BuVeW1sQF50LSFPGsOYwtpxwSrK2aO/RJBvHToB4CMsUt5VUIm45uhfuvQ3gGXVHFVw==
