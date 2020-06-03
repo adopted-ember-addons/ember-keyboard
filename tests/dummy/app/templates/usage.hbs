@@ -129,6 +129,9 @@ export default class extends Component {
 In addition to Glimmer Component classes, you can use these decorators on services,
 routes, controllers, etc, provided that they are ES6 classes.
 
+Decorators require Ember 3.10 or higher. If you are using an Ember version earlier than that, you will
+need to stick with template helpers/modifiers and, if needed, the deprecated mixins API.
+
 For “classic” Ember classes, the usage of the decorator imports is a little different:
 
 ```js
