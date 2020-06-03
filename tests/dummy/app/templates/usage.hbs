@@ -5,7 +5,7 @@
 
 To declaratively attach an action to a keyboard event while a particular template is rendered, use the `keyboard-press` component. In this example, when a user presses the '/' key, the onSlash action is triggered.
 
-```hbs
+```htmlbars
 {{keyboard-press
   key='Slash'
   onPress=(action 'onSlash')
@@ -16,7 +16,7 @@ Note that the listener is active for the lifecycle of the template. When the tem
 
 Another option (supported in Ember 3.12+) for templates is the `on-keyboard` element modifier. This allows a keydown event to trigger an action. In the following example, we trigger an action when the input field is focused and the user presses enter:
 
-```hbs
+```htmlbars
 <input type='text'
   oninput={{action (mut this.textFieldValue) value='target.value'}}
   {{on-keyboard 'Enter' (action 'onEnterPressedInInput')}}
@@ -25,7 +25,7 @@ Another option (supported in Ember 3.12+) for templates is the `on-keyboard` ele
 
 If you want a shortcut for triggering a click on an element when a key is pressed, look no further than the `keyboard-shortcut` element modifier  (also Ember 3.12+). This allows a keyboard event to simulate clicking the element the modifier is attached to. In the following example, we trigger a click on the button when the B key is pressed together with the Alt key:
 
-```hbs
+```htmlbars
 <button {{action 'onButtonClick'}} {{keyboard-shortcut 'alt+KeyB'}}>
   Press me or press 'Alt-B'
 </button>
@@ -47,14 +47,14 @@ export default Ember.Component.extend(EKMixin, {
 Now this component observes several new properties that'll help it determine when and if it should respond to key events. These properties are outlined in greater detail below, but to simply get things started, you'll need to set `keyboardActivated` to true:
 
 ```js
-  activateKeyboard: Ember.on('init', function() {
-    this.set('keyboardActivated', true);
-  })
+activateKeyboard: Ember.on('init', function() {
+  this.set('keyboardActivated', true);
+})
 ```
 
 Or simply activate the component from your template:
 
-```hbs
+```htmlbars
 {{my-component keyboardActivated=true}}
 ```
 
@@ -190,7 +190,7 @@ To prevent `ember-keyboard` from responding to key strokes while an input/textar
 
 This applies to `input` and `textarea` helpers:
 
-```hbs
+```htmlbars
 {{input}}
 {{textarea}}
 ```

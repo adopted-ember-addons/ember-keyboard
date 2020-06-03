@@ -7,25 +7,33 @@ To reduce boilerplate, `ember-keyboard` includes several mixins with common patt
 
 ### EKOnInsertMixin
 
-`import { EKOnInsertMixin } from 'ember-keyboard';`
+```js
+import { EKOnInsertMixin } from 'ember-keyboard';
+```
 
 This mixin will activate the component on `didInsertElement`, and as per normal, it will deactivate on `willDestroyElement`.
 
 ### EKOnInitMixin
 
-`import { EKOnInitMixin } from 'ember-keyboard';`
+```js
+import { EKOnInitMixin } from 'ember-keyboard';
+```
 
 This mixin will activate the controller on `init`.
 
 ### EKOnFocusMixin
 
-`import { EKOnFocusMixin } from 'ember-keyboard';`
+```js
+import { EKOnFocusMixin } from 'ember-keyboard';
+```
 
 This mixin will activate the component whenever it receives focus and deactivate it when it loses focus.
 
 ### EKFirstResponderOnFocusMixin
 
-`import { EKFirstResponderOnFocusMixin } from 'ember-keyboard';`
+```js
+import { EKFirstResponderOnFocusMixin } from 'ember-keyboard';
+```
 
 This mixin grants the component first responder status while it is focused. When it loses focus, it resigns its status.
 
