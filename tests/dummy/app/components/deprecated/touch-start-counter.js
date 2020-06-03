@@ -1,13 +1,13 @@
-import { get, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { EKMixin, touchStart } from 'ember-keyboard';
 
 function makeEventHandler(stepSize = 1) {
   return function(event, ekEvent) {
-    if (get(this, 'stopImmediatePropagation')) {
+    if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }
-    if (get(this, 'stopPropagation')) {
+    if (this.stopPropagation) {
       ekEvent.stopPropagation();
     }
 
@@ -24,9 +24,9 @@ export default Component.extend(EKMixin, {
 
   keyboardActivated: computed('parentActivated', 'toggleActivated', 'activatedToggle', {
     get() {
-      const toggleActivated = this.get('activatedToggle') ? this.get('toggleActivated') : true;
+      const toggleActivated = this.activatedToggle ? this.toggleActivated : true;
 
-      return toggleActivated && this.get('parentActivated');
+      return toggleActivated && this.parentActivated;
     }
   }).readOnly(),
 

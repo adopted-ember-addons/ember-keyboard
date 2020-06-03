@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-mixins */
 import getMouseCode from 'ember-keyboard/utils/get-mouse-code';
 import EKMixin from 'ember-keyboard/mixins/ember-keyboard';
 import EKFirstResponderOnFocusMixin from 'ember-keyboard/mixins/keyboard-first-responder-on-focus';

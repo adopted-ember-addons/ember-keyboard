@@ -16,7 +16,7 @@ module('Integration | Util | triggerEvent', function(hooks) {
   test('`keyDown` triggers a keydown event', async function(assert) {
     assert.expect(4);
 
-    await render(hbs`{{trigger-event-test}}`);
+    await render(hbs`<TriggerEventWidget />`);
 
     triggerKeyDown('KeyA');
 
@@ -29,7 +29,7 @@ module('Integration | Util | triggerEvent', function(hooks) {
   test('`keyPress` triggers a keypress event', async function(assert) {
     assert.expect(4);
 
-    await render(hbs`{{trigger-event-test}}`);
+    await render(hbs`<TriggerEventWidget />`);
 
     triggerKeyPress('KeyA');
 
@@ -42,7 +42,7 @@ module('Integration | Util | triggerEvent', function(hooks) {
   test('`keyUp` triggers a keyup event', async function(assert) {
     assert.expect(4);
 
-    await render(hbs`{{trigger-event-test}}`);
+    await render(hbs`<TriggerEventWidget />`);
 
     triggerKeyUp('KeyA');
 
@@ -55,7 +55,7 @@ module('Integration | Util | triggerEvent', function(hooks) {
   test('modifiers can be added', async function(assert) {
     assert.expect(4);
 
-    await render(hbs`{{trigger-event-test}}`);
+    await render(hbs`<TriggerEventWidget />`);
 
     triggerKeyDown('shift+KeyA+cmd');
 

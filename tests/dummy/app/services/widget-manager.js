@@ -3,7 +3,7 @@ import { isEqual } from '@ember/utils';
 
 export default Service.extend({
   activate(widget) {
-    const previousWidget = this.get('activeWidget');
+    let previousWidget = this.activeWidget;
 
     if (previousWidget && !isEqual(widget, previousWidget)) {
       previousWidget.deactivate();

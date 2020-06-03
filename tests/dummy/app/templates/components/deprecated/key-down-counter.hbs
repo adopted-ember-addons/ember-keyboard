@@ -2,7 +2,7 @@
   <label><code>keyboardPriority</code>:</label>
   <input
     value={{this.keyboardPriority}}
-    oninput={{action (mut this.keyboardPriority) value="target.value"}}
+    oninput={{fn (pick 'target.value' (set this.keyboardPriority))}}
     class="input-field"
     data-test-counter-priority-input
   >

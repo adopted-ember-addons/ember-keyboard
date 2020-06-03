@@ -5,7 +5,7 @@
       class="input-field"
       data-test-counter-priority-input
       value={{this.keyboardPriority}}
-      oninput={{action (mut this.keyboardPriority) value="target.value"}}
+      oninput={{fn (pick 'target.value' (set this.keyboardPriority))}}
     >
   {{/if}}
 
@@ -15,7 +15,7 @@
       type="checkbox"
       data-test-counter-activated-toggle
       checked={{this.toggleActivated}}
-      onclick={{action (mut this.toggleActivated) value="target.checked"}}
+      onclick={{fn (pick "target.checked" (set this.toggleActivated))}}
     >
   {{/if}}
 
@@ -25,7 +25,7 @@
       type="checkbox"
       data-test-counter-first-responder-toggle
       checked={{this.keyboardFirstResponder}}
-      onclick={{action (mut this.keyboardFirstResponder) value="target.checked"}}
+      onclick={{fn (pick "target.checked" (set this.keyboardFirstResponder))}}
     >
   {{/if}}
 
@@ -35,7 +35,7 @@
       type="checkbox"
       data-test-counter-lax-priority-toggle
       checked={{this.keyboardLaxPriority}}
-      onclick={{action (mut this.keyboardLaxPriority) value="target.checked"}}
+      onclick={{fn (pick "target.checked" (set this.keyboardLaxPriority))}}
     >
   {{/if}}
 
@@ -45,7 +45,7 @@
       type="checkbox"
       data-test-counter-stop-immediate-propagation-toggle
       checked={{this.stopImmediatePropagation}}
-      onclick={{action (mut this.stopImmediatePropagation) value="target.checked"}}
+      onclick={{fn (pick "target.checked" (set this.stopImmediatePropagation))}}
     >
   {{/if}}
 
@@ -55,7 +55,7 @@
       type="checkbox"
       data-test-counter-stop-propagation-toggle
       checked={{this.stopPropagation}}
-      onclick={{action (mut this.stopPropagation) value="target.checked"}}
+      onclick={{fn (pick "target.checked" (set this.stopPropagation))}}
     >
 
   {{/if}}
