@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'dummy',
     environment,
     rootURL: '/',
-    locationType: 'hash',
+    locationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -48,11 +48,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.locationType = 'hash';
+    ENV.locationType = 'auto';
     ENV.rootURL = '/ember-keyboard/';
-    ENV.locationType = 'hash';
-    ENV.rootURL = '/ember-keyboard/';
-
   }
 
   return ENV;

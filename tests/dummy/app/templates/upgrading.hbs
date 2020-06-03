@@ -1,0 +1,29 @@
+{{format-markdown "
+## Upgrading
+
+### Upgrading from ember-keyboard 5.x to 6.x
+
+ember-keyboard 6.0 introduces new APIs to bring ember-keyboard into the Ember Octane era.
+The old mixins-based API still works but is deprecated in 6.0 and slated for removal in version 7.
+
+Version 6 requires Ember 3.8 or higher, so if you are on a version of Ember before that, you should
+stick with 5.0.0 until you are able to upgrade your app's Ember version.
+
+If your app is on a recent version of Ember, you are good to go. The path is to upgrade to
+ember-keyboard 6.x and you can iteratively update to the new APIs until you have no more
+deprecation warnings left.
+
+The [deprecations](deprecations) page discusses migration paths for each warning you may encounter,
+but our broader advice is to consider moving as much of your keyboard handling logic to templates
+as possible. We think that you'll find the `on-key` helper and modifier to be very convenient to
+work with. The decorator API (which required ember 3.10 or higher) is closest equivalent to the
+mixins API, but it should be used sparingly in situations where the template approach isn't a
+good fit.
+
+There is one other potential *breaking* change to be aware of when upgrading from v5 to v6:
+ember-keyboard versions before 6.0 had an ambiguous API when it came to specifying key combos
+and required the use of `code` identifiers, like `KeyT`, `Digit1`, etc. Be sure to read the
+[docs regarding `key` vs. `code` properties](usage) and be sure you are specifying the key
+combo consistent with your intended behavior. You will likely find that you want to update some key
+combos to the `key` equivalent. e.g. replace `ctrl+KeyT` with `ctrl+t`.
+"}}

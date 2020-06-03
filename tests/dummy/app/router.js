@@ -26,4 +26,5 @@ Router.map(function() {
   this.route('priority');
   this.route('usage');
   this.route('testing');
+  this.route('upgrading');
 });
