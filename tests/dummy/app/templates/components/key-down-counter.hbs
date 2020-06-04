@@ -1,60 +1,65 @@
-{{#if @priorityInput}}
-  <label><code>keyboardPriority</code>:</label>
-  <Input
-    @value={{this.keyboardPriority}}
-    class="input-field"
-    data-test-counter-priority-input
-  />
-{{/if}}
+<span class="counter-container" ...attributes>
+  {{#if @priorityInput}}
+    <label><code>keyboardPriority</code>:</label>
+    <input
+      class="input-field"
+      data-test-counter-priority-input
+      value={{this.keyboardPriority}}
+      oninput={{fn (pick 'target.value' (set this.keyboardPriority))}}
+    >
+  {{/if}}
 
-{{#if @activatedToggle}}
-  <label><code>keyboardActivated</code>:</label>
-  <Input
-    @type="checkbox"
-    @checked={{this.toggleActivated}}
-    class="checkbox"
-    data-test-counter-activated-toggle
-  />
-{{/if}}
+  {{#if @activatedToggle}}
+    <label><code>keyboardActivated</code>:</label>
+    <input
+      type="checkbox"
+      data-test-counter-activated-toggle
+      checked={{this.toggleActivated}}
+      onclick={{fn (pick "target.checked" (set this.toggleActivated))}}
+    >
+  {{/if}}
 
-{{#if @firstResponderToggle}}
-  <label><code>keyboardFirstResponder</code>:</label>
-  <Input
-    @type="checkbox"
-    @checked={{this.keyboardFirstResponder}}
-    class="checkbox"
-    data-test-counter-first-responder-toggle
-  />
-{{/if}}
+  {{#if @firstResponderToggle}}
+    <label><code>keyboardFirstResponder</code>:</label>
+    <input
+      type="checkbox"
+      data-test-counter-first-responder-toggle
+      checked={{this.keyboardFirstResponder}}
+      onclick={{fn (pick "target.checked" (set this.keyboardFirstResponder))}}
+    >
+  {{/if}}
 
-{{#if this.laxPriorityToggle}}
-  <label><code>keyboardLaxPriority</code>:</label>
-  <Input
-    @type="checkbox"
-    @checked={{this.keyboardLaxPriority}}
-    class="checkbox"
-    data-test-counter-lax-priority-toggle
-  />
-{{/if}}
+  {{#if @laxPriorityToggle}}
+    <label><code>keyboardLaxPriority</code>:</label>
+    <input
+      type="checkbox"
+      data-test-counter-lax-priority-toggle
+      checked={{this.keyboardLaxPriority}}
+      onclick={{fn (pick "target.checked" (set this.keyboardLaxPriority))}}
+    >
+  {{/if}}
 
-{{#if @stopImmediatePropagationToggle}}
-  <label><code>stopImmediatePropagation()</code>:</label>
-  <Input
-    @type="checkbox"
-    @checked={{this.stopImmediatePropagation}}
-    class="checkbox"
-    data-test-counter-stop-immediate-propagation-toggle
-  />
-{{/if}}
+  {{#if @stopImmediatePropagationToggle}}
+    <label><code>stopImmediatePropagation()</code>:</label>
+    <input
+      type="checkbox"
+      data-test-counter-stop-immediate-propagation-toggle
+      checked={{this.stopImmediatePropagation}}
+      onclick={{fn (pick "target.checked" (set this.stopImmediatePropagation))}}
+    >
+  {{/if}}
 
-{{#if @stopPropagationToggle}}
-  <label><code>stopPropagation()</code>:</label>
-  <Input
-    @type="checkbox"
-    @checked={{this.stopPropagation}}
-    class="checkbox"
-    data-test-counter-stop-propagation-toggle
-  />
-{{/if}}
+  {{#if @stopPropagationToggle}}
+    <label><code>stopPropagation()</code>:</label>
+    <input
+      type="checkbox"
+      data-test-counter-stop-propagation-toggle
+      checked={{this.stopPropagation}}
+      onclick={{fn (pick "target.checked" (set this.stopPropagation))}}
+    >
 
-<div data-test-counter-counter>{{this.counter}}</div>
+  {{/if}}
+
+  <div data-test-counter-counter>{{this.counter}}</div>
+
+</span>

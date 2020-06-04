@@ -21,7 +21,7 @@ module('Unit | Service | keyboard', function(hooks) {
     service.register({ keyboardActivated: true });
     service.register({ keyboardActivated: false });
     service.register({ keyboardActivated: true });
-    assert.equal(service.get('activeResponders.length'), 2, 'correct number of responders');
+    assert.equal(service.activeResponders.length, 2, 'correct number of responders');
   });
 
   test('`sortedResponders` sorts by keyboardFirstResponder and keyboardPriority', function(assert) {
@@ -47,7 +47,7 @@ module('Unit | Service | keyboard', function(hooks) {
       keyboardPriority: 1
     });
 
-    assert.deepEqual(service.get('sortedResponders').mapBy('keyboardPriority'), [0, 1, 0, -1], 'correct sorting');
+    assert.deepEqual(service.sortedResponders.map(r => r.keyboardPriority), [0, 1, 0, -1], 'correct sorting');
   });
 
   // It would be nice to test that tearing down this service removes the installed

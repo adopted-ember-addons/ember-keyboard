@@ -1,30 +1,29 @@
 import { get } from '@ember/object';
-import { isPresent } from '@ember/utils';
 import getMouseName from 'ember-keyboard/utils/get-mouse-name';
-import getCode from 'ember-keyboard/utils/get-code';
 import listenerName from 'ember-keyboard/utils/listener-name';
+import isKey from 'ember-keyboard/utils/is-key';
+import { deprecate } from '@ember/debug';
 
-function gatherKeys(event) {
-  const key = getCode(event);
-  const mouseButton = getMouseName(event.button);
-  const primaryEvent = [];
 
-  if (isPresent(key)) primaryEvent.push(key);
-  if (isPresent(mouseButton)) primaryEvent.push(mouseButton)
+function modifierStrings(event) {
+  if (event instanceof KeyboardEvent) {
+    return ['alt', 'ctrl', 'meta', 'shift'].reduce((result, keyName) => {
+      if (event[`${keyName}Key`]) {
+        result.push(keyName);
+      }
 
-  return ['alt', 'ctrl', 'meta', 'shift'].reduce((keys, keyName) => {
-    if (event[`${keyName}Key`]) {
-      keys.push(keyName);
+      return result;
+    }, []);
+  } else if (event instanceof MouseEvent) {
+    let mouseButton = getMouseName(event.button);
+    if (mouseButton) {
+      return [mouseButton];
     }
-
-    return keys;
-  }, primaryEvent);
+    return []
+  }
 }
 
 export function handleKeyEventWithPropagation(event, { firstResponders, normalResponders }) {
-  const keys = gatherKeys(event);
-  const listenerNames = [listenerName(event.type, keys), listenerName(event.type)];
-
   let isImmediatePropagationStopped = false;
   let isPropagationStopped = false;
   const ekEvent = {
@@ -37,9 +36,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
   }
   /* eslint-disable no-unused-vars */
   for (const responder of firstResponders) {
-    for (const listenerName of listenerNames) {
-      responder.trigger(listenerName, event, ekEvent);
-    }
+    triggerResponderListener(responder, event, ekEvent);
 
     if (isImmediatePropagationStopped) {
       break;
@@ -69,9 +66,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
       previousPriorityLevel = currentPriorityLevel;
     }
 
-    for (const listenerName of listenerNames) {
-      responder.trigger(listenerName, event, ekEvent);
-    }
+    triggerResponderListener(responder, event, ekEvent);
   }
   /* eslint-enable no-unused-vars */
 }
@@ -80,11 +75,6 @@ export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
   let currentPriorityLevel;
   let noFirstResponders = true;
   let isLax = true;
-
-  const keys = gatherKeys(event);
-  const listenerNames = [listenerName(event.type)];
-
-  if (keys.length > 0) listenerNames.unshift(listenerName(event.type, keys));
 
   sortedResponders.every((responder) => {
     const keyboardFirstResponder = get(responder, 'keyboardFirstResponder');
@@ -101,15 +91,82 @@ export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
         currentPriorityLevel = keyboardPriority;
       }
 
-      listenerNames.forEach((triggerName) => {
-        if (responder.has(triggerName)) {
-          responder.trigger(triggerName, event);
-        }
-      });
+      triggerResponderListener(responder, event);
 
       return true;
     } else {
       return false;
     }
   });
+}
+
+function triggerResponderListener(responder, event, ekEvent = null) {
+  if (responder.handleKeyboardEvent) {
+    if (responder.canHandleKeyboardEvent && !responder.canHandleKeyboardEvent(event)) {
+      return;
+    }
+    responder.handleKeyboardEvent(event, ekEvent);
+    return;
+  }
+
+  if (responder.keyboardHandlers) {
+    Object.keys(responder.keyboardHandlers).forEach((responderListenerName) => {
+      if (isKey(responderListenerName, event)) {
+        if (ekEvent) {
+          responder.keyboardHandlers[responderListenerName](event, ekEvent);
+        } else {
+          responder.keyboardHandlers[responderListenerName](event);
+        }
+      }
+    });
+    return;
+  }
+
+  if (responder.trigger) {
+    deprecate(
+      'ember-keyboard registered responders handling events via `trigger(listenerName, event)` is deprecated. A responder should have either `keyboardHandlers` (a property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`.',
+      false,
+      {
+          id: 'ember-keyboard.responder-trigger',
+          until: '7.0.0',
+          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#responder-trigger'
+      }
+    );
+
+    triggerViaLegacyResponderApi(responder, event, ekEvent);
+    return;
+  }
+  throw new Error('A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)');
+}
+
+export function getListenerNames(event) {
+  let result = [];
+  if (event instanceof KeyboardEvent) {
+    if (event.key) {
+      result.push(listenerName(event.type, modifierStrings(event).concat([event.key]).join('+')));
+    }
+    if (event.code && (event.key !== event.code)) {
+      result.push(listenerName(event.type, modifierStrings(event).concat([event.code]).join('+')));
+    }
+  } else if (event instanceof MouseEvent) {
+    let modifiers = modifierStrings(event);
+    if (modifiers.length) {
+      result.push(listenerName(event.type, modifierStrings(event).join('+')));
+    }
+  }
+  result.push(listenerName(event.type));
+  return result;
+}
+
+export function triggerViaLegacyResponderApi(responder, event, ekEvent) {
+  for (const listenerName of getListenerNames(event)) {
+    if (responder.has && !responder.has(listenerName)) {
+      continue;
+    }
+    if (ekEvent) {
+      responder.trigger(listenerName, event, ekEvent);
+    } else {
+      responder.trigger(listenerName, event);
+    }
+  }
 }

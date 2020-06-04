@@ -16,7 +16,7 @@ export default Mixin.create( {
   },
 
   _activate() {
-    this.get('widgetManager').activate(this);
+    this.widgetManager.activate(this);
     this.set('keyboardActivated', true);
   }
 });

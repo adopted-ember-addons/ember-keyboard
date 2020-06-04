@@ -1,33 +1,30 @@
-import { getKeyCode, getMouseCode } from 'ember-keyboard';
+import { getMouseCode } from 'ember-keyboard';
 import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
 import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 import { triggerEvent } from '@ember/test-helpers';
 
-export const keyEvent = function keyEvent(attributes, type, element) {
-  const keys = (attributes || '').split('+');
+export function keyEvent(keyCombo, type, element = document) {
+  let keyComboParts = (keyCombo || '').split('+');
 
-  const event = keys.reduce((event, attribute) => {
-    const isValidModifier = validModifiers.indexOf(attribute) > -1;
+  let eventProps = keyComboParts.reduce((eventProps, keyComboPart) => {
+    let isValidModifier = validModifiers.indexOf(keyComboPart) > -1;
 
     if (isValidModifier) {
-      attribute = attribute === 'cmd' ? getCmdKey() : attribute;
-
-      event[`${attribute}Key`] = true;
-    } else if (validMouseButtons.indexOf(attribute) > -1) {
-      event.button = getMouseCode(attribute);
-    } else {
-      const keyCode = getKeyCode(attribute);
-
-      event.code = attribute;
-
-      // deprecated / removed from the Web Standards
-      event.which = keyCode;
-      event.keyCode = keyCode;
+      keyComboPart = keyComboPart === 'cmd' ? getCmdKey() : keyComboPart;
+      eventProps[`${keyComboPart}Key`] = true;
+    }
+    
+    if (type.startsWith('key') && !isValidModifier) {
+      eventProps.code = keyComboPart;
+    }
+    
+    if (type.startsWith('mouse') && !isValidModifier && validMouseButtons.indexOf(keyComboPart) > -1) {
+      eventProps.button = getMouseCode(keyComboPart);
     }
 
-    return event;
+    return eventProps;
   }, {});
 
-  return triggerEvent(element || document.body, type, event);
+  return triggerEvent(element, type, eventProps);
 }

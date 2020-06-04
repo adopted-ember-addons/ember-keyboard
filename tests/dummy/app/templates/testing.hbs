@@ -1,22 +1,6 @@
 {{format-markdown "
 ## Testing
 
-### Integration Testing
-
-Since integration tests do not run initializers, you'll need to manually run the `ember-keyboard` initializer before each test:
-
-```js
-import { initialize } from 'ember-keyboard';
-
-moduleForComponent('my component', 'Integration | Component | my component', {
-  integration: true,
-
-  beforeEach() {
-    initialize();
-  }
-});
-```
-
 ### Trigger Key Events
 
 If you need to manually trigger a key event (such as in a component integration test), you can use `triggerKeyDown`, `triggerKeyPress`, and `triggerKeyUp`. By default, the event triggers on the `document`, but you can optionally provide a DOM element as the second argument:

@@ -1,52 +1,48 @@
-import { get, computed } from '@ember/object';
-import Component from '@ember/component';
-import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
+import Component from '@glimmer/component';
+import { keyResponder, onKey } from 'ember-keyboard';
+import { tracked } from '@glimmer/tracking';
 
 function makeEventHandler(stepSize = 1) {
-  return function(event, ekEvent) {
-    if (get(this, 'stopImmediatePropagation')) {
+  return function(_event, ekEvent) {
+    if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }
-    if (get(this, 'stopPropagation')) {
+    if (this.stopPropagation) {
       ekEvent.stopPropagation();
     }
-    this.incrementProperty('counter', stepSize);
+    this.counter = this.counter + stepSize;
   }
 }
 
-export default Component.extend(EKMixin, {
-  tagName: 'span',
-  classNames: 'counter-container',
-  toggleActivated: true,
+@keyResponder
+export default class extends Component {
+  @tracked toggleActivated = true;
+  @tracked counter = 0;
+  @tracked keyboardPriority = 0;
+  @tracked stopPropagation = false;
+  @tracked stopImmediatePropagation = false;
+  @tracked keyboardLaxPriority = false;
+  @tracked keyboardFirstResponder = false;
 
-  counter: 0,
-
-  keyboardActivated: computed('parentActivated', 'toggleActivated', 'activatedToggle', {
-    get() {
-      const toggleActivated = this.get('activatedToggle') ? this.get('toggleActivated') : true;
-
-      return toggleActivated && this.get('parentActivated');
-    }
-  }).readOnly(),
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.on(keyDown('ArrowLeft'), makeEventHandler(-1));
-    this.on(keyDown('ArrowRight'), makeEventHandler(1));
-    this.on(keyDown('shift+ArrowLeft'), makeEventHandler(-10));
-    this.on(keyDown('shift+ArrowRight'), makeEventHandler(10));
-    this.on(keyDown('ctrl+shift+ArrowLeft'), makeEventHandler(-100));
-    this.on(keyDown('ctrl+shift+ArrowRight'), makeEventHandler(100));
-
-    this.on(keyUp('KeyR'), function() {
-      this.set('counter', 0);
-    });
-
-    this.on(keyPress('Digit5'), function() {
-      this.set('counter', 5);
-    });
+  get keyboardActivated() {
+    let toggleActivated = this.args.activatedToggle ? this.toggleActivated : true;
+    return toggleActivated && this.args.parentActivated;
   }
 
+  @onKey('ArrowLeft') dec1 = makeEventHandler(-1);
+  @onKey('ArrowRight') inc1 = makeEventHandler(1);
+  @onKey('shift+ArrowLeft') dec10 = makeEventHandler(-10);
+  @onKey('shift+ArrowRight') inc10 = makeEventHandler(10);
+  @onKey('ctrl+shift+ArrowLeft') dec100 = makeEventHandler(-100);
+  @onKey('ctrl+shift+ArrowRight') inc100 = makeEventHandler(100);
 
-});
+  @onKey('KeyR', { event: 'keyup' })
+  resetCounter() {
+    this.counter = 0;
+  }
+
+  @onKey('Digit5', { event: 'keypress' })
+  resetCounterTo5() {
+    this.counter = 5;
+  }
+}

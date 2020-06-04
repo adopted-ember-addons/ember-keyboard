@@ -1,4 +1,4 @@
-import getCmdKey from 'dummy/utils/get-cmd-key';
+import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | get cmd key', function() {
