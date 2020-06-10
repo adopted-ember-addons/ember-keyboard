@@ -1,3 +1,42 @@
+## v6.0.0 (2020-06-10)
+
+This major release sports new Octane-friendly API. You can see examples and read about the reasons for the API choices in our [API Design doc](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/API-DESIGN.md).
+
+### Upgrading from ember-keyboard 5.0.0 to 6.0.0
+
+ember-keyboard 6.0.0-beta.1 introduces new APIs to bring ember-keyboard into the Ember Octane era. The old mixins-based API still works but is deprecated in this release and slated for removal in version 7.
+
+Version 6 requires Ember 3.8 or higher, so if you are on a version of Ember before that, you should stick with 5.0.0 until you are able to upgrade your app's Ember version.
+
+If your app is on a recent version of Ember, you are good to go. The path is to upgrade to ember-keyboard 6.x and you can iteratively update to the new APIs until you have no more deprecation warnings left.
+
+The [deprecations](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/tests/dummy/app/templates/deprecations.hbs) page discusses migration paths for each warning you may encounter, but our broader advice is to consider moving as much of your keyboard handling logic to templates as possible. We think that you'll find the `on-key` helper and modifier to be very convenient to work with. The decorator API (which required ember 3.10 or higher) is closest equivalent to the mixins API, but it should be used sparingly in situations where the template approach isn't a good fit.
+
+There is one other potential *breaking* change to be aware of when upgrading from v5 to v6: ember-keyboard versions before 6.0 had an ambiguous API when it came to specifying key combos and required the use of `code` identifiers, like `KeyT`, `Digit1`, etc. Be sure to read the [docs regarding `key` vs. `code` properties](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/tests/dummy/app/templates/usage.hbs) and be sure you are specifying the key combo consistent with your intended behavior. You will likely find that you want to update some key combos to the `key` equivalent. e.g. replace `ctrl+KeyT` with `ctrl+t`.
+
+### Upgrading from ember-keyboard 6.0.0-beta.0 to 6.0.0
+
+The `keyboard-press` component has been deprecated and replaced with the `on-key` helper. The `on-keyboard` and `keyboard-shortut` modifiers have been deprecated and replaced with the `on-key` modifier. The [deprecations](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/tests/dummy/app/templates/deprecations.hbs) page has more info, along with the 5 to 6 upgrade guide immediately below.
+
+### Upgrading from ember-keyboard 6.0.0-beta.1 to 6.0.0
+
+The only changes since 6.0.0-beta.1 were internal dependency updates. Upgrading should be smooth.
+
+#### :house: Internal Changes since 6.0.0-beta.1
+* [#186](https://github.com/adopted-ember-addons/ember-keyboard/pull/186) [Security] Bump websocket-extensions from 0.1.3 to 0.1.4 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#188](https://github.com/adopted-ember-addons/ember-keyboard/pull/188) Bump eslint from 7.1.0 to 7.2.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#187](https://github.com/adopted-ember-addons/ember-keyboard/pull/187) Bump ember-angle-bracket-invocation-polyfill from 2.0.2 to 2.1.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#181](https://github.com/adopted-ember-addons/ember-keyboard/pull/181) Bump eslint-plugin-ember from 7.11.1 to 8.6.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#183](https://github.com/adopted-ember-addons/ember-keyboard/pull/183) [Security] Bump tar from 2.2.1 to 2.2.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 2
+- Luke Melia ([@lukemelia](https://github.com/lukemelia))
+
+#### Other contributors
+
+Thank you to @optikalefx, @NullVoxPopuli @mattmcmanus, @seanCodes, and @bendemboski for helping to shape the API Design for this release.
+
+
 ## v6.0.0-beta.1 (2020-06-04)
 
 This release sports new Octane-friendly API. You can see examples and read about the reasons for the API choices in our [API Design doc](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/API-DESIGN.md).
