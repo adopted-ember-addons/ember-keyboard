@@ -4100,7 +4100,7 @@ broccoli-funnel@^2.0.0, broccoli-funnel@^2.0.1, broccoli-funnel@^2.0.2:
     symlink-or-copy "^1.0.0"
     walk-sync "^0.3.1"
 
-broccoli-funnel@^3.0.2, broccoli-funnel@^3.0.3:
+broccoli-funnel@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-3.0.3.tgz#26fd42632471f67a91f4770d1987118087219937"
   integrity sha512-LPzZ91BwStoHZXdXHQAJeYORl189OrRKM5NdIi86SDU9wZ4s/3lV1PRFOiobDT/jKM10voM7CDzfvicHbCYxAQ==
@@ -6462,16 +6462,16 @@ ember-qunit@^4.6.0:
     qunit "^2.9.3"
 
 ember-resolver@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-8.0.0.tgz#cc48682c1e2f5d208499b1ecdcac1e43839683bd"
-  integrity sha512-M0P1++26h9KuEpg14VDrg37daneXrj9Hv9kuM0Xzsm38guma9JzO1+BvJcL/u5EGiJSUjtLtYvakk/6feFlo6A==
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-8.0.2.tgz#8a45a744aaf5391eb52b4cb393b3b06d2db1975c"
+  integrity sha512-BmCoPT8nf5uv0g2QkhMsrG1Gmu6MtXd6igfhCVzCTMTwZ97SxhJKqoMY62EP/av5HVSWBC/Sa1uGU5cQvX1Aog==
   dependencies:
     babel-plugin-debug-macros "^0.3.3"
-    broccoli-funnel "^3.0.2"
+    broccoli-funnel "^3.0.3"
     broccoli-merge-trees "^4.2.0"
-    ember-cli-babel "^7.18.0"
-    ember-cli-version-checker "^5.0.2"
-    resolve "^1.15.1"
+    ember-cli-babel "^7.22.1"
+    ember-cli-version-checker "^5.1.1"
+    resolve "^1.17.0"
 
 ember-rfc176-data@^0.3.13:
   version "0.3.13"
