@@ -1,3 +1,24 @@
+## v6.0.1 (2020-09-07)
+
+#### :house: Internal
+* [#251](https://github.com/adopted-ember-addons/ember-keyboard/pull/251) Bump release-it from 13.6.9 to 14.0.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#236](https://github.com/adopted-ember-addons/ember-keyboard/pull/236) Bump eslint from 7.5.0 to 7.7.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#226](https://github.com/adopted-ember-addons/ember-keyboard/pull/226) Bump ember-modifier from 1.0.3 to 2.1.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#219](https://github.com/adopted-ember-addons/ember-keyboard/pull/219) [Security] Bump elliptic from 6.5.2 to 6.5.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#218](https://github.com/adopted-ember-addons/ember-keyboard/pull/218) Bump @glimmer/component from 1.0.0 to 1.0.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#216](https://github.com/adopted-ember-addons/ember-keyboard/pull/216) Bump @glimmer/tracking from 1.0.0 to 1.0.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#224](https://github.com/adopted-ember-addons/ember-keyboard/pull/224) Bump qunit-dom from 1.2.0 to 1.4.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#199](https://github.com/adopted-ember-addons/ember-keyboard/pull/199) Bump ember-auto-import from 1.5.3 to 1.6.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#213](https://github.com/adopted-ember-addons/ember-keyboard/pull/213) Bump eslint-plugin-ember from 8.9.1 to 8.9.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#211](https://github.com/adopted-ember-addons/ember-keyboard/pull/211) Bump eslint from 7.4.0 to 7.5.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#208](https://github.com/adopted-ember-addons/ember-keyboard/pull/208) Bump marked from 1.1.0 to 1.1.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#215](https://github.com/adopted-ember-addons/ember-keyboard/pull/215) Bump release-it from 13.6.5 to 13.6.6 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#189](https://github.com/adopted-ember-addons/ember-keyboard/pull/189) Add test to make sure ember-keybaord doesn't break fastboot rendering ([@lukemelia](https://github.com/lukemelia))
+
+#### Committers: 2
+- Luke Melia ([@lukemelia](https://github.com/lukemelia))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v6.0.0 (2020-06-10)
 
 This major release sports new Octane-friendly API. You can see examples and read about the reasons for the API choices in our [API Design doc](https://github.com/adopted-ember-addons/ember-keyboard/blob/master/API-DESIGN.md).
