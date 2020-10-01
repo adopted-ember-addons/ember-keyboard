@@ -66,11 +66,18 @@ pre {
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
   -webkit-align-items: center;
   align-items: center;
   width: 100%;
+}
+
+.logo {
+  width: 72px;
+  margin-right: 16px;
+}
+
+.header-text {
+  flex-grow: 1;
 }
 
 .octocat {
