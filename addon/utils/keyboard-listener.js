@@ -23,6 +23,12 @@ export default class KeyboardListener {
     let keyboardListener = new KeyboardListener(platform);
     let [eventType, keyCombo] = s.split(':');
     keyboardListener.type = eventType;
+
+    if (keyCombo === '+') {
+      keyboardListener.keyOrCode = keyCombo;
+      return keyboardListener;
+    }
+
     keyCombo.split('+').forEach((part) => {
       if (ALT_REGEX.test(part)) {
         keyboardListener.altKey = true;

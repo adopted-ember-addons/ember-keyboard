@@ -8,49 +8,50 @@ const LINUX_UA = 'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (
 
 module('Unit | Utility | isKey', function() {
   let table = `
-                                   |    keydown event                   |    result
-  listenerName           platform  |  alt ctrl meta shift key  code     |  expected  pending   note
-  -----------------------------------------------------------------------------------------------------------------------------
-  keydown:alt+c             win    |  T   F    F    F     c    KeyC     |  T         F
-  keyup:alt+c               win    |  T   F    F    F     c    KeyC     |  F         F
-  keypress:alt+c            win    |  T   F    F    F     c    KeyC     |  F         F
-  keydown:alt+c             win    |  T   F    F    F     j    KeyC     |  F         F         simulates dvorak j
-  keydown:alt+c             linux  |  T   F    F    F     c    KeyI     |  T         F         simulates dvorak c
-  keydown:alt+c             mac    |  T   F    F    F     ç    KeyC     |  T         F         simulates Mac alt+c
-  keydown:shift+alt+7       mac    |  T   F    F    T     ‡    Digit1   |  T         F         simulates Mac shift+alt+7
-  keydown:alt+KeyC          win    |  T   F    F    F     c    KeyC     |  T         F
-  keydown:alt+c             win    |  F   F    F    F     c    KeyC     |  F         F         alt not pressed
-  keydown:alt+c             win    |  T   F    F    T     c    KeyC     |  F         F         alt+shift pressed
-  keydown:alt+KeyC          win    |  F   F    F    F     c    KeyC     |  F         F         alt not pressed
-  keydown:alt+KeyC          win    |  T   F    F    T     c    KeyC     |  F         F         alt+shift pressed
-  keydown:shift+c           win    |  F   F    F    T     c    KeyC     |  T         F
-  keydown:shift+KeyC        win    |  F   F    F    T     c    KeyC     |  T         F
-  keydown:ctrl+shift+t      win    |  F   T    F    T     t    KeyT     |  T         F
-  keydown:ctrl+shift+KeyT   win    |  F   T    F    T     t    KeyT     |  T         F
-  keydown:alt+Digit2        win    |  T   F    F    F     2    Digit2   |  T         F
-  keydown:shift+Digit2      win    |  F   F    F    T     @    Digit2   |  T         F
-  keydown:shift+2           win    |  F   F    F    T     @    Digit2   |  T         F
-  keydown:@                 win    |  F   F    F    F     @    Digit2   |  T         F
-  keydown:?                 win    |  F   F    F    T     ?    Slash    |  T         F
-  keydown:ctrl+shift+?      win    |  F   T    F    T     ?    Slash    |  T         F
-  keydown:ctrl+Slash        win    |  F   T    F    F     /    Slash    |  T         F
-  keydown:ctrl+Slash        win    |  F   T    F    T     ?    Slash    |  F         F
-  keydown:/                 win    |  F   F    F    F     /    Slash    |  T         F         slash key with us language
-  keydown:/                 win    |  F   F    F    F     -    Slash    |  F         F         same key with german language
-  keydown:/                 win    |  F   F    F    F     /    Digit7   |  T         F         slash key on german keyboard
-  keydown:_all              win    |  F   F    F    F     /    Digit7   |  T         F
-  keydown:_all              win    |  T   F    F    F     c    KeyC     |  T         F
-  keydown:_all              win    |  F   T    F    F     ç    KeyC     |  T         F
-  keydown:Alt+c             win    |  T   F    F    F     c    KeyC     |  T         F
-  keydown:ALT+c             win    |  T   F    F    F     c    KeyC     |  T         F
-  keydown:SHIFT+c           win    |  F   F    F    T     c    KeyC     |  T         F
-  keydown:Shift+KeyC        win    |  F   F    F    T     c    KeyC     |  T         F
-  keydown:Ctrl+Shift+t      win    |  F   T    F    T     t    KeyT     |  T         F
-  keydown:CTRL+Slash        win    |  F   T    F    F     /    Slash    |  T         F
-  keydown:meta+c            win    |  F   F    T    F     c    KeyC     |  T         F
-  keydown:cmd+c             mac    |  F   F    T    F     c    KeyC     |  T         F
-  keydown:cmd+c             win    |  F   T    F    F     c    KeyC     |  T         F
-  keydown:cmd+c             win    |  F   F    F    T     c    KeyC     |  F         F
+                                   |    keydown event                       |    result
+  listenerName           platform  |  alt ctrl meta shift key  code         |  expected  pending   note
+  ---------------------------------------------------------------------------------------------------------------------------------
+  keydown:alt+c             win    |  T   F    F    F     c    KeyC         |  T         F
+  keyup:alt+c               win    |  T   F    F    F     c    KeyC         |  F         F
+  keypress:alt+c            win    |  T   F    F    F     c    KeyC         |  F         F
+  keydown:alt+c             win    |  T   F    F    F     j    KeyC         |  F         F         simulates dvorak j
+  keydown:alt+c             linux  |  T   F    F    F     c    KeyI         |  T         F         simulates dvorak c
+  keydown:alt+c             mac    |  T   F    F    F     ç    KeyC         |  T         F         simulates Mac alt+c
+  keydown:shift+alt+7       mac    |  T   F    F    T     ‡    Digit1       |  T         F         simulates Mac shift+alt+7
+  keydown:alt+KeyC          win    |  T   F    F    F     c    KeyC         |  T         F
+  keydown:alt+c             win    |  F   F    F    F     c    KeyC         |  F         F         alt not pressed
+  keydown:alt+c             win    |  T   F    F    T     c    KeyC         |  F         F         alt+shift pressed
+  keydown:alt+KeyC          win    |  F   F    F    F     c    KeyC         |  F         F         alt not pressed
+  keydown:alt+KeyC          win    |  T   F    F    T     c    KeyC         |  F         F         alt+shift pressed
+  keydown:shift+c           win    |  F   F    F    T     c    KeyC         |  T         F
+  keydown:shift+KeyC        win    |  F   F    F    T     c    KeyC         |  T         F
+  keydown:ctrl+shift+t      win    |  F   T    F    T     t    KeyT         |  T         F
+  keydown:ctrl+shift+KeyT   win    |  F   T    F    T     t    KeyT         |  T         F
+  keydown:alt+Digit2        win    |  T   F    F    F     2    Digit2       |  T         F
+  keydown:shift+Digit2      win    |  F   F    F    T     @    Digit2       |  T         F
+  keydown:shift+2           win    |  F   F    F    T     @    Digit2       |  T         F
+  keydown:@                 win    |  F   F    F    F     @    Digit2       |  T         F
+  keydown:?                 win    |  F   F    F    T     ?    Slash        |  T         F
+  keydown:ctrl+shift+?      win    |  F   T    F    T     ?    Slash        |  T         F
+  keydown:ctrl+Slash        win    |  F   T    F    F     /    Slash        |  T         F
+  keydown:ctrl+Slash        win    |  F   T    F    T     ?    Slash        |  F         F
+  keydown:/                 win    |  F   F    F    F     /    Slash        |  T         F         slash key with us language
+  keydown:/                 win    |  F   F    F    F     -    Slash        |  F         F         same key with german language
+  keydown:/                 win    |  F   F    F    F     /    Digit7       |  T         F         slash key on german keyboard
+  keydown:_all              win    |  F   F    F    F     /    Digit7       |  T         F
+  keydown:_all              win    |  T   F    F    F     c    KeyC         |  T         F
+  keydown:_all              win    |  F   T    F    F     ç    KeyC         |  T         F
+  keydown:Alt+c             win    |  T   F    F    F     c    KeyC         |  T         F
+  keydown:ALT+c             win    |  T   F    F    F     c    KeyC         |  T         F
+  keydown:SHIFT+c           win    |  F   F    F    T     c    KeyC         |  T         F
+  keydown:Shift+KeyC        win    |  F   F    F    T     c    KeyC         |  T         F
+  keydown:Ctrl+Shift+t      win    |  F   T    F    T     t    KeyT         |  T         F
+  keydown:CTRL+Slash        win    |  F   T    F    F     /    Slash        |  T         F
+  keydown:meta+c            win    |  F   F    T    F     c    KeyC         |  T         F
+  keydown:cmd+c             mac    |  F   F    T    F     c    KeyC         |  T         F
+  keydown:cmd+c             win    |  F   T    F    F     c    KeyC         |  T         F
+  keydown:cmd+c             win    |  F   F    F    T     c    KeyC         |  F         F
+  keydown:+                 win    |  F   F    F    F     +    BracketRight |  T         F         plus key with german language
   `;
   for (let line of table.split("\n").map(line => line.trim().replace(/\|/g, ''))) {
     if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
