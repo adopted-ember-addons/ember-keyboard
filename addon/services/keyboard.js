@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { getOwner } from '@ember/application';
-import { action, get } from '@ember/object';
+import { action } from '@ember/object';
 import { run } from '@ember/runloop';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 import {
@@ -49,11 +49,12 @@ export default class KeyboardService extends Service {
     }
 
     const config = getOwner(this).resolveRegistration('config:environment') || {};
+    let emberKeyboardConfig = config.emberKeyboard || {};
 
-    const isPropagationEnabled = Boolean(get(config, 'emberKeyboard.propagation'));
+    const isPropagationEnabled = Boolean(emberKeyboardConfig.propagation);
     this.isPropagationEnabled = isPropagationEnabled;
 
-    this._listeners = get(config, 'emberKeyboard.listeners') || ['keyUp', 'keyDown', 'keyPress'];
+    this._listeners = emberKeyboardConfig.listeners || ['keyUp', 'keyDown', 'keyPress'];
     this._listeners = this._listeners.map((listener) => listener.toLowerCase());
 
     this._listeners.forEach((type) => {
