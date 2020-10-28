@@ -1,4 +1,3 @@
-import { get } from '@ember/object';
 import getMouseName from 'ember-keyboard/utils/get-mouse-name';
 import listenerName from 'ember-keyboard/utils/listener-name';
 import isKey from 'ember-keyboard/utils/is-key';
@@ -52,7 +51,7 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
   let previousPriorityLevel = Number.POSITIVE_INFINITY;
 
   for (const responder of normalResponders) {
-    const currentPriorityLevel = Number(get(responder, 'keyboardPriority'));
+    const currentPriorityLevel = Number(responder.keyboardPriority);
 
     if (isImmediatePropagationStopped && currentPriorityLevel === previousPriorityLevel) {
       continue;
@@ -77,11 +76,11 @@ export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
   let isLax = true;
 
   sortedResponders.every((responder) => {
-    const keyboardFirstResponder = get(responder, 'keyboardFirstResponder');
-    const keyboardPriority = get(responder, 'keyboardPriority');
+    const keyboardFirstResponder = responder.keyboardFirstResponder;
+    const keyboardPriority = responder.keyboardPriority;
 
     if (keyboardFirstResponder || (noFirstResponders && keyboardPriority >= currentPriorityLevel) || isLax) {
-      if (!get(responder, 'keyboardLaxPriority')) {
+      if (!responder.keyboardLaxPriority) {
         isLax = false;
       }
 

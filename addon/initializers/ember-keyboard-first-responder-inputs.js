@@ -5,12 +5,12 @@ import {
   EKFirstResponderOnFocusMixin
 } from 'ember-keyboard';
 import { deprecate } from '@ember/debug';
-import { get } from '@ember/object';
 
 export function initialize(application) {
   if (application) {
     let config = application.resolveRegistration('config:environment') || {};
-    let disableInputsInitializer = Boolean(get(config, 'emberKeyboard.disableInputsInitializer'));
+    let emberKeyboardConfig = config.emberKeyboard || {};
+    let disableInputsInitializer = Boolean(emberKeyboardConfig.disableInputsInitializer);
     if (disableInputsInitializer) {
       return;
     }
