@@ -1,3 +1,22 @@
+## v6.0.2 (2020-10-30)
+
+#### :rocket: Enhancement
+* [#281](https://github.com/adopted-ember-addons/ember-keyboard/pull/281) support binding to "+" key ([@marcoow](https://github.com/marcoow))
+
+#### :memo: Documentation
+* [#271](https://github.com/adopted-ember-addons/ember-keyboard/pull/271) Update README to add logo and adjust order ([@lukemelia](https://github.com/lukemelia))
+* [#269](https://github.com/adopted-ember-addons/ember-keyboard/pull/269) Adds logo, also as favicon ([@MinThaMie](https://github.com/MinThaMie))
+
+#### :house: Internal
+* [#285](https://github.com/adopted-ember-addons/ember-keyboard/pull/285) Update ember/ember-cli ([@lukemelia](https://github.com/lukemelia))
+* [#279](https://github.com/adopted-ember-addons/ember-keyboard/pull/279) Bump release-it-lerna-changelog from 2.3.0 to 3.0.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 4
+- Anne-Greeth van Herwijnen ([@MinThaMie](https://github.com/MinThaMie))
+- Luke Melia ([@lukemelia](https://github.com/lukemelia))
+- Marco Otte-Witte ([@marcoow](https://github.com/marcoow))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
 ## v6.0.1 (2020-09-07)
 
 #### :house: Internal
