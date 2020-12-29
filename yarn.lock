@@ -5624,14 +5624,15 @@ escodegen@^1.11.0, escodegen@^1.14.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-plugin-ember@^9.3.0:
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-9.5.0.tgz#55966bce55ec7ee8bed336b9ad4ce6b953c61aaa"
-  integrity sha512-kkOYb5e4d8prPK7Hv5/HCvQu7oZxjKcrD43KNrOsTfFotscVax1d3oRt1J+SmOG99qW144mit4YNURZDFtlLKw==
+eslint-plugin-ember@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.1.0.tgz#e7ca20cb1255c93732cd0d233d3f4fcb1bd591ea"
+  integrity sha512-NP2bwa1zCuHk0HWk2zAG3COybGqk3okIxtQYRkW8YBJymDJGdLsJ+yD1B1ZJO9J3w3vPPZRF+wulkQsv7ppagQ==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     css-tree "^1.0.0-alpha.39"
     ember-rfc176-data "^0.3.15"
+    eslint-utils "^2.1.0"
     lodash.kebabcase "^4.1.1"
     snake-case "^3.0.3"
 
