@@ -18,6 +18,8 @@ export default Component.extend(EKMixin, EKOnInsertMixin, {
       false,
       {
           id: 'ember-keyboard.keyboard-press',
+          for: 'ember-keyboard',
+          since: '6.0.0-beta.0',
           until: '7.0.0',
           url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-press'
       }
