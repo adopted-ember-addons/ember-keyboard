@@ -127,6 +127,8 @@ function triggerResponderListener(responder, event, ekEvent = null) {
       false,
       {
           id: 'ember-keyboard.responder-trigger',
+          for: 'ember-keyboard',
+          since: '6.0.2',
           until: '7.0.0',
           url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#responder-trigger'
       }
