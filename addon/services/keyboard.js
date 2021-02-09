@@ -76,6 +76,14 @@ export default class KeyboardService extends Service {
 
   @action
   _respond(event) {
+    const { target } = event;
+    if (target) {
+      const tag = target.tagName;
+      const isContentEditable = target.getAttribute && target.getAttribute('contenteditable') != null;
+      if (isContentEditable || tag === 'TEXTAREA' || tag === 'INPUT') {
+        return;
+      }
+    }
     run(() => {
       if (this.isPropagationEnabled) {
         let { firstResponders, normalResponders } = this;
