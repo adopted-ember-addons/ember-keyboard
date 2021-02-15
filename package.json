@@ -54,7 +54,7 @@
     "ember-fn-helper-polyfill": "^1.0.2",
     "ember-load-initializers": "^2.1.1",
     "ember-on-helper": "^0.1.0",
-    "ember-qunit": "^4.6.0",
+    "ember-qunit": "^5.1.2",
     "ember-resolver": "^8.0.2",
     "ember-simple-set-helper": "^0.1.2",
     "ember-source": "~3.22.0",
