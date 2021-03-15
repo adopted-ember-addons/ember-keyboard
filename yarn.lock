@@ -2413,6 +2413,13 @@ babel-plugin-ember-modules-api-polyfill@^3.2.1:
   dependencies:
     ember-rfc176-data "^0.3.16"
 
+babel-plugin-ember-modules-api-polyfill@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-3.4.0.tgz#3f5e0457e135f8a29b3a8b6910806bb5b524649e"
+  integrity sha512-nVu/LqbZBAup1zLij6xGvQwVLWVk4XYu2fl4vIOUR3S6ukdonMLhKAb0d4QXSzH30Pd7OczVTlPffWbiwahdJw==
+  dependencies:
+    ember-rfc176-data "^0.3.16"
+
 babel-plugin-filter-imports@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-filter-imports/-/babel-plugin-filter-imports-4.0.0.tgz#068f8da15236a96a9602c36dc6f4a6eeca70a4f4"
@@ -2431,10 +2438,12 @@ babel-plugin-htmlbars-inline-precompile@^3.0.1:
   resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-3.0.1.tgz#e1e38a4087f446578e419a21c112530c8df02345"
   integrity sha512-ZiFY0nQjtdMPGIDwp/5LYOs6rCr54QfcSV5nPbrA7C++Fv4Vb2Q/qrKYx78t+dwmARJztnOBlObFk4z8veHxNA==
 
-babel-plugin-htmlbars-inline-precompile@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-4.2.0.tgz#73e7a199c14db139b9c9aea240e03b7112784c81"
-  integrity sha512-n2jMGcFKvubnYi8Ink7zJnC+aQor97v5FJKYUOUKijj5gIDy/sOIAZ7BxDWb0co1VzZokdN7tvtLnQtiWfD1Gw==
+babel-plugin-htmlbars-inline-precompile@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-htmlbars-inline-precompile/-/babel-plugin-htmlbars-inline-precompile-4.4.5.tgz#ca0fc6ea49fe13b0a91ff995ee381d33d421a4ef"
+  integrity sha512-7qnZTDm9uUQppOmEWjAyIPTQ54akEdd9PCIfbTJ8HNgUdekeKC+24uwd+M1ZTjUItby1iLy9maQOK3Wv9RjWJA==
+  dependencies:
+    babel-plugin-ember-modules-api-polyfill "^3.4.0"
 
 babel-plugin-module-resolver@^3.1.1:
   version "3.1.3"
@@ -3318,24 +3327,6 @@ broccoli-persistent-filter@^2.2.1, broccoli-persistent-filter@^2.3.0, broccoli-p
     symlink-or-copy "^1.0.1"
     sync-disk-cache "^1.3.3"
     walk-sync "^1.0.0"
-
-broccoli-persistent-filter@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/broccoli-persistent-filter/-/broccoli-persistent-filter-3.1.0.tgz#5812abbc000b2409ef40addeeed16a2a9482696e"
-  integrity sha512-yHHPv7M04qb9ajo3QkbGWetpshekVYG8sSjNdgAPQQ3spiRvS6RthYBddni5iw9b2DidSCpe/YPGRnp7LL4OIQ==
-  dependencies:
-    async-disk-cache "^2.0.0"
-    async-promise-queue "^1.0.3"
-    broccoli-plugin "^4.0.3"
-    fs-tree-diff "^2.0.0"
-    hash-for-dep "^1.5.0"
-    heimdalljs "^0.2.1"
-    heimdalljs-logger "^0.1.7"
-    mkdirp "^0.5.1"
-    promise-map-series "^0.2.1"
-    rimraf "^3.0.0"
-    symlink-or-copy "^1.0.1"
-    sync-disk-cache "^2.0.0"
 
 broccoli-persistent-filter@^3.1.2:
   version "3.1.2"
@@ -4981,22 +4972,22 @@ ember-cli-htmlbars@^4.2.2:
     walk-sync "^2.0.2"
 
 ember-cli-htmlbars@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.3.1.tgz#61793964fc2599ce750db9e972ab55c6dd177c48"
-  integrity sha512-ZjQTt44euDoqLvUkWbt1svgNCXgLzOztEbc2qqYMQvhQig416LMrWK7l3SSbNU+BtLD5UIxmwvLfF1tsO2CVyA==
+  version "5.6.5"
+  resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.6.5.tgz#15a55e4e4f47869a5e95a1e49813f77fd22fb76e"
+  integrity sha512-Wl3AntESMmQoG//yKuu+/7qAOznYAwRgWU8ZOCOPaGdPFaFXD6SPd2SKpRW4BEox5KLBJZFH0e7b9m78IAzcUw==
   dependencies:
     "@ember/edition-utils" "^1.2.0"
-    babel-plugin-htmlbars-inline-precompile "^4.2.0"
+    babel-plugin-htmlbars-inline-precompile "^4.4.5"
     broccoli-debug "^0.6.5"
-    broccoli-persistent-filter "^3.1.0"
+    broccoli-persistent-filter "^3.1.2"
     broccoli-plugin "^4.0.3"
     common-tags "^1.8.0"
-    ember-cli-babel-plugin-helpers "^1.1.0"
+    ember-cli-babel-plugin-helpers "^1.1.1"
     fs-tree-diff "^2.0.1"
     hash-for-dep "^1.5.1"
     heimdalljs-logger "^0.1.10"
     json-stable-stringify "^1.0.1"
-    semver "^7.3.2"
+    semver "^7.3.4"
     silent-error "^1.1.1"
     strip-bom "^4.0.0"
     walk-sync "^2.2.0"
