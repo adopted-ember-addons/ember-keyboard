@@ -19,7 +19,7 @@ module('Integration | Helper | if-key', function(hooks) {
           'error is thrown'
         );
       });  
-      await render(hbs`{{on-document "keydown" (if-key "alt+c" unknownEvent)}}`);
+      await render(hbs`{{on-document "keydown" (if-key "alt+c" this.unknownEvent)}}`);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'c' });
     });
   
@@ -33,7 +33,7 @@ module('Integration | Helper | if-key', function(hooks) {
           'error is thrown'
         );
       });  
-      await render(hbs`<button {{on 'click' (if-key "alt+c" onTrigger)}}>Press me</button>`);
+      await render(hbs`<button {{on 'click' (if-key "alt+c" this.onTrigger)}}>Press me</button>`);
       await click('button');
     });  
   });
@@ -43,7 +43,7 @@ module('Integration | Helper | if-key', function(hooks) {
     this.set('onTrigger', (ev) => {
       onTriggerCalledWith = ev;
     });
-    await render(hbs`{{on-document "keydown" (if-key "alt+c" onTrigger)}}`);
+    await render(hbs`{{on-document "keydown" (if-key "alt+c" this.onTrigger)}}`);
     await triggerEvent(document.body, 'keydown', { altKey: true, key: 'c' });
     assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
   });
@@ -53,7 +53,7 @@ module('Integration | Helper | if-key', function(hooks) {
     this.set('onTrigger', (ev) => {
       onTriggerCalledWith = ev;
     });
-    await render(hbs`{{on-document "keydown" (if-key "alt+c" onTrigger)}}`);
+    await render(hbs`{{on-document "keydown" (if-key "alt+c" this.onTrigger)}}`);
     await triggerEvent(document.body, 'keydown', { shiftKey: true, key: 'z' });
     assert.ok(!onTriggerCalledWith, 'trigger is on invoked if key does not match');
   });

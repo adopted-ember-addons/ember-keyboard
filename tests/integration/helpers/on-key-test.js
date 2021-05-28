@@ -21,8 +21,8 @@ module('Integration | Helper | on-key', function(hooks) {
       this.set('shouldRenderOnKeyHelper', false);
       this.renderWithConditional = () => {
         return render(hbs`
-          {{#if shouldRenderOnKeyHelper}}
-            {{on-key 'shift+c' onTrigger}}
+          {{#if this.shouldRenderOnKeyHelper}}
+            {{on-key 'shift+c' this.onTrigger}}
           {{/if}}
         `);
       }
@@ -52,7 +52,7 @@ module('Integration | Helper | on-key', function(hooks) {
     this.set('onTrigger', (ev) => {
       onTriggerCalledWith = ev;
     });
-    await render(hbs`{{on-key 'shift+c' onTrigger}}`);
+    await render(hbs`{{on-key 'shift+c' this.onTrigger}}`);
     await keyDown('shift+c');
     assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
   });
@@ -75,36 +75,36 @@ module('Integration | Helper | on-key', function(hooks) {
      });
      test('stopPropagation+stopImmediatePropagation', async function(assert) {
       await render(hbs`
-        {{on-key 'alt+a' (fn trigger 'A2a' true true) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A2b' true true) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A1' true true) priority=1}}
+        {{on-key 'alt+a' (fn this.trigger 'A2a' true true) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A2b' true true) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A1' true true) priority=1}}
       `);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
       assert.deepEqual(triggered, ['A2a']);
     });
     test('stopPropagation', async function(assert) {
       await render(hbs`
-        {{on-key 'alt+a' (fn trigger 'A2a' true false) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A2b' true false) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A1' true false) priority=1}}
+        {{on-key 'alt+a' (fn this.trigger 'A2a' true false) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A2b' true false) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A1' true false) priority=1}}
       `);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
       assert.deepEqual(triggered, ['A2a', 'A2b']);
     });
     test('stopImmediatePropagation', async function(assert) {
       await render(hbs`
-        {{on-key 'alt+a' (fn trigger 'A2a' false true) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A2b' false true) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A1' false true) priority=1}}
+        {{on-key 'alt+a' (fn this.trigger 'A2a' false true) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A2b' false true) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A1' false true) priority=1}}
       `);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
       assert.deepEqual(triggered, ['A2a', 'A1']);
     });
     test('no stopping', async function(assert) {
       await render(hbs`
-        {{on-key 'alt+a' (fn trigger 'A2a' false false) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A2b' false false) priority=2}}
-        {{on-key 'alt+a' (fn trigger 'A1' false false) priority=1}}
+        {{on-key 'alt+a' (fn this.trigger 'A2a' false false) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A2b' false false) priority=2}}
+        {{on-key 'alt+a' (fn this.trigger 'A1' false false) priority=1}}
       `);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'a' });
       assert.deepEqual(triggered, ['A2a', 'A2b', 'A1']);
@@ -113,7 +113,7 @@ module('Integration | Helper | on-key', function(hooks) {
 
   module('unspecified event param', function(hooks) {
     hooks.beforeEach(async function() {
-      await render(hbs`{{on-key 'shift+c' onTrigger}}`);
+      await render(hbs`{{on-key 'shift+c' this.onTrigger}}`);
     });
     test('triggers on keydown by default (affirmative)', async function(assert) {
       await keyDown('shift+c');
@@ -131,7 +131,7 @@ module('Integration | Helper | on-key', function(hooks) {
 
   module('with event="keydown"', function(hooks) {
     hooks.beforeEach(async function() {
-      await render(hbs`{{on-key 'shift+c' onTrigger event='keydown'}}`);
+      await render(hbs`{{on-key 'shift+c' this.onTrigger event='keydown'}}`);
     });
     test('triggers on keydown', async function(assert) {
       await keyDown('shift+c');
@@ -149,7 +149,7 @@ module('Integration | Helper | on-key', function(hooks) {
 
   module('with event="keyup"', function(hooks) {
     hooks.beforeEach(async function() {
-      await render(hbs`{{on-key 'shift+c' onTrigger event='keyup'}}`);
+      await render(hbs`{{on-key 'shift+c' this.onTrigger event='keyup'}}`);
     });
     test('triggers on keyup', async function(assert) {
       await keyUp('shift+c');
@@ -167,7 +167,7 @@ module('Integration | Helper | on-key', function(hooks) {
 
   module('with event="keypress"', function(hooks) {
     hooks.beforeEach(async function() {
-      await render(hbs`{{on-key 'shift+c' onTrigger event='keypress'}}`);
+      await render(hbs`{{on-key 'shift+c' this.onTrigger event='keypress'}}`);
     });
     test('triggers on keypress', async function(assert) {
       await keyPress('shift+c');
@@ -187,7 +187,7 @@ module('Integration | Helper | on-key', function(hooks) {
     hooks.beforeEach(function() {
       this.set('isActivated', false);
       this.renderWithActivated = () => {
-        return render(hbs`{{on-key 'shift+c' onTrigger activated=isActivated}}`);
+        return render(hbs`{{on-key 'shift+c' this.onTrigger activated=this.isActivated}}`);
       }
     });
     test('does not trigger if helper is not activated', async function(assert) {
@@ -223,7 +223,7 @@ module('Integration | Helper | on-key', function(hooks) {
             'error is thrown'
           );
         });
-        await render(hbs`{{on-key "alt+a" doesNotExist}}`);
+        await render(hbs`{{on-key "alt+a" this.doesNotExist}}`);
         await triggerEvent(document.body, 'keydown', { altKey: true, key: 'c' });
       });
     }
