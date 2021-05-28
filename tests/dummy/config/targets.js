@@ -3,7 +3,8 @@
 const browsers = [
   'last 1 Chrome versions',
   'last 1 Firefox versions',
-  'last 1 Safari versions'
+  'last 1 Safari versions',
+  'maintained node versions'
 ];
 
 module.exports = {
