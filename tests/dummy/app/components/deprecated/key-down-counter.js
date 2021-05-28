@@ -1,9 +1,13 @@
+/* eslint-disable ember/no-component-lifecycle-hooks */
+/* eslint-disable ember/require-tagless-components */
+/* eslint-disable ember/no-classic-classes */
+/* eslint-disable ember/no-classic-components */
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
 
 function makeEventHandler(stepSize = 1) {
-  return function(event, ekEvent) {
+  return function(_event, ekEvent) {
     if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }

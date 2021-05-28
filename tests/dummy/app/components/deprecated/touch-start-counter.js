@@ -1,3 +1,7 @@
+/* eslint-disable ember/no-component-lifecycle-hooks */
+/* eslint-disable ember/require-tagless-components */
+/* eslint-disable ember/no-classic-classes */
+/* eslint-disable ember/no-classic-components */
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { EKMixin, touchStart } from 'ember-keyboard';

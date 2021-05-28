@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-actions-hash */
+/* eslint-disable ember/no-classic-classes */
 import Controller from '@ember/controller';
 
 export default Controller.extend({

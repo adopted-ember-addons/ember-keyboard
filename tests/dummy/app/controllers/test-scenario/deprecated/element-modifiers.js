@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { set } from '@ember/object';
+
 export default class extends Controller {
   constructor(...args) {
     super(...args);
@@ -9,21 +11,21 @@ export default class extends Controller {
 
   @action
   changeSetting(name, e) {
-    this.set(name, e.target.value);
+    set(this, name, e.target.value);
   }
 
   @action
   applyCheckedValue(name, e) {
-    this.set(name, e.target.checked);
+    set(this, name, e.target.checked);
   }
 
   @action
   changePriority(e) {
-    this.set('priority', e.target.value);
+    set(this, 'priority', e.target.value);
   }
 
   @action
   onEnterPressedInInput() {
-    this.set('wasEnterPressedInInput', true);
+    set(this, 'wasEnterPressedInInput', true);
   }
 }
