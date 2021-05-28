@@ -40,10 +40,14 @@
   </div>
 </div>
 
+<label>
+  on-keyboard with Enter
 <input type="text"
   {{on "input" (fn this.changeSetting 'textFieldValue')}}
   {{on-keyboard "Enter" this.onEnterPressedInInput}}
 >
+</label>
+
 <span data-test-text-field>
   {{if this.wasEnterPressedInInput 'enter pressed while input focused' 'enter not pressed while input focused'}}
 </span>

@@ -1,62 +1,68 @@
 <span class="counter-container" ...attributes>
   {{#if @priorityInput}}
-    <label><code>keyboardPriority</code>:</label>
-    <input
-      class="input-field"
-      data-test-counter-priority-input
-      value={{this.keyboardPriority}}
-      oninput={{fn (pick 'target.value' (set this 'keyboardPriority'))}}
-    >
+    <label><code>keyboardPriority</code>:
+      <input
+        class="input-field"
+        data-test-counter-priority-input
+        value={{this.keyboardPriority}}
+        oninput={{fn (pick 'target.value' (set this 'keyboardPriority'))}}
+      >
+    </label>
   {{/if}}
 
   {{#if @activatedToggle}}
-    <label><code>keyboardActivated</code>:</label>
+    <label><code>keyboardActivated</code>:
     <input
       type="checkbox"
       data-test-counter-activated-toggle
       checked={{this.toggleActivated}}
       onclick={{fn (pick "target.checked" (set this 'toggleActivated'))}}
     >
+    </label>
   {{/if}}
 
   {{#if @firstResponderToggle}}
-    <label><code>keyboardFirstResponder</code>:</label>
+    <label><code>keyboardFirstResponder</code>:
     <input
       type="checkbox"
       data-test-counter-first-responder-toggle
       checked={{this.keyboardFirstResponder}}
       onclick={{fn (pick "target.checked" (set this 'keyboardFirstResponder'))}}
     >
+    </label>
   {{/if}}
 
   {{#if @laxPriorityToggle}}
-    <label><code>keyboardLaxPriority</code>:</label>
+    <label><code>keyboardLaxPriority</code>:
     <input
       type="checkbox"
       data-test-counter-lax-priority-toggle
       checked={{this.keyboardLaxPriority}}
       onclick={{fn (pick "target.checked" (set this 'keyboardLaxPriority'))}}
     >
+    </label>
   {{/if}}
 
   {{#if @stopImmediatePropagationToggle}}
-    <label><code>stopImmediatePropagation()</code>:</label>
+    <label><code>stopImmediatePropagation()</code>:
     <input
       type="checkbox"
       data-test-counter-stop-immediate-propagation-toggle
       checked={{this.stopImmediatePropagation}}
       onclick={{fn (pick "target.checked" (set this 'stopImmediatePropagation'))}}
     >
+    </label>
   {{/if}}
 
   {{#if @stopPropagationToggle}}
-    <label><code>stopPropagation()</code>:</label>
+    <label><code>stopPropagation()</code>:
     <input
       type="checkbox"
       data-test-counter-stop-propagation-toggle
       checked={{this.stopPropagation}}
       onclick={{fn (pick "target.checked" (set this 'stopPropagation'))}}
     >
+    </label>
 
   {{/if}}
 

@@ -28,8 +28,8 @@ export default class extends Helper {
     this.keyboard.register(this);
   }
 
-  destroy() {
+  willDestroy() {
     this.keyboard.unregister(this);
-    super.destroy(...arguments);
+    super.willDestroy(...arguments);
   }
 }
