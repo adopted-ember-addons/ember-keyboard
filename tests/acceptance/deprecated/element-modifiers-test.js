@@ -24,14 +24,18 @@ if (gte('3.8.0')) {
 
     test('issues deprecation warnings', function(assert) {
       assert.ok(deprecations.length > 0);
-      assert.equal(deprecations[0].message, "The `keyboard-shortcut` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier with no action instead.");
-      assert.equal(deprecations[0].options.id, "ember-keyboard.keyboard-shortcut");
-      assert.equal(deprecations[0].options.until, "7.0.0");
-      assert.equal(deprecations[0].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-shortcut");
-      assert.equal(deprecations[3].message, "The `on-keyboard` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier instead.");
-      assert.equal(deprecations[3].options.id, "ember-keyboard.on-keyboard");
-      assert.equal(deprecations[3].options.until, "7.0.0");
-      assert.equal(deprecations[3].options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#on-keyboard");
+      let shortcutDeprecation = deprecations.filter(d => d.options.id === 'ember-keyboard.keyboard-shortcut')[0];
+      assert.ok(shortcutDeprecation, 'keyboard-shortcut deprecation is triggered as expected');
+      assert.equal(shortcutDeprecation.message, "The `keyboard-shortcut` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier with no action instead.");
+      assert.equal(shortcutDeprecation.options.id, "ember-keyboard.keyboard-shortcut");
+      assert.equal(shortcutDeprecation.options.until, "7.0.0");
+      assert.equal(shortcutDeprecation.options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-shortcut");
+      let onKeyboardDeprecation = deprecations.filter(d => d.options.id === 'ember-keyboard.on-keyboard')[0];
+      assert.ok(onKeyboardDeprecation, 'on-keyboard deprecation is triggered as expected');
+      assert.equal(onKeyboardDeprecation.message, "The `on-keyboard` modifier of ember-keyboard is deprecated. Please use the `on-key` modifier instead.");
+      assert.equal(onKeyboardDeprecation.options.id, "ember-keyboard.on-keyboard");
+      assert.equal(onKeyboardDeprecation.options.until, "7.0.0");
+      assert.equal(onKeyboardDeprecation.options.url, "https://adopted-ember-addons.github.io/ember-keyboard/deprecations#on-keyboard");
     });
 
 
