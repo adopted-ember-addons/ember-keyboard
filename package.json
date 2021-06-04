@@ -58,7 +58,7 @@
     "ember-qunit": "^5.1.4",
     "ember-resolver": "^8.0.2",
     "ember-set-helper": "^2.0.1",
-    "ember-source": "3.27.2",
+    "ember-source": "3.27.3",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^3.4.2",
     "ember-test-selectors": "^5.3.0",
