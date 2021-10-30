@@ -1,5 +1,4 @@
-import TextArea from '@ember/component/text-area';
-import TextField from '@ember/component/text-field';
+import { TextArea, TextField } from '@ember/legacy-built-in-components';
 import {
   EKMixin,
   EKFirstResponderOnFocusMixin

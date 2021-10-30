@@ -33,6 +33,7 @@
     "ember-modifier": "^2.1.1"
   },
   "devDependencies": {
+    "@ember/legacy-built-in-components": "^0.2.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.2.5",
     "@glimmer/component": "^1.0.4",
