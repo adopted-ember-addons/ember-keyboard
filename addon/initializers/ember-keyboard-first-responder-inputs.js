@@ -1,10 +1,11 @@
-import TextArea from '@ember/component/text-area';
-import TextField from '@ember/component/text-field';
+import Ember from 'ember';
+import { importSync } from '@embroider/macros';
 import {
   EKMixin,
   EKFirstResponderOnFocusMixin
 } from 'ember-keyboard';
 import { deprecate } from '@ember/debug';
+import { gte } from 'ember-compatibility-helpers';
 
 export function initialize(application) {
   if (application) {
@@ -27,8 +28,18 @@ deprecate(
         url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#first-responder-inputs'
     }
   );
-  TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);
-  TextArea.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+
+  if (gte('3.27.0')) {
+    const { default: TextField } = importSync('@ember/legacy-built-in-components/components/text-field');
+    const { default: TextArea } = importSync('@ember/legacy-built-in-components/components/textarea');
+
+    TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+    TextArea.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+  } else {
+    /* eslint-disable ember/new-module-imports */
+    Ember.TextField.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+    Ember.TextArea.reopen(EKMixin, EKFirstResponderOnFocusMixin);
+  }
 }
 
 export default {

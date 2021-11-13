@@ -134,7 +134,7 @@ module('Integration | decorators', function(hooks) {
         assert.deepEqual(triggered, ['A2a', 'A2b', 'A1']);
       });
     });
-    module('activated param', function() {
+    module('activated param', function(hooks) {
       hooks.beforeEach(function() {
         this.set('isActivated', false);
         this.renderWithActivated = () => {
