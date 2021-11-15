@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
+import { deprecate } from '@ember/debug';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 import {
   handleKeyEventWithPropagation,
@@ -53,6 +54,19 @@ export default class KeyboardService extends Service {
 
     const isPropagationEnabled = Boolean(emberKeyboardConfig.propagation);
     this.isPropagationEnabled = isPropagationEnabled;
+
+    deprecate(
+      'The old event propagation semantics have been deprecated. ' +
+      'You should set `emberKeyboard.propagation = true` in `config/environment.js`.',
+      isPropagationEnabled,
+      {
+        id: 'ember-keyboard.old-propagation-model',
+        for: 'ember-keyboard',
+        since: '6.0.4',
+        until: '7.0.0',
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#old-propagation-model'
+      }
+    );
 
     this._listeners = emberKeyboardConfig.listeners || ['keyUp', 'keyDown', 'keyPress'];
     this._listeners = this._listeners.map((listener) => listener.toLowerCase());
