@@ -33,6 +33,5 @@ export {
 export { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
 export { click, mouseDown, mouseUp } from 'ember-keyboard/listeners/mouse-events';
 export { touchStart, touchEnd } from 'ember-keyboard/listeners/touch-events';
-export { initialize } from 'ember-keyboard/initializers/ember-keyboard-first-responder-inputs'; // Remove in 7.0
 export { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard/utils/trigger-event';
 
