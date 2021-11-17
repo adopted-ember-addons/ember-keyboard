@@ -16,7 +16,7 @@ module('Integration | Helper | on-key', function(hooks) {
     });
   });
 
-  module('lifecycle', function() {
+  module('lifecycle', function(hooks) {
     hooks.beforeEach(function() {
       this.set('shouldRenderOnKeyHelper', false);
       this.renderWithConditional = () => {
@@ -183,7 +183,7 @@ module('Integration | Helper | on-key', function(hooks) {
     });
   });
 
-  module('activated param', function() {
+  module('activated param', function(hooks) {
     hooks.beforeEach(function() {
       this.set('isActivated', false);
       this.renderWithActivated = () => {

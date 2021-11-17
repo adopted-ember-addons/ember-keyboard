@@ -23,7 +23,8 @@ module.exports = function(environment) {
     },
 
     emberKeyboard: {
-      listeners: ['keyUp', 'keyDown', 'keyPress', 'click', 'mouseDown', 'mouseUp', 'touchStart', 'touchEnd']
+      listeners: ['keyUp', 'keyDown', 'keyPress', 'click', 'mouseDown', 'mouseUp', 'touchStart', 'touchEnd'],
+      disableInputsInitializer: true
     }
   };
 
