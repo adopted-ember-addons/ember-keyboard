@@ -364,4 +364,21 @@ in the `config/environment.js` to `true`.
 
 Related to this, if you were importing `{ initializer } from 'ember-keyboard'` in any integration tests, this should no
 longer be necessary as Ember integration tests now run initializers themselves. This export will be removed in 7.0 as well.
+
+### <a name='old-propagation-model'></a> Old propagation model
+
+By setting `emberKeyboard.propagation` in the `config/environment.js` to `true`,
+you're opting into the new event propagation semantics that were introduced in
+[issue #63](https://github.com/patience-tema-baron/ember-keyboard/issues/63).
+
+The event propagation is designed to mirror how standard DOM events bubble up
+the parent node chain and supports calling a
+[`stopPropagation()` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation)
+and
+[`stopImmediatePropagation()` method](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation)
+on a second event object pased to your handlers.
+
+The old propagation model will be removed in 7.0. To opt out of it now
+and remove the deprecation warning, opt in for the propagation model by setting `emberKeyboard.propagation`
+in the `config/environment.js` to `true`.
 "}}
