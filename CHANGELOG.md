@@ -2,6 +2,25 @@ Version 9 of Highlight.js has reached EOL and is no longer supported.
 Please upgrade or ask whatever dependency you are using to upgrade.
 https://github.com/highlightjs/highlight.js/issues/2877
 
+## v6.0.4 (2021-11-19)
+
+This will be the last release in the 6.x series. 7.0 will drop code related to several deprecations.
+
+#### :boom: Breaking Change
+* [#492](https://github.com/adopted-ember-addons/ember-keyboard/pull/492) [Breaking] Drop support for Node.js 10, 13, 15 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :rocket: Enhancement
+* [#494](https://github.com/adopted-ember-addons/ember-keyboard/pull/494) Update ember-modifier to add support for 3.22 modifier capabilities ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#499](https://github.com/adopted-ember-addons/ember-keyboard/pull/499) Deprecate old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#490](https://github.com/adopted-ember-addons/ember-keyboard/pull/490) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#498](https://github.com/adopted-ember-addons/ember-keyboard/pull/498) Fix CI for latest Ember v4 beta/canary scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
 ## v6.0.3 (2021-05-28)
 
 ember-cli-babel has been updated in this release.
