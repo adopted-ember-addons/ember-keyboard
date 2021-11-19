@@ -30,3 +30,9 @@
 /.node_modules.ember-try/
 /bower.json.ember-try
 /package.json.ember-try
+
+# custom
+/.codeclimate.yml
+/jsconfig.json
+/API-DESIGN.md
+/RELEASE.md
