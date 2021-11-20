@@ -26,4 +26,19 @@ and required the use of `code` identifiers, like `KeyT`, `Digit1`, etc. Be sure 
 [docs regarding `key` vs. `code` properties](usage) and be sure you are specifying the key
 combo consistent with your intended behavior. You will likely find that you want to update some key
 combos to the `key` equivalent. e.g. replace `ctrl+KeyT` with `ctrl+t`.
+
+### Upgrading from ember-keyboard 6.x to 7.x
+
+ember-keyboard 7.0 removes the old mixins-based APIs deprecated in 6.x cycle.
+
+#### keyboard-press component, keyboard-shortcut and on-keyboard modifiers
+
+You should use the `on-key` helper or `on-key` modifier instead.
+
+For more examples see [deprecations page](/deprecations#keyboard-press).
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
 "}}
