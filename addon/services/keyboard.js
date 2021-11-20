@@ -2,17 +2,13 @@ import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
-import { deprecate } from '@ember/debug';
 import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
 import {
-  handleKeyEventWithPropagation,
-  handleKeyEventWithLaxPriorities
+  handleKeyEventWithPropagation
 } from 'ember-keyboard/utils/handle-key-event';
 import { reverseCompareProp } from 'ember-keyboard/utils/sort';
 
 export default class KeyboardService extends Service {
-  isPropagationEnabled = false;
-
   registeredResponders = new Set();
 
   get activeResponders() {
@@ -22,15 +18,7 @@ export default class KeyboardService extends Service {
 
   get sortedResponders() {
     return this.activeResponders.sort((a, b) => {
-      if (this.isPropagationEnabled) {
-        return reverseCompareProp(a, b, 'keyboardPriority');
-      } else {
-        let compareValue = reverseCompareProp(a, b, 'keyboardFirstResponder', Boolean);
-        if (compareValue === 0) {
-          return reverseCompareProp(a, b, 'keyboardPriority');
-        }
-        return compareValue;
-      }
+      return reverseCompareProp(a, b, 'keyboardPriority');
     });
   }
 
@@ -51,22 +39,6 @@ export default class KeyboardService extends Service {
 
     const config = getOwner(this).resolveRegistration('config:environment') || {};
     let emberKeyboardConfig = config.emberKeyboard || {};
-
-    const isPropagationEnabled = Boolean(emberKeyboardConfig.propagation);
-    this.isPropagationEnabled = isPropagationEnabled;
-
-    deprecate(
-      'The old event propagation semantics have been deprecated. ' +
-      'You should set `emberKeyboard.propagation = true` in `config/environment.js`.',
-      isPropagationEnabled,
-      {
-        id: 'ember-keyboard.old-propagation-model',
-        for: 'ember-keyboard',
-        since: '6.0.4',
-        until: '7.0.0',
-        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#old-propagation-model'
-      }
-    );
 
     this._listeners = emberKeyboardConfig.listeners || ['keyUp', 'keyDown', 'keyPress'];
     this._listeners = this._listeners.map((listener) => listener.toLowerCase());
@@ -91,13 +63,8 @@ export default class KeyboardService extends Service {
   @action
   _respond(event) {
     run(() => {
-      if (this.isPropagationEnabled) {
-        let { firstResponders, normalResponders } = this;
-        handleKeyEventWithPropagation(event, { firstResponders, normalResponders });
-      } else {
-        let { sortedResponders } = this;
-        handleKeyEventWithLaxPriorities(event, sortedResponders);
-      }
+      let { firstResponders, normalResponders } = this;
+      handleKeyEventWithPropagation(event, { firstResponders, normalResponders });
     });
   }
 

@@ -1,7 +1,11 @@
-{{format-markdown "
-### Event propagation
+{{#if @v6Intro}}
+  {{format-markdown "
+  ### Event propagation
+  "}}
+{{/if}}
 
-By setting `emberKeyboard.propagation` in the `config/environment.js` to `true`,
+{{format-markdown "
+By setting `emberKeyboard.propagation` in the `config/environment.js` to `true` (only for 6.x),
 you're opting into the new event propagation semantics that were introduced in
 [issue #63](https://github.com/patience-tema-baron/ember-keyboard/issues/63).
 
