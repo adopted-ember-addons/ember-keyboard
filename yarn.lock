@@ -9051,10 +9051,10 @@ markdown-it@^8.3.1:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
-marked@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.6.tgz#c3ab1403b9b70f26acd92590fc272eb1718e778c"
-  integrity sha512-S2mYj0FzTQa0dLddssqwRVW4EOJOVJ355Xm2Vcbm+LU7GQRGWvwbO5K87OaPSOux2AwTSgtPPaXmc8sDPrhn2A==
+marked@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.4.tgz#d7cb16adaa474291307c521824c5716d32b95c36"
+  integrity sha512-d8v7SensuOj+gxi0TGbqb2WtS60ycZfZuqtmAB9yz0JLotKerTob/47Qk9oLCDmn5G1dcdn3d5ydR+ih9dvS0A==
 
 matcher-collection@^1.0.0, matcher-collection@^1.1.1:
   version "1.1.2"
