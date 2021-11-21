@@ -6,7 +6,7 @@ export default class extends Controller {
   constructor(...args) {
     super(...args);
 
-    this.priority = 0
+    this.priority = 0;
   }
 
   @action

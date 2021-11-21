@@ -18,8 +18,4 @@ const triggerKeyUp = function triggerKeyUp(keyCombo, element = document) {
   triggerKeyEvent('keyup', keyCombo, element);
 };
 
-export {
-  triggerKeyDown,
-  triggerKeyPress,
-  triggerKeyUp
-};
+export { triggerKeyDown, triggerKeyPress, triggerKeyUp };

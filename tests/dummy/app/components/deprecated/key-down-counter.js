@@ -7,7 +7,7 @@ import Component from '@ember/component';
 import { EKMixin, keyDown, keyUp, keyPress } from 'ember-keyboard';
 
 function makeEventHandler(stepSize = 1) {
-  return function(_event, ekEvent) {
+  return function (_event, ekEvent) {
     if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }
@@ -15,7 +15,7 @@ function makeEventHandler(stepSize = 1) {
       ekEvent.stopPropagation();
     }
     this.incrementProperty('counter', stepSize);
-  }
+  };
 }
 
 export default Component.extend(EKMixin, {
@@ -25,13 +25,20 @@ export default Component.extend(EKMixin, {
 
   counter: 0,
 
-  keyboardActivated: computed('parentActivated', 'toggleActivated', 'activatedToggle', {
-    get() {
-      const toggleActivated = this.activatedToggle ? this.toggleActivated : true;
+  keyboardActivated: computed(
+    'parentActivated',
+    'toggleActivated',
+    'activatedToggle',
+    {
+      get() {
+        const toggleActivated = this.activatedToggle
+          ? this.toggleActivated
+          : true;
 
-      return toggleActivated && this.parentActivated;
+        return toggleActivated && this.parentActivated;
+      },
     }
-  }).readOnly(),
+  ).readOnly(),
 
   didInsertElement() {
     this._super(...arguments);
@@ -43,14 +50,12 @@ export default Component.extend(EKMixin, {
     this.on(keyDown('ctrl+shift+ArrowLeft'), makeEventHandler(-100));
     this.on(keyDown('ctrl+shift+ArrowRight'), makeEventHandler(100));
 
-    this.on(keyUp('KeyR'), function() {
+    this.on(keyUp('KeyR'), function () {
       this.set('counter', 0);
     });
 
-    this.on(keyPress('Digit5'), function() {
+    this.on(keyPress('Digit5'), function () {
       this.set('counter', 5);
     });
-  }
-
-
+  },
 });

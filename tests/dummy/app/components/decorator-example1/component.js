@@ -3,7 +3,6 @@ import { keyResponder, onKey } from 'ember-keyboard';
 
 @keyResponder
 export default class extends Component {
-
   @onKey('shift+c')
   onShiftCDown(e) {
     this.args.onTrigger(e);
@@ -19,5 +18,4 @@ export default class extends Component {
   onAltLeftArrowOrRightArrowDown(e) {
     this.args.onTrigger(e);
   }
-
 }

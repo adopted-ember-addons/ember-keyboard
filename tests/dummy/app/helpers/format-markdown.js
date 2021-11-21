@@ -1,7 +1,7 @@
 import marked from 'marked';
 import hljs from 'highlightjs';
-import { helper } from "@ember/component/helper";
-import { htmlSafe } from "@ember/string";
+import { helper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/string';
 
 export function formatMarkdown([value]) {
   if (!value) {
@@ -9,9 +9,9 @@ export function formatMarkdown([value]) {
   }
 
   marked.setOptions({
-    highlight: function(code) {
+    highlight: function (code) {
       return hljs.highlightAuto(code).value;
-    }
+    },
   });
 
   // highlight JS requires the following classes for code highlighting
@@ -22,8 +22,7 @@ export function formatMarkdown([value]) {
   // input: ```javascript\nsomeJavascript()\n```
   // will result in a class: <code class="lang-javascript"></code>
   // and after the following replace: <code class "lang-javascript hljs javascript">...
-  let parsedMarkdown = marked(value)
-    .replace(/lang-(\w+)/g, "lang-$1 hljs $1");
+  let parsedMarkdown = marked(value).replace(/lang-(\w+)/g, 'lang-$1 hljs $1');
 
   return new htmlSafe(parsedMarkdown);
 }

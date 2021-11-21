@@ -6,21 +6,26 @@ function populateKeyboardHandlers(responder) {
     responder.keyboardHandlerNames = {};
     for (let propertyName in responder) {
       let propertyValue = responder[propertyName];
-      if ((typeof propertyValue === 'function') && propertyValue._emberKeyboardOnKeyDecoratorData) {
-        for (let listenerName of propertyValue._emberKeyboardOnKeyDecoratorData.listenerNames || []) {
+      if (
+        typeof propertyValue === 'function' &&
+        propertyValue._emberKeyboardOnKeyDecoratorData
+      ) {
+        for (let listenerName of propertyValue._emberKeyboardOnKeyDecoratorData
+          .listenerNames || []) {
           responder.keyboardHandlerNames[listenerName] = propertyName;
         }
       }
     }
   }
-  for (let [listenerName, methodName] of Object.entries(responder.keyboardHandlerNames || {})) {
-    responder.keyboardHandlers[listenerName] = responder[methodName].bind(responder);
+  for (let [listenerName, methodName] of Object.entries(
+    responder.keyboardHandlerNames || {}
+  )) {
+    responder.keyboardHandlers[listenerName] =
+      responder[methodName].bind(responder);
   }
 }
 export default function keyResponder(opts = {}) {
-
-  const createClass = function(DecoratedClass) {
-
+  const createClass = function (DecoratedClass) {
     if (opts.priority === undefined) {
       opts.priority = 0;
     }
@@ -66,14 +71,14 @@ export default function keyResponder(opts = {}) {
         this.keyboard.unregister(this);
         super.willDestroy(...arguments);
       }
-    }
-  }
+    };
+  };
 
-  if (typeof opts === "function") {
-    return createClass(opts)
+  if (typeof opts === 'function') {
+    return createClass(opts);
   } else {
-    return function(DecoratedClass) {
-      return createClass(DecoratedClass)
-    }
+    return function (DecoratedClass) {
+      return createClass(DecoratedClass);
+    };
   }
 }

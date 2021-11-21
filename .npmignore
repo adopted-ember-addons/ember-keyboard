@@ -15,6 +15,8 @@
 /.git/
 /.github/
 /.gitignore
+/.prettierignore
+/.prettierrc.js
 /.template-lintrc.js
 /.watchmanconfig
 /bower.json

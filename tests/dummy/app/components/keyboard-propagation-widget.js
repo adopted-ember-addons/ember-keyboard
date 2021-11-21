@@ -20,5 +20,5 @@ export default Component.extend(EnterableMixin, {
     this._super(...arguments);
 
     set(this, 'keyboard.isPropagationEnabled', false);
-  }
+  },
 });

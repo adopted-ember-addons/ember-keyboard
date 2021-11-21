@@ -9,11 +9,15 @@ import { default as keyResponder } from 'ember-keyboard/decorators/key-responder
 import { default as onKey } from 'ember-keyboard/decorators/on-key';
 
 function getCode() {
-  throw new Error('ember-keyboard: `getCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values');
+  throw new Error(
+    'ember-keyboard: `getCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values'
+  );
 }
 
 function getKeyCode() {
-  throw new Error('ember-keyboard: `getKeyCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values');
+  throw new Error(
+    'ember-keyboard: `getKeyCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values'
+  );
 }
 
 export {
@@ -21,17 +25,23 @@ export {
   EKFirstResponderOnFocusMixin,
   EKOnFocusMixin,
   EKOnInsertMixin,
-	EKOnInitMixin,
+  EKOnInitMixin,
   getCode,
   getKeyCode,
   getMouseCode,
   keyResponder,
-  onKey
+  onKey,
 };
 
-
 export { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
-export { click, mouseDown, mouseUp } from 'ember-keyboard/listeners/mouse-events';
+export {
+  click,
+  mouseDown,
+  mouseUp,
+} from 'ember-keyboard/listeners/mouse-events';
 export { touchStart, touchEnd } from 'ember-keyboard/listeners/touch-events';
-export { triggerKeyDown, triggerKeyPress, triggerKeyUp } from 'ember-keyboard/utils/trigger-event';
-
+export {
+  triggerKeyDown,
+  triggerKeyPress,
+  triggerKeyUp,
+} from 'ember-keyboard/utils/trigger-event';

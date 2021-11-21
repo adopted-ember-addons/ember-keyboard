@@ -3,7 +3,6 @@ import listenerName from 'ember-keyboard/utils/listener-name';
 import isKey from 'ember-keyboard/utils/is-key';
 import { deprecate } from '@ember/debug';
 
-
 function modifierStrings(event) {
   if (event instanceof KeyboardEvent) {
     return ['alt', 'ctrl', 'meta', 'shift'].reduce((result, keyName) => {
@@ -18,11 +17,14 @@ function modifierStrings(event) {
     if (mouseButton) {
       return [mouseButton];
     }
-    return []
+    return [];
   }
 }
 
-export function handleKeyEventWithPropagation(event, { firstResponders, normalResponders }) {
+export function handleKeyEventWithPropagation(
+  event,
+  { firstResponders, normalResponders }
+) {
   let isImmediatePropagationStopped = false;
   let isPropagationStopped = false;
   const ekEvent = {
@@ -31,8 +33,8 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
     },
     stopPropagation() {
       isPropagationStopped = true;
-    }
-  }
+    },
+  };
   /* eslint-disable no-unused-vars */
   for (const responder of firstResponders) {
     triggerResponderListener(responder, event, ekEvent);
@@ -53,7 +55,10 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
   for (const responder of normalResponders) {
     const currentPriorityLevel = Number(responder.keyboardPriority);
 
-    if (isImmediatePropagationStopped && currentPriorityLevel === previousPriorityLevel) {
+    if (
+      isImmediatePropagationStopped &&
+      currentPriorityLevel === previousPriorityLevel
+    ) {
       continue;
     }
 
@@ -72,7 +77,10 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
 
 function triggerResponderListener(responder, event, ekEvent = null) {
   if (responder.handleKeyboardEvent) {
-    if (responder.canHandleKeyboardEvent && !responder.canHandleKeyboardEvent(event)) {
+    if (
+      responder.canHandleKeyboardEvent &&
+      !responder.canHandleKeyboardEvent(event)
+    ) {
       return;
     }
     responder.handleKeyboardEvent(event, ekEvent);
@@ -97,28 +105,40 @@ function triggerResponderListener(responder, event, ekEvent = null) {
       'ember-keyboard registered responders handling events via `trigger(listenerName, event)` is deprecated. A responder should have either `keyboardHandlers` (a property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`.',
       false,
       {
-          id: 'ember-keyboard.responder-trigger',
-          for: 'ember-keyboard',
-          since: '6.0.2',
-          until: '7.0.0',
-          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#responder-trigger'
+        id: 'ember-keyboard.responder-trigger',
+        for: 'ember-keyboard',
+        since: '6.0.2',
+        until: '7.0.0',
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#responder-trigger',
       }
     );
 
     triggerViaLegacyResponderApi(responder, event, ekEvent);
     return;
   }
-  throw new Error('A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)');
+  throw new Error(
+    'A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)'
+  );
 }
 
 export function getListenerNames(event) {
   let result = [];
   if (event instanceof KeyboardEvent) {
     if (event.key) {
-      result.push(listenerName(event.type, modifierStrings(event).concat([event.key]).join('+')));
+      result.push(
+        listenerName(
+          event.type,
+          modifierStrings(event).concat([event.key]).join('+')
+        )
+      );
     }
-    if (event.code && (event.key !== event.code)) {
-      result.push(listenerName(event.type, modifierStrings(event).concat([event.code]).join('+')));
+    if (event.code && event.key !== event.code) {
+      result.push(
+        listenerName(
+          event.type,
+          modifierStrings(event).concat([event.code]).join('+')
+        )
+      );
     }
   } else if (event instanceof MouseEvent) {
     let modifiers = modifierStrings(event);

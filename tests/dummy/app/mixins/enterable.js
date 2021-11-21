@@ -2,7 +2,7 @@
 import { inject as service } from '@ember/service';
 import Mixin from '@ember/object/mixin';
 
-export default Mixin.create( {
+export default Mixin.create({
   classNames: ['keyboard-widget'],
   classNameBindings: ['keyboardActivated:active'],
   keyboard: service(),
@@ -31,5 +31,5 @@ export default Mixin.create( {
     if (this.oldPropagationModel) {
       this.keyboard.isPropagationEnabled = false;
     }
-  }
+  },
 });

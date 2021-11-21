@@ -9,7 +9,6 @@ const ONLY_WHEN_FOCUSED_TAG_NAMES = ['input', 'select', 'textarea'];
 
 let Klass;
 if (gte('3.8.0')) {
-
   /* This is an element modifier to trigger some behavior when
    * specified key combo is pressed. When used with a form element
    * (input, textarea, or select), the action fires only when element
@@ -34,20 +33,25 @@ if (gte('3.8.0')) {
     onlyWhenFocused = true;
     listenerName;
 
-
     didReceiveArguments() {
-      let [ keyCombo, callback ] = this.args.positional;
+      let [keyCombo, callback] = this.args.positional;
       let { activated, event, priority } = this.args.named;
       this.keyCombo = keyCombo;
       this.callback = callback;
       this.eventName = event || 'keydown';
-      this.activatedParamValue = Object.keys(this.args.named).includes('activated') ? !!activated : undefined;
+      this.activatedParamValue = Object.keys(this.args.named).includes(
+        'activated'
+      )
+        ? !!activated
+        : undefined;
       this.keyboardPriority = priority ? parseInt(priority, 10) : 0;
       this.listenerName = listenerName(this.eventName, this.keyCombo);
       if (this.args.named.onlyWhenFocused !== undefined) {
         this.onlyWhenFocused = this.args.named.onlyWhenFocused;
       } else {
-        this.onlyWhenFocused = ONLY_WHEN_FOCUSED_TAG_NAMES.includes(this.element.tagName.toLowerCase());
+        this.onlyWhenFocused = ONLY_WHEN_FOCUSED_TAG_NAMES.includes(
+          this.element.tagName.toLowerCase()
+        );
       }
     }
 
@@ -74,7 +78,7 @@ if (gte('3.8.0')) {
     }
 
     @action onFocusOut() {
-      this.isFocused=false;
+      this.isFocused = false;
     }
 
     get keyboardActivated() {
@@ -107,14 +111,15 @@ if (gte('3.8.0')) {
         }
       }
     }
-
-  }
+  };
 } else {
   Klass = class OnKeyModifier extends Modifier {
     didInstall() {
-      throw new Error('ember-keyboard only supports the on-key element modifier in Ember 3.8 and higher.');
+      throw new Error(
+        'ember-keyboard only supports the on-key element modifier in Ember 3.8 and higher.'
+      );
     }
-  }
+  };
 }
 
 export default Klass;

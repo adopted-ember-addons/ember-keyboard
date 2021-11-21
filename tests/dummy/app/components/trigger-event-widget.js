@@ -18,20 +18,17 @@ export default Component.extend(EKMixin, {
   didInsertElement() {
     this._super(...arguments);
 
-    this.on(keyDown('KeyA'), function() {
+    this.on(keyDown('KeyA'), function () {
       this.toggleProperty('keyDown');
     }),
-
-    this.on(keyDown('KeyA+cmd+shift'), function() {
-      this.toggleProperty('keyDownWithMods');
-    }),
-
-    this.on(keyPress('KeyA'), function() {
-      this.toggleProperty('keyPress');
-    }),
-
-    this.on(keyUp('KeyA'), function() {
-      this.toggleProperty('keyUp');
-    })
-  }
+      this.on(keyDown('KeyA+cmd+shift'), function () {
+        this.toggleProperty('keyDownWithMods');
+      }),
+      this.on(keyPress('KeyA'), function () {
+        this.toggleProperty('keyPress');
+      }),
+      this.on(keyUp('KeyA'), function () {
+        this.toggleProperty('keyUp');
+      });
+  },
 });

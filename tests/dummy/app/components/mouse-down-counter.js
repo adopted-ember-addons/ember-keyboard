@@ -3,7 +3,7 @@ import { keyResponder, onKey } from 'ember-keyboard';
 import { tracked } from '@glimmer/tracking';
 
 function makeEventHandler(stepSize = 1) {
-  return function(_event, ekEvent) {
+  return function (_event, ekEvent) {
     if (this.stopImmediatePropagation) {
       ekEvent.stopImmediatePropagation();
     }
@@ -11,7 +11,7 @@ function makeEventHandler(stepSize = 1) {
       ekEvent.stopPropagation();
     }
     this.counter = this.counter + stepSize;
-  }
+  };
 }
 
 @keyResponder
@@ -20,7 +20,9 @@ export default class extends Component {
   @tracked counter = 0;
 
   get keyboardActivated() {
-    let toggleActivated = this.args.activatedToggle ? this.toggleActivated : true;
+    let toggleActivated = this.args.activatedToggle
+      ? this.toggleActivated
+      : true;
     return toggleActivated && this.args.parentActivated;
   }
 

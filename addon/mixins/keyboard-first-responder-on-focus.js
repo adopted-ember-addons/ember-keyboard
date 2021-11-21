@@ -10,25 +10,25 @@ export default Mixin.create({
       '`EKFirstResponderOnFocusMixin` of ember-keyboard is deprecated. This behavior is now the default when using the `on-key` modifier with a text field. For other use cases, implement manually.',
       false,
       {
-          id: 'ember-keyboard.keyboard-first-responder-on-focus-mixin',
-          for: 'ember-keyboard',
-          since: '6.0.2',
-          until: '7.0.0',
-          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-first-responder-on-focus-mixin'
+        id: 'ember-keyboard.keyboard-first-responder-on-focus-mixin',
+        for: 'ember-keyboard',
+        since: '6.0.2',
+        until: '7.0.0',
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#keyboard-first-responder-on-focus-mixin',
       }
     );
 
     return this._super(...args);
   },
 
-  makeFirstResponderOnFocusIn: on('click', 'focusIn', function() {
+  makeFirstResponderOnFocusIn: on('click', 'focusIn', function () {
     setProperties(this, {
       keyboardActivated: true,
-      keyboardFirstResponder: true
+      keyboardFirstResponder: true,
     });
   }),
 
-  resignFirstResponderOnFocusOut: on('focusOut', function() {
+  resignFirstResponderOnFocusOut: on('focusOut', function () {
     set(this, 'keyboardFirstResponder', false);
-  })
+  }),
 });

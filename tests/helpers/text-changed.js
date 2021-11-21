@@ -4,12 +4,12 @@ const defaultOptions = {
   selectorName: undefined,
   beforeValue: undefined,
   afterValue: undefined,
-}
+};
 
 export const textChanged = async (assert, testFn, passedOptions = {}) => {
   const options = {
     ...defaultOptions,
-    ...passedOptions
+    ...passedOptions,
   };
 
   const { beforeValue, afterValue, selectorName } = options;
@@ -26,4 +26,4 @@ export const textChanged = async (assert, testFn, passedOptions = {}) => {
   const afterResult = afterElement.innerText.trim();
 
   assert.equal(afterResult, afterValue);
-}
+};

@@ -11,6 +11,7 @@
 # misc
 /.env*
 /.pnp*
+/.prettierignore
 /.sass-cache
 /connect.lock
 /coverage/
