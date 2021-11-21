@@ -130,7 +130,7 @@ In addition to Glimmer Component classes, you can use these decorators on servic
 routes, controllers, etc, provided that they are ES6 classes.
 
 Decorators require Ember 3.10 or higher. If you are using an Ember version earlier than that, you will
-need to stick with template helpers/modifiers and, if needed, the deprecated mixins API.
+need to stick with template helpers/modifiers.
 
 For “classic” Ember classes, the usage of the decorator imports is a little different:
 
@@ -277,17 +277,23 @@ triggerOnAlphaNumeric(event) {
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to keystrokes while an input/textarea is focused, previous versions of ember-keyboard used an intializers
-to reopen `Ember.TextField` and `Ember.TextArea` and apply the `EKOnInsertMixin` and `EKFirstResponderOnFocusMixin`. This ensures that whenever an
-input is focused, other key responders will not fire. This applies to `input` and `textarea` helpers:
+To prevent `ember-keyboard` from responding to keystrokes while an input/textarea is focused,
+you may use the `on-key` modifier with regular `<input>` and `<textarea>` elements and invoke
+`ekEvent.stopPropagation()` and/or `ekEvent.stopImmediatePropagation()`.
+This ensures that whenever an input is focused, other key responders will not fire.
 
 ```htmlbars
-{{input}}
+<input {{on-key '/' this.onSlash}} />
 {{textarea}}
 ```
 
-This initializer is now deprecated. We recommend using the `on-key` modifier and regular `<input>` and `<textarea>` elements. See the entry in the
-deprecations section below for information on how to suppress the deprecation warning.
+```javascript
+@action
+this.onSlash (event, ekEvent) {
+  ekEvent.stopPropagation();
+  ekEvent.stopImmediatePropagation();
+}
+```
 
 ### Unpropagated Key Events
 

@@ -1,34 +1,24 @@
-/* eslint-disable ember/no-classic-components */
-/* eslint-disable ember/require-tagless-components */
-/* eslint-disable ember/no-classic-classes */
-import Component from '@ember/component';
-import layout from '../templates/components/trigger-event-widget';
-import { EKMixin, keyDown, keyPress, keyUp } from 'ember-keyboard';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { keyResponder, onKey } from 'ember-keyboard';
 
-export default Component.extend(EKMixin, {
-  layout,
+@keyResponder({ activated: true })
+export default class extends Component {
+  @tracked keyboardActivated = true;
+  @tracked keyDown = false;
+  @tracked keyDownWithMods = false;
+  @tracked keyPress = false;
+  @tracked keyUp = false;
 
-  keyboardActivated: true,
-  keyDown: false,
-  keyDownWithMods: false,
-  keyPress: false,
-  keyUp: false,
+  @onKey('KeyA', { event: 'keydown' })
+  toggleKeyDown = () => (this.keyDown = !this.keyDown);
 
-  // eslint-disable-next-line ember/no-component-lifecycle-hooks
-  didInsertElement() {
-    this._super(...arguments);
+  @onKey('KeyA+cmd+shift', { event: 'keydown' })
+  toggleKeyDownWithMods = () => (this.keyDownWithMods = !this.keyDownWithMods);
 
-    this.on(keyDown('KeyA'), function () {
-      this.toggleProperty('keyDown');
-    }),
-      this.on(keyDown('KeyA+cmd+shift'), function () {
-        this.toggleProperty('keyDownWithMods');
-      }),
-      this.on(keyPress('KeyA'), function () {
-        this.toggleProperty('keyPress');
-      }),
-      this.on(keyUp('KeyA'), function () {
-        this.toggleProperty('keyUp');
-      });
-  },
-});
+  @onKey('KeyA', { event: 'keypress' })
+  toggleKeyPress = () => (this.keyPress = !this.keyPress);
+
+  @onKey('KeyA', { event: 'keyup' })
+  toggleKeyUp = () => (this.keyUp = !this.keyUp);
+}

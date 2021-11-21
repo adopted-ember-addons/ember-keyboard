@@ -35,7 +35,7 @@ export function handleKeyEventWithPropagation(
       isPropagationStopped = true;
     },
   };
-  /* eslint-disable no-unused-vars */
+
   for (const responder of firstResponders) {
     triggerResponderListener(responder, event, ekEvent);
 

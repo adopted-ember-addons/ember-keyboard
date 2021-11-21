@@ -13,12 +13,6 @@ Router.map(function () {
     this.route('keyboard');
     this.route('on-key-helper-examples');
     this.route('on-key-modifier-examples');
-    this.route('deprecated', function () {
-      this.route('element-modifiers');
-      this.route('keyboard');
-      this.route('mouse-down');
-      this.route('touch');
-    });
   });
 
   this.route('deprecations');
