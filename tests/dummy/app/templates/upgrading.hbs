@@ -41,4 +41,12 @@ Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it ca
 to specifying key combos. Read the docs regarding `key` vs. `code` properties and
 be sure you are specifying the key combo to `on-key` consistent with your
 intended behavior.
+
+#### Event propagation
+The new event propagation semantics (introduced in [#63](https://github.com/patience-tema-baron/ember-keyboard/issues/63))
+removed automatic blocking of lower priority responders.
+
+You should use `ekEvent.stopPropagation()` or `ekEvent.stopPropagation()` instead (baed on use case).
+
+For more details see [Event Propagation](/event-propagation) page.
 "}}

@@ -24,7 +24,7 @@ module('Unit | Service | keyboard', function(hooks) {
     assert.equal(service.activeResponders.length, 2, 'correct number of responders');
   });
 
-  test('`sortedResponders` sorts by keyboardFirstResponder and keyboardPriority', function(assert) {
+  test('`sortedResponders` sorts by keyboardPriority', function(assert) {
     service.register({
       keyboardActivated: true,
       keyboardPriority: 0
@@ -40,14 +40,66 @@ module('Unit | Service | keyboard', function(hooks) {
     service.register({
       keyboardActivated: true,
       keyboardPriority: 0,
-        keyboardFirstResponder: true
+      keyboardFirstResponder: true
     });
     service.register({
       keyboardActivated: true,
       keyboardPriority: 1
     });
 
-    assert.deepEqual(service.sortedResponders.map(r => r.keyboardPriority), [0, 1, 0, -1], 'correct sorting');
+    assert.deepEqual(service.sortedResponders.map(r => r.keyboardPriority), [1, 0, 0, -1], 'correct sorting');
+  });
+
+  test('`firstResponders` sorts by keyboardPriority and filters by keyboardFirstResponder', function(assert) {
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 0
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: -1
+    });
+    service.register({
+      keyboardActivated: false,
+      keyboardPriority: 50
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 0,
+      keyboardFirstResponder: true
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 1
+    });
+
+    assert.deepEqual(service.firstResponders.map(r => r.keyboardPriority), [0], 'correct sorting');
+  });
+
+  test('`normalResponders` sorts by keyboardPriority and filter out by keyboardFirstResponder', function(assert) {
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 0
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: -1
+    });
+    service.register({
+      keyboardActivated: false,
+      keyboardPriority: 50
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 0,
+      keyboardFirstResponder: true
+    });
+    service.register({
+      keyboardActivated: true,
+      keyboardPriority: 1
+    });
+
+    assert.deepEqual(service.normalResponders.map(r => r.keyboardPriority), [1, 0, -1], 'correct sorting');
   });
 
   // It would be nice to test that tearing down this service removes the installed

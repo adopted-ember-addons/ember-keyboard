@@ -66,7 +66,7 @@ if (gte('3.8.0')) {
         });
     });
 
-    test('KeyP button shortcut should only fire highest priority', async function(assert) {
+    test('KeyP button shortcut does not block other shortcuts', async function(assert) {
       assert.expect(5);
 
       await fillIn('[data-test-priority]', 1);
@@ -76,7 +76,7 @@ if (gte('3.8.0')) {
         () => triggerEvent(document.body, 'keydown', { code: 'KeyD', key: 'd' }), {
           selectorName: 'd-button',
           beforeValue: 'button press not triggered',
-          afterValue: 'button press not triggered'
+          afterValue: 'button press triggered'
         });
 
       await textChanged(
