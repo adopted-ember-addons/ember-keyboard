@@ -1,6 +1,6 @@
 <img alt="ember-keyboard logo" src="./tests/dummy/public/ember-keyboard.svg" height=72 /> &nbsp; 
 [![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
-[![Build Status](https://travis-ci.org/adopted-ember-addons/ember-keyboard.svg?branch=master)](https://travis-ci.org/adopted-ember-addons/ember-keyboard)
+[![Build Status](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/ci.yml/badge.svg)](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/ci.yml)
 
 # ember-keyboard
 
@@ -21,7 +21,7 @@ You can find interactive documentation [here](http://adopted-ember-addons.github
 
 * ember-keyboard 6.x requires Ember 3.8 or higher, and is not compatible with Internet Explorer
 * For use with Ember 2.0 up to 3.8 or IE compatibility, use ember-keyboard 5.x.
-* Node.js v10 or above (Node v14+ is required for fastboot)
+* Node.js v12 or above (Node v14+ is required for fastboot)
 
 ## Accessibility Considerations
 In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
