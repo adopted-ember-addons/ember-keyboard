@@ -13,13 +13,19 @@ function handleKeyEventWithLaxPriorities(event, sortedResponders) {
     const keyboardFirstResponder = responder.keyboardFirstResponder;
     const keyboardPriority = responder.keyboardPriority;
 
-    if (keyboardFirstResponder || (noFirstResponders && keyboardPriority >= currentPriorityLevel) || isLax) {
+    if (
+      keyboardFirstResponder ||
+      (noFirstResponders && keyboardPriority >= currentPriorityLevel) ||
+      isLax
+    ) {
       if (!responder.keyboardLaxPriority) {
         isLax = false;
       }
 
       if (keyboardFirstResponder) {
-        if (!isLax) { noFirstResponders = false; }
+        if (!isLax) {
+          noFirstResponders = false;
+        }
       } else {
         currentPriorityLevel = keyboardPriority;
       }
@@ -35,7 +41,10 @@ function handleKeyEventWithLaxPriorities(event, sortedResponders) {
 
 function triggerResponderListener(responder, event, ekEvent = null) {
   if (responder.handleKeyboardEvent) {
-    if (responder.canHandleKeyboardEvent && !responder.canHandleKeyboardEvent(event)) {
+    if (
+      responder.canHandleKeyboardEvent &&
+      !responder.canHandleKeyboardEvent(event)
+    ) {
       return;
     }
     responder.handleKeyboardEvent(event, ekEvent);
@@ -55,7 +64,9 @@ function triggerResponderListener(responder, event, ekEvent = null) {
     return;
   }
 
-  throw new Error('A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)');
+  throw new Error(
+    'A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)'
+  );
 }
 
 /**
@@ -72,7 +83,12 @@ export default class extends KeyboardService {
     } else {
       run(() => {
         const sortedResponders = this.activeResponders.sort((a, b) => {
-          let compareValue = reverseCompareProp(a, b, 'keyboardFirstResponder', Boolean);
+          let compareValue = reverseCompareProp(
+            a,
+            b,
+            'keyboardFirstResponder',
+            Boolean
+          );
           if (compareValue === 0) {
             return reverseCompareProp(a, b, 'keyboardPriority');
           }

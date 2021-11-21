@@ -11,5 +11,5 @@ export default Service.extend({
     }
 
     this.set('activeWidget', widget);
-  }
+  },
 });

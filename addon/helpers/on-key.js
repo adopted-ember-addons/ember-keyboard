@@ -12,7 +12,10 @@ export default class extends Helper {
   eventName = 'keydown';
   keyboardHandlers;
 
-  compute([keyCombo, callback], { event = 'keydown', activated = true, priority = 0 }) {
+  compute(
+    [keyCombo, callback],
+    { event = 'keydown', activated = true, priority = 0 }
+  ) {
     assert(
       'ember-keyboard: You must pass a function as the second argument to the `on-key` helper',
       typeof callback === 'function'

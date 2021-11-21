@@ -14,12 +14,16 @@ export function keyEvent(keyCombo, type, element = document) {
       keyComboPart = keyComboPart === 'cmd' ? getCmdKey() : keyComboPart;
       eventProps[`${keyComboPart}Key`] = true;
     }
-    
+
     if (type.startsWith('key') && !isValidModifier) {
       eventProps.code = keyComboPart;
     }
-    
-    if (type.startsWith('mouse') && !isValidModifier && validMouseButtons.indexOf(keyComboPart) > -1) {
+
+    if (
+      type.startsWith('mouse') &&
+      !isValidModifier &&
+      validMouseButtons.indexOf(keyComboPart) > -1
+    ) {
       eventProps.button = getMouseCode(keyComboPart);
     }
 

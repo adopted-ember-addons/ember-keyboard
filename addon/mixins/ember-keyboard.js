@@ -2,7 +2,10 @@
 import { inject as service } from '@ember/service';
 import Evented from '@ember/object/evented';
 import Mixin from '@ember/object/mixin';
-import { getListenerNames, triggerViaLegacyResponderApi } from 'ember-keyboard/utils/handle-key-event';
+import {
+  getListenerNames,
+  triggerViaLegacyResponderApi,
+} from 'ember-keyboard/utils/handle-key-event';
 import { deprecate } from '@ember/debug';
 
 export default Mixin.create(Evented, {
@@ -15,11 +18,11 @@ export default Mixin.create(Evented, {
       '`EKMixin` of ember-keyboard is deprecated. Please use the @keyResponder decorator instead.',
       false,
       {
-          id: 'ember-keyboard.ember-keyboard-mixin',
-          for: 'ember-keyboard',
-          since: '6.0.2',
-          until: '7.0.0',
-          url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#ember-keyboard-mixin'
+        id: 'ember-keyboard.ember-keyboard-mixin',
+        for: 'ember-keyboard',
+        since: '6.0.2',
+        until: '7.0.0',
+        url: 'https://adopted-ember-addons.github.io/ember-keyboard/deprecations#ember-keyboard-mixin',
       }
     );
     this.keyboard.register(this);
@@ -54,5 +57,5 @@ export default Mixin.create(Evented, {
 
   handleKeyboardEvent(event, ekEvent) {
     triggerViaLegacyResponderApi(this, event, ekEvent);
-  }
+  },
 });

@@ -1,4 +1,4 @@
-import getPlatform from "./platform";
+import getPlatform from './platform';
 
 const ALT_REGEX = /^alt$/i;
 const SHIFT_REGEX = /^shift$/i;
@@ -52,16 +52,22 @@ export default class KeyboardListener {
   }
 
   createMatchingKeyboardEvent(opts = {}) {
-    return new KeyboardEvent(this.type, Object.assign({
-      // one of these next two will be incorrect. For test usage, if usually
-      // doesn't matter, but you can pass in correct values via opts if needed.
-      key: this.keyOrCode,
-      code: this.keyOrCode,
+    return new KeyboardEvent(
+      this.type,
+      Object.assign(
+        {
+          // one of these next two will be incorrect. For test usage, if usually
+          // doesn't matter, but you can pass in correct values via opts if needed.
+          key: this.keyOrCode,
+          code: this.keyOrCode,
 
-      altKey: this.altKey,
-      ctrlKey: this.ctrlKey,
-      metaKey: this.metaKey,
-      shiftKey: this.shiftKey
-    }, opts));
+          altKey: this.altKey,
+          ctrlKey: this.ctrlKey,
+          metaKey: this.metaKey,
+          shiftKey: this.shiftKey,
+        },
+        opts
+      )
+    );
   }
 }
