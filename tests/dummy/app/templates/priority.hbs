@@ -1,5 +1,5 @@
 {{format-markdown "
-## Priority
+## Priority (6.x and below)
 
 Below are several interactive demos of `ember-keyboard` properties. They allow you to see how different properties interact with each other. Simply click the containing box and try using the below key commands.
 
@@ -12,12 +12,12 @@ Controls:
 * `r`: resets counter to 0
 "}}
 
-<KeyboardActivatedWidget />
+<KeyboardActivatedWidget @oldPropagationModel={{true}} />
 
-<KeyboardPriorityWidget />
+<KeyboardPriorityWidget @oldPropagationModel={{true}} />
 
-<KeyboardFirstResponderWidget />
+<KeyboardFirstResponderWidget @oldPropagationModel={{true}} />
 
-<KeyboardLaxPriorityWidget />
+<KeyboardLaxPriorityWidget @oldPropagationModel={{true}} />
 
-<KeyboardPropagationWidget />
+<KeyboardPropagationWidget @v6Intro={{true}} />

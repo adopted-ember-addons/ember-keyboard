@@ -1,6 +1,5 @@
 import { click, fillIn, blur, visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import { set } from '@ember/object';
 import { module, test } from 'qunit';
 import { gte } from 'ember-compatibility-helpers';
 
@@ -12,7 +11,6 @@ import {
 
 import { hook } from '../helpers/hook';
 
-import { getService } from '../helpers/get-service';
 import { getValues, getMouseValues, getTouchValues } from '../helpers/get-values';
 
 module('Acceptance | ember keyboard', function(hooks) {
@@ -20,9 +18,9 @@ module('Acceptance | ember keyboard', function(hooks) {
 
   if (gte('3.10.0')) {
     test('test standard functionality', async function(assert) {
-      assert.expect(11);
+      assert.expect(8);
 
-      await visit('/test-scenario')
+      await visit('/test-scenario');
 
       await mouseDown('left');
       assert.deepEqual(getMouseValues(), [1], 'left mouse');
@@ -39,40 +37,20 @@ module('Acceptance | ember keyboard', function(hooks) {
       await keyDown('ArrowRight');
       assert.deepEqual(getValues(), [1, 1, 1], 'equal responders all respond');
 
-      await fillIn(`${hook('counter-first')} ${hook('counter-priority-input')}`, '1');
-
-      await blur(`${hook('counter-first')} ${hook('counter-priority-input')}`);
-
-      await keyDown('ArrowRight');
-      assert.deepEqual(getValues(), [2, 1, 1], 'highest responder responds first');
-
-      await click(`${hook('counter-second')} ${hook('counter-first-responder-toggle')}`);
-
-      await keyDown('ArrowRight');
-      assert.deepEqual(getValues(), [2, 2, 1], 'first responder responds first');
-
-      await click(`${hook('counter-second')} ${hook('counter-lax-priority-toggle')}`);
-
-      await keyDown('ArrowRight');
-      assert.deepEqual(getValues(), [3, 3, 1], 'lax priority does not block lower priority responders');
-
       await click(`${hook('counter-first')} ${hook('counter-activated-toggle')}`);
 
       await keyDown('ArrowRight');
-      assert.deepEqual(getValues(), [3, 4, 2], 'deactivating a responder removes it from the stack');
+      assert.deepEqual(getValues(), [1, 2, 2], 'deactivating a responder removes it from the stack');
 
       await keyDown('ArrowRight+ctrl+shift');
-      assert.deepEqual(getValues(), [3, 104, 102], 'modifier keys work');
+      assert.deepEqual(getValues(), [1, 102, 102], 'modifier keys work');
 
       await keyUp('KeyR');
-      assert.deepEqual(getValues(), [3, 0, 0], 'keyUp works');
+      assert.deepEqual(getValues(), [1, 0, 0], 'keyUp works');
     });
 
     test('test event propagation', async function(assert) {
       assert.expect(6);
-
-      const keyboardService = getService('keyboard');
-      set(keyboardService, 'isPropagationEnabled', true);
 
       await visit('/test-scenario');
       await keyDown('ArrowRight');

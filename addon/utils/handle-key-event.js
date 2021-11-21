@@ -70,35 +70,6 @@ export function handleKeyEventWithPropagation(event, { firstResponders, normalRe
   /* eslint-enable no-unused-vars */
 }
 
-export function handleKeyEventWithLaxPriorities(event, sortedResponders) {
-  let currentPriorityLevel;
-  let noFirstResponders = true;
-  let isLax = true;
-
-  sortedResponders.every((responder) => {
-    const keyboardFirstResponder = responder.keyboardFirstResponder;
-    const keyboardPriority = responder.keyboardPriority;
-
-    if (keyboardFirstResponder || (noFirstResponders && keyboardPriority >= currentPriorityLevel) || isLax) {
-      if (!responder.keyboardLaxPriority) {
-        isLax = false;
-      }
-
-      if (keyboardFirstResponder) {
-        if (!isLax) { noFirstResponders = false; }
-      } else {
-        currentPriorityLevel = keyboardPriority;
-      }
-
-      triggerResponderListener(responder, event);
-
-      return true;
-    } else {
-      return false;
-    }
-  });
-}
-
 function triggerResponderListener(responder, event, ekEvent = null) {
   if (responder.handleKeyboardEvent) {
     if (responder.canHandleKeyboardEvent && !responder.canHandleKeyboardEvent(event)) {
