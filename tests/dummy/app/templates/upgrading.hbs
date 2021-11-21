@@ -31,6 +31,17 @@ combos to the `key` equivalent. e.g. replace `ctrl+KeyT` with `ctrl+t`.
 
 ember-keyboard 7.0 removes the old mixins-based APIs deprecated in 6.x cycle.
 
+#### keyboard-press component, keyboard-shortcut and on-keyboard modifiers
+
+You should use the `on-key` helper or `on-key` modifier instead.
+
+For more examples see [deprecations page](/deprecations#keyboard-press).
+
+Be aware that ember-keyboard versions before 6.0 had an ambiguous API when it came
+to specifying key combos. Read the docs regarding `key` vs. `code` properties and
+be sure you are specifying the key combo to `on-key` consistent with your
+intended behavior.
+
 #### Event propagation
 The new event propagation semantics (introduced in [#63](https://github.com/patience-tema-baron/ember-keyboard/issues/63))
 removed automatic blocking of lower priority responders.
