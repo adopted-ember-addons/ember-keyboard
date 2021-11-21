@@ -20,10 +20,10 @@ module('Integration | Util | triggerEvent', function(hooks) {
 
     triggerKeyDown('KeyA');
 
-    assert.equal(document.querySelector(hook('key_down')).textContent.trim(), 'true', 'keyDown was triggered');
-    assert.equal(document.querySelector(hook('key_down_with_mods')).textContent.trim(), 'false', 'keyDown was triggered with mods');
-    assert.equal(document.querySelector(hook('key_press')).textContent.trim(), 'false', 'keyPress was triggered');
-    assert.equal(document.querySelector(hook('key_up')).textContent.trim(), 'false', 'keyUp was triggered');
+    assert.dom(hook('key_down')).hasText('true', 'keyDown was triggered');
+    assert.dom(hook('key_down_with_mods')).hasText('false', 'keyDown was triggered with mods');
+    assert.dom(hook('key_press')).hasText('false', 'keyPress was triggered');
+    assert.dom(hook('key_up')).hasText('false', 'keyUp was triggered');
   });
 
   test('`keyPress` triggers a keypress event', async function(assert) {
@@ -33,10 +33,10 @@ module('Integration | Util | triggerEvent', function(hooks) {
 
     triggerKeyPress('KeyA');
 
-    assert.equal(document.querySelector(hook('key_down')).textContent.trim(), 'false', 'keyDown was triggered');
-    assert.equal(document.querySelector(hook('key_down_with_mods')).textContent.trim(), 'false', 'keyDown was triggered with mods');
-    assert.equal(document.querySelector(hook('key_press')).textContent.trim(), 'true', 'keyPress was triggered');
-    assert.equal(document.querySelector(hook('key_up')).textContent.trim(), 'false', 'keyUp was triggered');
+    assert.dom(hook('key_down')).hasText('false', 'keyDown was triggered');
+    assert.dom(hook('key_down_with_mods')).hasText('false', 'keyDown was triggered with mods');
+    assert.dom(hook('key_press')).hasText('true', 'keyPress was triggered');
+    assert.dom(hook('key_up')).hasText('false', 'keyUp was triggered');
   });
 
   test('`keyUp` triggers a keyup event', async function(assert) {
@@ -46,10 +46,10 @@ module('Integration | Util | triggerEvent', function(hooks) {
 
     triggerKeyUp('KeyA');
 
-    assert.equal(document.querySelector(hook('key_down')).textContent.trim(), 'false', 'keyDown was triggered');
-    assert.equal(document.querySelector(hook('key_down_with_mods')).textContent.trim(), 'false', 'keyDown was triggered with mods');
-    assert.equal(document.querySelector(hook('key_press')).textContent.trim(), 'false', 'keyPress was triggered');
-    assert.equal(document.querySelector(hook('key_up')).textContent.trim(), 'true', 'keyUp was triggered');
+    assert.dom(hook('key_down')).hasText('false', 'keyDown was triggered');
+    assert.dom(hook('key_down_with_mods')).hasText('false', 'keyDown was triggered with mods');
+    assert.dom(hook('key_press')).hasText('false', 'keyPress was triggered');
+    assert.dom(hook('key_up')).hasText('true', 'keyUp was triggered');
   });
 
   test('modifiers can be added', async function(assert) {
@@ -59,9 +59,9 @@ module('Integration | Util | triggerEvent', function(hooks) {
 
     triggerKeyDown('shift+KeyA+cmd');
 
-    assert.equal(document.querySelector(hook('key_down')).textContent.trim(), 'false', 'keyDown was triggered');
-    assert.equal(document.querySelector(hook('key_down_with_mods')).textContent.trim(), 'true', 'keyDown was triggered with mods');
-    assert.equal(document.querySelector(hook('key_press')).textContent.trim(), 'false', 'keyPress was triggered');
-    assert.equal(document.querySelector(hook('key_up')).textContent.trim(), 'false', 'keyUp was triggered');
+    assert.dom(hook('key_down')).hasText('false', 'keyDown was triggered');
+    assert.dom(hook('key_down_with_mods')).hasText('true', 'keyDown was triggered with mods');
+    assert.dom(hook('key_press')).hasText('false', 'keyPress was triggered');
+    assert.dom(hook('key_up')).hasText('false', 'keyUp was triggered');
   });
 });

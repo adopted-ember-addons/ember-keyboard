@@ -15,7 +15,7 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended'
+    'plugin:ember/recommended',
   ],
   env: {
     browser: true
@@ -52,6 +52,11 @@ module.exports = {
       },
       plugins: ['node'],
       extends: ['plugin:node/recommended']
+    },
+    {
+      // Test files:
+      files: ['tests/**/*-test.{js,ts}'],
+      extends: ['plugin:qunit/recommended'],
     }
   ]
 };
