@@ -65,7 +65,7 @@ module('Unit | Utility | isKey', function() {
 
   test('should not match mousedown event for alt+right with left button mousedown and modifiers alt on win', async function(assert) {
     let fakeEvent = new MouseEvent('mousedown', { button: 0, altKey: true });
-    assert.ok(!isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
+    assert.notOk(isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
   });
 
   test('should match mousedown event for cmd+middle with middle button mousedown and modifiers meta on mac', async function(assert) {

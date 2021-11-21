@@ -32,7 +32,7 @@ module('Integration | decorators', function(hooks) {
       test('does not trigger if helper is not rendered', async function(assert) {
         await this.renderWithConditional();
         await keyDown('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
       test('triggers if helper is rendered', async function(assert) {
         await this.renderWithConditional();
@@ -45,7 +45,7 @@ module('Integration | decorators', function(hooks) {
         await this.renderWithConditional();
         this.set('shouldRenderOnKeyHelper', false);
         await keyDown('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
     test('with an event specified', async function(assert) {
@@ -56,10 +56,10 @@ module('Integration | decorators', function(hooks) {
       await render(hbs`<DecoratorExample1 @onTrigger={{this.onTrigger}} />`);
 
       await keyUp('shift+c');
-      assert.ok(!onTriggerCalledWith, 'not called in keyup if event is not specified');
+      assert.notOk(onTriggerCalledWith, 'not called in keyup if event is not specified');
 
       await keyDown('ctrl+alt+KeyE');
-      assert.ok(!onTriggerCalledWith, 'not called in keydown if keyup is specified');
+      assert.notOk(onTriggerCalledWith, 'not called in keydown if keyup is specified');
 
       await keyUp('ctrl+alt+KeyE');
       assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
@@ -144,7 +144,7 @@ module('Integration | decorators', function(hooks) {
       test('does not trigger if helper is not activated', async function(assert) {
         await this.renderWithActivated();
         await keyDown('Digit2');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
       test('triggers if helper is activated', async function(assert) {
         await this.renderWithActivated();
@@ -157,7 +157,7 @@ module('Integration | decorators', function(hooks) {
         await this.renderWithActivated();
         this.set('isActivated', false);
         await keyDown('Digit2');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
   });
@@ -178,7 +178,7 @@ module('Integration | decorators', function(hooks) {
         test('does not trigger if helper is not rendered', async function(assert) {
           await this.renderWithConditional();
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
         test('triggers if helper is rendered', async function(assert) {
           await this.renderWithConditional();
@@ -191,7 +191,7 @@ module('Integration | decorators', function(hooks) {
           await this.renderWithConditional();
           this.set('shouldRenderOnKeyHelper', false);
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       test('with an event specified', async function(assert) {
@@ -202,10 +202,10 @@ module('Integration | decorators', function(hooks) {
         await render(hbs`<DecoratorExample3 @onTrigger={{this.onTrigger}} />`);
 
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalledWith, 'not called in keyup if event is not specified');
+        assert.notOk(onTriggerCalledWith, 'not called in keyup if event is not specified');
 
         await keyDown('ctrl+alt+KeyE');
-        assert.ok(!onTriggerCalledWith, 'not called in keydown if keyup is specified');
+        assert.notOk(onTriggerCalledWith, 'not called in keydown if keyup is specified');
 
         await keyUp('ctrl+alt+KeyE');
         assert.ok(onTriggerCalledWith instanceof KeyboardEvent);
@@ -290,7 +290,7 @@ module('Integration | decorators', function(hooks) {
         test('does not trigger if helper is not activated', async function(assert) {
           await this.renderWithActivated();
           await keyDown('Digit2');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
         test('triggers if helper is activated', async function(assert) {
           await this.renderWithActivated();
@@ -303,7 +303,7 @@ module('Integration | decorators', function(hooks) {
           await this.renderWithActivated();
           this.set('isActivated', false);
           await keyDown('Digit2');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
     });

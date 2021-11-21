@@ -30,7 +30,7 @@ module('Integration | Helper | on-key', function(hooks) {
     test('does not trigger if helper is not rendered', async function(assert) {
       await this.renderWithConditional();
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
     test('triggers if helper is rendered', async function(assert) {
       await this.renderWithConditional();
@@ -43,7 +43,7 @@ module('Integration | Helper | on-key', function(hooks) {
       await this.renderWithConditional();
       await this.set('shouldRenderOnKeyHelper', false);
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 
@@ -122,10 +122,10 @@ module('Integration | Helper | on-key', function(hooks) {
 
     test('does not trigger on keyup or keypress', async function(assert) {
       await keyUp('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
 
       await keyPress('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 
@@ -140,10 +140,10 @@ module('Integration | Helper | on-key', function(hooks) {
 
     test('does not trigger on keyup or keypress', async function(assert) {
       await keyUp('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
 
       await keyPress('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 
@@ -158,10 +158,10 @@ module('Integration | Helper | on-key', function(hooks) {
 
     test('does not trigger on keydown or keypress', async function(assert) {
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
 
       await keyPress('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 
@@ -176,10 +176,10 @@ module('Integration | Helper | on-key', function(hooks) {
 
     test('does not trigger on keydown or keyup', async function(assert) {
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
 
       await keyUp('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 
@@ -193,7 +193,7 @@ module('Integration | Helper | on-key', function(hooks) {
     test('does not trigger if helper is not activated', async function(assert) {
       await this.renderWithActivated();
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
     test('triggers if helper is activated', async function(assert) {
       await this.renderWithActivated();
@@ -206,7 +206,7 @@ module('Integration | Helper | on-key', function(hooks) {
       await this.renderWithActivated();
       await this.set('isActivated', false);
       await keyDown('shift+c');
-      assert.ok(!onTriggerCalled, 'does not trigger action');
+      assert.notOk(onTriggerCalled, 'does not trigger action');
     });
   });
 

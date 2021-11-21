@@ -5,7 +5,7 @@ import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Helper | if-key', function(hooks) {
   setupRenderingTest(hooks);
-  
+
   module('error cases', function(hooks) {
     hooks.afterEach(() => resetOnerror());
 
@@ -18,11 +18,11 @@ module('Integration | Helper | if-key', function(hooks) {
           "Assertion Failed: ember-keyboard: The if-key helper must be provided a function as its second argument",
           'error is thrown'
         );
-      });  
+      });
       await render(hbs`{{on-document "keydown" (if-key "alt+c" this.unknownEvent)}}`);
       await triggerEvent(document.body, 'keydown', { altKey: true, key: 'c' });
     });
-  
+
     // This doesn't work. I wish it did, but can't figure out why not.
     skip('warns if called without a keyboard event', async function(assert) {
       assert.expect(1);
@@ -32,10 +32,10 @@ module('Integration | Helper | if-key', function(hooks) {
           "Assertion Failed: ember-keyboard: The if-key helper expects to be invoked with a KeyboardEvent",
           'error is thrown'
         );
-      });  
+      });
       await render(hbs`<button {{on 'click' (if-key "alt+c" this.onTrigger)}}>Press me</button>`);
       await click('button');
-    });  
+    });
   });
 
   test('called with event', async function(assert) {
@@ -55,6 +55,6 @@ module('Integration | Helper | if-key', function(hooks) {
     });
     await render(hbs`{{on-document "keydown" (if-key "alt+c" this.onTrigger)}}`);
     await triggerEvent(document.body, 'keydown', { shiftKey: true, key: 'z' });
-    assert.ok(!onTriggerCalledWith, 'trigger is on invoked if key does not match');
+    assert.notOk(onTriggerCalledWith, 'trigger is on invoked if key does not match');
   });
 });

@@ -3,22 +3,22 @@ import { module, test } from 'qunit';
 
 module('Unit | Utility | get cmd key', function() {
   test('it returns ctrl for windows', function(assert) {
-    let result = getCmdKey('Windows');
-    assert.equal(result, 'ctrl');
+    const result = getCmdKey('Windows');
+    assert.strictEqual(result, 'ctrl');
   });
 
   test('it returns ctrl for linux', function(assert) {
-    let result = getCmdKey('Linux');
-    assert.equal(result, 'ctrl');
+    const result = getCmdKey('Linux');
+    assert.strictEqual(result, 'ctrl');
   });
 
   test('it defaults to ctlr for unexpected platform', function(assert) {
-    let result = getCmdKey('NeXTSTEP');
-    assert.equal(result, 'ctrl');
+    const result = getCmdKey('NeXTSTEP');
+    assert.strictEqual(result, 'ctrl');
   });
 
   test('it returns meta (command) for macOS', function(assert) {
-    let result = getCmdKey('MacIntel');
-    assert.equal(result, 'meta');
+    const result = getCmdKey('MacIntel');
+    assert.strictEqual(result, 'meta');
   });
 });

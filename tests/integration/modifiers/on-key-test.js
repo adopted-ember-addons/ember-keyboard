@@ -31,10 +31,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
         test('called with event', async function(assert) {
           let onTriggerCalledWith;
@@ -48,13 +48,13 @@ module('Integration | Modifier | on-key', function(hooks) {
       module('when element does not have focus', function(/* hooks */) {
         test('does not trigger on keydown, keyup, or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
     });
@@ -73,22 +73,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('when element does not have focus', function() {
         test('does not trigger on keydown, keyup, or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
     });
@@ -107,22 +107,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keydown or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('when element does not have focus', function(/* hooks */) {
         test('does not trigger on keydown, keyup, or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
     });
@@ -141,22 +141,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keydown or keyup', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('when element does not have focus', function(/* hooks */) {
         test('does not trigger on keydown, keyup, or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
     });
@@ -178,13 +178,13 @@ module('Integration | Modifier | on-key', function(hooks) {
           });
           test('does not trigger on keydown, keyup or keypress', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
         });
         module('when element does not have focus', function(hooks) {
@@ -193,13 +193,13 @@ module('Integration | Modifier | on-key', function(hooks) {
           });
           test('does not trigger on keydown, keyup or keypress', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
         });
       });
@@ -219,22 +219,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
           test('does not trigger on keyup or keypress', async function(assert) {
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
         });
         module('when element does not have focus', function(/* hooks */) {
           test('does not trigger on keydown, keyup or keypress', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
         });
       });
@@ -258,22 +258,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
     module('when element does not have focus', function(/* hooks */) {
       test('does not trigger on keydown, keyup, or keypress', async function(assert) {
         await keyDown('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
   });
@@ -295,22 +295,22 @@ module('Integration | Modifier | on-key', function(hooks) {
 
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
     module('when element does not have focus', function(/* hooks */) {
       test('does not trigger on keydown, keyup, or keypress', async function(assert) {
         await keyDown('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
   });
@@ -328,10 +328,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
 
         test('called without keyboard event', async function(assert) {
@@ -354,10 +354,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger a click on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('with event="keyup"', function(hooks) {
@@ -371,10 +371,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keydown or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('with event="keypress"', function(hooks) {
@@ -388,10 +388,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
         test('does not trigger on keydown or keyup', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
         });
       });
       module('activated param', function(hooks) {
@@ -408,17 +408,17 @@ module('Integration | Modifier | on-key', function(hooks) {
           });
           test('does not trigger on keydown, keyup or keypress', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
           test('after set activated back to true, triggers', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             this.set('isActivated', true);
 
@@ -438,10 +438,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
           test('does not trigger on keyup or keypress', async function(assert) {
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
           });
         });
       });
@@ -461,16 +461,16 @@ module('Integration | Modifier | on-key', function(hooks) {
         test('triggers action on keydown by default', async function(assert) {
           await keyDown('shift+c');
           assert.ok(onTriggerCalled, 'triggers action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
         test('does not trigger on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
       });
       module('with event="keydown"', function(hooks) {
@@ -480,16 +480,16 @@ module('Integration | Modifier | on-key', function(hooks) {
         test('triggers action on keydown', async function(assert) {
           await keyDown('shift+c');
           assert.ok(onTriggerCalled, 'triggers action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
         test('does not trigger a click on keyup or keypress', async function(assert) {
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
       });
       module('with event="keyup"', function(hooks) {
@@ -499,16 +499,16 @@ module('Integration | Modifier | on-key', function(hooks) {
         test('triggers action on keyup', async function(assert) {
           await keyUp('shift+c');
           assert.ok(onTriggerCalled, 'triggers action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
         test('does not trigger on keydown or keypress', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
           await keyPress('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
       });
       module('with event="keypress"', function(hooks) {
@@ -518,16 +518,16 @@ module('Integration | Modifier | on-key', function(hooks) {
         test('triggers action on keypress', async function(assert) {
           await keyPress('shift+c');
           assert.ok(onTriggerCalled, 'triggers action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
         test('does not trigger on keydown or keyup', async function(assert) {
           await keyDown('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
           await keyUp('shift+c');
-          assert.ok(!onTriggerCalled, 'does not trigger action');
-          assert.ok(!onTriggerClickCalled, 'does not trigger click');
+          assert.notOk(onTriggerCalled, 'does not trigger action');
+          assert.notOk(onTriggerClickCalled, 'does not trigger click');
         });
       });
       module('activated param', function(hooks) {
@@ -544,27 +544,27 @@ module('Integration | Modifier | on-key', function(hooks) {
           });
           test('does not trigger on keydown, keyup or keypress', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
           });
           test('after set activated back to true, triggers', async function(assert) {
             await keyDown('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
             this.set('isActivated', true);
 
             await keyDown('shift+c');
             assert.ok(onTriggerCalled, 'triggers action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
           });
         });
         module('with activated=true', function(hooks) {
@@ -575,16 +575,16 @@ module('Integration | Modifier | on-key', function(hooks) {
           test('triggers on keydown by default', async function(assert) {
             await keyDown('shift+c');
             assert.ok(onTriggerCalled, 'triggers action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
           });
           test('does not trigger on keyup or keypress', async function(assert) {
             await keyUp('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
             await keyPress('shift+c');
-            assert.ok(!onTriggerCalled, 'does not trigger action');
-            assert.ok(!onTriggerClickCalled, 'does not trigger click');
+            assert.notOk(onTriggerCalled, 'does not trigger action');
+            assert.notOk(onTriggerClickCalled, 'does not trigger click');
           });
         });
       });
@@ -658,10 +658,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
     module('with an action specified', function(hooks) {
@@ -678,16 +678,16 @@ module('Integration | Modifier | on-key', function(hooks) {
       test('triggers action on keydown by default', async function(assert) {
         await keyDown('shift+c');
         assert.ok(onTriggerCalled, 'triggers action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
       });
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
       });
     });
   });
@@ -706,10 +706,10 @@ module('Integration | Modifier | on-key', function(hooks) {
 
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
       });
     });
     module('with an action specified', function(hooks) {
@@ -727,16 +727,16 @@ module('Integration | Modifier | on-key', function(hooks) {
       test('triggers action on keydown by default', async function(assert) {
         await keyDown('shift+c');
         assert.ok(onTriggerCalled, 'triggers action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
       });
       test('does not trigger on keyup or keypress', async function(assert) {
         await keyUp('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
 
         await keyPress('shift+c');
-        assert.ok(!onTriggerCalled, 'does not trigger action');
-        assert.ok(!onTriggerClickCalled, 'does not trigger click');
+        assert.notOk(onTriggerCalled, 'does not trigger action');
+        assert.notOk(onTriggerClickCalled, 'does not trigger click');
       });
     });
   });

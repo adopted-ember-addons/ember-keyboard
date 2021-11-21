@@ -5,7 +5,7 @@ module('FastBoot | rendering test', function(hooks) {
   setup(hooks);
 
   test('renders', async function(assert) {
-    let res = await visit('/test-scenario');
-    assert.equal(res.statusCode, 200);
+    const res = await visit('/test-scenario');
+    assert.strictEqual(res.statusCode, 200);
   });
 });
