@@ -31,6 +31,11 @@ combos to the `key` equivalent. e.g. replace `ctrl+KeyT` with `ctrl+t`.
 
 ember-keyboard 7.0 removes the old mixins-based APIs deprecated in 6.x cycle.
 
+If you use ember-keyboard 5.x, it's highly advised to upgrade to ember-keyboard 6.x first
+and iteratively update to the new APIs until you have no more
+deprecation warnings left.
+Then, upgrade to ember-keyboard 7.x should pretty simple and straightforward.
+
 #### keyboard-press component, keyboard-shortcut and on-keyboard modifiers
 
 You should use the `on-key` helper or `on-key` modifier instead.
@@ -58,4 +63,12 @@ but our recommendation is to adopt the `on-key` helper and `on-key` element modi
 to accomplish in templates what you previously did in your Javascript files.
 
 For more examples with suggested approaches to migrating to the new APIs see [deprecations page](/deprecations).
+
+#### responders handling keyboard events via trigger
+
+The Ember.Evented API mechanism for triggering handlers on a responder
+(using `has(listenerName)` and `trigger(listenerName, event)` methods) should be replaced
+with `handleKeyboardEvent(event, ekEvent)` and optionally the `canHandleKeyboardEvent(event)` methods.
+
+For more examples see [deprecations page](/deprecations#responder-trigger).
 "}}
