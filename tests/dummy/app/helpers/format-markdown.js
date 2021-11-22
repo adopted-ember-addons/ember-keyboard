@@ -1,5 +1,5 @@
 import marked from 'marked';
-import hljs from 'highlightjs';
+import hljs from 'highlight.js';
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/string';
 
@@ -8,21 +8,17 @@ export function formatMarkdown([value]) {
     return;
   }
 
+  // Set options
+  // `highlight` example uses https://highlightjs.org
   marked.setOptions({
-    highlight: function (code) {
-      return hljs.highlightAuto(code).value;
+    highlight: function (code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
     },
+    langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
   });
 
-  // highlight JS requires the following classes for code highlighting
-  // hljs [LANG]. By default, marked places "lang-[LANG]" as a class on the code
-  // html element. This will search and replace all instances of that class
-  // with proper hljs code classes
-  // ex.
-  // input: ```javascript\nsomeJavascript()\n```
-  // will result in a class: <code class="lang-javascript"></code>
-  // and after the following replace: <code class "lang-javascript hljs javascript">...
-  let parsedMarkdown = marked(value).replace(/lang-(\w+)/g, 'lang-$1 hljs $1');
+  let parsedMarkdown = marked.parse(value);
 
   return new htmlSafe(parsedMarkdown);
 }
