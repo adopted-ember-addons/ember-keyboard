@@ -9,7 +9,7 @@ module.exports = function (defaults) {
     },
   });
 
-  app.import('node_modules/highlightjs/styles/github-gist.css');
+  app.import('node_modules/highlight.js/styles/github.css');
 
   /*
     This build file specifies the options for the dummy test app of this
