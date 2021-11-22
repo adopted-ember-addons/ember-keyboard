@@ -1,10 +1,4 @@
-/* eslint-disable ember/no-mixins */
 import getMouseCode from 'ember-keyboard/utils/get-mouse-code';
-import EKMixin from 'ember-keyboard/mixins/ember-keyboard';
-import EKFirstResponderOnFocusMixin from 'ember-keyboard/mixins/keyboard-first-responder-on-focus';
-import EKOnFocusMixin from 'ember-keyboard/mixins/activate-keyboard-on-focus';
-import EKOnInsertMixin from 'ember-keyboard/mixins/activate-keyboard-on-insert';
-import EKOnInitMixin from 'ember-keyboard/mixins/activate-keyboard-on-init';
 import { default as keyResponder } from 'ember-keyboard/decorators/key-responder';
 import { default as onKey } from 'ember-keyboard/decorators/on-key';
 
@@ -20,18 +14,7 @@ function getKeyCode() {
   );
 }
 
-export {
-  EKMixin,
-  EKFirstResponderOnFocusMixin,
-  EKOnFocusMixin,
-  EKOnInsertMixin,
-  EKOnInitMixin,
-  getCode,
-  getKeyCode,
-  getMouseCode,
-  keyResponder,
-  onKey,
-};
+export { getCode, getKeyCode, getMouseCode, keyResponder, onKey };
 
 export { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
 export {

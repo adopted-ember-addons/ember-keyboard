@@ -43,10 +43,19 @@ be sure you are specifying the key combo to `on-key` consistent with your
 intended behavior.
 
 #### Event propagation
+
 The new event propagation semantics (introduced in [#63](https://github.com/patience-tema-baron/ember-keyboard/issues/63))
 removed automatic blocking of lower priority responders.
 
 You should use `ekEvent.stopPropagation()` or `ekEvent.stopPropagation()` instead (baed on use case).
 
 For more details see [Event Propagation](/event-propagation) page.
+
+#### The mixin APIs
+
+The most direct translation to the new API is to use the `@keyResponder` decorator,
+but our recommendation is to adopt the `on-key` helper and `on-key` element modifier
+to accomplish in templates what you previously did in your Javascript files.
+
+For more examples with suggested approaches to migrating to the new APIs see [deprecations page](/deprecations).
 "}}
