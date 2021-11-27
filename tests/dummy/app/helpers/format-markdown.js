@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import hljs from 'highlight.js';
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/string';
@@ -20,7 +20,7 @@ export function formatMarkdown([value]) {
 
   let parsedMarkdown = marked.parse(value);
 
-  return new htmlSafe(parsedMarkdown);
+  return htmlSafe(parsedMarkdown);
 }
 
 export default helper(formatMarkdown);
