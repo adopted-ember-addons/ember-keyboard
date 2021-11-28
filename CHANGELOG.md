@@ -2,6 +2,39 @@ Version 9 of Highlight.js has reached EOL and is no longer supported.
 Please upgrade or ask whatever dependency you are using to upgrade.
 https://github.com/highlightjs/highlight.js/issues/2877
 
+
+## v7.0.0-beta.0 (2021-11-28)
+
+Special thanks to @SergeAstapov for his great work on this release!
+ 
+#### :boom: Breaking Change
+* [#521](https://github.com/adopted-ember-addons/ember-keyboard/pull/521) Delete deprecated has/trigger responder API ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#520](https://github.com/adopted-ember-addons/ember-keyboard/pull/520) Delete deprecated mixins ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#515](https://github.com/adopted-ember-addons/ember-keyboard/pull/515) Delete deprecated on-keyboard and keyboard-shortcut modifiers ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#512](https://github.com/adopted-ember-addons/ember-keyboard/pull/512) Delete deprecated keyboard-press component ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#511](https://github.com/adopted-ember-addons/ember-keyboard/pull/511) Delete deprecated old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#493](https://github.com/adopted-ember-addons/ember-keyboard/pull/493) [Breaking] Delete deprecated first-responder-inputs-initializer ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#492](https://github.com/adopted-ember-addons/ember-keyboard/pull/492) [Breaking] Drop support for Node.js 10, 13, 15 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :rocket: Enhancement
+* [#536](https://github.com/adopted-ember-addons/ember-keyboard/pull/536) Move ember-compatibility-helpers to devDependencies ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#494](https://github.com/adopted-ember-addons/ember-keyboard/pull/494) Update ember-modifier to add support for 3.22 modifier capabilities ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#499](https://github.com/adopted-ember-addons/ember-keyboard/pull/499) Deprecate old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#539](https://github.com/adopted-ember-addons/ember-keyboard/pull/539) Fix marked import in format-markdown helper ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#529](https://github.com/adopted-ember-addons/ember-keyboard/pull/529) Replace deprecated highlightjs with highlight.js ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#518](https://github.com/adopted-ember-addons/ember-keyboard/pull/518) Run ember-cli-update to v3.28.4 to align with the latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#517](https://github.com/adopted-ember-addons/ember-keyboard/pull/517) Add prettier per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#516](https://github.com/adopted-ember-addons/ember-keyboard/pull/516) Add eslint-plugin-qunit per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#513](https://github.com/adopted-ember-addons/ember-keyboard/pull/513) Add Ember 3.24 and Ember 3.28 to ember-try scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#490](https://github.com/adopted-ember-addons/ember-keyboard/pull/490) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#498](https://github.com/adopted-ember-addons/ember-keyboard/pull/498) Fix CI for latest Ember v4 beta/canary scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
 ## v6.0.4 (2021-11-19)
 
 This will be the last release in the 6.x series. 7.0 will drop code related to several deprecations.
