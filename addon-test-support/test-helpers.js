@@ -12,6 +12,10 @@ export function keyDown(keyCombo) {
   return keyEvent(keyCombo, 'keydown');
 }
 
+export function keyDownWithElement(keyCombo, element) {
+  return keyEvent(keyCombo, 'keydown', element);
+}
+
 export function keyUp(keyCombo) {
   return keyEvent(keyCombo, 'keyup');
 }
