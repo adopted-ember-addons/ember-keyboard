@@ -6,7 +6,7 @@ export default Mixin.create({
     this._super(...args);
 
     if (typeof FastBoot === 'undefined') {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
-  }
+  },
 });

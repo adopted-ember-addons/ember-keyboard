@@ -1,12 +1,15 @@
 import { module, skip, test } from 'qunit';
 import isKey from 'ember-keyboard/utils/is-key';
-import getPlatform from "ember-keyboard/utils/platform";
+import getPlatform from 'ember-keyboard/utils/platform';
 
-const WINDOWS_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';
-const MAC_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36';
-const LINUX_UA = 'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36';
+const WINDOWS_UA =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';
+const MAC_UA =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36';
+const LINUX_UA =
+  'Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36';
 
-module('Unit | Utility | isKey', function() {
+module('Unit | Utility | isKey', function () {
   let table = `
                                    |    keydown event                       |    result
   listenerName           platform  |  alt ctrl meta shift key  code         |  expected  pending   note
@@ -53,22 +56,28 @@ module('Unit | Utility | isKey', function() {
   keydown:cmd+c             win    |  F   F    F    T     c    KeyC         |  F         F
   keydown:+                 win    |  F   F    F    F     +    BracketRight |  T         F         plus key with german language
   `;
-  for (let line of table.split("\n").map(line => line.trim().replace(/\|/g, ''))) {
-    if (line === '' || line.match(/^listenerName|keydown event|---/)) { continue; } // blank or header row
+  for (let line of table
+    .split('\n')
+    .map((line) => line.trim().replace(/\|/g, ''))) {
+    if (line === '' || line.match(/^listenerName|keydown event|---/)) {
+      continue;
+    } // blank or header row
     buildTestFromLine(line);
   }
 
-  test('should match mousedown event for alt+right with right button mousedown and modifiers alt on win', async function(assert) {
+  test('should match mousedown event for alt+right with right button mousedown and modifiers alt on win', async function (assert) {
     let fakeEvent = new MouseEvent('mousedown', { button: 2, altKey: true });
     assert.ok(isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
   });
 
-  test('should not match mousedown event for alt+right with left button mousedown and modifiers alt on win', async function(assert) {
+  test('should not match mousedown event for alt+right with left button mousedown and modifiers alt on win', async function (assert) {
     let fakeEvent = new MouseEvent('mousedown', { button: 0, altKey: true });
-    assert.ok(!isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA)));
+    assert.notOk(
+      isKey('mousedown:alt+right', fakeEvent, getPlatform(WINDOWS_UA))
+    );
   });
 
-  test('should match mousedown event for cmd+middle with middle button mousedown and modifiers meta on mac', async function(assert) {
+  test('should match mousedown event for cmd+middle with middle button mousedown and modifiers meta on mac', async function (assert) {
     let fakeEvent = new MouseEvent('mouseup', { button: 1, metaKey: true });
     assert.ok(isKey('mouseup:cmd+middle', fakeEvent, getPlatform(MAC_UA)));
   });
@@ -81,7 +90,19 @@ function stringToBoolean(s) {
 }
 
 function buildTestFromLine(line) {
-  let [listenerName,plat,alt,ctrl,meta,shift,key,code,expected,pending,...note] = line.split(/\s+/);
+  let [
+    listenerName,
+    plat,
+    alt,
+    ctrl,
+    meta,
+    shift,
+    key,
+    code,
+    expected,
+    pending,
+    ...note
+  ] = line.split(/\s+/);
   let altKey = stringToBoolean(alt);
   let ctrlKey = stringToBoolean(ctrl);
   let metaKey = stringToBoolean(meta);
@@ -109,7 +130,7 @@ function buildTestFromLine(line) {
     modifiers.push('shift');
   }
   let userAgent;
-  switch(plat) {
+  switch (plat) {
     case 'win':
       userAgent = WINDOWS_UA;
       break;
@@ -122,14 +143,29 @@ function buildTestFromLine(line) {
   }
   testDescription += modifiers.join('+') + ` on ${plat}`;
   let testFunc = isPending ? skip : test;
-  testFunc(testDescription, async function(assert) {
-    let fakeEvent = new KeyboardEvent('keydown', { key, code, altKey, ctrlKey, metaKey, shiftKey });
+  testFunc(testDescription, async function (assert) {
+    let fakeEvent = new KeyboardEvent('keydown', {
+      key,
+      code,
+      altKey,
+      ctrlKey,
+      metaKey,
+      shiftKey,
+    });
     if (expectedResult) {
       let expectedTriggerMessage = `should match${note ? ', ' + note : ''}`;
-      assert.ok(isKey(listenerName, fakeEvent, getPlatform(userAgent)), expectedTriggerMessage);
+      assert.ok(
+        isKey(listenerName, fakeEvent, getPlatform(userAgent)),
+        expectedTriggerMessage
+      );
     } else {
-      let expectedNoTriggerMessage = `should not match${note ? ', ' + note : ''}`;
-      assert.ok(!isKey(listenerName, fakeEvent, getPlatform(userAgent)), expectedNoTriggerMessage);
+      let expectedNoTriggerMessage = `should not match${
+        note ? ', ' + note : ''
+      }`;
+      assert.ok(
+        !isKey(listenerName, fakeEvent, getPlatform(userAgent)),
+        expectedNoTriggerMessage
+      );
     }
   });
 }

@@ -5,84 +5,89 @@ import { mouseDown } from 'ember-keyboard/test-support/test-helpers';
 import { textChanged } from '../helpers/text-changed';
 import { gte } from 'ember-compatibility-helpers';
 
-module('Acceptance | ember keyboard | mouseDown', function(hooks) {
+module('Acceptance | ember keyboard | mouseDown', function (hooks) {
   setupApplicationTest(hooks);
 
   if (gte('3.10.0')) {
-
-    hooks.beforeEach(async function() {
+    hooks.beforeEach(async function () {
       await visit('/test-scenario/mouse-down');
     });
 
-    module('left clicking', function() {
-      test('clicking once adjusts the counter by 1', async function(assert) {
+    module('left clicking', function () {
+      test('clicking once adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('left'), {
-            selectorName: 'mouse-down-counter',
-            beforeValue: '0',
-            afterValue: '1',
-          });
+        await textChanged(assert, () => mouseDown('left'), {
+          selectorName: 'mouse-down-counter',
+          beforeValue: '0',
+          afterValue: '1',
+        });
       });
 
-      test('clicking twice adjusts the counter by 1', async function(assert) {
+      test('clicking twice adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('left') && mouseDown('left'), {
+        await textChanged(
+          assert,
+          () => mouseDown('left') && mouseDown('left'),
+          {
             selectorName: 'mouse-down-counter',
             beforeValue: '0',
             afterValue: '2',
-          });
+          }
+        );
       });
     });
 
-    module('middle clicking', function() {
-      test('clicking once adjusts the counter by 1', async function(assert) {
+    module('middle clicking', function () {
+      test('clicking once adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('middle'), {
-            selectorName: 'mouse-down-counter',
-            beforeValue: '0',
-            afterValue: '-10',
-          });
+        await textChanged(assert, () => mouseDown('middle'), {
+          selectorName: 'mouse-down-counter',
+          beforeValue: '0',
+          afterValue: '-10',
+        });
       });
 
-      test('clicking twice adjusts the counter by 1', async function(assert) {
+      test('clicking twice adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('middle') && mouseDown('middle'), {
+        await textChanged(
+          assert,
+          () => mouseDown('middle') && mouseDown('middle'),
+          {
             selectorName: 'mouse-down-counter',
             beforeValue: '0',
             afterValue: '-20',
-          });
+          }
+        );
       });
     });
 
-    module('right clicking', function() {
-      test('clicking once adjusts the counter by 1', async function(assert) {
+    module('right clicking', function () {
+      test('clicking once adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('right'), {
-            selectorName: 'mouse-down-counter',
-            beforeValue: '0',
-            afterValue: '10',
-          });
+        await textChanged(assert, () => mouseDown('right'), {
+          selectorName: 'mouse-down-counter',
+          beforeValue: '0',
+          afterValue: '10',
+        });
       });
 
-      test('clicking twice adjusts the counter by 1', async function(assert) {
+      test('clicking twice adjusts the counter by 1', async function (assert) {
         assert.expect(2);
 
-        await textChanged(assert,
-          () => mouseDown('right') && mouseDown('right'), {
+        await textChanged(
+          assert,
+          () => mouseDown('right') && mouseDown('right'),
+          {
             selectorName: 'mouse-down-counter',
             beforeValue: '0',
             afterValue: '20',
-          });
+          }
+        );
       });
     });
   }

@@ -2,23 +2,14 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
-    babel: {
-      plugins: ['@babel/plugin-proposal-object-rest-spread']
-    },
-    'ember-cli-babel': {
-      includePolyfill: true,
-      plugins: [
-        '@babel/plugin-proposal-object-rest-spread'
-      ]
-    },
     'ember-test-selectors': {
-      strip: false
-    }
+      strip: false,
+    },
   });
 
-  app.import('node_modules/highlightjs/styles/github-gist.css');
+  app.import('node_modules/highlight.js/styles/github.css');
 
   /*
     This build file specifies the options for the dummy test app of this
@@ -27,5 +18,12 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  return app.toTree();
+  const { maybeEmbroider } = require('@embroider/test-setup');
+  return maybeEmbroider(app, {
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };

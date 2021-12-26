@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "ember-cli",
-      "version": "3.22.0",
+      "version": "3.28.4",
       "blueprints": [
         {
           "name": "addon",
@@ -12,7 +12,8 @@
           "isBaseBlueprint": true,
           "options": [
             "--yarn",
-            "--no-welcome"
+            "--no-welcome",
+            "--ci-provider=github"
           ]
         }
       ]

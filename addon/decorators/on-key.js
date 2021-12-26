@@ -17,21 +17,25 @@ export default function onKey(keyCombo, opts = {}) {
 
 function onKeyDecorator(keyCombo, opts) {
   // ES6 class
-  return function(target, property, descriptor) {
+  return function (target, property, descriptor) {
     if (!Object.prototype.hasOwnProperty.call(target, 'keyboardHandlerNames')) {
       let parentKeyboardHandlerNames = target.parentKeyboardHandlerNames;
       // we need to assign because of the way mixins copy actions down when inheriting
-      target.keyboardHandlerNames = parentKeyboardHandlerNames ? Object.assign({}, parentKeyboardHandlerNames) : {};
+      target.keyboardHandlerNames = parentKeyboardHandlerNames
+        ? Object.assign({}, parentKeyboardHandlerNames)
+        : {};
     }
     target.keyboardHandlerNames[listenerName(opts.event, keyCombo)] = property;
     return descriptor;
-  }
+  };
 }
 
 function onKeyClassic(keyCombo, opts, handler) {
   if (!handler._emberKeyboardOnKeyDecoratorData) {
     handler._emberKeyboardOnKeyDecoratorData = { listenerNames: [] };
   }
-  handler._emberKeyboardOnKeyDecoratorData.listenerNames.push(listenerName(opts.event, keyCombo));
+  handler._emberKeyboardOnKeyDecoratorData.listenerNames.push(
+    listenerName(opts.event, keyCombo)
+  );
   return handler;
 }

@@ -2,15 +2,14 @@
 
 ## Installation
 
-* `git clone <repository-url>`
+* `git clone https://github.com/adopted-ember-addons/ember-keyboard.git`
 * `cd ember-keyboard`
 * `yarn install`
 
 ## Linting
 
-* `yarn lint:hbs`
-* `yarn lint:js`
-* `yarn lint:js --fix`
+* `yarn run lint`
+* `yarn run lint:fix`
 
 ## Running tests
 

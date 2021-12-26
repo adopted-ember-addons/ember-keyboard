@@ -1,3 +1,93 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
+
+
+## v7.0.0-beta.0 (2021-11-28)
+
+Special thanks to @SergeAstapov for his great work on this release!
+ 
+#### :boom: Breaking Change
+* [#521](https://github.com/adopted-ember-addons/ember-keyboard/pull/521) Delete deprecated has/trigger responder API ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#520](https://github.com/adopted-ember-addons/ember-keyboard/pull/520) Delete deprecated mixins ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#515](https://github.com/adopted-ember-addons/ember-keyboard/pull/515) Delete deprecated on-keyboard and keyboard-shortcut modifiers ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#512](https://github.com/adopted-ember-addons/ember-keyboard/pull/512) Delete deprecated keyboard-press component ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#511](https://github.com/adopted-ember-addons/ember-keyboard/pull/511) Delete deprecated old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#493](https://github.com/adopted-ember-addons/ember-keyboard/pull/493) [Breaking] Delete deprecated first-responder-inputs-initializer ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#492](https://github.com/adopted-ember-addons/ember-keyboard/pull/492) [Breaking] Drop support for Node.js 10, 13, 15 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :rocket: Enhancement
+* [#536](https://github.com/adopted-ember-addons/ember-keyboard/pull/536) Move ember-compatibility-helpers to devDependencies ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#494](https://github.com/adopted-ember-addons/ember-keyboard/pull/494) Update ember-modifier to add support for 3.22 modifier capabilities ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#499](https://github.com/adopted-ember-addons/ember-keyboard/pull/499) Deprecate old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#539](https://github.com/adopted-ember-addons/ember-keyboard/pull/539) Fix marked import in format-markdown helper ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#529](https://github.com/adopted-ember-addons/ember-keyboard/pull/529) Replace deprecated highlightjs with highlight.js ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#518](https://github.com/adopted-ember-addons/ember-keyboard/pull/518) Run ember-cli-update to v3.28.4 to align with the latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#517](https://github.com/adopted-ember-addons/ember-keyboard/pull/517) Add prettier per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#516](https://github.com/adopted-ember-addons/ember-keyboard/pull/516) Add eslint-plugin-qunit per latest addon blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#513](https://github.com/adopted-ember-addons/ember-keyboard/pull/513) Add Ember 3.24 and Ember 3.28 to ember-try scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#490](https://github.com/adopted-ember-addons/ember-keyboard/pull/490) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#498](https://github.com/adopted-ember-addons/ember-keyboard/pull/498) Fix CI for latest Ember v4 beta/canary scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
+## v6.0.4 (2021-11-19)
+
+This will be the last release in the 6.x series. 7.0 will drop code related to several deprecations.
+
+#### :boom: Breaking Change
+* [#492](https://github.com/adopted-ember-addons/ember-keyboard/pull/492) [Breaking] Drop support for Node.js 10, 13, 15 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :rocket: Enhancement
+* [#494](https://github.com/adopted-ember-addons/ember-keyboard/pull/494) Update ember-modifier to add support for 3.22 modifier capabilities ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#499](https://github.com/adopted-ember-addons/ember-keyboard/pull/499) Deprecate old propagation model ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#490](https://github.com/adopted-ember-addons/ember-keyboard/pull/490) Update npmignore file ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#498](https://github.com/adopted-ember-addons/ember-keyboard/pull/498) Fix CI for latest Ember v4 beta/canary scenarios ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
+
+## v6.0.3 (2021-05-28)
+
+ember-cli-babel has been updated in this release.
+
+#### :bug: Bug Fix
+* [#347](https://github.com/adopted-ember-addons/ember-keyboard/pull/347) fix: ES6 @keyResponder decorator fails with params ([@urbany](https://github.com/urbany))
+
+#### :house: Internal
+* [#413](https://github.com/adopted-ember-addons/ember-keyboard/pull/413) Update dependencies including ember-cli-babel to fix address some deprecations ([@lukemelia](https://github.com/lukemelia))
+* [#339](https://github.com/adopted-ember-addons/ember-keyboard/pull/339) Bump eslint from 7.13.0 to 7.19.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#341](https://github.com/adopted-ember-addons/ember-keyboard/pull/341) Bump @glimmer/component from 1.0.2 to 1.0.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#337](https://github.com/adopted-ember-addons/ember-keyboard/pull/337) Bump @glimmer/tracking from 1.0.2 to 1.0.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#331](https://github.com/adopted-ember-addons/ember-keyboard/pull/331) Bump eslint from 7.13.0 to 7.18.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#335](https://github.com/adopted-ember-addons/ember-keyboard/pull/335) Bump ember-template-lint from 2.14.0 to 2.18.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#301](https://github.com/adopted-ember-addons/ember-keyboard/pull/301) Bump ember-compatibility-helpers from 1.2.1 to 1.2.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#309](https://github.com/adopted-ember-addons/ember-keyboard/pull/309) Bump release-it from 14.2.1 to 14.2.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#334](https://github.com/adopted-ember-addons/ember-keyboard/pull/334) Bump marked from 1.2.3 to 1.2.8 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#302](https://github.com/adopted-ember-addons/ember-keyboard/pull/302) Bump qunit-dom from 1.5.0 to 1.6.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#336](https://github.com/adopted-ember-addons/ember-keyboard/pull/336) Replace Travis CI with Github Actions ([@lukemelia](https://github.com/lukemelia))
+* [#295](https://github.com/adopted-ember-addons/ember-keyboard/pull/295) Bump marked from 1.2.2 to 1.2.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#297](https://github.com/adopted-ember-addons/ember-keyboard/pull/297) Bump eslint from 7.12.1 to 7.13.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#298](https://github.com/adopted-ember-addons/ember-keyboard/pull/298) Bump ember-load-initializers from 2.1.1 to 2.1.2 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#290](https://github.com/adopted-ember-addons/ember-keyboard/pull/290) Bump ember-modifier from 2.1.0 to 2.1.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#291](https://github.com/adopted-ember-addons/ember-keyboard/pull/291) Bump eslint-plugin-ember from 9.3.0 to 9.4.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#294](https://github.com/adopted-ember-addons/ember-keyboard/pull/294) Bump ember-auto-import from 1.6.0 to 1.7.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#292](https://github.com/adopted-ember-addons/ember-keyboard/pull/292) Bump release-it-lerna-changelog from 3.0.0 to 3.1.0 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+* [#293](https://github.com/adopted-ember-addons/ember-keyboard/pull/293) Bump release-it from 14.2.0 to 14.2.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 3
+- João Teixeira ([@urbany](https://github.com/urbany))
+- Luke Melia ([@lukemelia](https://github.com/lukemelia))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v6.0.2 (2020-10-30)
 
 #### :rocket: Enhancement
