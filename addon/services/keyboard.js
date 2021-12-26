@@ -39,6 +39,10 @@ export default class KeyboardService extends Service {
       getOwner(this).resolveRegistration('config:environment') || {};
     let emberKeyboardConfig = config.emberKeyboard || {};
 
+    if (emberKeyboardConfig.disableOnInputFields) {
+      this._disableOnInput = true;
+    }
+
     this._listeners = emberKeyboardConfig.listeners || [
       'keyUp',
       'keyDown',
@@ -65,9 +69,11 @@ export default class KeyboardService extends Service {
 
   @action
   _respond(event) {
-    if (event.target) {
+    if (this._disableOnInput && event.target) {
       const tag = event.target.tagName;
-      const isContentEditable = event.target.getAttribute && event.target.getAttribute('contenteditable') != null;
+      const isContentEditable =
+        event.target.getAttribute &&
+        event.target.getAttribute('contenteditable') != null;
       if (isContentEditable || tag === 'TEXTAREA' || tag === 'INPUT') {
         return;
       }
