@@ -3,6 +3,25 @@ Please upgrade or ask whatever dependency you are using to upgrade.
 https://github.com/highlightjs/highlight.js/issues/2877
 
 
+
+## v7.0.0 (2022-01-11)
+
+#### :house: Internal
+* [#558](https://github.com/adopted-ember-addons/ember-keyboard/pull/558) Bump ember-source from 3.28.6 to 4.1.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#568](https://github.com/adopted-ember-addons/ember-keyboard/pull/568) Drop ember-default-with-jquery test scenario as it is no longer relevant in Ember 4 ([@lukemelia](https://github.com/lukemelia))
+* [#556](https://github.com/adopted-ember-addons/ember-keyboard/pull/556) Bump ember-cli-babel from 7.26.10 to 7.26.11 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#559](https://github.com/adopted-ember-addons/ember-keyboard/pull/559) Bump ember-cli from 3.28.4 to 4.1.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#560](https://github.com/adopted-ember-addons/ember-keyboard/pull/560) Bump ember-template-lint from 3.15.0 to 4.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#564](https://github.com/adopted-ember-addons/ember-keyboard/pull/564) Bump @embroider/test-setup from 0.44.2 to 0.50.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#567](https://github.com/adopted-ember-addons/ember-keyboard/pull/567) Bump underscore from 1.9.1 to 1.13.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#566](https://github.com/adopted-ember-addons/ember-keyboard/pull/566) Add test config to verify under Ember 3.28 and 4.0 ([@lukemelia](https://github.com/lukemelia))
+* [#562](https://github.com/adopted-ember-addons/ember-keyboard/pull/562) Bump marked from 4.0.7 to 4.0.9 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#561](https://github.com/adopted-ember-addons/ember-keyboard/pull/561) Bump highlight.js from 11.3.1 to 11.4.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#563](https://github.com/adopted-ember-addons/ember-keyboard/pull/563) Bump release-it from 14.11.8 to 14.12.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Luke Melia ([@lukemelia](https://github.com/lukemelia))
+
 ## v7.0.0-beta.0 (2021-11-28)
 
 Special thanks to @SergeAstapov for his great work on this release!
