@@ -19,7 +19,8 @@ You can find interactive documentation [here](http://adopted-ember-addons.github
 
 ## Compatibility
 
-* ember-keyboard 6.x requires Ember 3.8 or higher, and is not compatible with Internet Explorer
+* Ember 4 compatibility requires ember-keyboard 7.x or higher
+* For Ember 3.8 to 3.28, you can use ember-keyboard 6.x (not compatible with Internet Explorer)
 * For use with Ember 2.0 up to 3.8 or IE compatibility, use ember-keyboard 5.x.
 * Node.js v12 or above (Node v14+ is required for fastboot)
 
