@@ -20,12 +20,23 @@ import {
   getTouchValues,
 } from '../helpers/get-values';
 
-module('Acceptance | ember keyboard test auto responder', function (hooks) {
+module('Acceptance | disableOnInputFields config', function (hooks) {
   setupApplicationTest(hooks);
 
-  config.emberKeyboard.disableOnInputFields = true;
+  hooks.beforeEach(() => {
+    config.emberKeyboard.disableOnInputFields = true;
+  });
 
   if (gte('3.10.0')) {
+    test('test event does not propagate on input field', async function (assert) {
+      assert.expect(1);
+
+      await visit('/test-scenario');
+
+      await keyDownWithElement('ArrowRight', '[data-test-input-field]');
+      assert.deepEqual(getValues(), [0, 0, 0], 'responders do not respond');
+    });
+
     test('test standard functionality', async function (assert) {
       assert.expect(8);
 
@@ -162,15 +173,6 @@ module('Acceptance | ember keyboard test auto responder', function (hooks) {
         [5, 5, 4],
         'first responders get called in priority order.'
       );
-    });
-
-    test('test event does not propagate on input field', async function (assert) {
-      assert.expect(1);
-
-      await visit('/test-scenario');
-
-      await keyDownWithElement('ArrowRight', '[data-test-input-field]');
-      assert.deepEqual(getValues(), [0, 0, 0], 'equal responders all respond');
     });
   }
 });
