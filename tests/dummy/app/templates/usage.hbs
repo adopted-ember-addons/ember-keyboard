@@ -277,8 +277,16 @@ triggerOnAlphaNumeric(event) {
 
 ### `Ember.TextField` && `Ember.TextArea`
 
-To prevent `ember-keyboard` from responding to keystrokes while an input/textarea is focused,
-you may use the `on-key` modifier with regular `<input>` and `<textarea>` elements and invoke
+To prevent `ember-keyboard` from responding to keystrokes while an input/textarea/contenteditable is focused,
+you can set disableOnInputFields in config/environment.json.
+
+```javascript
+emberKeyboard: {
+  disableOnInputFields: true
+},
+
+```
+Alernatively you may use the `on-key` modifier with regular `<input>` and `<textarea>` elements and invoke
 `ekEvent.stopPropagation()` and/or `ekEvent.stopImmediatePropagation()`.
 This ensures that whenever an input is focused, other key responders will not fire.
 
