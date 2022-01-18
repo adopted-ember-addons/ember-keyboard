@@ -4,6 +4,24 @@ https://github.com/highlightjs/highlight.js/issues/2877
 
 
 
+
+## v7.0.1 (2022-01-18)
+
+#### :rocket: Enhancement
+* [#557](https://github.com/adopted-ember-addons/ember-keyboard/pull/557) Add disableOnInputFields option, which allows to automatically disable keyboard events on all input fields ([@st-h](https://github.com/st-h))
+
+#### :house: Internal
+* [#570](https://github.com/adopted-ember-addons/ember-keyboard/pull/570) Bump webpack from 5.65.0 to 5.66.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#571](https://github.com/adopted-ember-addons/ember-keyboard/pull/571) Bump follow-redirects from 1.5.7 to 1.14.7 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#572](https://github.com/adopted-ember-addons/ember-keyboard/pull/572) Bump engine.io from 6.1.0 to 6.1.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#573](https://github.com/adopted-ember-addons/ember-keyboard/pull/573) Bump marked from 4.0.9 to 4.0.10 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#574](https://github.com/adopted-ember-addons/ember-keyboard/pull/574) Bump ember-auto-import from 2.2.4 to 2.3.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#575](https://github.com/adopted-ember-addons/ember-keyboard/pull/575) Bump release-it from 14.12.1 to 14.12.3 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#576](https://github.com/adopted-ember-addons/ember-keyboard/pull/576) Bump @embroider/test-setup from 0.50.0 to 0.50.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Steve ([@st-h](https://github.com/st-h))
+
 ## v7.0.0 (2022-01-11)
 
 #### :house: Internal
