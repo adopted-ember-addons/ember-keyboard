@@ -1,0 +1,69 @@
+{
+  "name": "@ember/optional-features",
+  "version": "2.0.0",
+  "description": "The default blueprint for ember-cli addons.",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emberjs/ember-optional-features.git"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Godfrey Chan <godfreykfc@gmail.com>"
+  ],
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "ember build",
+    "lint:js": "eslint . --cache",
+    "start": "ember serve",
+    "test": "qunit tests/**/*-test.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "ember-cli-version-checker": "^5.1.1",
+    "glob": "^7.1.6",
+    "inquirer": "^7.3.3",
+    "mkdirp": "^1.0.4",
+    "silent-error": "^1.1.1"
+  },
+  "devDependencies": {
+    "broccoli-test-helper": "^2.0.0",
+    "ember-cli": "~3.20.0",
+    "ember-cli-dependency-checker": "^3.2.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "execa": "^4.0.3",
+    "prettier": "^2.1.1",
+    "qunit": "^2.11.1",
+    "release-it": "^13.7.0",
+    "release-it-lerna-changelog": "^2.3.0"
+  },
+  "engines": {
+    "node": "10.* || 12.* || >= 14"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

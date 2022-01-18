@@ -1,0 +1,16 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.resolveComponent = resolveComponent;
+
+var _util = require('@glimmer/util');
+
+function resolveComponent(resolver, name, meta) {
+    var definition = resolver.lookupComponent(name, meta);
+    false && (0, _util.assert)(definition, 'Could not find a component named "' + name + '"');
+
+    return definition;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3J1bnRpbWUvbGliL2NvbXBvbmVudC9yZXNvbHZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O1FBR00sZ0IsR0FBQSxnQjs7OztBQUFBLFNBQUEsZ0JBQUEsQ0FBQSxRQUFBLEVBQUEsSUFBQSxFQUFBLElBQUEsRUFHSTtBQUVSLFFBQUksYUFBYSxTQUFBLGVBQUEsQ0FBQSxJQUFBLEVBQWpCLElBQWlCLENBQWpCO0FBRlEsYUFHUixrQkFBQSxVQUFBLEVBQUEsdUNBSFEsSUFHUixHQUhRLEdBR1IsQ0FIUTs7QUFJUixXQUFBLFVBQUE7QUFDRCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudERlZmluaXRpb24sIFJ1bnRpbWVSZXNvbHZlciB9IGZyb20gJ0BnbGltbWVyL2ludGVyZmFjZXMnO1xuaW1wb3J0IHsgT3B0aW9uLCBhc3NlcnQgfSBmcm9tICdAZ2xpbW1lci91dGlsJztcblxuZXhwb3J0IGZ1bmN0aW9uIHJlc29sdmVDb21wb25lbnQ8TD4oXG4gIHJlc29sdmVyOiBSdW50aW1lUmVzb2x2ZXI8TD4sXG4gIG5hbWU6IHN0cmluZyxcbiAgbWV0YT86IExcbik6IE9wdGlvbjxDb21wb25lbnREZWZpbml0aW9uPiB7XG4gIGxldCBkZWZpbml0aW9uID0gcmVzb2x2ZXIubG9va3VwQ29tcG9uZW50KG5hbWUsIG1ldGEpO1xuICBhc3NlcnQoZGVmaW5pdGlvbiwgYENvdWxkIG5vdCBmaW5kIGEgY29tcG9uZW50IG5hbWVkIFwiJHtuYW1lfVwiYCk7XG4gIHJldHVybiBkZWZpbml0aW9uO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==

@@ -1,0 +1,57 @@
+{
+  "name": "ember-source-channel-url",
+  "version": "3.0.0",
+  "description": "Determine the URL to a given Ember channels (beta, canary, etc) latest tarball.",
+  "repository": "git@github.com:rwjblue/ember-source-channel-url.git",
+  "license": "MIT",
+  "author": "Robert Jackson <me@rwjblue.com>",
+  "main": "src/index.js",
+  "bin": "./bin/ember-source-channel-url",
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "scripts": {
+    "lint:js": "eslint .",
+    "test": "qunit tests/**/*-test.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "execa": "^4.0.3",
+    "get-port": "^5.1.1",
+    "prettier": "^2.0.5",
+    "qunit": "~2.10.1",
+    "qunit-eslint": "^2.0.0",
+    "release-it": "^13.6.6",
+    "release-it-lerna-changelog": "^2.3.0",
+    "rsvp": "^4.8.5",
+    "tmp": "^0.2.1"
+  },
+  "engines": {
+    "node": "10.* || 12.* || >= 14"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - next
+      - 'release-*'
+      - 'v*'
+  pull_request: {}
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+
+      - name: install dependencies
+        run: npm ci
+
+      - run: npm run lint
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+
+      - name: install dependencies
+        run: npm ci
+
+      - run: npm test

@@ -1,0 +1,72 @@
+{
+  "name": "ember-cli-terser",
+  "version": "4.0.1",
+  "description": "JavaScript minification for Ember-CLI",
+  "keywords": [
+    "ember-addon"
+  ],
+  "homepage": "https://github.com/ember-cli/ember-cli-terser#readme",
+  "bugs": {
+    "url": "https://github.com/ember-cli/ember-cli-terser/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-cli/ember-cli-terser.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "build": "ember build",
+    "start": "ember server",
+    "test": "ember test -e production"
+  },
+  "dependencies": {
+    "broccoli-terser-sourcemap": "^4.1.0"
+  },
+  "devDependencies": {
+    "ember-cli": "~3.21.2",
+    "ember-cli-babel": "^7.22.1",
+    "ember-cli-htmlbars": "^5.3.1",
+    "ember-cli-qunit": "^4.4.0",
+    "ember-load-initializers": "^2.1.1",
+    "ember-resolver": "^8.0.2",
+    "ember-source": "^3.21.3",
+    "loader.js": "^4.7.0",
+    "release-it": "^14.2.0",
+    "release-it-lerna-changelog": "^3.0.0"
+  },
+  "engines": {
+    "node": "10.* || 12.* || >= 14"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-cli/ember-cli-terser",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "ember-addon": {
+    "before": "broccoli-asset-rev"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

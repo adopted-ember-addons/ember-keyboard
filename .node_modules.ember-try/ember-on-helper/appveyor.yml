@@ -1,0 +1,30 @@
+# http://www.appveyor.com/docs/appveyor-yml
+
+image: Visual Studio 2017
+
+environment:
+  CI: true
+  IE: true
+
+cache:
+  - '%LOCALAPPDATA%\Yarn'
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of nodejs
+  - ps: Install-Product node 8
+  - npm version
+  - npm config set spin false
+  - appveyor-retry npm install -g yarn
+  - yarn --version
+  - appveyor-retry yarn install --frozen-lockfile --non-interactive
+
+# Post-install test scripts.
+test_script:
+  - cmd: yarn test
+
+# Don't actually build.
+build: off
+
+# Set build version format here instead of in the admin panel.
+version: "{build}"

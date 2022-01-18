@@ -1,0 +1,260 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = require("path");
+const core_1 = require("@embroider/core");
+const ast_transform_1 = require("./glimmer/ast-transform");
+const packageCache = new core_1.PackageCache();
+// this is a module-scoped cache. If multiple callers ask _this copy_ of
+// @embroider/macros for a shared MacrosConfig, they'll all get the same one.
+// And if somebody asks a *different* copy of @embroider/macros for the shared
+// MacrosConfig, it will have its own instance with its own code, but will still
+// share the GlobalSharedState beneath.
+let localSharedState = new WeakMap();
+class MacrosConfig {
+    constructor() {
+        this.mode = 'compile-time';
+        this.globalConfig = {};
+        this.isDevelopingPackageRoots = new Set();
+        this._configWritable = true;
+        this.configs = new Map();
+        this.mergers = new Map();
+        this.moves = new Map();
+        // this uses globalConfig because these things truly are global. Even if a
+        // package doesn't have a dep or peerDep on @embroider/macros, it's legit
+        // for them to want to know the answer to these questions, and there is only
+        // one answer throughout the whole dependency graph.
+        this.globalConfig['@embroider/macros'] = {
+            // this powers the `isTesting` macro. It always starts out false here,
+            // because:
+            //  - if this is a production build, we will evaluate all macros at build
+            //    time and isTesting will stay false, so test-only code will not be
+            //    included.
+            //  - if this is a dev build, we evaluate macros at runtime, which allows
+            //    both "I'm running my app in development" and "I'm running my test
+            //    suite" to coexist within a single build. When you run the test
+            //    suite, early in the runtime boot process we can flip isTesting to
+            //    true to distinguish the two.
+            isTesting: false,
+        };
+    }
+    static for(key) {
+        let found = localSharedState.get(key);
+        if (found) {
+            return found;
+        }
+        let g = global;
+        if (!g.__embroider_macros_global__) {
+            g.__embroider_macros_global__ = new WeakMap();
+        }
+        let shared = g.__embroider_macros_global__.get(key);
+        if (!shared) {
+            shared = {
+                configs: new Map(),
+                mergers: new Map(),
+            };
+            g.__embroider_macros_global__.set(key, shared);
+        }
+        let config = new MacrosConfig();
+        config.configs = shared.configs;
+        config.mergers = shared.mergers;
+        localSharedState.set(key, config);
+        return config;
+    }
+    enableRuntimeMode() {
+        if (this.mode !== 'run-time') {
+            if (!this._configWritable) {
+                throw new Error(`[Embroider:MacrosConfig] attempted to enableRuntimeMode after configs have been finalized`);
+            }
+            this.mode = 'run-time';
+        }
+    }
+    enableAppDevelopment(appPackageRoot) {
+        if (!appPackageRoot) {
+            throw new Error(`must provide appPackageRoot`);
+        }
+        if (this.appPackageRoot) {
+            if (this.appPackageRoot !== appPackageRoot && this.moves.get(this.appPackageRoot) !== appPackageRoot) {
+                throw new Error(`bug: conflicting appPackageRoots ${this.appPackageRoot} vs ${appPackageRoot}`);
+            }
+        }
+        else {
+            if (!this._configWritable) {
+                throw new Error(`[Embroider:MacrosConfig] attempted to enableAppDevelopment after configs have been finalized`);
+            }
+            this.appPackageRoot = appPackageRoot;
+            this.isDevelopingPackageRoots.add(appPackageRoot);
+        }
+    }
+    enablePackageDevelopment(packageRoot) {
+        if (!this.isDevelopingPackageRoots.has(packageRoot)) {
+            if (!this._configWritable) {
+                throw new Error(`[Embroider:MacrosConfig] attempted to enablePackageDevelopment after configs have been finalized`);
+            }
+            this.isDevelopingPackageRoots.add(packageRoot);
+        }
+    }
+    // Registers a new source of configuration to be given to the named package.
+    // Your config type must be json-serializable. You must always set fromPath to
+    // `__filename`.
+    setConfig(fromPath, packageName, config) {
+        return this.internalSetConfig(fromPath, packageName, config);
+    }
+    // Registers a new source of configuration to be given to your own package.
+    // Your config type must be json-serializable. You must always set fromPath to
+    // `__filename`.
+    setOwnConfig(fromPath, config) {
+        return this.internalSetConfig(fromPath, undefined, config);
+    }
+    // Registers a new source of configuration to be shared globally within the
+    // app. USE GLOBALS SPARINGLY! Prefer setConfig or setOwnConfig instead,
+    // unless your state is truly, necessarily global.
+    //
+    // Include a relevant package name in your key to help avoid collisions.
+    //
+    // Your value must be json-serializable. You must always set fromPath to
+    // `__filename`.
+    setGlobalConfig(fromPath, key, value) {
+        if (!this._configWritable) {
+            throw new Error(`[Embroider:MacrosConfig] attempted to set global config after configs have been finalized from: '${fromPath}'`);
+        }
+        this.globalConfig[key] = value;
+    }
+    internalSetConfig(fromPath, packageName, config) {
+        if (!this._configWritable) {
+            throw new Error(`[Embroider:MacrosConfig] attempted to set config after configs have been finalized from: '${fromPath}'`);
+        }
+        let targetPackage = this.resolvePackage(fromPath, packageName);
+        let peers = core_1.getOrCreate(this.configs, targetPackage.root, () => []);
+        peers.push(config);
+    }
+    // Allows you to set the merging strategy used for your package's config. The
+    // merging strategy applies when multiple other packages all try to send
+    // configuration to you.
+    useMerger(fromPath, merger) {
+        if (this._configWritable) {
+            throw new Error(`[Embroider:MacrosConfig] attempted to call useMerger after configs have been finalized`);
+        }
+        let targetPackage = this.resolvePackage(fromPath, undefined);
+        let other = this.mergers.get(targetPackage.root);
+        if (other) {
+            throw new Error(`[Embroider:MacrosConfig] conflicting mergers registered for package ${targetPackage.name} at ${targetPackage.root}. See ${other.fromPath} and ${fromPath}.`);
+        }
+        this.mergers.set(targetPackage.root, { merger, fromPath });
+    }
+    get userConfigs() {
+        if (this._configWritable) {
+            throw new Error('[Embroider:MacrosConfig] cannot read userConfigs until MacrosConfig has been finalized.');
+        }
+        if (!this.cachedUserConfigs) {
+            let userConfigs = {};
+            for (let [pkgRoot, configs] of this.configs) {
+                let combined;
+                if (configs.length > 1) {
+                    combined = this.mergerFor(pkgRoot)(configs);
+                }
+                else {
+                    combined = configs[0];
+                }
+                userConfigs[pkgRoot] = combined;
+            }
+            for (let [oldPath, newPath] of this.moves) {
+                userConfigs[newPath] = userConfigs[oldPath];
+            }
+            this.cachedUserConfigs = userConfigs;
+        }
+        return this.cachedUserConfigs;
+    }
+    // to be called from within your build system. Returns the thing you should
+    // push into your babel plugins list.
+    //
+    // owningPackageRoot is needed when the files you will process (1) all belongs
+    // to one package, (2) will not be located in globally correct paths such that
+    // normal node_modules resolution can find their dependencies. In other words,
+    // owningPackageRoot is needed when you use this inside classic ember-cli, and
+    // it's not appropriate inside embroider.
+    babelPluginConfig(owningPackageRoot) {
+        let self = this;
+        let opts = {
+            // this is deliberately lazy because we want to allow everyone to finish
+            // setting config before we generate the userConfigs
+            get userConfigs() {
+                return self.userConfigs;
+            },
+            get globalConfig() {
+                return self.globalConfig;
+            },
+            owningPackageRoot,
+            isDevelopingPackageRoots: [...this.isDevelopingPackageRoots].map(root => this.moves.get(root) || root),
+            appPackageRoot: this.appPackageRoot ? this.moves.get(this.appPackageRoot) || this.appPackageRoot : undefined,
+            // This is used as a signature so we can detect ourself among the plugins
+            // emitted from v1 addons.
+            embroiderMacrosConfigMarker: true,
+            get mode() {
+                return self.mode;
+            },
+        };
+        return [path_1.join(__dirname, 'babel', 'macros-babel-plugin.js'), opts];
+    }
+    static astPlugins(owningPackageRoot) {
+        let configs;
+        let plugins = [
+            ast_transform_1.makeFirstTransform({
+                // this is deliberately lazy because we want to allow everyone to finish
+                // setting config before we generate the userConfigs
+                get userConfigs() {
+                    if (!configs) {
+                        throw new Error(`Bug: @embroider/macros ast-transforms were not plugged into a MacrosConfig`);
+                    }
+                    return configs.userConfigs;
+                },
+                baseDir: owningPackageRoot,
+            }),
+            ast_transform_1.makeSecondTransform(),
+        ].reverse();
+        function setConfig(c) {
+            configs = c;
+        }
+        return { plugins, setConfig };
+    }
+    mergerFor(pkgRoot) {
+        let entry = this.mergers.get(pkgRoot);
+        if (entry) {
+            return entry.merger;
+        }
+        return defaultMerger;
+    }
+    // this exists because @embroider/compat rewrites and moves v1 addons, and
+    // their macro configs need to follow them to their new homes.
+    packageMoved(oldPath, newPath) {
+        if (!this._configWritable) {
+            throw new Error(`[Embroider:MacrosConfig] attempted to call packageMoved after configs have been finalized`);
+        }
+        this.moves.set(oldPath, newPath);
+    }
+    getConfig(fromPath, packageName) {
+        return this.userConfigs[this.resolvePackage(fromPath, packageName).root];
+    }
+    getOwnConfig(fromPath) {
+        return this.userConfigs[this.resolvePackage(fromPath, undefined).root];
+    }
+    resolvePackage(fromPath, packageName) {
+        let us = packageCache.ownerOfFile(fromPath);
+        if (!us) {
+            throw new Error(`[Embroider:MacrosConfig] unable to determine which npm package owns the file ${fromPath}`);
+        }
+        if (packageName) {
+            return packageCache.resolve(packageName, us);
+        }
+        else {
+            return us;
+        }
+    }
+    finalize() {
+        this._configWritable = false;
+    }
+}
+exports.default = MacrosConfig;
+function defaultMerger(configs) {
+    return Object.assign({}, ...configs);
+}
+//# sourceMappingURL=macros-config.js.map

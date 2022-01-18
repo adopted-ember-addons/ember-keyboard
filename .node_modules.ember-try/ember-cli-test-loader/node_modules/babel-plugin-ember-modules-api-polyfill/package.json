@@ -1,0 +1,78 @@
+{
+  "name": "babel-plugin-ember-modules-api-polyfill",
+  "version": "2.13.4",
+  "description": "Polyfill for Ember JS API.",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ember-cli/babel-plugin-ember-modules-api-polyfill#readme",
+  "bugs": {
+    "url": "https://github.com/ember-cli/babel-plugin-ember-modules-api-polyfill/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-cli/babel-plugin-ember-modules-api-polyfill.git"
+  },
+  "license": "MIT",
+  "author": "Robert Jackson <me@rwjblue.com>",
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "start": "jest --watchAll",
+    "test": "jest"
+  },
+  "dependencies": {
+    "ember-rfc176-data": "^0.3.13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-transform-typescript": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "babel-core": "^6.25.0",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "jest": "^24.9.0",
+    "prettier": "^2.0.5",
+    "release-it": "^13.6.0",
+    "release-it-lerna-changelog": "^2.3.0"
+  },
+  "engines": {
+    "node": "6.* || 8.* || >= 10.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-cli/babel-plugin-ember-modules-api-polyfill",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

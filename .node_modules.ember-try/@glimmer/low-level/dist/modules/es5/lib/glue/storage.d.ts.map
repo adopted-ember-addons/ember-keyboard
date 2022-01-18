@@ -1,0 +1,1 @@
+{"version":3,"file":"storage.d.ts","sourceRoot":"","sources":["../../../../../packages/@glimmer/low-level/lib/glue/storage.ts"],"names":[],"mappings":"AAAA,qBAAa,OAAO;IAClB,OAAO,CAAC,QAAQ,CAAC,KAAK,CAAiB;IACvC,OAAO,CAAC,IAAI,CAAK;IAEjB,GAAG,CAAC,OAAO,EAAE,OAAO,GAAG,MAAM;IAc7B,KAAK,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO;IAI/B,IAAI,CAAC,OAAO,EAAE,MAAM,GAAG,IAAI;CAI5B"}

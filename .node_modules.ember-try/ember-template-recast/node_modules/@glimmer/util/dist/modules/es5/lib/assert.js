@@ -1,0 +1,17 @@
+// import Logger from './logger';
+// let alreadyWarned = false;
+export function debugAssert(test, msg) {
+  // if (!alreadyWarned) {
+  //   alreadyWarned = true;
+  //   Logger.warn("Don't leave debug assertions on in public builds");
+  // }
+  if (!test) {
+    throw new Error(msg || 'assertion failure');
+  }
+}
+export function prodAssert() {}
+export function deprecate(desc) {
+  console.warn("DEPRECATION: " + desc);
+}
+export default debugAssert;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3V0aWwvbGliL2Fzc2VydC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUVBO0FBRUEsT0FBTSxTQUFBLFdBQUEsQ0FBQSxJQUFBLEVBQUEsR0FBQSxFQUE0QztBQUNoRDtBQUNBO0FBQ0E7QUFDQTtBQUVBLE1BQUksQ0FBSixJQUFBLEVBQVc7QUFDVCxVQUFNLElBQUEsS0FBQSxDQUFVLEdBQUcsSUFBbkIsbUJBQU0sQ0FBTjtBQUNEO0FBQ0Y7QUFFRCxPQUFNLFNBQUEsVUFBQSxHQUFvQixDQUFLO0FBRS9CLE9BQU0sU0FBQSxTQUFBLENBQUEsSUFBQSxFQUFnQztBQUNwQyxFQUFBLE9BQU8sQ0FBUCxJQUFBLG1CQUFBLElBQUE7QUFDRDtBQUVELGVBQUEsV0FBQSIsInNvdXJjZXNDb250ZW50IjpbIi8vIGltcG9ydCBMb2dnZXIgZnJvbSAnLi9sb2dnZXInO1xuXG4vLyBsZXQgYWxyZWFkeVdhcm5lZCA9IGZhbHNlO1xuXG5leHBvcnQgZnVuY3Rpb24gZGVidWdBc3NlcnQodGVzdDogYW55LCBtc2c6IHN0cmluZykge1xuICAvLyBpZiAoIWFscmVhZHlXYXJuZWQpIHtcbiAgLy8gICBhbHJlYWR5V2FybmVkID0gdHJ1ZTtcbiAgLy8gICBMb2dnZXIud2FybihcIkRvbid0IGxlYXZlIGRlYnVnIGFzc2VydGlvbnMgb24gaW4gcHVibGljIGJ1aWxkc1wiKTtcbiAgLy8gfVxuXG4gIGlmICghdGVzdCkge1xuICAgIHRocm93IG5ldyBFcnJvcihtc2cgfHwgJ2Fzc2VydGlvbiBmYWlsdXJlJyk7XG4gIH1cbn1cblxuZXhwb3J0IGZ1bmN0aW9uIHByb2RBc3NlcnQoKSB7fVxuXG5leHBvcnQgZnVuY3Rpb24gZGVwcmVjYXRlKGRlc2M6IHN0cmluZykge1xuICBjb25zb2xlLndhcm4oYERFUFJFQ0FUSU9OOiAke2Rlc2N9YCk7XG59XG5cbmV4cG9ydCBkZWZhdWx0IGRlYnVnQXNzZXJ0O1xuIl0sInNvdXJjZVJvb3QiOiIifQ==

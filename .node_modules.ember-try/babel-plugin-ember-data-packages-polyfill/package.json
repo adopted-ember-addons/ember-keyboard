@@ -1,0 +1,73 @@
+{
+  "name": "babel-plugin-ember-data-packages-polyfill",
+  "version": "0.1.2",
+  "description": "Polyfill for EmberData Packages API.",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "homepage": "https://github.com/ember-data/babel-plugin-ember-data-packages-polyfill#readme",
+  "bugs": {
+    "url": "https://github.com/ember-data/babel-plugin-ember-packages-polyfill/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-data/babel-plugin-ember-data-packages-polyfill.git"
+  },
+  "license": "MIT",
+  "author": "Chris Thoburn <runspired@gmail.com>",
+  "contributors": [
+    "Robert Jackson <me@rwjblue.com> (https://www.rwjblue.com)"
+  ],
+  "main": "src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "changelog": "lerna-changelog",
+    "start": "qunit --watch tests/**/*-test.js",
+    "test": "qunit tests/**/*-test.js"
+  },
+  "dependencies": {
+    "@ember-data/rfc395-data": "^0.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/plugin-transform-modules-amd": "^7.8.3",
+    "lerna-changelog": "^0.8.3",
+    "qunit": "^2.9.3",
+    "qunit-eslint": "^2.0.0"
+  },
+  "engines": {
+    "node": "6.* || 8.* || 10.* || >= 12.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-data/babel-plugin-ember-data-packages-polyfill",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  },
+  "volta": {
+    "node": "13.6.0",
+    "yarn": "1.21.1"
+  }
+}

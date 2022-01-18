@@ -1,0 +1,1 @@
+{"version":3,"file":"props.d.ts","sourceRoot":"","sources":["../../../../../packages/@glimmer/runtime/lib/dom/props.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,aAAa,EAAE,MAAM,uBAAuB,CAAC;AAQtD,wBAAgB,iBAAiB,CAAC,OAAO,EAAE,aAAa,EAAE,QAAQ,EAAE,MAAM;;;EAyBzE;AAED,wBAAgB,sBAAsB,CAAC,KAAK,EAAE,OAAO,GAAG,OAAO,CAM9D"}

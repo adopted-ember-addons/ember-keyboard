@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    // Compilation Configuration
+    "target": "es2017",
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "outDir": "dist",
+    "baseUrl": "lib",
+    "rootDir": "lib",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    // Enhance Strictness
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+
+    "newLine": "LF",
+    "allowJs": true
+  },
+  "include": ["lib/**/*.js"],
+  "exclude": ["dist", "node_modules", ".vscode"]
+}

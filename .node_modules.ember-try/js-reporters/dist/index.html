@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<title>K</title>
+<script src="./js-reporters.js"></script>
+<script>
+    emitter = new JsReporters.EventEmitter();
+    new JsReporters.TapReporter(emitter);
+    emitter.emit('runStart', {counts:{total:2}});
+    emitter.emit('runEnd', {
+      testCounts: {
+        total: 6,
+        passed: 3,
+        failed: 2,
+        skipped: 1,
+        todo: 0
+      }
+    });
+
+	document.write(JsReporters.TapReporter);
+</script>

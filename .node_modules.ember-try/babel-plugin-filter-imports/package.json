@@ -1,0 +1,58 @@
+{
+  "name": "babel-plugin-filter-imports",
+  "version": "4.0.0",
+  "description": "A babel transform for filtering out imports",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "babel src -d lib",
+    "lint": "prettier --list-different \"src/**/*.js\" \"test/test.js\" && eslint \"src/**/*.js\" \"test/test.js\"",
+    "lint:fix": "prettier --write \"src/**/*.js\" \"test/test.js\" && eslint --fix \"src/**/*.js\" \"test/test.js\"",
+    "prerelease": "yarn lint && yarn test && yarn clean && yarn build",
+    "release:major": "yarn prerelease && release-it major",
+    "release:minor": "yarn prerelease && release-it minor",
+    "release:patch": "yarn prerelease && release-it patch",
+    "test": "mocha --require @babel/register \"test/*.js\"",
+    "test:watch": "yarn test --watch --watch-extensions js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ember-cli/babel-plugin-filter-imports"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin"
+  ],
+  "author": "Martin Muñoz <im.mmun@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ember-cli/babel-plugin-filter-imports/issues"
+  },
+  "homepage": "https://github.com/ember-cli/babel-plugin-filter-imports",
+  "dependencies": {
+    "@babel/types": "^7.7.2",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-decorators": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "prettier": "^1.19.1",
+    "release-it": "^12.4.3",
+    "rimraf": "^3.0.0"
+  }
+}

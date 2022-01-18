@@ -1,0 +1,58 @@
+{
+  "name": "typescript-memoize",
+  "version": "1.0.0-alpha.3",
+  "description": "Memoize decorator for Typescript",
+  "main": "./dist/memoize-decorator.js",
+  "typings": "./dist/memoize-decorator.d.ts",
+  "scripts": {
+    "test": "karma start test/karma.config.js --single-run",
+    "prepublish": "npm run build",
+    "clean": "rm -rf ./dist",
+    "build": "tsc"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darrylhodgins/typescript-memoize.git"
+  },
+  "keywords": [
+    "typescript",
+    "memoize",
+    "functional",
+    "decorator"
+  ],
+  "author": "Darryl Hodgins <darrylh@darryh.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darrylhodgins/typescript-memoize/issues"
+  },
+  "homepage": "https://github.com/darrylhodgins/typescript-memoize#readme",
+  "dependencies": {
+    "core-js": "2.4.1"
+  },
+  "devDependencies": {
+    "@types/core-js": "0.9.42",
+    "@types/jasmine": "2.5.53",
+    "@types/node": "8.0.17",
+    "awesome-typescript-loader": "3.2.2",
+    "es6-shim": "0.35.3",
+    "jasmine-core": "2.7.0",
+    "karma": "1.7.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-es6-shim": "1.0.0",
+    "karma-jasmine": "1.1.0",
+    "karma-jasmine-html-reporter": "0.2.2",
+    "karma-junit-reporter": "1.2.0",
+    "karma-typescript": "3.0.4",
+    "karma-phantomjs-launcher": "1.0.4",
+    "karma-sourcemap-loader": "0.3.7",
+    "karma-spec-reporter": "0.0.31",
+    "karma-threshold-reporter": "0.1.15",
+    "source-map-loader": "0.2.1",
+    "tslib": "1.7.1",
+    "typescript": "2.4.2"
+  }
+}

@@ -1,0 +1,36 @@
+/**
+ * Registers
+ *
+ * For the most part, these follows MIPS naming conventions, however the
+ * register numbers are different.
+ */
+// $0 or $pc (program counter): pointer into `program` for the next insturction; -1 means exit
+export const $pc = 0;
+// $1 or $ra (return address): pointer into `program` for the return
+export const $ra = 1;
+// $2 or $fp (frame pointer): pointer into the `evalStack` for the base of the stack
+export const $fp = 2;
+// $3 or $sp (stack pointer): pointer into the `evalStack` for the top of the stack
+export const $sp = 3;
+// $4-$5 or $s0-$s1 (saved): callee saved general-purpose registers
+export const $s0 = 4;
+export const $s1 = 5;
+// $6-$7 or $t0-$t1 (temporaries): caller saved general-purpose registers
+export const $t0 = 6;
+export const $t1 = 7;
+// $8 or $v0 (return value)
+export const $v0 = 8;
+export function isLowLevelRegister(register) {
+    return register <= $sp;
+}
+export var SavedRegister;
+(function (SavedRegister) {
+    SavedRegister[SavedRegister["s0"] = 4] = "s0";
+    SavedRegister[SavedRegister["s1"] = 5] = "s1";
+})(SavedRegister || (SavedRegister = {}));
+export var TemporaryRegister;
+(function (TemporaryRegister) {
+    TemporaryRegister[TemporaryRegister["t0"] = 6] = "t0";
+    TemporaryRegister[TemporaryRegister["t1"] = 7] = "t1";
+})(TemporaryRegister || (TemporaryRegister = {}));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3ZtL2xpYi9yZWdpc3RlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBT0E7QUFDQSxPQUFPLE1BQU0sTUFBMEIsQ0FBaEM7QUFDUDtBQUNBLE9BQU8sTUFBTSxNQUEwQixDQUFoQztBQUNQO0FBQ0EsT0FBTyxNQUFNLE1BQTBCLENBQWhDO0FBQ1A7QUFDQSxPQUFPLE1BQU0sTUFBMEIsQ0FBaEM7QUFDUDtBQUNBLE9BQU8sTUFBTSxNQUF3QixDQUE5QjtBQUNQLE9BQU8sTUFBTSxNQUF3QixDQUE5QjtBQUNQO0FBQ0EsT0FBTyxNQUFNLE1BQTRCLENBQWxDO0FBQ1AsT0FBTyxNQUFNLE1BQTRCLENBQWxDO0FBQ1A7QUFDQSxPQUFPLE1BQU0sTUFBTSxDQUFaO0FBWVAsT0FBTSxTQUFVLGtCQUFWLENBQ0osUUFESSxFQUNnQztBQUVwQyxXQUFRLFlBQXVCLEdBQS9CO0FBQ0Q7QUFFRCxPQUFBLElBQVksYUFBWjtBQUFBLENBQUEsVUFBWSxhQUFaLEVBQXlCO0FBQ3ZCLGtCQUFBLGNBQUEsSUFBQSxJQUFBLENBQUEsSUFBQSxJQUFBO0FBQ0Esa0JBQUEsY0FBQSxJQUFBLElBQUEsQ0FBQSxJQUFBLElBQUE7QUFDRCxDQUhELEVBQVksa0JBQUEsZ0JBQWEsRUFBYixDQUFaO0FBS0EsT0FBQSxJQUFZLGlCQUFaO0FBQUEsQ0FBQSxVQUFZLGlCQUFaLEVBQTZCO0FBQzNCLHNCQUFBLGtCQUFBLElBQUEsSUFBQSxDQUFBLElBQUEsSUFBQTtBQUNBLHNCQUFBLGtCQUFBLElBQUEsSUFBQSxDQUFBLElBQUEsSUFBQTtBQUNELENBSEQsRUFBWSxzQkFBQSxvQkFBaUIsRUFBakIsQ0FBWiIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogUmVnaXN0ZXJzXG4gKlxuICogRm9yIHRoZSBtb3N0IHBhcnQsIHRoZXNlIGZvbGxvd3MgTUlQUyBuYW1pbmcgY29udmVudGlvbnMsIGhvd2V2ZXIgdGhlXG4gKiByZWdpc3RlciBudW1iZXJzIGFyZSBkaWZmZXJlbnQuXG4gKi9cblxuLy8gJDAgb3IgJHBjIChwcm9ncmFtIGNvdW50ZXIpOiBwb2ludGVyIGludG8gYHByb2dyYW1gIGZvciB0aGUgbmV4dCBpbnN0dXJjdGlvbjsgLTEgbWVhbnMgZXhpdFxuZXhwb3J0IGNvbnN0ICRwYzogTWFjaGluZVJlZ2lzdGVyLnBjID0gMDtcbi8vICQxIG9yICRyYSAocmV0dXJuIGFkZHJlc3MpOiBwb2ludGVyIGludG8gYHByb2dyYW1gIGZvciB0aGUgcmV0dXJuXG5leHBvcnQgY29uc3QgJHJhOiBNYWNoaW5lUmVnaXN0ZXIucmEgPSAxO1xuLy8gJDIgb3IgJGZwIChmcmFtZSBwb2ludGVyKTogcG9pbnRlciBpbnRvIHRoZSBgZXZhbFN0YWNrYCBmb3IgdGhlIGJhc2Ugb2YgdGhlIHN0YWNrXG5leHBvcnQgY29uc3QgJGZwOiBNYWNoaW5lUmVnaXN0ZXIuZnAgPSAyO1xuLy8gJDMgb3IgJHNwIChzdGFjayBwb2ludGVyKTogcG9pbnRlciBpbnRvIHRoZSBgZXZhbFN0YWNrYCBmb3IgdGhlIHRvcCBvZiB0aGUgc3RhY2tcbmV4cG9ydCBjb25zdCAkc3A6IE1hY2hpbmVSZWdpc3Rlci5zcCA9IDM7XG4vLyAkNC0kNSBvciAkczAtJHMxIChzYXZlZCk6IGNhbGxlZSBzYXZlZCBnZW5lcmFsLXB1cnBvc2UgcmVnaXN0ZXJzXG5leHBvcnQgY29uc3QgJHMwOiBTYXZlZFJlZ2lzdGVyLnMwID0gNDtcbmV4cG9ydCBjb25zdCAkczE6IFNhdmVkUmVnaXN0ZXIuczEgPSA1O1xuLy8gJDYtJDcgb3IgJHQwLSR0MSAodGVtcG9yYXJpZXMpOiBjYWxsZXIgc2F2ZWQgZ2VuZXJhbC1wdXJwb3NlIHJlZ2lzdGVyc1xuZXhwb3J0IGNvbnN0ICR0MDogVGVtcG9yYXJ5UmVnaXN0ZXIudDAgPSA2O1xuZXhwb3J0IGNvbnN0ICR0MTogVGVtcG9yYXJ5UmVnaXN0ZXIudDEgPSA3O1xuLy8gJDggb3IgJHYwIChyZXR1cm4gdmFsdWUpXG5leHBvcnQgY29uc3QgJHYwID0gODtcblxuZXhwb3J0IGNvbnN0IGVudW0gTWFjaGluZVJlZ2lzdGVyIHtcbiAgLy8gVGhlc2UgbXVzdCBiZSBpbiBzeW5jIHdpdGggdGhlIGNvbXB1dGVkIHZhbHVlc1xuICAvLyBhYm92ZSwgYnV0IFR5cGVTY3JpcHQgZG9lc24ndCBsaWtlIGl0XG5cbiAgJ3BjJyA9IDAsXG4gICdyYScgPSAxLFxuICAnZnAnID0gMixcbiAgJ3NwJyA9IDMsXG59XG5cbmV4cG9ydCBmdW5jdGlvbiBpc0xvd0xldmVsUmVnaXN0ZXIoXG4gIHJlZ2lzdGVyOiBSZWdpc3RlciB8IE1hY2hpbmVSZWdpc3RlclxuKTogcmVnaXN0ZXIgaXMgUmVnaXN0ZXIgJiBNYWNoaW5lUmVnaXN0ZXIge1xuICByZXR1cm4gKHJlZ2lzdGVyIGFzIG51bWJlcikgPD0gJHNwO1xufVxuXG5leHBvcnQgZW51bSBTYXZlZFJlZ2lzdGVyIHtcbiAgJ3MwJyA9IDQsXG4gICdzMScgPSA1LFxufVxuXG5leHBvcnQgZW51bSBUZW1wb3JhcnlSZWdpc3RlciB7XG4gICd0MCcgPSA2LFxuICAndDEnID0gNyxcbn1cblxuZXhwb3J0IHR5cGUgUmVnaXN0ZXIgPSBNYWNoaW5lUmVnaXN0ZXIgfCBTYXZlZFJlZ2lzdGVyIHwgVGVtcG9yYXJ5UmVnaXN0ZXIgfCB0eXBlb2YgJHYwO1xuZXhwb3J0IHR5cGUgU3lzY2FsbFJlZ2lzdGVyID0gU2F2ZWRSZWdpc3RlciB8IFRlbXBvcmFyeVJlZ2lzdGVyIHwgdHlwZW9mICR2MDtcbiJdLCJzb3VyY2VSb290IjoiIn0=

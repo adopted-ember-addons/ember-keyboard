@@ -1,0 +1,30 @@
+{
+  "name": "wrap-legacy-hbs-plugin-if-needed",
+  "version": "1.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:stefanpenner/wrap-legacy-hbs-plugin-if-needed",
+  "author": "Stefan Penner <stefan.penner@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@glimmer/syntax": "^0.42.1",
+    "@glimmer/reference": "^0.42.1",
+    "@glimmer/runtime": "^0.42.1",
+    "@simple-dom/interface": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "~3.2.2"
+  },
+  "scripts": {
+    "prepare": "tsc -b .",
+    "build": "tsc -b .",
+    "test": "jest",
+    "clean": "git clean -x -f"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ]
+}

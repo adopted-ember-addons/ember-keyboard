@@ -1,0 +1,34 @@
+{
+  "name": "fixturify-project",
+  "version": "1.10.0",
+  "main": "index.js",
+  "repository": "git@github.com:stefanpenner/node-fixturify-project",
+  "author": "Stefan Penner <stefan.penner@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fixturify": "^1.2.0",
+    "tmp": "^0.0.33"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/fs-extra": "^5.0.5",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.10.4",
+    "@types/tmp": "^0.0.34",
+    "chai": "^4.1.2",
+    "fs-extra": "^7.0.0",
+    "mocha": "^5.2.0",
+    "typescript": "^3.3.3333"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index.js.map"
+  ],
+  "scripts": {
+    "test": "mocha test",
+    "test:debug": "mocha debug test",
+    "prepare": "tsc",
+    "clean": "git clean -x -f"
+  }
+}

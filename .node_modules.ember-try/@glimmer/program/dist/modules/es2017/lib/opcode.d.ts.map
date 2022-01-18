@@ -1,0 +1,1 @@
+{"version":3,"file":"opcode.d.ts","sourceRoot":"","sources":["../../../../packages/@glimmer/program/lib/opcode.ts"],"names":[],"mappings":"AAAA,OAAO,EAAc,SAAS,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAC;AAExE,qBAAa,aAAc,YAAW,SAAS;IAEjC,QAAQ,CAAC,IAAI,EAAE,UAAU;IAD9B,MAAM,SAAK;gBACG,IAAI,EAAE,UAAU;aAEjC,IAAI;aAKJ,SAAS,EAAI,CAAC,GAAG,CAAC;aAKlB,IAAI;aAIJ,GAAG;aAIH,GAAG;aAIH,GAAG;CAGR"}

@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'v*'
+  pull_request: {}
+  schedule:
+  - cron:  '0 6 * * 0' # weekly, on sundays
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: install dependencies
+      run: yarn install
+    - name: lint:js
+      run: yarn lint:js
+
+  test:
+    name: Tests
+    runs-on: ${{ matrix.os }}-latest
+
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install dependencies
+      run: yarn install
+    - name: ember test
+      run: yarn test
+
+  floating-dependencies:
+    name: Floating Deps
+    runs-on: ubuntu-latest
+
+    needs: [test, lint]
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: install dependencies
+      run: yarn install --ignore-lockfile
+    - name: ember test
+      run: yarn test
+
+  try-scenarios:
+    name: ${{ matrix.ember-try-scenario }}
+
+    runs-on: ubuntu-latest
+
+    needs: [test, lint]
+
+    strategy:
+      matrix:
+        ember-try-scenario:
+         - ember-babel-6
+         - node-babel-6
+         - ember-2.0-babel-7
+         - ember-babel-7
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: install dependencies
+      run: yarn install
+    - name: test
+      env:
+        EMBER_TRY_SCENARIO: ${{ matrix.ember-try-scenario }}
+      run: node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO

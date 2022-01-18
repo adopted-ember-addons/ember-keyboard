@@ -1,0 +1,22 @@
+/**
+ * A class providing a production, noop replacement for the {TestWaiter<T>} class.
+ *
+ * @public
+ * @class TestWaiter<T>
+ */
+export default class NoopTestWaiter {
+    constructor(name) {
+        this.name = name;
+    }
+    beginAsync() {
+        return this;
+    }
+    endAsync() { }
+    waitUntil() {
+        return true;
+    }
+    debugInfo() {
+        return [];
+    }
+    reset() { }
+}

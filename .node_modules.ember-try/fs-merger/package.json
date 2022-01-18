@@ -1,0 +1,36 @@
+{
+  "name": "fs-merger",
+  "version": "3.1.0",
+  "description": "Reads files from a real location",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Sparshith NR",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "yarn clean && yarn build && mocha tests/unit-test.js -r ts-node/register",
+    "test:debugger": "yarn build && mocha --inspect-brk tests/unit-test.js -r ts-node/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SparshithNR/fs-merger.git"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.5",
+    "broccoli-source": "^3.0.0",
+    "chai": "^4.2.0",
+    "fixturify": "^1.2.0",
+    "mocha": "^6.1.4",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.2"
+  },
+  "dependencies": {
+    "broccoli-node-api": "^1.7.0",
+    "broccoli-node-info": "^2.1.0",
+    "fs-extra": "^8.0.1",
+    "fs-tree-diff": "^2.0.1",
+    "rimraf": "^2.6.3",
+    "walk-sync": "^2.0.2"
+  }
+}

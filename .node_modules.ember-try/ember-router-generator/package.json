@@ -1,0 +1,46 @@
+{
+  "name": "ember-router-generator",
+  "version": "2.0.0",
+  "description": "MicroLib to add or remove routes from your Ember.js router.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests/**/*-test.js",
+    "ci": "mocha tests/**/*-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ember-cli/ember-router-generator.git"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.4.5",
+    "@babel/traverse": "^7.4.5",
+    "recast": "^0.18.1"
+  },
+  "devDependencies": {
+    "assertion-error": "^1.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-node": "^9.1.0",
+    "mocha": "^6.1.4",
+    "mocha-eslint": "^5.0.0",
+    "prettier": "^1.18.2"
+  },
+  "author": "Adolfo Builes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ember-cli/ember-router-generator/issues"
+  },
+  "homepage": "https://github.com/ember-cli/ember-router-generator",
+  "engines": {
+    "node": "8.* || 10.* || >= 12"
+  }
+}

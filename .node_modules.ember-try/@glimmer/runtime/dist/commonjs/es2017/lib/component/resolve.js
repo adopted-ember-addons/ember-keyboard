@@ -1,0 +1,16 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.resolveComponent = resolveComponent;
+
+var _util = require('@glimmer/util');
+
+function resolveComponent(resolver, name, meta) {
+    let definition = resolver.lookupComponent(name, meta);
+    false && (0, _util.assert)(definition, `Could not find a component named "${name}"`);
+
+    return definition;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3J1bnRpbWUvbGliL2NvbXBvbmVudC9yZXNvbHZlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O1FBR00sZ0IsR0FBQSxnQjs7OztBQUFBLFNBQUEsZ0JBQUEsQ0FBQSxRQUFBLEVBQUEsSUFBQSxFQUFBLElBQUEsRUFHSTtBQUVSLFFBQUksYUFBYSxTQUFBLGVBQUEsQ0FBQSxJQUFBLEVBQWpCLElBQWlCLENBQWpCO0FBRlEsYUFHUixrQkFBQSxVQUFBLEVBQW1CLHFDQUFxQyxJQUhoRCxHQUdSLENBSFE7O0FBSVIsV0FBQSxVQUFBO0FBQ0QiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnREZWZpbml0aW9uLCBSdW50aW1lUmVzb2x2ZXIgfSBmcm9tICdAZ2xpbW1lci9pbnRlcmZhY2VzJztcbmltcG9ydCB7IE9wdGlvbiwgYXNzZXJ0IH0gZnJvbSAnQGdsaW1tZXIvdXRpbCc7XG5cbmV4cG9ydCBmdW5jdGlvbiByZXNvbHZlQ29tcG9uZW50PEw+KFxuICByZXNvbHZlcjogUnVudGltZVJlc29sdmVyPEw+LFxuICBuYW1lOiBzdHJpbmcsXG4gIG1ldGE/OiBMXG4pOiBPcHRpb248Q29tcG9uZW50RGVmaW5pdGlvbj4ge1xuICBsZXQgZGVmaW5pdGlvbiA9IHJlc29sdmVyLmxvb2t1cENvbXBvbmVudChuYW1lLCBtZXRhKTtcbiAgYXNzZXJ0KGRlZmluaXRpb24sIGBDb3VsZCBub3QgZmluZCBhIGNvbXBvbmVudCBuYW1lZCBcIiR7bmFtZX1cImApO1xuICByZXR1cm4gZGVmaW5pdGlvbjtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0=

@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // Paths are relative to root project, *not* to this file.
+    "paths": {
+      "ember-modifier": ["."],
+      "ember-modifier/*": ["./*"],
+    }
+  },
+  "include": [
+    "./modifier-test.ts"
+  ]
+}

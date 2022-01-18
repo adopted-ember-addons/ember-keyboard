@@ -1,0 +1,67 @@
+{
+  "name": "@handlebars/parser",
+  "version": "1.1.0",
+  "description": "The parser for the Handlebars language",
+  "homepage": "https://github.com/handlebars-lang/handlebars-parser#readme",
+  "bugs": {
+    "url": "https://github.com/handlebars-lang/handlebars-parser/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/handlebars-lang/handlebars-parser.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build",
+    "build": "npm-run-all build:parser build:esm build:cjs",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "build:esm": "tsc --module es2015 --target es5 --outDir dist/esm",
+    "build:jison": "jison -m js src/handlebars.yy src/handlebars.l -o lib/parser.js",
+    "build:parser": "npm-run-all build:jison build:parser-suffix",
+    "build:parser-suffix": "combine-files lib/parser.js,src/parser-suffix.js lib/parser.js",
+    "test": "npm run build && mocha spec --require esm"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "combine-files": "^1.1.8",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-compat": "^3.8.0",
+    "esm": "^3.2.25",
+    "jison": "^0.4.18",
+    "mocha": "^8.1.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1",
+    "release-it": "^14.0.2",
+    "release-it-lerna-changelog": "^2.4.0",
+    "typescript": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

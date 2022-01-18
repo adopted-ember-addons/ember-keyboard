@@ -1,0 +1,17 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.clearElement = clearElement;
+
+function clearElement(parent) {
+  let current = parent.firstChild;
+
+  while (current) {
+    let next = current.nextSibling;
+    parent.removeChild(current);
+    current = next;
+  }
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3V0aWwvbGliL2RvbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBR00sU0FBQSxZQUFBLENBQUEsTUFBQSxFQUE0QztBQUNoRCxNQUFJLE9BQU8sR0FBdUIsTUFBTSxDQUF4QyxVQUFBOztBQUVBLFNBQUEsT0FBQSxFQUFnQjtBQUNkLFFBQUksSUFBSSxHQUFHLE9BQU8sQ0FBbEIsV0FBQTtBQUNBLElBQUEsTUFBTSxDQUFOLFdBQUEsQ0FBQSxPQUFBO0FBQ0EsSUFBQSxPQUFPLEdBQVAsSUFBQTtBQUNEO0FBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBPcHRpb24gfSBmcm9tICdAZ2xpbW1lci9pbnRlcmZhY2VzJztcbmltcG9ydCB7IFNpbXBsZUVsZW1lbnQsIFNpbXBsZU5vZGUgfSBmcm9tICdAc2ltcGxlLWRvbS9pbnRlcmZhY2UnO1xuXG5leHBvcnQgZnVuY3Rpb24gY2xlYXJFbGVtZW50KHBhcmVudDogU2ltcGxlRWxlbWVudCkge1xuICBsZXQgY3VycmVudDogT3B0aW9uPFNpbXBsZU5vZGU+ID0gcGFyZW50LmZpcnN0Q2hpbGQ7XG5cbiAgd2hpbGUgKGN1cnJlbnQpIHtcbiAgICBsZXQgbmV4dCA9IGN1cnJlbnQubmV4dFNpYmxpbmc7XG4gICAgcGFyZW50LnJlbW92ZUNoaWxkKGN1cnJlbnQpO1xuICAgIGN1cnJlbnQgPSBuZXh0O1xuICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9

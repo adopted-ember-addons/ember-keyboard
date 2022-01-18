@@ -1,0 +1,23 @@
+import { Checker } from '@glimmer/debug';
+import { CapturedArguments, CompilableBlock, ComponentDefinition, ComponentManager, ElementOperations, Invocation, JitOrAotBlock, Scope, Helper, Option } from '@glimmer/interfaces';
+import { Tag, VersionedPathReference, Reference } from '@glimmer/reference';
+import CurryComponentReference from '../../references/curry-component';
+import { VMArgumentsImpl } from '../../vm/arguments';
+import { ComponentInstance, ComponentElementOperations } from './component';
+export declare const CheckTag: Checker<Tag>;
+export declare const CheckOperations: Checker<Option<ComponentElementOperations>>;
+export declare const CheckPathReference: Checker<VersionedPathReference>;
+export declare const CheckReference: Checker<Reference>;
+export declare const CheckArguments: Checker<VMArgumentsImpl>;
+export declare const CheckHelper: Checker<Helper>;
+export declare const CheckCapturedArguments: Checker<CapturedArguments>;
+export declare const CheckCurryComponent: Checker<CurryComponentReference>;
+export declare const CheckScope: Checker<Scope<JitOrAotBlock>>;
+export declare const CheckComponentManager: Checker<ComponentManager<unknown>>;
+export declare const CheckComponentInstance: Checker<ComponentInstance>;
+export declare const CheckComponentDefinition: Checker<ComponentDefinition>;
+export declare const CheckInvocation: Checker<Invocation>;
+export declare const CheckElementOperations: Checker<ElementOperations>;
+export declare const CheckFinishedComponentInstance: Checker<ComponentInstance>;
+export declare const CheckCompilableBlock: Checker<CompilableBlock>;
+//# sourceMappingURL=-debug-strip.d.ts.map

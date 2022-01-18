@@ -1,0 +1,39 @@
+{
+  "name": "linkify-it",
+  "version": "2.0.3",
+  "description": "Links recognition library with FULL unicode support",
+  "keywords": [
+    "linkify",
+    "linkifier",
+    "autolink",
+    "autolinker"
+  ],
+  "repository": "markdown-it/linkify-it",
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "uc.micro": "^1.0.1"
+  },
+  "devDependencies": {
+    "ansi": "^0.3.0",
+    "autoprefixer-stylus": "^0.11.0",
+    "benchmark": "^2.1.0",
+    "browserify": "*",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.2",
+    "jade": "^1.11.0",
+    "eslint": "^3.8.0",
+    "istanbul": "*",
+    "mdurl": "^1.0.0",
+    "mocha": "^3.1.2",
+    "ndoc": "^5.0.1",
+    "stylus": "~0.54.5",
+    "tlds": "^1.166.0"
+  }
+}

@@ -1,0 +1,6 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare .js and .hbs files to use lf only
+*.js text eol=lf
+*.hbs text eol=lf

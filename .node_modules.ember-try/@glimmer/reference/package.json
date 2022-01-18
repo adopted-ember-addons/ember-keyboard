@@ -1,0 +1,16 @@
+{
+  "name": "@glimmer/reference",
+  "version": "0.42.2",
+  "description": "Objects used to track values and their dirtiness in Glimmer",
+  "license": "MIT",
+  "dependencies": {
+    "@glimmer/util": "^0.42.2"
+  },
+  "devDependencies": {
+    "typescript": "^2.8.3"
+  },
+  "main": "dist/commonjs/es5/index.js",
+  "jsnext:main": "dist/modules/es5/index.js",
+  "module": "dist/modules/es2017/index.js",
+  "typings": "dist/types/index.d.ts"
+}

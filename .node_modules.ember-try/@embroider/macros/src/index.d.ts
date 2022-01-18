@@ -1,0 +1,11 @@
+export declare function dependencySatisfies(packageName: string, semverRange: string): boolean;
+export declare function macroCondition(predicate: boolean): boolean;
+export declare function each<T>(array: T[]): T[];
+export declare function importSync(specifier: string): unknown;
+export declare function getConfig<T>(packageName: string): T;
+export declare function getOwnConfig<T>(): T;
+export declare function getGlobalConfig<T>(): T;
+export declare function isDevelopingApp(): boolean;
+export declare function isTesting(): boolean;
+export declare function failBuild(message: string): void;
+export declare function moduleExists(packageName: string): boolean;

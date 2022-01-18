@@ -1,0 +1,48 @@
+{
+  "name": "babel-plugin-htmlbars-inline-precompile",
+  "version": "4.2.0",
+  "description": "Babel plugin to replace tagged template strings with precompiled HTMLBars templates",
+  "repository": "https://github.com/ember-cli/babel-plugin-htmlbars-inline-precompile",
+  "license": "MIT",
+  "author": "Clemens Müller <cmueller.418@gmail.com>",
+  "scripts": {
+    "lint": "eslint --cache .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-modules-amd": "^7.10.5",
+    "@babel/plugin-transform-template-literals": "^7.10.5",
+    "common-tags": "^1.8.0",
+    "ember-source": "^3.20.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.2.2",
+    "prettier": "^2.0.5",
+    "release-it": "^13.6.6",
+    "release-it-lerna-changelog": "^2.3.0"
+  },
+  "engines": {
+    "node": "10.* || >= 12.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es5",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["types/*"]
+    }
+  }
+}

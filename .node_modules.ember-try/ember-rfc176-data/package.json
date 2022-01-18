@@ -1,0 +1,64 @@
+{
+  "name": "ember-rfc176-data",
+  "version": "0.3.16",
+  "description": "JSON data for Ember.js RFC #176",
+  "homepage": "https://github.com/ember-cli/ember-rfc176-data#readme",
+  "bugs": {
+    "url": "https://github.com/ember-cli/ember-rfc176-data/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ember-cli/ember-rfc176-data.git"
+  },
+  "license": "MIT",
+  "author": "Tom Dale <tom@tomdale.net>",
+  "main": "mappings.json",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "got": "^11.5.2",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.1",
+    "release-it": "^13.7.0",
+    "release-it-lerna-changelog": "^2.3.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-cli/ember-rfc176-data",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "node scripts/update-readme.js"
+    },
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

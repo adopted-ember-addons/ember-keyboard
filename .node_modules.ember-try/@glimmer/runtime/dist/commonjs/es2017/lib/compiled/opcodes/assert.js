@@ -1,0 +1,10 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.stackAssert = stackAssert;
+function stackAssert(name, top) {
+    return `Expected top of stack to be ${name}, was ${String(top)}`;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3J1bnRpbWUvbGliL2NvbXBpbGVkL29wY29kZXMvYXNzZXJ0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O1FBQU0sVyxHQUFBLFc7QUFBQSxTQUFBLFdBQUEsQ0FBQSxJQUFBLEVBQUEsR0FBQSxFQUFnRDtBQUNwRCxXQUFPLCtCQUErQixJQUFJLFNBQVMsT0FBQSxHQUFBLENBQW5ELEVBQUE7QUFDRCIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBmdW5jdGlvbiBzdGFja0Fzc2VydChuYW1lOiBzdHJpbmcsIHRvcDogdW5rbm93bikge1xuICByZXR1cm4gYEV4cGVjdGVkIHRvcCBvZiBzdGFjayB0byBiZSAke25hbWV9LCB3YXMgJHtTdHJpbmcodG9wKX1gO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ==

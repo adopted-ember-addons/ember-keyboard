@@ -1,0 +1,17 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initializeGuid = initializeGuid;
+exports.ensureGuid = ensureGuid;
+var GUID = 0;
+
+function initializeGuid(object) {
+  return object._guid = ++GUID;
+}
+
+function ensureGuid(object) {
+  return object._guid || initializeGuid(object);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3V0aWwvbGliL2d1aWQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBLElBQUksSUFBSSxHQUFSLENBQUE7O0FBTU0sU0FBQSxjQUFBLENBQUEsTUFBQSxFQUF3QztBQUM1QyxTQUFRLE1BQU0sQ0FBTixLQUFBLEdBQWUsRUFBdkIsSUFBQTtBQUNEOztBQUVLLFNBQUEsVUFBQSxDQUFBLE1BQUEsRUFBb0M7QUFDeEMsU0FBTyxNQUFNLENBQU4sS0FBQSxJQUFnQixjQUFjLENBQXJDLE1BQXFDLENBQXJDO0FBQ0QiLCJzb3VyY2VzQ29udGVudCI6WyJsZXQgR1VJRCA9IDA7XG5cbmV4cG9ydCBpbnRlcmZhY2UgSGFzR3VpZCB7XG4gIF9ndWlkOiBudW1iZXI7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBpbml0aWFsaXplR3VpZChvYmplY3Q6IEhhc0d1aWQpOiBudW1iZXIge1xuICByZXR1cm4gKG9iamVjdC5fZ3VpZCA9ICsrR1VJRCk7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBlbnN1cmVHdWlkKG9iamVjdDogSGFzR3VpZCk6IG51bWJlciB7XG4gIHJldHVybiBvYmplY3QuX2d1aWQgfHwgaW5pdGlhbGl6ZUd1aWQob2JqZWN0KTtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0=

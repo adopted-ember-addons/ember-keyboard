@@ -1,0 +1,56 @@
+{
+  "name": "broccoli-concat",
+  "version": "4.2.4",
+  "description": "Fast, good-enough concatenation with source maps.",
+  "main": "index.js",
+  "files": [
+    "concat.js",
+    "concat-without-source-maps.js",
+    "index.js",
+    "lib/"
+  ],
+  "scripts": {
+    "test": "mocha --recursive",
+    "test:lint": "mocha lint.js",
+    "test:debug": "mocha --no-timeouts --inspect",
+    "bench": "node bench/info && bench bench/suites -i 10"
+  },
+  "repository": "https://github.com/ember-cli/broccoli-concat",
+  "author": "Edward Faulkner <ef@alum.mit.edu>",
+  "license": "MIT",
+  "keywords": [
+    "broccoli-plugin"
+  ],
+  "devDependencies": {
+    "bench-cli": "^0.1.0",
+    "broccoli": "^3.2.0",
+    "broccoli-merge-trees": "^3.0.2",
+    "broccoli-source": "^3.0.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-files": "^1.2.0",
+    "fixturify": "^1.2.0",
+    "fs-merger": "^3.0.2",
+    "mocha": "^6.2.1",
+    "mocha-eslint": "^4.1.0",
+    "quick-temp": "^0.1.8",
+    "sourcemap-validator": "^2.1.0",
+    "walk-sync": "^2.0.2"
+  },
+  "dependencies": {
+    "broccoli-debug": "^0.6.5",
+    "broccoli-kitchen-sink-helpers": "^0.3.1",
+    "broccoli-plugin": "^4.0.2",
+    "ensure-posix-path": "^1.0.2",
+    "fast-sourcemap-concat": "^2.1.0",
+    "find-index": "^1.1.0",
+    "fs-extra": "^8.1.0",
+    "fs-tree-diff": "^2.0.1",
+    "lodash.merge": "^4.6.2",
+    "lodash.omit": "^4.1.0",
+    "lodash.uniq": "^4.2.0"
+  },
+  "engines": {
+    "node": "10.* || >= 12.*"
+  }
+}

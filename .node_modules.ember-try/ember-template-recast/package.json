@@ -1,0 +1,99 @@
+{
+  "name": "ember-template-recast",
+  "version": "5.0.1",
+  "description": "Non-destructive template transformer.",
+  "keywords": [
+    "codemod",
+    "ember",
+    "glimmer",
+    "handlebars",
+    "recast",
+    "templates"
+  ],
+  "homepage": "https://github.com/ember-template-lint/ember-template-recast",
+  "bugs": "https://github.com/ember-template-lint/ember-template-recast/issues",
+  "repository": "github:ember-template-lint/ember-template-recast",
+  "license": "MIT",
+  "author": "Robert Jackson <me@rwjblue.com>",
+  "main": "lib/index.js",
+  "bin": "lib/bin.js",
+  "files": [
+    "lib/",
+    "!lib/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "npm-run-all lint:*",
+    "lint:files": "eslint .",
+    "lint:tsc": "tsc --noEmit",
+    "prepare": "tsc",
+    "release": "release-it",
+    "test": "npm-run-all lint test:*",
+    "test:jest": "jest"
+  },
+  "dependencies": {
+    "@glimmer/reference": "^0.65.0",
+    "@glimmer/syntax": "^0.65.0",
+    "@glimmer/validator": "^0.65.0",
+    "async-promise-queue": "^1.0.5",
+    "colors": "^1.4.0",
+    "commander": "^6.2.0",
+    "globby": "^11.0.1",
+    "ora": "^5.1.0",
+    "slash": "^3.0.0",
+    "tmp": "^0.2.1",
+    "workerpool": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/common-tags": "^1.8.0",
+    "@types/jest": "^26.0.15",
+    "@types/workerpool": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "broccoli-test-helper": "^2.0.0",
+    "common-tags": "^1.8.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "execa": "^4.0.3",
+    "jest": "^26.6.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2",
+    "release-it": "^14.2.1",
+    "release-it-lerna-changelog": "^3.1.0",
+    "ts-jest": "^26.4.4",
+    "typescript": "~4.0.5"
+  },
+  "engines": {
+    "node": "10.* || 12.* || >= 14.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-template-lint/ember-template-recast",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

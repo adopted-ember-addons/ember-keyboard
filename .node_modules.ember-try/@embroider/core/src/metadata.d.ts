@@ -1,0 +1,46 @@
+declare type Filename = string;
+declare type AppRelativeURL = string;
+export interface AppMeta {
+    type: 'app';
+    'auto-upgraded'?: true;
+    assets: Filename[];
+    babel: {
+        filename: string;
+        isParallelSafe: boolean;
+        majorVersion: 6 | 7;
+        fileFilter: string;
+    };
+    'resolvable-extensions': string[];
+    'root-url': string;
+    'template-compiler': {
+        filename: string;
+        isParallelSafe: boolean;
+    };
+    version: 2;
+}
+export interface AddonMeta {
+    type: 'addon';
+    'order-index'?: number;
+    'lazy-engine'?: boolean;
+    'auto-upgraded'?: true;
+    'app-js'?: Filename;
+    'fastboot-js'?: Filename;
+    externals?: string[];
+    'implicit-modules'?: string[];
+    'implicit-scripts'?: Filename[];
+    'implicit-styles'?: Filename[];
+    'implicit-test-modules'?: string[];
+    'implicit-test-scripts'?: Filename[];
+    'implicit-test-styles'?: Filename[];
+    'public-assets'?: {
+        [filename: string]: AppRelativeURL;
+    };
+    'renamed-packages'?: {
+        [fromName: string]: string;
+    };
+    'renamed-modules'?: {
+        [fromName: string]: string;
+    };
+    version: 2;
+}
+export {};

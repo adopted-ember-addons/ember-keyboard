@@ -1,0 +1,16 @@
+import Printer from './printer';
+export default function build(ast, options) {
+  if (options === void 0) {
+    options = {
+      entityEncoding: 'transformed'
+    };
+  }
+
+  if (!ast) {
+    return '';
+  }
+
+  var printer = new Printer(options);
+  return printer.print(ast);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3N5bnRheC9saWIvZ2VuZXJhdGlvbi9wcmludC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSxPQUFBLE9BQUEsTUFBQSxXQUFBO0FBRUEsZUFBYyxTQUFBLEtBQUEsQ0FBQSxHQUFBLEVBRVosT0FGWSxFQUUrQztBQUFBLE1BQTNELE9BQTJEO0FBQTNELElBQUEsT0FBMkQsR0FBakM7QUFBRSxNQUFBLGNBQWMsRUFBRTtBQUFsQixLQUFpQztBQUFBOztBQUUzRCxNQUFJLENBQUosR0FBQSxFQUFVO0FBQ1IsV0FBQSxFQUFBO0FBQ0Q7O0FBRUQsTUFBSSxPQUFPLEdBQUcsSUFBQSxPQUFBLENBQWQsT0FBYyxDQUFkO0FBQ0EsU0FBTyxPQUFPLENBQVAsS0FBQSxDQUFQLEdBQU8sQ0FBUDtBQUNEIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTm9kZSB9IGZyb20gJy4uL3R5cGVzL25vZGVzJztcbmltcG9ydCBQcmludGVyLCB7IFByaW50ZXJPcHRpb25zIH0gZnJvbSAnLi9wcmludGVyJztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gYnVpbGQoXG4gIGFzdDogTm9kZSxcbiAgb3B0aW9uczogUHJpbnRlck9wdGlvbnMgPSB7IGVudGl0eUVuY29kaW5nOiAndHJhbnNmb3JtZWQnIH1cbik6IHN0cmluZyB7XG4gIGlmICghYXN0KSB7XG4gICAgcmV0dXJuICcnO1xuICB9XG5cbiAgbGV0IHByaW50ZXIgPSBuZXcgUHJpbnRlcihvcHRpb25zKTtcbiAgcmV0dXJuIHByaW50ZXIucHJpbnQoYXN0KTtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0=
