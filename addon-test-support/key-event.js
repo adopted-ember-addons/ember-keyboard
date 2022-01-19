@@ -4,7 +4,12 @@ import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
 import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
 import { triggerEvent } from '@ember/test-helpers';
 
-export function keyEvent(keyCombo, type, element = document) {
+export function keyEvent(
+  keyCombo,
+  type,
+  element = document,
+  eventOptions = {}
+) {
   let keyComboParts = (keyCombo || '').split('+');
 
   let eventProps = keyComboParts.reduce((eventProps, keyComboPart) => {
@@ -30,5 +35,5 @@ export function keyEvent(keyCombo, type, element = document) {
     return eventProps;
   }, {});
 
-  return triggerEvent(element, type, eventProps);
+  return triggerEvent(element, type, { ...eventOptions, ...eventProps });
 }

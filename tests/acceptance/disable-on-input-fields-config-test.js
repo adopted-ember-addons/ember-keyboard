@@ -37,6 +37,21 @@ module('Acceptance | disableOnInputFields config', function (hooks) {
       assert.deepEqual(getValues(), [0, 0, 0], 'responders do not respond');
     });
 
+    test('test event does not propagate on input field in open shadow DOM', async function (assert) {
+      assert.expect(1);
+
+      await visit('/test-scenario');
+
+      const input = this.element
+        .querySelector('[data-test-shadow-dom]')
+        .shadowRoot.querySelector('input');
+
+      // trigger a "composed" event to make sure the event triggered within the shadow dom is able to traverse the shadow root boundary.
+      // this is only needed for the synthetic event we create here in tests, "real" events do this by default.
+      await keyDownWithElement('ArrowRight', input, { composed: true });
+      assert.deepEqual(getValues(), [0, 0, 0], 'responders do not respond');
+    });
+
     test('test standard functionality', async function (assert) {
       assert.expect(8);
 

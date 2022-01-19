@@ -70,10 +70,10 @@ export default class KeyboardService extends Service {
   @action
   _respond(event) {
     if (this._disableOnInput && event.target) {
-      const tag = event.target.tagName;
+      const target = event.composedPath()[0] ?? event.target;
+      const tag = target.tagName;
       const isContentEditable =
-        event.target.getAttribute &&
-        event.target.getAttribute('contenteditable') != null;
+        target.getAttribute && target.getAttribute('contenteditable') != null;
       if (isContentEditable || tag === 'TEXTAREA' || tag === 'INPUT') {
         return;
       }
