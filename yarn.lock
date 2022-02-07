@@ -4613,7 +4613,7 @@ detect-indent@^6.0.0:
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.1.0.tgz#592485ebbbf6b3b1ab2be175c8393d04ca0d57e6"
   integrity sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==
 
-detect-newline@3.1.0:
+detect-newline@3.1.0, detect-newline@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
@@ -10589,7 +10589,19 @@ release-it-lerna-changelog@^4.0.1:
     validate-peer-dependencies "^2.0.0"
     which "^2.0.2"
 
-release-it@^14.7.0:
+release-it-yarn-workspaces@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/release-it-yarn-workspaces/-/release-it-yarn-workspaces-2.0.1.tgz#5edef8d499099a7cb3a83d48f090e32ba306e925"
+  integrity sha512-dLX/mnvKpwDNvfbRm+ji3NWxVIEFlSac+29y2KkhPORKYgxFPKawhRm9/ESZOdnLIy7bIwtB17MILGhwohzVgw==
+  dependencies:
+    detect-indent "^6.0.0"
+    detect-newline "^3.1.0"
+    semver "^7.1.3"
+    url-join "^4.0.1"
+    validate-peer-dependencies "^1.0.0"
+    walk-sync "^2.0.2"
+
+release-it@^14.12.4:
   version "14.12.4"
   resolved "https://registry.yarnpkg.com/release-it/-/release-it-14.12.4.tgz#0fd13de85e382323c634a0697a601437e042123a"
   integrity sha512-lqf9PMsj7ycCqFHGag8Uv7cE1hNsKa+yKUMe+Fkh9fdOfxu2F01On+YUefRCP0DuQthmr/WyLCYdrjThMEkWFQ==
@@ -11029,7 +11041,7 @@ semver@7.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.0.0.tgz#5f3ca35761e47e05b206c6daff2cf814f0316b8e"
   integrity sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
 
-semver@7.3.5, semver@^7.2.1, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5:
+semver@7.3.5, semver@^7.1.3, semver@^7.2.1, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5:
   version "7.3.5"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.5.tgz#0b621c879348d8998e4b0e4be94b3f12e6018ef7"
   integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
@@ -12362,7 +12374,7 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
-url-join@4.0.1:
+url-join@4.0.1, url-join@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/url-join/-/url-join-4.0.1.tgz#b642e21a2646808ffa178c4c5fda39844e12cde7"
   integrity sha512-jk1+QP6ZJqyOiuEI9AEWQfju/nB2Pw466kbA0LEZljHwKeMgd9WrAEgEGxjPDD2+TNbbb37rTyhEfrCXfuKXnA==
@@ -12451,7 +12463,7 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-validate-peer-dependencies@^1.2.0:
+validate-peer-dependencies@^1.0.0, validate-peer-dependencies@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/validate-peer-dependencies/-/validate-peer-dependencies-1.2.0.tgz#22aab93c514f4fda457d36c80685e8b1160d2036"
   integrity sha512-nd2HUpKc6RWblPZQ2GDuI65sxJ2n/UqZwSBVtj64xlWjMx0m7ZB2m9b2JS3v1f+n9VWH/dd1CMhkHfP6pIdckA==
@@ -12643,7 +12655,7 @@ webpack@^4.43.0:
     watchpack "^1.7.4"
     webpack-sources "^1.4.1"
 
-webpack@^5.64.0:
+webpack@^5.68.0:
   version "5.68.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.68.0.tgz#a653a58ed44280062e47257f260117e4be90d560"
   integrity sha512-zUcqaUO0772UuuW2bzaES2Zjlm/y3kRBQDVFVCge+s2Y8mwuUTdperGaAv65/NtRL/1zanpSJOq/MD8u61vo6g==
