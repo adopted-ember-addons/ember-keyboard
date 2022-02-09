@@ -7,6 +7,10 @@ on:
       - master
   pull_request: {}
 
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: "Tests"
@@ -21,10 +25,15 @@ jobs:
           cache: yarn
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
-      - name: Lint
+      - name: Lint Addon
         run: yarn lint
+        working-directory: addon
+      - name: Lint Test App
+        run: yarn lint
+        working-directory: test-app
       - name: Run Tests
         run: yarn test:ember
+        working-directory: test-app
 
   floating:
     name: "Floating Dependencies"
@@ -40,6 +49,7 @@ jobs:
         run: yarn install --no-lockfile
       - name: Run Tests
         run: yarn test:ember
+        working-directory: test-app
 
   try-scenarios:
     name: ${{ matrix.try-scenario }}
@@ -74,4 +84,5 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
       - name: Run Tests
-        run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
+        run: ../node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
+        working-directory: test-app

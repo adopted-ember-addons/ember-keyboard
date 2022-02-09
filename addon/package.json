@@ -1,0 +1,64 @@
+{
+  "name": "ember-keyboard",
+  "version": "7.0.1",
+  "description": "An Ember.js addon for the painless support of keyboard events",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "https://github.com/adopted-ember-addons/ember-keyboard",
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
+    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^7.26.6",
+    "ember-modifier": "^2.1.2 || ^3.0.0",
+    "ember-modifier-manager-polyfill": "^1.2.0"
+  },
+  "devDependencies": {
+    "ember-template-lint": "^4.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ember": "^10.5.7",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-qunit": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1"
+  },
+  "engines": {
+    "node": "12.* || 14.* || >= 16"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "demoURL": "https://adopted-ember-addons.github.io/ember-keyboard/"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  },
+  "volta": {
+    "extends": "../package.json"
+  }
+}
