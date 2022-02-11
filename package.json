@@ -6,10 +6,41 @@
     "test-app"
   ],
   "scripts": {
-    "prepare": "cd addon && yarn build"
+    "prepare": "cd addon && yarn build",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "release-it": "^14.12.4",
+    "release-it-lerna-changelog": "^4.0.1",
+    "release-it-yarn-workspaces": "^2.0.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      },
+      "release-it-yarn-workspaces": {
+        "workspaces": [
+          "addon"
+        ],
+        "additionalManifests": {
+          "dependencyUpdates": [
+            "test-app/package.json"
+          ]
+        }
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   },
   "volta": {
     "node": "12.22.1",

@@ -1,4 +1,4 @@
-<img alt="ember-keyboard logo" src="./tests/dummy/public/ember-keyboard.svg" height=72 /> &nbsp; 
+<img alt="ember-keyboard logo" src="./test-app/public/ember-keyboard.svg" height=72 /> &nbsp; 
 [![npm version](https://badge.fury.io/js/ember-keyboard.svg)](https://badge.fury.io/js/ember-keyboard)
 [![Build Status](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/ci.yml/badge.svg)](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/ci.yml)
 
