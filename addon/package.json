@@ -46,11 +46,11 @@
     "ember-template-lint": "^4.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-ember": "^10.5.7",
+    "eslint-plugin-ember": "^10.5.8",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-qunit": "^7.0.0",
-    "prettier": "^2.4.1",
+    "eslint-plugin-qunit": "^7.2.0",
+    "prettier": "^2.5.1",
     "rollup": "^2.67.2"
   },
   "peerDependencies": {
@@ -72,6 +72,9 @@
     "main": "addon-main.js",
     "type": "addon",
     "version": 2,
+    "versionCompatibility": {
+      "ember": "3.8 || 3.12 || 3.16 || 3.20 || 3.24 || 3.28 || >=4.0"
+    },
     "app-js": {
       "./helpers/if-key.js": "./dist/_app_/helpers/if-key.js",
       "./helpers/on-key.js": "./dist/_app_/helpers/on-key.js",
