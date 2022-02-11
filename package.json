@@ -5,6 +5,10 @@
     "docs",
     "test-app"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adopted-ember-addons/ember-keyboard.git"
+  },
   "scripts": {
     "prepare": "cd addon && yarn build",
     "release": "release-it"

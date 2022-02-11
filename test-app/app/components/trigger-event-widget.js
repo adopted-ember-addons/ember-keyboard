@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { set } from '@ember/object';
-import { keyResponder, onKey } from 'ember-keyboard';
+import { keyResponder, onKey } from 'ember-keyboard/index';
 
 // Use set(this) instead of tracked properties for Ember 3.8 compatibility.
 @keyResponder({ activated: true })

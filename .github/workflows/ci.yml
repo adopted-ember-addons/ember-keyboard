@@ -36,6 +36,26 @@ jobs:
         run: yarn test:ember
         working-directory: test-app
 
+  test-docs:
+    name: "Test Docs"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
+          cache: yarn
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+        working-directory: docs
+      - name: Run Tests
+        run: yarn test:ember
+        working-directory: docs
+
   floating:
     name: "Floating Dependencies"
     runs-on: ubuntu-latest
