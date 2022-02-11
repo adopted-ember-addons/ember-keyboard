@@ -2,9 +2,9 @@ import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
-import { keyDown, keyPress, keyUp } from 'ember-keyboard/listeners/key-events';
-import { handleKeyEventWithPropagation } from 'ember-keyboard/utils/handle-key-event';
-import { reverseCompareProp } from 'ember-keyboard/utils/sort';
+import { keyDown, keyPress, keyUp } from '../listeners/key-events';
+import { handleKeyEventWithPropagation } from '../utils/handle-key-event';
+import { reverseCompareProp } from '../utils/sort';
 
 export default class KeyboardService extends Service {
   registeredResponders = new Set();

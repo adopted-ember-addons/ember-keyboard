@@ -1,5 +1,5 @@
-import listenerName from 'ember-keyboard/utils/listener-name';
-import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
+import listenerName from '../utils/listener-name';
+import validModifiers from '../fixtures/modifiers-array';
 
 function validateKeys(keysString) {
   const keys = keysString !== undefined ? keysString.split('+') : [];

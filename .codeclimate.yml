@@ -3,7 +3,4 @@ engines:
     enabled: true
 ratings:
   paths:
-  - "**.js"
-exclude_paths:
-- config/**/*
-- vendor/**/*
+  - "addon/src/**/*.js"

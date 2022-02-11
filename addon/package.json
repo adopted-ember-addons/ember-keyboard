@@ -12,18 +12,37 @@
     "doc": "doc",
     "test": "tests"
   },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*",
+    "./test-support/key-event": "./dist/test-support/key-event.js",
+    "./test-support/test-helpers": "./dist/test-support/test-helpers.js",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "files": [
+    "addon-main.js",
+    "dist"
+  ],
   "scripts": {
-    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
-    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "build": "rollup --config",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix",
     "lint:js": "eslint . --cache",
-    "lint:js:fix": "eslint . --fix"
+    "lint:js:fix": "eslint . --fix",
+    "prepublishOnly": "rollup --config",
+    "start": "rollup --config --watch"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.26.6",
-    "ember-modifier": "^2.1.2 || ^3.0.0",
+    "@embroider/addon-shim": "^1.2.0",
+    "ember-modifier": "^2.1.2 || ^3.1.0",
     "ember-modifier-manager-polyfill": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.2",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.2",
+    "@embroider/addon-dev": "^1.2.0",
+    "@rollup/plugin-babel": "^5.3.0",
     "ember-template-lint": "^4.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -31,8 +50,16 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-qunit": "^7.0.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "rollup": "^2.67.2"
+  },
+  "peerDependencies": {
+    "@ember/test-helpers": "^2.6.0"
+  },
+  "peerDependenciesMeta": {
+    "@ember/test-helpers": {
+      "optional": true
+    }
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
@@ -41,7 +68,16 @@
     "edition": "octane"
   },
   "ember-addon": {
-    "demoURL": "https://adopted-ember-addons.github.io/ember-keyboard/"
+    "demoURL": "https://adopted-ember-addons.github.io/ember-keyboard/",
+    "main": "addon-main.js",
+    "type": "addon",
+    "version": 2,
+    "app-js": {
+      "./helpers/if-key.js": "./dist/_app_/helpers/if-key.js",
+      "./helpers/on-key.js": "./dist/_app_/helpers/on-key.js",
+      "./modifiers/on-key.js": "./dist/_app_/modifiers/on-key.js",
+      "./services/keyboard.js": "./dist/_app_/services/keyboard.js"
+    }
   },
   "release-it": {
     "plugins": {

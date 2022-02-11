@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
-import isKey from 'ember-keyboard/utils/is-key';
-import listenerName from 'ember-keyboard/utils/listener-name';
 import { assert } from '@ember/debug';
+import isKey from '../utils/is-key';
+import listenerName from '../utils/listener-name';
 
 export default helper(function ifKey([keyCombo, callback] /*, named*/) {
   return function (event) {

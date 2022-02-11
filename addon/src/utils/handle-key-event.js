@@ -1,4 +1,4 @@
-import isKey from 'ember-keyboard/utils/is-key';
+import isKey from './is-key';
 
 export function handleKeyEventWithPropagation(
   event,

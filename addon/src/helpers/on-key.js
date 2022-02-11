@@ -1,7 +1,7 @@
 import Helper from '@ember/component/helper';
-import { inject as service } from '@ember/service';
-import listenerName from 'ember-keyboard/utils/listener-name';
 import { assert } from '@ember/debug';
+import { inject as service } from '@ember/service';
+import listenerName from '../utils/listener-name';
 
 export default class extends Helper {
   @service keyboard;

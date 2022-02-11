@@ -1,7 +1,7 @@
-import { getMouseCode } from 'ember-keyboard';
-import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
-import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
-import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
+import getMouseCode from '../utils/get-mouse-code';
+import validModifiers from '../fixtures/modifiers-array';
+import validMouseButtons from '../fixtures/mouse-buttons-array';
+import getCmdKey from '../utils/get-cmd-key';
 import { triggerEvent } from '@ember/test-helpers';
 
 export function keyEvent(
