@@ -1,6 +1,6 @@
-import getMouseCode from 'ember-keyboard/utils/get-mouse-code';
-import { default as keyResponder } from 'ember-keyboard/decorators/key-responder';
-import { default as onKey } from 'ember-keyboard/decorators/on-key';
+import getMouseCode from './utils/get-mouse-code';
+import { default as keyResponder } from './decorators/key-responder';
+import { default as onKey } from './decorators/on-key';
 
 function getCode() {
   throw new Error(
@@ -16,15 +16,11 @@ function getKeyCode() {
 
 export { getCode, getKeyCode, getMouseCode, keyResponder, onKey };
 
-export { keyDown, keyUp, keyPress } from 'ember-keyboard/listeners/key-events';
-export {
-  click,
-  mouseDown,
-  mouseUp,
-} from 'ember-keyboard/listeners/mouse-events';
-export { touchStart, touchEnd } from 'ember-keyboard/listeners/touch-events';
+export { keyDown, keyUp, keyPress } from './listeners/key-events';
+export { click, mouseDown, mouseUp } from './listeners/mouse-events';
+export { touchStart, touchEnd } from './listeners/touch-events';
 export {
   triggerKeyDown,
   triggerKeyPress,
   triggerKeyUp,
-} from 'ember-keyboard/utils/trigger-event';
+} from './utils/trigger-event';

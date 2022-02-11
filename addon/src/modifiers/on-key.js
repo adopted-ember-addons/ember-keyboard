@@ -1,8 +1,8 @@
 import Modifier from 'ember-modifier';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import listenerName from 'ember-keyboard/utils/listener-name';
-import isKey from 'ember-keyboard/utils/is-key';
+import listenerName from '../utils/listener-name';
+import isKey from '../utils/is-key';
 
 const ONLY_WHEN_FOCUSED_TAG_NAMES = ['input', 'select', 'textarea'];
 

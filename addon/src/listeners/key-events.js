@@ -1,4 +1,4 @@
-import listenerName from 'ember-keyboard/utils/listener-name';
+import listenerName from '../utils/listener-name';
 
 export function keyDown(keyCombo) {
   return listenerName('keydown', keyCombo);

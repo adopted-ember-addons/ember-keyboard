@@ -1,4 +1,4 @@
-import getCmdKey from 'ember-keyboard/utils/get-cmd-key';
+import getCmdKey from './get-cmd-key';
 
 function sortedKeys(keyArray) {
   return keyArray.sort().join('+');

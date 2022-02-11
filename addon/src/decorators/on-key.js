@@ -1,4 +1,4 @@
-import listenerName from 'ember-keyboard/utils/listener-name';
+import listenerName from '../utils/listener-name';
 const DEFAULT_EVENT_NAME = 'keydown';
 
 export default function onKey(keyCombo, opts = {}) {

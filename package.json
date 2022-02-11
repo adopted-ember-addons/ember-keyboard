@@ -5,6 +5,9 @@
     "docs",
     "test-app"
   ],
+  "scripts": {
+    "prepare": "cd addon && yarn build"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

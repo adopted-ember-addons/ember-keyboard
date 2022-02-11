@@ -4,9 +4,9 @@ import {
   SHIFT_KEY_MAP,
   MAC_ALT_KEY_MAP,
   MAC_SHIFT_ALT_KEY_MAP,
-} from 'ember-keyboard/fixtures/key-maps';
-import ALL_MODIFIERS from 'ember-keyboard/fixtures/modifiers-array';
-import getMouseName from 'ember-keyboard/utils/get-mouse-name';
+} from '../fixtures/key-maps';
+import ALL_MODIFIERS from '../fixtures/modifiers-array';
+import getMouseName from './get-mouse-name';
 
 const ALL_SYMBOL = '_all';
 

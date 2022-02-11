@@ -1,6 +1,6 @@
-import listenerName from 'ember-keyboard/utils/listener-name';
-import validMouseButtons from 'ember-keyboard/fixtures/mouse-buttons-array';
-import validModifiers from 'ember-keyboard/fixtures/modifiers-array';
+import listenerName from '../utils/listener-name';
+import validMouseButtons from '../fixtures/mouse-buttons-array';
+import validModifiers from '../fixtures/modifiers-array';
 
 const validKeys = validMouseButtons.concat(validModifiers);
 
