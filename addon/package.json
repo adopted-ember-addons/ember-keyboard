@@ -33,25 +33,26 @@
     "start": "rollup --config --watch"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.2.0",
+    "@embroider/addon-shim": "^1.5.0",
     "ember-modifier": "^2.1.2 || ^3.1.0",
     "ember-modifier-manager-polyfill": "^1.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.2",
+    "@babel/core": "^7.17.7",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-decorators": "^7.17.2",
-    "@embroider/addon-dev": "^1.2.0",
+    "@embroider/addon-dev": "^1.5.0",
     "@rollup/plugin-babel": "^5.3.0",
     "ember-template-lint": "^4.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-ember": "^10.5.8",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-ember": "^10.5.9",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-qunit": "^7.2.0",
-    "prettier": "^2.5.1",
-    "rollup": "^2.67.2"
+    "prettier": "^2.6.0",
+    "rollup": "^2.70.1"
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.6.0"
