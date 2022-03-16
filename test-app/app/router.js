@@ -14,11 +14,4 @@ Router.map(function () {
     this.route('on-key-helper-examples');
     this.route('on-key-modifier-examples');
   });
-
-  this.route('deprecations');
-  this.route('priority');
-  this.route('event-propagation');
-  this.route('usage');
-  this.route('testing');
-  this.route('upgrading');
 });

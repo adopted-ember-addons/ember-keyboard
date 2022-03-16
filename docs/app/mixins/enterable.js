@@ -26,8 +26,8 @@ export default Mixin.create({
     this.set('keyboardActivated', true);
 
     // Support old propagation model (< 7.x) in docs.
-    // See tests/test-app/app/services/keyboard.js which extends addon service with old code.
-    // See tests/test-app/app/templates/priority.hbs when property is set usage.
+    // See docs/app/services/keyboard.js which extends addon service with old code.
+    // See docs/app/templates/priority.hbs when property is set usage.
     if (this.oldPropagationModel) {
       this.keyboard.isPropagationEnabled = false;
     }

@@ -5,13 +5,13 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/adopted-ember-addons/ember-keyboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adopted-ember-addons/ember-keyboard.git",
+    "directory": "addon"
+  },
   "license": "MIT",
   "author": "",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*",

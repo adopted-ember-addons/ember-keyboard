@@ -5,7 +5,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { set } from '@ember/object';
-import EnterableMixin from 'test-app/mixins/enterable';
+import EnterableMixin from 'docs/mixins/enterable';
 
 export default Component.extend(EnterableMixin, {
   keyboard: service(),
