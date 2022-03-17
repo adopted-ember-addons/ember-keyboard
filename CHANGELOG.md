@@ -5,6 +5,29 @@ https://github.com/highlightjs/highlight.js/issues/2877
 
 
 
+
+## v8.0.0 (2022-03-17)
+
+#### :boom: Breaking Change
+* [#598](https://github.com/adopted-ember-addons/ember-keyboard/pull/598) convert to v2 addon ([@SergeAstapov](https://github.com/SergeAstapov))
+Your app or addon now must have ember-auto-import version 2 or higher in its dependencies in order to use this addon (or any v2 addons)
+
+#### :rocket: Enhancement
+* [#578](https://github.com/adopted-ember-addons/ember-keyboard/pull/578) Support inputs in shadow DOM in disableOnInputFields mode ([@simonihmig](https://github.com/simonihmig))
+
+#### :house: Internal
+* [#612](https://github.com/adopted-ember-addons/ember-keyboard/pull/612) Add `publishConfig.registry` to addon/package.json ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#609](https://github.com/adopted-ember-addons/ember-keyboard/pull/609) Run `npx ember-cli-update --to=v4.2.0` to align with the latest blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#604](https://github.com/adopted-ember-addons/ember-keyboard/pull/604) Extract docs into separate app ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#597](https://github.com/adopted-ember-addons/ember-keyboard/pull/597) Monorepo release it ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#591](https://github.com/adopted-ember-addons/ember-keyboard/pull/591) Convert to monorepo ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#584](https://github.com/adopted-ember-addons/ember-keyboard/pull/584) Move `ember-cli-htmlbars` to `devDependencies` ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- Simon Ihmig ([@simonihmig](https://github.com/simonihmig))
+
+
 ## v7.0.1 (2022-01-18)
 
 #### :rocket: Enhancement
