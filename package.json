@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "prepare": "cd addon && yarn build",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "cd test-app && yarn test"
   },
   "devDependencies": {
     "release-it": "^14.12.5",
