@@ -37,6 +37,10 @@
           "dependencyUpdates": [
             "docs/package.json",
             "test-app/package.json"
+          ],
+          "versionUpdates": [
+            "docs/package.json",
+            "test-app/package.json"
           ]
         }
       }
@@ -47,7 +51,8 @@
     "github": {
       "release": true,
       "tokenRef": "GITHUB_AUTH"
-    }
+    },
+    "npm": false
   },
   "volta": {
     "node": "12.22.10",
