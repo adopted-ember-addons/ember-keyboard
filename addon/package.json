@@ -65,6 +65,9 @@
   "engines": {
     "node": "12.* || 14.* || >= 16"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "ember": {
     "edition": "octane"
   },
