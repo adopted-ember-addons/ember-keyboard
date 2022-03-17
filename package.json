@@ -35,6 +35,7 @@
         ],
         "additionalManifests": {
           "dependencyUpdates": [
+            "docs/package.json",
             "test-app/package.json"
           ]
         }
