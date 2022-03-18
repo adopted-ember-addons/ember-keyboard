@@ -39,6 +39,7 @@
             "test-app/package.json"
           ],
           "versionUpdates": [
+            "package.json",
             "docs/package.json",
             "test-app/package.json"
           ]
