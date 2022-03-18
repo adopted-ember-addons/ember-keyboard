@@ -16,3 +16,9 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+/.idea/
+
+# monorepo packages
+/addon/
+/docs/
+/test-app/
