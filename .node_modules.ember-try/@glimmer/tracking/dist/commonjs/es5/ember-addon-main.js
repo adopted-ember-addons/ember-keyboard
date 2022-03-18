@@ -1,6 +1,0 @@
-'use strict';
-
-module.exports = {
-  name: '@glimmer/tracking'
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkBnbGltbWVyL3RyYWNraW5nL2VtYmVyLWFkZG9uLW1haW4uanMiXSwibmFtZXMiOlsibW9kdWxlIiwibmFtZSJdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUFBLE1BQU0sQ0FBTkEsT0FBQUEsR0FBaUI7QUFDZkMsRUFBQUEsSUFBSSxFQUFFO0FBRFMsQ0FBakJEIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG5tb2R1bGUuZXhwb3J0cyA9IHtcbiAgbmFtZTogJ0BnbGltbWVyL3RyYWNraW5nJyxcbn07XG4iXX0=

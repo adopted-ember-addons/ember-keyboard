@@ -1,3 +1,0 @@
-export { REFERENCE, Reference, createPrimitiveRef, createConstRef, createUnboundRef, createComputeRef, createDebugAliasRef, createReadOnlyRef, createInvokableRef, isInvokableRef, isConstRef, isUpdatableRef, valueForRef, updateRef, childRefFor, childRefFromParts, ReferenceEnvironment, UNDEFINED_REFERENCE, NULL_REFERENCE, TRUE_REFERENCE, FALSE_REFERENCE, } from './lib/reference';
-export { IterationItem, OpaqueIterationItem, OpaqueIterator, AbstractIterator, IteratorDelegate, createIteratorRef, createIteratorItemRef, } from './lib/iterable';
-//# sourceMappingURL=index.d.ts.map

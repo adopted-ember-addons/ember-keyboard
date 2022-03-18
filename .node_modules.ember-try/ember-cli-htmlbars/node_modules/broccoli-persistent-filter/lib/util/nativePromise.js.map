@@ -1,1 +1,0 @@
-{"version":3,"file":"nativePromise.js","sourceRoot":"","sources":["../../src/util/nativePromise.ts"],"names":[],"mappings":";;AAAe,KAAK,UAAU,aAAa,CAAI,OAAmB;IAChE,OAAO,IAAI,OAAO,CAAI,CAAC,OAAO,EAAE,MAAM,EAAE,EAAE;QACxC,OAAO,CAAC,IAAI,CAAC,OAAO,EAAE,MAAM,CAAC,CAAC;IAChC,CAAC,CAAC,CAAC;AACL,CAAC;AAJD,gCAIC"}

@@ -1,7 +1,0 @@
-ignore:
-  'npm:uglify-js:20150824':
-    - 'broccoli@0.16.8 > handlebars@3.0.3 > uglify-js@2.3.6':
-        reason: Waiting for update of ember-cli
-        expires: '2015-12-03T20:02:27.923Z'
-patch: {}
-version: v1

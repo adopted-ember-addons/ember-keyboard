@@ -1,7 +1,0 @@
-blueprint-files/
-test-fixtures/
-node_modules/
-.azure/
-.github/
-.vscode/
-testem.js
