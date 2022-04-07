@@ -1,5 +1,21 @@
 # Changelog
 
+
+## v8.1.0 (2022-04-07)
+
+#### :rocket: Enhancement
+* [#617](https://github.com/adopted-ember-addons/ember-keyboard/pull/617) Prepare for ember-modifier v4 ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :memo: Documentation
+* [#615](https://github.com/adopted-ember-addons/ember-keyboard/pull/615) move `.md` files to published package ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#616](https://github.com/adopted-ember-addons/ember-keyboard/pull/616) replace highlight.js EOL warning in changelog by title ([@jelhan](https://github.com/jelhan))
+
+#### Committers: 2
+- Jeldrik Hanschke ([@jelhan](https://github.com/jelhan))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v8.0.0 (2022-03-17)
 
 #### :boom: Breaking Change
