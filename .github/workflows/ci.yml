@@ -96,6 +96,8 @@ jobs:
           - ember-classic
           - embroider-safe
           - embroider-optimized
+          - ember-modifier-2.x
+          - ember-modifier-3.1
 
     steps:
       - uses: actions/checkout@v3
