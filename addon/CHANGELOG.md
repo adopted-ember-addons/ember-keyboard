@@ -1,6 +1,15 @@
 # Changelog
 
 
+
+## v8.1.1 (2022-04-10)
+
+#### :bug: Bug Fix
+* [#620](https://github.com/adopted-ember-addons/ember-keyboard/pull/620) Fix ember-modifier v3.2 compatibility ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v8.1.0 (2022-04-07)
 
 #### :rocket: Enhancement
