@@ -1,6 +1,7 @@
 {
   "name": "test-app",
   "version": "8.1.0",
+  "private": true,
   "description": "Test app for ember-keyboard addon",
   "keywords": [],
   "repository": {
@@ -86,5 +87,9 @@
   },
   "volta": {
     "extends": "../package.json"
-  }
+  },
+  "workspaces": [
+    "../addon",
+    "../docs"
+  ]
 }
