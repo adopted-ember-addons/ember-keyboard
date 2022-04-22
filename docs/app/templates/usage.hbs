@@ -161,7 +161,7 @@ considered to match a specified key-combo will also be exposed.
 It will be available (and used internally) as an `isKey` JS function:
 
 ```js
-import { isKey } from 'ember-keyboard';
+import isKey from 'ember-keyboard/utils/is-key';
 
 function onEvent(ev) {
   if (isKey('keydown:alt+x', ev)) {
