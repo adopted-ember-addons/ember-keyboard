@@ -15,10 +15,6 @@
     "doc": "doc",
     "test": "tests"
   },
-  "workspaces": [
-    "../addon",
-    "../docs"
-  ],
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
