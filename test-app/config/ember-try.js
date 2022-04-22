@@ -133,6 +133,14 @@ module.exports = async function () {
           },
         },
       },
+      {
+        name: 'ember-modifier-4.x',
+        npm: {
+          devDependencies: {
+            'ember-modifier': '^4.0.0-beta.0',
+          },
+        },
+      },
     ],
   };
 };

@@ -98,6 +98,7 @@ jobs:
           - embroider-optimized
           - ember-modifier-2.x
           - ember-modifier-3.1
+          - ember-modifier-4.x
 
     steps:
       - uses: actions/checkout@v3
