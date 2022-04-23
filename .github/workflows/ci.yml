@@ -24,14 +24,18 @@ jobs:
         with:
           node-version: 12.x
           cache: yarn
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
       - name: Lint Addon
         run: yarn lint
         working-directory: addon
+
       - name: Lint Test App
         run: yarn lint
         working-directory: test-app
+
       - name: Run Tests
         run: yarn test:ember
         working-directory: test-app
@@ -47,11 +51,14 @@ jobs:
         with:
           node-version: 12.x
           cache: yarn
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
       - name: Lint
         run: yarn lint
         working-directory: docs
+
       - name: Run Tests
         run: yarn test:ember
         working-directory: docs
@@ -67,8 +74,10 @@ jobs:
         with:
           node-version: 12.x
           cache: yarn
+
       - name: Install Dependencies
         run: yarn install --no-lockfile
+
       - name: Run Tests
         run: yarn test:ember
         working-directory: test-app
@@ -96,8 +105,6 @@ jobs:
           - ember-classic
           - embroider-safe
           - embroider-optimized
-          - ember-modifier-2.x
-          - ember-modifier-3.1
 
     steps:
       - uses: actions/checkout@v3
@@ -106,8 +113,44 @@ jobs:
         with:
           node-version: 12.x
           cache: yarn
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
+
       - name: Run Tests
         run: ../node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
+        working-directory: test-app
+
+  ember-modifier-scenarios:
+    name: ${{ matrix.ember-modifier-scenario }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: 'test'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ember-modifier-scenario:
+          - ember-modifier@2
+          - ember-modifier@3.1
+          - ember-modifier@3.2
+          - ember-modifier@^4.0.0-beta.0
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x # ember-modifier 4.x requires Node.js 14
+          cache: yarn
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Update ember-modifier version
+        run: yarn add -D ${{ matrix.ember-modifier-scenario }}
+        working-directory: addon
+
+      - name: Run Tests
+        run: yarn test:ember
         working-directory: test-app

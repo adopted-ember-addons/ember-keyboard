@@ -5,12 +5,6 @@ const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
   return {
-    /**
-     * `ember-classic` scenario should not use `useWorkspaces`
-     * as only test-app need to get classic flags.
-     * Otherwise, this scenario would fail.
-     */
-    useWorkspaces: process.argv.every((a) => !a.includes('ember-classic')),
     useYarn: true,
     scenarios: [
       {
@@ -122,14 +116,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-modifier': '^2.0.0',
-          },
-        },
-      },
-      {
-        name: 'ember-modifier-3.1',
-        npm: {
-          devDependencies: {
-            'ember-modifier': '~3.1.0',
           },
         },
       },
