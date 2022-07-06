@@ -1,4 +1,5 @@
 import { inject as service } from '@ember/service';
+import { registerDestructor } from '@ember/destroyable';
 
 function populateKeyboardHandlers(responder) {
   responder.keyboardHandlers = responder.keyboardHandlers || {};
@@ -65,11 +66,10 @@ export default function keyResponder(opts = {}) {
         super(...arguments);
         populateKeyboardHandlers(this);
         this.keyboard.register(this);
-      }
 
-      willDestroy() {
-        this.keyboard.unregister(this);
-        super.willDestroy(...arguments);
+        registerDestructor(this, () => {
+          this.keyboard.unregister(this);
+        });
       }
     };
   };
