@@ -84,5 +84,8 @@
   },
   "volta": {
     "extends": "../package.json"
-  }
+  },
+  "nohoist": [
+    "@ember/test-helpers"
+  ]
 }
