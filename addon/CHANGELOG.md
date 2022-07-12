@@ -2,6 +2,26 @@
 
 
 
+
+## v8.2.0 (2022-07-12)
+
+#### :rocket: Enhancement
+* [#638](https://github.com/adopted-ember-addons/ember-keyboard/pull/638) Make keyResponder ember-modifier@4 compat ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#625](https://github.com/adopted-ember-addons/ember-keyboard/pull/625) auto-publish unstable packages to NPM ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#627](https://github.com/adopted-ember-addons/ember-keyboard/pull/627) Widen `ember-modifier` dependency requirement ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :memo: Documentation
+* [#626](https://github.com/adopted-ember-addons/ember-keyboard/pull/626) Fix `isKey` import in documentation usage ([@hugopeixoto](https://github.com/hugopeixoto))
+* [#622](https://github.com/adopted-ember-addons/ember-keyboard/pull/622) Improve contributing docs ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#623](https://github.com/adopted-ember-addons/ember-keyboard/pull/623) run `npx ember-cli-update --to=4.3.0` to align with blueprint ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 3
+- Hugo Peixoto ([@hugopeixoto](https://github.com/hugopeixoto))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## v8.1.1 (2022-04-10)
 
 #### :bug: Bug Fix
