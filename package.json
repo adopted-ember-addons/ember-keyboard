@@ -13,11 +13,11 @@
     ],
     "nohoist": [
       "addon/@ember/*",
-      "addon/ember-source",
+      "addon/ember-*",
       "docs/@ember/*",
-      "docs/ember-source",
+      "docs/ember-*",
       "test-app/@ember/*",
-      "test-app/ember-source"
+      "test-app/ember-*"
     ]
   },
   "scripts": {
