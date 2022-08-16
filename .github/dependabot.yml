@@ -1,20 +1,7 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/addon"
-  schedule:
-    interval: daily
-    time: "02:00"
-  open-pull-requests-limit: 4
-- package-ecosystem: npm
-  directory: "/test-app"
-  schedule:
-    interval: daily
-    time: "02:00"
-  open-pull-requests-limit: 3
-- package-ecosystem: npm
-  directory: "/docs"
-  schedule:
-    interval: daily
-    time: "02:00"
-  open-pull-requests-limit: 3
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "02:00"
