@@ -67,22 +67,24 @@ pushing the tag and commits, etc.
 
 ## Docs Site
 
-Once release is done, you should update docs side.
+Docs side gets updated automatically once release is done.
+This is done via [`after:release` hook](https://github.com/release-it/release-it#hooks)
+which runs following operations:
 
-* First build the documentation application:
+* builds the documentation application:
 
   ```shell
   cd docs && yarn deploy
   ```
 
-* Second, push the updated documentation:
+* pushes the updated documentation:
 
   ```shell
   git push origin
   ```
 
   From there, GitHub Pages takes care of deploying documentation site to [http://adopted-ember-addons.github.io/ember-keyboard/](http://adopted-ember-addons.github.io/ember-keyboard/).
-  You may check the deploy status via GitHub actions [pages-build-deployment workflow](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/pages/pages-build-deployment).
+  You may check the deployment status via GitHub actions [pages-build-deployment workflow](https://github.com/adopted-ember-addons/ember-keyboard/actions/workflows/pages/pages-build-deployment).
 
 ## Unstable Tag
 
