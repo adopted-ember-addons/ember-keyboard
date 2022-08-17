@@ -24,6 +24,10 @@
     "registry": "https://registry.npmjs.org"
   },
   "release-it": {
+    "hooks": {
+      "before:init": "cp README.md LICENSE.md addon/",
+      "after:release": "cd docs && yarn deploy && git push origin"
+    },
     "plugins": {
       "release-it-lerna-changelog": {
         "infile": "CHANGELOG.md",

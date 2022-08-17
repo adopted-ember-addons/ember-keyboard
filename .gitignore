@@ -7,6 +7,8 @@ dist/
 node_modules/
 
 # misc
+/addon/README.md
+/addon/LICENSE.md
 .env*
 .pnp*
 .sass-cache
