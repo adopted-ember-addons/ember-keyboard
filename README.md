@@ -23,6 +23,7 @@ You can find interactive documentation [here](http://adopted-ember-addons.github
 * For Ember 3.8 to 3.28, you can use ember-keyboard 6.x (not compatible with Internet Explorer)
 * For use with Ember 2.0 up to 3.8 or IE compatibility, use ember-keyboard 5.x.
 * Node.js v12 or above (Node v14+ is required for fastboot)
+* ember-auto-import v2.0.0 or above (this is [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html))
 
 ## Accessibility Considerations
 In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
