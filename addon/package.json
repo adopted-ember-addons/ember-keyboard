@@ -52,7 +52,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2",
-    "rollup": "^2.70.2"
+    "rollup": "^2.78.1"
   },
   "peerDependencies": {
     "@ember/test-helpers": "^2.6.0"
