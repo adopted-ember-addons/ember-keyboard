@@ -21,7 +21,8 @@ export default class KeyboardListener {
 
   static parse(s, platform = getPlatform()) {
     let keyboardListener = new KeyboardListener(platform);
-    let [eventType, keyCombo] = s.split(':');
+    let [eventType, ...keyCombo] = s.split(':');
+    keyCombo = keyCombo.join(':'); // allow keyCombo contain semicolon
     keyboardListener.type = eventType;
 
     if (keyCombo === '+') {

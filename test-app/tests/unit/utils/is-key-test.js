@@ -55,6 +55,8 @@ module('Unit | Utility | isKey', function () {
   keydown:cmd+c             win    |  F   T    F    F     c    KeyC         |  T         F
   keydown:cmd+c             win    |  F   F    F    T     c    KeyC         |  F         F
   keydown:+                 win    |  F   F    F    F     +    BracketRight |  T         F         plus key with german language
+  keydown::                 win    |  F   F    F    T     :    Semicolon    |  T         F
+  keydown:ctrl+shift+:      win    |  F   T    F    T     :    Semicolon    |  T         F
   `;
   for (let line of table
     .split('\n')
