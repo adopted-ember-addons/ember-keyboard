@@ -221,6 +221,16 @@ module('Integration | Helper | on-key', function (hooks) {
     });
   });
 
+  module('single key test', function () {
+    test('triggers action', async function (assert) {
+      await render(hbs`
+        {{on-key 'KeyB' this.onTrigger}}
+      `);
+      await keyDown('KeyB');
+      assert.ok(onTriggerCalled, 'triggers action');
+    });
+  });
+
   module('error cases', function (hooks) {
     hooks.afterEach(() => resetOnerror());
 
