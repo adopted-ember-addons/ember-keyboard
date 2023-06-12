@@ -16,9 +16,9 @@
     "test": "cd test-app && yarn test"
   },
   "devDependencies": {
-    "release-it": "^14.14.2",
-    "release-it-lerna-changelog": "^4.0.1",
-    "release-it-yarn-workspaces": "^2.0.1"
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "@release-it-plugins/workspaces": "^3.2.0",
+    "release-it": "^15.11.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -29,11 +29,11 @@
       "after:release": "cd docs && yarn deploy && git push origin"
     },
     "plugins": {
-      "release-it-lerna-changelog": {
+      "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": true
       },
-      "release-it-yarn-workspaces": {
+      "@release-it-plugins/workspaces": {
         "workspaces": [
           "addon"
         ],
