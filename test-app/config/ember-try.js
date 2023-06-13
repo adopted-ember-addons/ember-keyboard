@@ -8,42 +8,6 @@ module.exports = async function () {
     useYarn: true,
     scenarios: [
       {
-        name: 'ember-lts-3.8',
-        npm: {
-          devDependencies: {
-            'ember-cli': '~3.8.0',
-            'ember-on-modifier': '^1.0.1',
-            'ember-source': '~3.8.0',
-            'ember-test-selectors': '^5.5.0',
-          },
-        },
-      },
-      {
-        name: 'ember-lts-3.12',
-        npm: {
-          devDependencies: {
-            'ember-cli': '~3.12.0',
-            'ember-source': '~3.12.0',
-          },
-        },
-      },
-      {
-        name: 'ember-lts-3.16',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.16.0',
-          },
-        },
-      },
-      {
-        name: 'ember-lts-3.20',
-        npm: {
-          devDependencies: {
-            'ember-source': '~3.20.5',
-          },
-        },
-      },
-      {
         name: 'ember-lts-3.24',
         npm: {
           devDependencies: {
