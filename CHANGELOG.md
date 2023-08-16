@@ -3,6 +3,25 @@
 
 
 
+
+## v8.2.1 (2023-08-16)
+
+#### :rocket: Enhancement
+* [#739](https://github.com/adopted-ember-addons/ember-keyboard/pull/739) Remove engines from addon package.json ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#732](https://github.com/adopted-ember-addons/ember-keyboard/pull/732) Allow @ember/test-helpers v3 in peer dependencies ([@francois2metz](https://github.com/francois2metz))
+
+#### :memo: Documentation
+* [#674](https://github.com/adopted-ember-addons/ember-keyboard/pull/674) Add note about v2 addon format and ember-auto-import requirement ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### :house: Internal
+* [#740](https://github.com/adopted-ember-addons/ember-keyboard/pull/740) add ember v4 LTS to CI ([@SergeAstapov](https://github.com/SergeAstapov))
+* [#736](https://github.com/adopted-ember-addons/ember-keyboard/pull/736) Fix fastboot test on ember 5 ([@francois2metz](https://github.com/francois2metz))
+* [#672](https://github.com/adopted-ember-addons/ember-keyboard/pull/672) Use release-it hook to copy .md files at publish time ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 2
+- François de Metz ([@francois2metz](https://github.com/francois2metz))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## v8.2.0 (2022-07-12)
 
 #### :rocket: Enhancement
