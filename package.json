@@ -25,7 +25,7 @@
   },
   "release-it": {
     "hooks": {
-      "before:init": "cp README.md LICENSE.md addon/",
+      "before:init": "cp README.md addon/",
       "after:release": "cd docs && yarn deploy && git push origin"
     },
     "plugins": {
