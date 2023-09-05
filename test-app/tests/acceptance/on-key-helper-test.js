@@ -84,4 +84,25 @@ module('Acceptance | on-key helper ', function (hooks) {
       }
     );
   });
+
+  test('Ctrl++', async function (assert) {
+    assert.expect(3);
+
+    await textChanged(
+      assert,
+      () =>
+        triggerEvent(document.body, 'keydown', {
+          code: 'Equal',
+          key: '+',
+          keyCode: 43,
+          which: 43,
+          ctrlKey: true,
+        }),
+      {
+        selectorName: 'ctrl-plus',
+        beforeValue: 'Ctrl++ not pressed',
+        afterValue: 'Ctrl++ pressed',
+      }
+    );
+  });
 });
