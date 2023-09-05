@@ -25,30 +25,43 @@ export default class KeyboardListener {
     keyCombo = keyCombo.join(':'); // allow keyCombo contain semicolon
     keyboardListener.type = eventType;
 
-    if (keyCombo === '+') {
-      keyboardListener.keyOrCode = keyCombo;
-      return keyboardListener;
-    }
+    let maybePlus = false;
+    keyCombo
+      .split('+')
+      .reduce((result, part) => {
+        if (part === '') {
+          if (maybePlus) {
+            result.push('+');
+          }
 
-    keyCombo.split('+').forEach((part) => {
-      if (ALT_REGEX.test(part)) {
-        keyboardListener.altKey = true;
-      } else if (CTRL_REGEX.test(part)) {
-        keyboardListener.ctrlKey = true;
-      } else if (META_REGEX.test(part)) {
-        keyboardListener.metaKey = true;
-      } else if (SHIFT_REGEX.test(part)) {
-        keyboardListener.shiftKey = true;
-      } else if (CMD_REGEX.test(part)) {
-        if (platform.indexOf('Mac') > -1) {
-          keyboardListener.metaKey = true;
+          maybePlus = !maybePlus;
         } else {
-          keyboardListener.ctrlKey = true;
+          result.push(part);
         }
-      } else {
-        keyboardListener.keyOrCode = part;
+
+        return result;
+      }, [])
+      .forEach((part) => {
+        if (ALT_REGEX.test(part)) {
+          keyboardListener.altKey = true;
+        } else if (CTRL_REGEX.test(part)) {
+          keyboardListener.ctrlKey = true;
+        } else if (META_REGEX.test(part)) {
+          keyboardListener.metaKey = true;
+        } else if (SHIFT_REGEX.test(part)) {
+          keyboardListener.shiftKey = true;
+        } else if (CMD_REGEX.test(part)) {
+          if (platform.indexOf('Mac') > -1) {
+            keyboardListener.metaKey = true;
+          } else {
+            keyboardListener.ctrlKey = true;
+          }
+        } else {
+          keyboardListener.keyOrCode = part;
+        }
       }
-    });
+    );
+
     return keyboardListener;
   }
 
