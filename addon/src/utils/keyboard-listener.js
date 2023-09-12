@@ -59,8 +59,7 @@ export default class KeyboardListener {
         } else {
           keyboardListener.keyOrCode = part;
         }
-      }
-    );
+      });
 
     return keyboardListener;
   }
