@@ -18,7 +18,12 @@
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "@release-it-plugins/workspaces": "^3.2.0",
-    "release-it": "^15.11.0"
+    "release-it": "^15.11.0",
+    "release-plan": "^0.8.0"
+  },
+  "volta": {
+    "node": "16.20.0",
+    "yarn": "1.22.18"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -58,9 +63,5 @@
       "tokenRef": "GITHUB_AUTH"
     },
     "npm": false
-  },
-  "volta": {
-    "node": "16.20.0",
-    "yarn": "1.22.18"
   }
 }
