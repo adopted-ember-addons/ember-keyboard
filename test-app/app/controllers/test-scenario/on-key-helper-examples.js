@@ -5,4 +5,5 @@ export default class extends Controller {
   wasSPressed = false;
   wasSlashPressed = false;
   wasQuestionMarkPressed = false;
+  wasCtrlPlusPressed = false;
 }

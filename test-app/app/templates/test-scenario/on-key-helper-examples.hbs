@@ -30,3 +30,12 @@
 </span>
 
 {{on-key 'shift+Slash' (fn (mut this.wasQuestionMarkPressed) true)}}
+
+<hr />
+
+
+<span data-test-ctrl-plus>
+  {{if this.wasCtrlPlusPressed 'Ctrl++ pressed' 'Ctrl++ not pressed'}}
+</span>
+
+{{on-key 'ctrl++' (fn (mut this.wasCtrlPlusPressed) true)}}
