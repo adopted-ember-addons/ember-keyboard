@@ -12,55 +12,16 @@
   ],
   "scripts": {
     "prepare": "cd addon && yarn build",
-    "release": "release-it",
     "test": "cd test-app && yarn test"
   },
   "devDependencies": {
-    "@release-it-plugins/lerna-changelog": "^5.0.0",
-    "@release-it-plugins/workspaces": "^3.2.0",
-    "release-it": "^15.11.0"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "release-it": {
-    "hooks": {
-      "before:init": "cp README.md addon/",
-      "after:release": "cd docs && yarn deploy && git push origin"
-    },
-    "plugins": {
-      "@release-it-plugins/lerna-changelog": {
-        "infile": "CHANGELOG.md",
-        "launchEditor": true
-      },
-      "@release-it-plugins/workspaces": {
-        "workspaces": [
-          "addon"
-        ],
-        "additionalManifests": {
-          "dependencyUpdates": [
-            "docs/package.json",
-            "test-app/package.json"
-          ],
-          "versionUpdates": [
-            "package.json",
-            "docs/package.json",
-            "test-app/package.json"
-          ]
-        }
-      }
-    },
-    "git": {
-      "tagName": "v${version}"
-    },
-    "github": {
-      "release": true,
-      "tokenRef": "GITHUB_AUTH"
-    },
-    "npm": false
+    "release-plan": "^0.8.0"
   },
   "volta": {
     "node": "16.20.0",
     "yarn": "1.22.18"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
