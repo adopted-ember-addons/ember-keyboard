@@ -121,7 +121,7 @@ jobs:
           node-version: 18
 
       - name: Update ember-modifier version
-        run: pnpm add -D ${{ matrix.ember-modifier-scenario }}
+        run: pnpm add ${{ matrix.ember-modifier-scenario }}
         working-directory: addon
 
       - name: Run Tests
