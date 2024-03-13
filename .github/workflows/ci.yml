@@ -19,25 +19,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - uses: wyvox/action-setup-pnpm@v2
         with:
-          node-version: 16.x
-          cache: yarn
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+          node-version: 18
 
       - name: Lint Addon
-        run: yarn lint
+        run: pnpm lint
         working-directory: addon
 
       - name: Lint Test App
-        run: yarn lint
+        run: pnpm lint
         working-directory: test-app
 
       - name: Run Tests
-        run: yarn test:ember
+        run: pnpm test:ember
         working-directory: test-app
 
   test-docs:
@@ -46,21 +41,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - uses: wyvox/action-setup-pnpm@v2
         with:
-          node-version: 16.x
-          cache: yarn
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+          node-version: 18
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
         working-directory: docs
 
       - name: Run Tests
-        run: yarn test:ember
+        run: pnpm test:ember
         working-directory: docs
 
   floating:
@@ -70,16 +60,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: wyvox/action-setup-pnpm@v2
         with:
-          node-version: 16.x
-          cache: yarn
-
-      - name: Install Dependencies
-        run: yarn install --no-lockfile
-
+          node-version: 18
       - name: Run Tests
-        run: yarn test:ember
+        run: pnpm test:ember
         working-directory: test-app
 
   try-scenarios:
@@ -106,17 +91,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - uses: wyvox/action-setup-pnpm@v2
         with:
-          node-version: 16.x
-          cache: yarn
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+          node-version: 18
 
       - name: Run Tests
-        run: ../node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
+        run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
         working-directory: test-app
 
   ember-modifier-scenarios:
@@ -136,19 +116,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node
-        uses: actions/setup-node@v3
+      - uses: wyvox/action-setup-pnpm@v2
         with:
-          node-version: 16.x
-          cache: yarn
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+          node-version: 18
 
       - name: Update ember-modifier version
-        run: yarn add -D ${{ matrix.ember-modifier-scenario }}
+        run: pnpm add -D ${{ matrix.ember-modifier-scenario }}
         working-directory: addon
 
       - name: Run Tests
-        run: yarn test:ember
+        run: pnpm test:ember
         working-directory: test-app

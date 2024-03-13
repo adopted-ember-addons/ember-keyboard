@@ -17,11 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          cache: yarn
-      - run: yarn install --frozen-lockfile
-      - run: yarn deploy
+      - uses: wyvox/action-setup-pnpm@v2
+      - run: pnpm deploy
         working-directory: docs
       - run: git push origin
-      
