@@ -24,11 +24,7 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
-
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Deploy
+      - run: pnpm install --frozen-lockfile
       - run: pnpm deploy
         working-directory: docs
       - run: git push origin
