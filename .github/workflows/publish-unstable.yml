@@ -23,11 +23,11 @@ jobs:
         with:
           node-version: 18
           cache: pnpm
+          # This creates an .npmrc that reads the NODE_AUTH_TOKEN environment variable
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-          # This creates an .npmrc that reads the NODE_AUTH_TOKEN environment variable
-          registry-url: 'https://registry.npmjs.org'
 
       # We need a workspace aware version of npm because our addon is in a subdir but our .npmrc is in the root
       - name: npm8
