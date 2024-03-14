@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
-    "deploy": "yarn ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" --destination \"..\"; git push; git checkout -",
+    "deploy": "pnpm ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" --destination \"..\"; git push; git checkout -",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
@@ -40,7 +40,7 @@
     "ember-cli": "~4.3.0",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-dependency-checker": "^3.3.1",
-    "ember-cli-fastboot": "^3.3.2",
+    "ember-cli-fastboot": "^4.0.0",
     "ember-cli-github-pages": "0.2.2",
     "ember-cli-htmlbars": "^6.1.1",
     "ember-cli-inject-live-reload": "^2.1.0",

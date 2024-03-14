@@ -17,11 +17,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
       - uses: actions/setup-node@v4
         with:
-          cache: yarn
-      - run: yarn install --frozen-lockfile
-      - run: yarn deploy
+          node-version: 18
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm deploy
         working-directory: docs
       - run: git push origin
-      

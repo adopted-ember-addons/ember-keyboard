@@ -5,21 +5,15 @@
     "type": "git",
     "url": "https://github.com/adopted-ember-addons/ember-keyboard.git"
   },
-  "workspaces": [
-    "addon",
-    "docs",
-    "test-app"
-  ],
   "scripts": {
-    "prepare": "cd addon && yarn build",
-    "test": "cd test-app && yarn test"
+    "prepare": "cd addon && pnpm build",
+    "test": "cd test-app && pnpm test"
   },
   "devDependencies": {
     "release-plan": "^0.8.0"
   },
   "volta": {
-    "node": "16.20.0",
-    "yarn": "1.22.18"
+    "node": "18.19.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
