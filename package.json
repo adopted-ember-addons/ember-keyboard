@@ -13,7 +13,7 @@
     "release-plan": "^0.8.0"
   },
   "volta": {
-    "node": "16.20.0"
+    "node": "18.19.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
