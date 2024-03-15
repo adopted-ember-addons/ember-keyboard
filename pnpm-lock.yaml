@@ -49,8 +49,8 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1(@babel/core@7.24.0)(rollup@2.79.1)
       ember-template-lint:
-        specifier: ^4.13.0
-        version: 4.18.2
+        specifier: ^5.13.0
+        version: 5.13.0
       eslint:
         specifier: ^8.23.0
         version: 8.57.0
@@ -154,8 +154,8 @@ importers:
         specifier: ~4.3.0
         version: 4.3.0(@babel/core@7.24.0)(webpack@5.90.3)
       ember-template-lint:
-        specifier: ^4.13.0
-        version: 4.18.2
+        specifier: ^5.13.0
+        version: 5.13.0
       ember-test-selectors:
         specifier: ^6.0.0
         version: 6.0.0
@@ -301,8 +301,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       ember-template-lint:
-        specifier: ^4.13.0
-        version: 4.18.2
+        specifier: ^5.13.0
+        version: 5.13.0
       ember-test-selectors:
         specifier: ^6.0.0
         version: 6.0.0
@@ -1537,7 +1537,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
-    dev: true
 
   /@babel/template@7.24.0:
     resolution: {integrity: sha512-Bkf2q8lMB0AFpX0NFEqSbx1OkTHf0f+0j82mkw+ZpzBnkk7e9Ql0891vlfgi+kHwOk8tQjiQHpqh4LaSa0fKEA==}
@@ -4613,6 +4612,11 @@ packages:
       supports-color: 7.2.0
     dev: true
 
+  /chalk@5.3.0:
+    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
+
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
@@ -6494,18 +6498,19 @@ packages:
       - supports-color
     dev: true
 
-  /ember-template-lint@4.18.2:
-    resolution: {integrity: sha512-yI8kQ8IQ2x5HVq0tQAISXABOHr0Is5sAg6rwceO6M8CYozq7HMxUPEj0VbdcbyIE70SWw/8d24M1rBI4km544Q==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+  /ember-template-lint@5.13.0:
+    resolution: {integrity: sha512-AYxz9S9fVZfHPmTsymc7NwsD7FVmDUZyfC+KYpxDlK0wic7JSQx2FNQNqQSBFRLOuzn7VQ0/+1pX6DGqKDGswg==}
+    engines: {node: ^14.18.0 || ^16.0.0 || >= 18.0.0}
     hasBin: true
     dependencies:
       '@lint-todo/utils': 13.1.1
       aria-query: 5.3.0
-      chalk: 4.1.2
+      chalk: 5.3.0
       ci-info: 3.9.0
       date-fns: 2.30.0
       ember-template-imports: 3.4.2
       ember-template-recast: 6.1.4
+      eslint-formatter-kakoune: 1.0.0
       find-up: 6.3.0
       fuse.js: 6.6.2
       get-stdin: 9.0.0
@@ -6811,6 +6816,10 @@ packages:
       eslint: '>=7.0.0'
     dependencies:
       eslint: 8.57.0
+    dev: true
+
+  /eslint-formatter-kakoune@1.0.0:
+    resolution: {integrity: sha512-Uk/TVLt6Nf6Xoz7C1iYuZjOSdJxe5aaauGRke8JhKeJwD66Y61/pY2FjtLP04Ooq9PwV34bzrkKkU2UZ5FtDRA==}
     dev: true
 
   /eslint-plugin-ember@10.6.1(eslint@8.57.0):
@@ -11311,12 +11320,11 @@ packages:
 
   /regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
-    dev: true
 
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
-      '@babel/runtime': 7.12.18
+      '@babel/runtime': 7.24.0
 
   /regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
