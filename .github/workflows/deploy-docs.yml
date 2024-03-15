@@ -25,6 +25,6 @@ jobs:
           node-version: 18
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm deploy
+      - run: pnpm run deploy
         working-directory: docs
       - run: git push origin
