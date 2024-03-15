@@ -50,9 +50,12 @@ jobs:
           # This creates an .npmrc that reads the NODE_AUTH_TOKEN environment variable
           registry-url: 'https://registry.npmjs.org'
       
-      - run: npm ci
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - run: pnpm install --frozen-lockfile
       - name: npm publish
-        run: npx release-plan publish
+        run: pnpm release-plan publish
       
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
