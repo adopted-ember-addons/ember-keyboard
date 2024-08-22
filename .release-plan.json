@@ -1,0 +1,25 @@
+{
+  "solution": {
+    "ember-keyboard": {
+      "impact": "major",
+      "oldVersion": "8.2.1",
+      "newVersion": "9.0.0",
+      "constraints": [
+        {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        },
+        {
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./addon/package.json"
+    }
+  },
+  "description": "## Release (2024-08-22)\n\nember-keyboard 9.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-keyboard`, `test-app`\n  * [#770](https://github.com/adopted-ember-addons/ember-keyboard/pull/770) Drops support for ember < 3.28 ([@leoeuclids](https://github.com/leoeuclids))\n\n#### :rocket: Enhancement\n* `ember-keyboard`\n  * [#780](https://github.com/adopted-ember-addons/ember-keyboard/pull/780) Widen peer range for peer, @ember/test-helpers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `ember-keyboard`, `test-app`\n  * [#755](https://github.com/adopted-ember-addons/ember-keyboard/pull/755) Feature: Plus sign support ([@leoeuclids](https://github.com/leoeuclids))\n\n#### :house: Internal\n* Other\n  * [#773](https://github.com/adopted-ember-addons/ember-keyboard/pull/773) Migrate to pnpm part 2 ([@SergeAstapov](https://github.com/SergeAstapov))\n  * [#771](https://github.com/adopted-ember-addons/ember-keyboard/pull/771) Setup release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#758](https://github.com/adopted-ember-addons/ember-keyboard/pull/758) Bump @babel/traverse from 7.17.0 to 7.23.2 ([@dependabot[bot]](https://github.com/apps/dependabot))\n* `ember-keyboard`, `docs`, `test-app`\n  * [#772](https://github.com/adopted-ember-addons/ember-keyboard/pull/772) Migrate to pnpm ([@leoeuclids](https://github.com/leoeuclids))\n\n#### Committers: 3\n- Leo Euclides ([@leoeuclids](https://github.com/leoeuclids))\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+}
