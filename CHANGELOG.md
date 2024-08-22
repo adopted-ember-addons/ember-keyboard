@@ -1,5 +1,32 @@
 # Changelog
 
+## Release (2024-08-22)
+
+ember-keyboard 9.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-keyboard`, `test-app`
+  * [#770](https://github.com/adopted-ember-addons/ember-keyboard/pull/770) Drops support for ember < 3.28 ([@leoeuclids](https://github.com/leoeuclids))
+
+#### :rocket: Enhancement
+* `ember-keyboard`
+  * [#780](https://github.com/adopted-ember-addons/ember-keyboard/pull/780) Widen peer range for peer, @ember/test-helpers ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `ember-keyboard`, `test-app`
+  * [#755](https://github.com/adopted-ember-addons/ember-keyboard/pull/755) Feature: Plus sign support ([@leoeuclids](https://github.com/leoeuclids))
+
+#### :house: Internal
+* Other
+  * [#773](https://github.com/adopted-ember-addons/ember-keyboard/pull/773) Migrate to pnpm part 2 ([@SergeAstapov](https://github.com/SergeAstapov))
+  * [#771](https://github.com/adopted-ember-addons/ember-keyboard/pull/771) Setup release plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#758](https://github.com/adopted-ember-addons/ember-keyboard/pull/758) Bump @babel/traverse from 7.17.0 to 7.23.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* `ember-keyboard`, `docs`, `test-app`
+  * [#772](https://github.com/adopted-ember-addons/ember-keyboard/pull/772) Migrate to pnpm ([@leoeuclids](https://github.com/leoeuclids))
+
+#### Committers: 3
+- Leo Euclides ([@leoeuclids](https://github.com/leoeuclids))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 
 
 
