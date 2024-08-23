@@ -1,19 +1,34 @@
 import { inject as service } from '@ember/service';
 import { registerDestructor } from '@ember/destroyable';
 
+function findPropertyDescriptor(obj, name) {
+  let descriptor;
+  do {
+    (descriptor = Object.getOwnPropertyDescriptor(obj, name)) ||
+      (obj = Object.getPrototypeOf(obj));
+  } while (!descriptor && obj);
+  return descriptor;
+}
+
 function populateKeyboardHandlers(responder) {
   responder.keyboardHandlers = responder.keyboardHandlers || {};
   if (!responder.keyboardHandlerNames) {
     responder.keyboardHandlerNames = {};
     for (let propertyName in responder) {
-      let propertyValue = responder[propertyName];
-      if (
-        typeof propertyValue === 'function' &&
-        propertyValue._emberKeyboardOnKeyDecoratorData
-      ) {
-        for (let listenerName of propertyValue._emberKeyboardOnKeyDecoratorData
-          .listenerNames || []) {
-          responder.keyboardHandlerNames[listenerName] = propertyName;
+      const descriptor = findPropertyDescriptor(responder, propertyName);
+      // If it has a getter it's not going to be a function. We also don't want to force getters to
+      // evaluate as they may be expensive. This has been observed specifically with classic classes
+      // and computed properties.
+      if (!descriptor?.get) {
+        let propertyValue = responder[propertyName];
+        if (
+          typeof propertyValue === 'function' &&
+          propertyValue._emberKeyboardOnKeyDecoratorData
+        ) {
+          for (let listenerName of propertyValue
+            ._emberKeyboardOnKeyDecoratorData.listenerNames || []) {
+            responder.keyboardHandlerNames[listenerName] = propertyName;
+          }
         }
       }
     }

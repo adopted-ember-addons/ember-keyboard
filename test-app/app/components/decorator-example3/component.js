@@ -2,6 +2,7 @@
 /* eslint-disable ember/no-classic-classes */
 /* eslint-disable ember/no-classic-components */
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { keyResponder, onKey } from 'ember-keyboard';
 
 export default keyResponder(
@@ -26,5 +27,10 @@ export default keyResponder(
         }
       })
     ),
+
+    // This exists to ensure that we don't call getters when looking for handlers
+    doNotCall: computed(function () {
+      throw new Error('This should not be called');
+    }),
   })
 );
