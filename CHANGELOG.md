@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2024-08-23)
+
+ember-keyboard 9.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-keyboard`, `test-app`
+  * [#757](https://github.com/adopted-ember-addons/ember-keyboard/pull/757) Don't evaluate getters when looking for handlers ([@wagenet](https://github.com/wagenet))
+
+#### :house: Internal
+* `test-app`
+  * [#785](https://github.com/adopted-ember-addons/ember-keyboard/pull/785) Use the in-repo copy of ember-keyboard using the workspace protocol ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#784](https://github.com/adopted-ember-addons/ember-keyboard/pull/784) Upgrade to pnpm 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* Other
+  * [#783](https://github.com/adopted-ember-addons/ember-keyboard/pull/783) Skip cleanup in ember-try ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2024-08-22)
 
 ember-keyboard 9.0.0 (major)
