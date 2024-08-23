@@ -14,8 +14,14 @@
   },
   "volta": {
     "node": "18.20.4",
-    "pnpm": "8.15.9"
+    "pnpm": "9.8.0"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["webpack"]
+    }
+  },
+  "packageManager": "pnpm@9.8.0",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   }
