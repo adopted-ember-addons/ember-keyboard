@@ -92,7 +92,6 @@ module('Acceptance | on-key helper ', function (hooks) {
       assert,
       () =>
         triggerEvent(document.body, 'keydown', {
-          code: 'Equal',
           key: '+',
           keyCode: 43,
           which: 43,
