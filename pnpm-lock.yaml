@@ -277,8 +277,8 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       ember-keyboard:
-        specifier: 8.2.1
-        version: 8.2.1(@babel/core@7.24.0)(@ember/test-helpers@2.6.0(@babel/core@7.24.0))(ember-source@4.3.0(@babel/core@7.24.0)(webpack@5.90.3))
+        specifier: workspace:*
+        version: link:../addon
       ember-load-initializers:
         specifier: ^2.1.2
         version: 2.1.2(@babel/core@7.24.0)
