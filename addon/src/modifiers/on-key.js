@@ -1,5 +1,5 @@
 import Modifier from 'ember-modifier';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 import { macroCondition, dependencySatisfies } from '@embroider/macros';
