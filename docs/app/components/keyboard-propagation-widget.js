@@ -3,9 +3,11 @@
 /* eslint-disable ember/no-classic-components */
 /* eslint-disable ember/no-mixins */
 import Component from '@ember/component';
-import { service } from '@ember/service';
+import * as emberService from '@ember/service';
 import { set } from '@ember/object';
 import EnterableMixin from 'docs/mixins/enterable';
+
+const service = emberService.service ?? emberService.inject;
 
 export default Component.extend(EnterableMixin, {
   keyboard: service(),

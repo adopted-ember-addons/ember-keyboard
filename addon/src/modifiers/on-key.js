@@ -1,11 +1,12 @@
 import Modifier from 'ember-modifier';
-import { service } from '@ember/service';
+import * as emberService from '@ember/service';
 import { action } from '@ember/object';
 import { registerDestructor } from '@ember/destroyable';
 import { macroCondition, dependencySatisfies } from '@embroider/macros';
 import listenerName from '../utils/listener-name';
 import isKey from '../utils/is-key';
 
+const service = emberService.service ?? emberService.inject;
 const ONLY_WHEN_FOCUSED_TAG_NAMES = ['input', 'select', 'textarea'];
 
 let modifier;

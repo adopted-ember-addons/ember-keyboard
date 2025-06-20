@@ -1,7 +1,9 @@
 import Helper from '@ember/component/helper';
 import { assert } from '@ember/debug';
-import { service } from '@ember/service';
+import * as emberService from '@ember/service';
 import listenerName from '../utils/listener-name';
+
+const service = emberService.service ?? emberService.inject;
 
 export default class extends Helper {
   @service keyboard;
