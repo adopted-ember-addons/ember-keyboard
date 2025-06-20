@@ -1,5 +1,7 @@
-import { inject as service } from '@ember/service';
+import * as emberService from '@ember/service';
 import { registerDestructor } from '@ember/destroyable';
+
+const service = emberService.service ?? emberService.inject;
 
 function findPropertyDescriptor(obj, name) {
   let descriptor;

@@ -1,6 +1,8 @@
 /* eslint-disable ember/no-new-mixins */
-import { inject as service } from '@ember/service';
+import * as emberService from '@ember/service';
 import Mixin from '@ember/object/mixin';
+
+const service = emberService.service ?? emberService.inject;
 
 export default Mixin.create({
   classNames: ['keyboard-widget'],
