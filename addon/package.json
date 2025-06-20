@@ -1,6 +1,6 @@
 {
   "name": "ember-keyboard",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "An Ember.js addon for the painless support of keyboard events",
   "keywords": [
     "ember-addon"

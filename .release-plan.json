@@ -2,8 +2,8 @@
   "solution": {
     "ember-keyboard": {
       "impact": "patch",
-      "oldVersion": "9.0.0",
-      "newVersion": "9.0.1",
+      "oldVersion": "9.0.1",
+      "newVersion": "9.0.2",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2024-08-23)\n\nember-keyboard 9.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-keyboard`, `test-app`\n  * [#757](https://github.com/adopted-ember-addons/ember-keyboard/pull/757) Don't evaluate getters when looking for handlers ([@wagenet](https://github.com/wagenet))\n\n#### :house: Internal\n* `test-app`\n  * [#785](https://github.com/adopted-ember-addons/ember-keyboard/pull/785) Use the in-repo copy of ember-keyboard using the workspace protocol ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#784](https://github.com/adopted-ember-addons/ember-keyboard/pull/784) Upgrade to pnpm 9 ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* Other\n  * [#783](https://github.com/adopted-ember-addons/ember-keyboard/pull/783) Skip cleanup in ember-try ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Peter Wagenet ([@wagenet](https://github.com/wagenet))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-06-20)\n\nember-keyboard 9.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-keyboard`, `docs`\n  * [#786](https://github.com/adopted-ember-addons/ember-keyboard/pull/786) Fix ember deprecation of inject as service ([@spruce](https://github.com/spruce))\n\n#### Committers: 1\n- Felix Fichte ([@spruce](https://github.com/spruce))\n"
 }

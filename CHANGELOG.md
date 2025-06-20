@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-06-20)
+
+ember-keyboard 9.0.2 (patch)
+
+#### :bug: Bug Fix
+* `ember-keyboard`, `docs`
+  * [#786](https://github.com/adopted-ember-addons/ember-keyboard/pull/786) Fix ember deprecation of inject as service ([@spruce](https://github.com/spruce))
+
+#### Committers: 1
+- Felix Fichte ([@spruce](https://github.com/spruce))
+
 ## Release (2024-08-23)
 
 ember-keyboard 9.0.1 (patch)
