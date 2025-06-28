@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-06-28)
+
+ember-keyboard 9.0.3 (patch)
+
+#### :house: Internal
+* `ember-keyboard`
+  * [#788](https://github.com/adopted-ember-addons/ember-keyboard/pull/788)  Include README.md in npm package bundle ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 1
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+
 ## Release (2025-06-20)
 
 ember-keyboard 9.0.2 (patch)

@@ -2,16 +2,16 @@
   "solution": {
     "ember-keyboard": {
       "impact": "patch",
-      "oldVersion": "9.0.1",
-      "newVersion": "9.0.2",
+      "oldVersion": "9.0.2",
+      "newVersion": "9.0.3",
       "constraints": [
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-06-20)\n\nember-keyboard 9.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-keyboard`, `docs`\n  * [#786](https://github.com/adopted-ember-addons/ember-keyboard/pull/786) Fix ember deprecation of inject as service ([@spruce](https://github.com/spruce))\n\n#### Committers: 1\n- Felix Fichte ([@spruce](https://github.com/spruce))\n"
+  "description": "## Release (2025-06-28)\n\nember-keyboard 9.0.3 (patch)\n\n#### :house: Internal\n* `ember-keyboard`\n  * [#788](https://github.com/adopted-ember-addons/ember-keyboard/pull/788)  Include README.md in npm package bundle ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 1\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n"
 }
