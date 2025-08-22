@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2025-08-22)
+
+* ember-keyboard 9.0.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-keyboard`
+  * [#790](https://github.com/adopted-ember-addons/ember-keyboard/pull/790) Remove dependency on ember-modifier-manager-polyfill ([@wagenet](https://github.com/wagenet))
+
+#### :house: Internal
+* Other
+  * [#791](https://github.com/adopted-ember-addons/ember-keyboard/pull/791) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* `ember-keyboard`
+  * [#788](https://github.com/adopted-ember-addons/ember-keyboard/pull/788)  Include README.md in npm package bundle ([@SergeAstapov](https://github.com/SergeAstapov))
+
+#### Committers: 3
+- Peter Wagenet ([@wagenet](https://github.com/wagenet))
+- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-06-20)
 
 ember-keyboard 9.0.2 (patch)
