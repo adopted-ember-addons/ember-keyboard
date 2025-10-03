@@ -2,21 +2,17 @@
   "solution": {
     "ember-keyboard": {
       "impact": "patch",
-      "oldVersion": "9.0.2",
-      "newVersion": "9.0.3",
+      "oldVersion": "9.0.3",
+      "newVersion": "9.0.4",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2025-08-22)\n\n* ember-keyboard 9.0.3 (patch)\n\n#### :bug: Bug Fix\n* `ember-keyboard`\n  * [#790](https://github.com/adopted-ember-addons/ember-keyboard/pull/790) Remove dependency on ember-modifier-manager-polyfill ([@wagenet](https://github.com/wagenet))\n\n#### :house: Internal\n* Other\n  * [#791](https://github.com/adopted-ember-addons/ember-keyboard/pull/791) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* `ember-keyboard`\n  * [#788](https://github.com/adopted-ember-addons/ember-keyboard/pull/788)  Include README.md in npm package bundle ([@SergeAstapov](https://github.com/SergeAstapov))\n\n#### Committers: 3\n- Peter Wagenet ([@wagenet](https://github.com/wagenet))\n- Sergey Astapov ([@SergeAstapov](https://github.com/SergeAstapov))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2025-10-03)\n\n* ember-keyboard 9.0.4 (patch)\n\n#### :bug: Bug Fix\n* `ember-keyboard`\n  * [#794](https://github.com/adopted-ember-addons/ember-keyboard/pull/794) Remove ember-destroyable-polyfill from dependencies ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
