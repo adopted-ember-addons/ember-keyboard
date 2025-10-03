@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-10-03)
+
+* ember-keyboard 9.0.4 (patch)
+
+#### :bug: Bug Fix
+* `ember-keyboard`
+  * [#794](https://github.com/adopted-ember-addons/ember-keyboard/pull/794) Remove ember-destroyable-polyfill from dependencies ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-08-22)
 
 * ember-keyboard 9.0.3 (patch)
