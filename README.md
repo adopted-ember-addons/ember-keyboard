@@ -19,15 +19,24 @@ You can find interactive documentation [here](http://adopted-ember-addons.github
 
 ## Compatibility
 
-* Ember 4 compatibility requires ember-keyboard 7.x or higher
+* Ember 6.x or higher (ember-keyboard 9.x)
+* Ember 4+ compatibility requires ember-keyboard 7.x or higher
 * For Ember 3.8 to 3.28, you can use ember-keyboard 6.x (not compatible with Internet Explorer)
 * For use with Ember 2.0 up to 3.8 or IE compatibility, use ember-keyboard 5.x.
-* Node.js v16 or above
-* ember-auto-import v2.0.0 or above (this is [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html))
+* Node.js v18 or above
+* This is a [v2 addon](https://emberjs.github.io/rfcs/0507-embroider-v2-package-format.html)
 
 ## Accessibility Considerations
 In order to avoid adding keyboard shortcuts to your application that are already in use by assistive technology, please review the existing keyboard shortcuts and gestures available today: https://dequeuniversity.com/screenreaders/.
 
 ## Installation
 
-`ember install ember-keyboard`
+```
+pnpm add ember-keyboard
+```
+
+Or with npm/yarn:
+
+```
+npm install ember-keyboard
+```

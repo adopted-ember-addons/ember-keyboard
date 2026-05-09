@@ -2,13 +2,16 @@ html {
   font-size: 120%;
 }
 
-body, input {
-  background-color: #FFF;
-  color: #00585F;
+body,
+input {
+  background-color: #fff;
+  color: #00585f;
   font-family: 'Open Sans', sans-serif;
 }
 
-html, body, body > .ember-view {
+html,
+body,
+body > .ember-view {
   height: 100%;
   padding: 0;
   margin: 0;
@@ -39,7 +42,7 @@ pre {
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  border: 0 dashed #00585F;
+  border: 0 dashed #00585f;
   border-right-width: thick;
   padding: 30px 30px 0 50px;
   text-align: right;
@@ -48,7 +51,7 @@ pre {
 }
 
 .menu a {
-  color: #00585F;
+  color: #00585f;
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
@@ -90,7 +93,7 @@ pre {
 }
 
 .keyboard-widget {
-  border: thin solid #00585F;
+  border: thin solid #00585f;
   margin: 40px 0;
   padding: 20px;
   cursor: pointer;
@@ -98,19 +101,19 @@ pre {
 }
 
 .keyboard-widget:hover {
-  color: #FFFCC4;
-  background-color: #00585F;
+  color: #fffcc4;
+  background-color: #00585f;
 }
 
 .keyboard-widget.active {
-  color: #FFFCC4;
-  background-color: #00585F;
+  color: #fffcc4;
+  background-color: #00585f;
 }
 
 .counter-container {
-  color: #00585F;
-  background-color: #F0EDBB;
-  border: thin solid #00585F;
+  color: #00585f;
+  background-color: #f0edbb;
+  border: thin solid #00585f;
   box-sizing: border-box;
   display: inline-block;
   overflow: hidden;
@@ -120,10 +123,10 @@ pre {
 }
 
 .counter-container .input-field {
-  background-color: #FFFCC4;
-  border: thin solid #00585F;
+  background-color: #fffcc4;
+  border: thin solid #00585f;
   border-top: 0;
-  color: #00585F;
+  color: #00585f;
   text-align: center;
   width: 20%;
 }

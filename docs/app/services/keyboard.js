@@ -65,7 +65,7 @@ function triggerResponderListener(responder, event, ekEvent = null) {
   }
 
   throw new Error(
-    'A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)'
+    'A responder registered with the ember-keyboard service must implement either `keyboardHandlers` (property returning a dictionary of listenerNames to handler functions), or `handleKeyboardEvent(event)`)',
   );
 }
 
@@ -87,7 +87,7 @@ export default class extends KeyboardService {
             a,
             b,
             'keyboardFirstResponder',
-            Boolean
+            Boolean,
           );
           if (compareValue === 0) {
             return reverseCompareProp(a, b, 'keyboardPriority');

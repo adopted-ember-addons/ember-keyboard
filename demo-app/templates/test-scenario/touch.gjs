@@ -1,0 +1,14 @@
+import TouchStartCounter from '../../components/touch-start-counter.gjs';
+
+<template>
+  <TouchStartCounter
+    @parentActivated={{true}}
+    @priorityInput={{true}}
+    @activatedToggle={{true}}
+    @firstResponderToggle={{true}}
+    @laxPriorityToggle={{true}}
+    @stopImmediatePropagationToggle={{true}}
+    @stopPropagationToggle={{true}}
+    data-test-touch-start-counter
+  />
+</template>

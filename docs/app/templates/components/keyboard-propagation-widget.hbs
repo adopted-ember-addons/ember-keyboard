@@ -1,10 +1,11 @@
 {{#if @v6Intro}}
-  {{format-markdown "
+  {{format-markdown '
   ### Event propagation
-  "}}
+  '}}
 {{/if}}
 
-{{format-markdown "
+{{format-markdown
+  "
 By setting `emberKeyboard.propagation` in the `config/environment.js` to `true` (only for 6.x),
 you're opting into the new event propagation semantics that were introduced in
 [issue #63](https://github.com/patience-tema-baron/ember-keyboard/issues/63).
@@ -55,7 +56,8 @@ fundamentally incompatible. The major advantage of the new event propagation is,
 that higher priority responders get to decide on a per-event basis which events
 to 'catch' and which not as opposed to setting or not setting
 `keyboardLaxPriority` which either 'catches' no or all events.
-"}}
+"
+}}
 
 <KeyDownCounter
   @parentActivated={{this.keyboardActivated}}

@@ -1,30 +1,128 @@
 {
-  "version": "8.2.1",
-  "private": true,
+  "name": "ember-keyboard",
+  "version": "9.0.4",
+  "description": "An Ember.js addon for the painless support of keyboard events",
+  "keywords": [
+    "ember-addon"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/adopted-ember-addons/ember-keyboard.git"
   },
+  "license": "MIT",
+  "author": "",
+  "imports": {
+    "#src/*": "./src/*"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": {
+      "types": "./declarations/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./test-support/key-event": "./dist/test-support/key-event.js",
+    "./test-support/test-helpers": "./dist/test-support/test-helpers.js",
+    "./addon-main.js": "./addon-main.cjs",
+    "./*.css": "./dist/*.css"
+  },
+  "files": [
+    "addon-main.cjs",
+    "declarations",
+    "dist",
+    "src"
+  ],
   "scripts": {
-    "prepare": "cd addon && pnpm build",
-    "test": "cd test-app && pnpm test"
+    "build": "rollup --config",
+    "format": "prettier . --cache --write",
+    "lint": "concurrently \"pnpm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"pnpm:lint:*:fix\" --names \"fix:\" --prefixColors auto && pnpm run format",
+    "lint:format": "prettier . --cache --check",
+    "lint:hbs": "ember-template-lint . --no-error-on-unmatched-pattern",
+    "lint:hbs:fix": "ember-template-lint . --fix --no-error-on-unmatched-pattern",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:publish": "pnpm build && publint run --level error",
+    "lint:types": "ember-tsc --noEmit",
+    "prepack": "rollup --config",
+    "start": "vite dev",
+    "test": "vite build --mode=development --out-dir dist-tests && testem --file testem.cjs ci --port 0"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.10.2",
+    "decorator-transforms": "^2.3.2"
   },
   "devDependencies": {
-    "release-plan": "^0.16.0"
+    "@babel/core": "^7.29.0",
+    "@babel/eslint-parser": "^7.28.6",
+    "@babel/plugin-transform-typescript": "^7.28.6",
+    "@babel/runtime": "^7.29.2",
+    "@ember/app-tsconfig": "^2.0.0",
+    "@ember/library-tsconfig": "^2.0.0",
+    "@ember/test-helpers": "^5.4.2",
+    "@ember/test-waiters": "^4.1.1",
+    "@embroider/addon-dev": "^8.3.0",
+    "@embroider/compat": "^4.1.17",
+    "@embroider/core": "^4.4.7",
+    "@embroider/macros": "^1.20.2",
+    "@embroider/vite": "^1.7.2",
+    "@eslint/js": "^9.39.4",
+    "@glimmer/component": "^2.1.1",
+    "@glint/ember-tsc": "^1.5.0",
+    "@glint/template": "^1.7.7",
+    "@glint/tsserver-plugin": "^2.4.0",
+    "@rollup/plugin-babel": "^7.0.0",
+    "babel-plugin-ember-template-compilation": "^4.0.0",
+    "concurrently": "^9.2.1",
+    "ember-modifier": "^4.3.0",
+    "ember-page-title": "^9.0.3",
+    "ember-qunit": "^9.0.4",
+    "ember-source": "^6.12.0",
+    "ember-strict-application-resolver": "^0.1.1",
+    "ember-template-lint": "^7.9.3",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-ember": "^13.2.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^18.0.1",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-ember-template-tag": "^2.1.6",
+    "publint": "^0.3.20",
+    "qunit": "^2.25.0",
+    "qunit-dom": "^3.5.1",
+    "release-plan": "^0.18.0",
+    "rollup": "^4.60.3",
+    "testem": "^3.20.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.11"
   },
-  "packageManager": "pnpm@9.8.0",
-  "volta": {
-    "node": "18.20.4",
-    "pnpm": "9.8.0"
+  "peerDependencies": {
+    "@ember/test-helpers": "^2.6.0 || ^3.0.0 || >= 4.0.0",
+    "ember-modifier": "^2.1.2 || ^3.1.0 || ^4.0.0"
   },
+  "peerDependenciesMeta": {
+    "@ember/test-helpers": {
+      "optional": true
+    }
+  },
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "webpack"
-      ]
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "demoURL": "https://adopted-ember-addons.github.io/ember-keyboard/",
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./helpers/if-key.js": "./dist/_app_/helpers/if-key.js",
+      "./helpers/on-key.js": "./dist/_app_/helpers/on-key.js",
+      "./modifiers/on-key.js": "./dist/_app_/modifiers/on-key.js",
+      "./services/keyboard.js": "./dist/_app_/services/keyboard.js"
     }
   }
 }

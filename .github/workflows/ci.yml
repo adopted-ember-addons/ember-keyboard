@@ -12,154 +12,85 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    name: "Lints"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+
   test:
     name: "Tests"
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: pnpm
-
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Lint Addon
-        run: pnpm lint
-        working-directory: addon
-
-      - name: Lint Test App
-        run: pnpm lint
-        working-directory: test-app
-
       - name: Run Tests
-        run: pnpm test:ember
-        working-directory: test-app
-
-  test-docs:
-    name: "Test Docs"
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm lint
-        working-directory: docs
-
-      - name: Run Tests
-        run: pnpm test:ember
-        working-directory: docs
+        run: pnpm test
+      # For the Try Scenarios
+      - id: set-matrix
+        run: |
+           echo "matrix=$(pnpm -s dlx @embroider/try list)" >> $GITHUB_OUTPUT
 
   floating:
     name: "Floating Dependencies"
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: pnpm
-
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
+        run: pnpm install --no-lockfile
       - name: Run Tests
-        run: pnpm test:ember
-        working-directory: test-app
+        run: pnpm test
 
   try-scenarios:
-    name: ${{ matrix.try-scenario }}
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    needs: 'test'
-
+    needs: "test"
+    timeout-minutes: 10
     strategy:
       fail-fast: false
-      matrix:
-        try-scenario:
-          - ember-lts-3.28
-          - ember-lts-4.4
-          - ember-lts-4.8
-          - ember-lts-4.12
-          - ember-lts-5.4
-          - ember-release
-          - ember-beta
-          - ember-canary
-          - ember-classic
-          - embroider-safe
-          - embroider-optimized
+      matrix: ${{fromJson(needs.test.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: pnpm
-
+      - name: Apply Scenario
+        run: |
+           pnpm dlx @embroider/try apply ${{ matrix.name }}
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
+        run: pnpm install --no-lockfile
       - name: Run Tests
-        run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }} --skip-cleanup
-        working-directory: test-app
-
-  ember-modifier-scenarios:
-    name: ${{ matrix.ember-modifier-scenario }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    needs: 'test'
-
-    strategy:
-      fail-fast: false
-      matrix:
-        ember-modifier-scenario:
-          - ember-modifier@2
-          - ember-modifier@3.1
-          - ember-modifier@3.2
-          - ember-modifier@4.1
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Update ember-modifier version
-        run: pnpm add ${{ matrix.ember-modifier-scenario }}
-        working-directory: addon
-
-      - name: Run Tests
-        run: pnpm test:ember
-        working-directory: test-app
+        run: |
+          pnpm test
+        env: ${{ matrix.env }}
