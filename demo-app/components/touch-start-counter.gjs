@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
-import { keyResponder, onKey } from '#src/index.js';
 import { tracked } from '@glimmer/tracking';
+import { keyResponder, onKey } from '#src/index.js';
 
 function makeEventHandler(stepSize = 1) {
   return function (_event, ekEvent) {

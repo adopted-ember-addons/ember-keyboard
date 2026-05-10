@@ -1,5 +1,6 @@
 import EmberApp from 'ember-strict-application-resolver';
 import EmberRouter from '@ember/routing/router';
+import { getComponentTemplate } from '@ember/component';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';
@@ -12,10 +13,18 @@ class Router extends EmberRouter {
   rootURL = '/';
 }
 
-function remapKeys(modules) {
+function remapKeys(modules, { extractTemplates = false } = {}) {
   const result = {};
   for (const [key, mod] of Object.entries(modules)) {
-    result[key.replace(/^\.\.\/demo-app\//, './')] = mod;
+    const newKey = key.replace(/^\.\.\/demo-app\//, './');
+    if (extractTemplates && mod.default) {
+      const tpl = getComponentTemplate(mod.default);
+      if (tpl) {
+        result[newKey] = { default: tpl };
+        continue;
+      }
+    }
+    result[newKey] = mod;
   }
   return result;
 }
@@ -53,6 +62,7 @@ class TestApp extends EmberApp {
     ),
     ...remapKeys(
       import.meta.glob('../demo-app/templates/**/*', { eager: true }),
+      { extractTemplates: true },
     ),
     ...remapKeys(
       import.meta.glob('../demo-app/custom-elements/**/*', { eager: true }),
