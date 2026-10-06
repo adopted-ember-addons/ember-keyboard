@@ -17,7 +17,7 @@ module.exports = async function (defaults) {
 };
 
 const compatDeps = {
-  '@embroider/compat': '^4.0.3',
+  '@embroider/compat': '^4.1.27',
   'ember-cli': '^5.12.0',
   'ember-auto-import': '^2.10.0',
   '@ember/optional-features': '^2.2.0',

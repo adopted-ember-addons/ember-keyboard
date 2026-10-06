@@ -15,3 +15,8 @@ autoInstallPeers: false
 # we want true isolation,
 # if a dependency is not declared, we want an error
 resolvePeersFromWorkspaceRoot: false
+
+# @embroider/macros@1.21.2 was published without its build output.
+# Keep transitive ranges (e.g. from ember-auto-import) off of it.
+overrides:
+  '@embroider/macros': '^1.21.3'
