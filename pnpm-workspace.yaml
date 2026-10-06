@@ -4,6 +4,7 @@
 packages:
   - .
   - docs
+  - test-types
 
 allowBuilds:
   core-js: false

@@ -3,7 +3,7 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import onKeyModifier from '#src/modifiers/on-key.js';
+import onKeyModifier from '#src/modifiers/on-key.ts';
 
 export default class OnKeyModifierExamples extends Component {
   @tracked bButtonTriggered = false;

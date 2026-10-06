@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, triggerEvent } from '@ember/test-helpers';
 import { fn } from '@ember/helper';
 import { tracked } from '@glimmer/tracking';
-import { keyDown, keyUp } from '#src/test-support/test-helpers.js';
+import { keyDown, keyUp } from '#src/test-support/test-helpers.ts';
 import DecoratorExample1 from '../../../demo-app/components/decorator-example1.gjs';
 import DecoratorExample2 from '../../../demo-app/components/decorator-example2.gjs';
 import DecoratorExample3 from '../../../demo-app/components/decorator-example3.js';

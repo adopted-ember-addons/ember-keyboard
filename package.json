@@ -15,15 +15,31 @@
     "#src/*": "./src/*"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./*": {
       "types": "./declarations/*.d.ts",
       "default": "./dist/*.js"
     },
-    "./test-support/key-event": "./dist/test-support/key-event.js",
-    "./test-support/test-helpers": "./dist/test-support/test-helpers.js",
+    "./test-support/key-event": {
+      "types": "./declarations/test-support/key-event.d.ts",
+      "default": "./dist/test-support/key-event.js"
+    },
+    "./test-support/test-helpers": {
+      "types": "./declarations/test-support/test-helpers.d.ts",
+      "default": "./dist/test-support/test-helpers.js"
+    },
     "./addon-main.js": "./addon-main.cjs",
     "./*.css": "./dist/*.css"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "declarations/*"
+      ]
+    }
   },
   "files": [
     "addon-main.cjs",

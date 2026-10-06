@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from '#src/index.js';
+import { triggerKeyDown, triggerKeyPress, triggerKeyUp } from '#src/index.ts';
 import TriggerEventWidget from '../../../demo-app/components/trigger-event-widget.gjs';
 
 import { hook } from '../../helpers/hook';

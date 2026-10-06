@@ -8,8 +8,8 @@ import {
 } from '@ember/test-helpers';
 import { fn } from '@ember/helper';
 import { tracked } from '@glimmer/tracking';
-import onKey from '#src/helpers/on-key.js';
-import { keyDown, keyPress, keyUp } from '#src/test-support/test-helpers.js';
+import onKey from '#src/helpers/on-key.ts';
+import { keyDown, keyPress, keyUp } from '#src/test-support/test-helpers.ts';
 
 class TestState {
   @tracked shouldRenderOnKeyHelper = false;

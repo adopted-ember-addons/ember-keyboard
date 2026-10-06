@@ -1,6 +1,6 @@
 import { module, skip, test } from 'qunit';
-import isKey from '#src/utils/is-key.js';
-import getPlatform from '#src/utils/platform.js';
+import isKey from '#src/utils/is-key.ts';
+import getPlatform from '#src/utils/platform.ts';
 
 const WINDOWS_UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36';

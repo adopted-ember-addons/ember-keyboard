@@ -1,14 +1,14 @@
-import getMouseCode from './utils/get-mouse-code.js';
-import { default as keyResponder } from './decorators/key-responder.js';
-import { default as onKey } from './decorators/on-key.js';
+import getMouseCode from './utils/get-mouse-code.ts';
+import { default as keyResponder } from './decorators/key-responder.ts';
+import { default as onKey } from './decorators/on-key.ts';
 
-function getCode() {
+function getCode(): never {
   throw new Error(
     'ember-keyboard: `getCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values',
   );
 }
 
-function getKeyCode() {
+function getKeyCode(): never {
   throw new Error(
     'ember-keyboard: `getKeyCode` has been removed. There is no longer a need for this function as you can directly specify `key` and/or `code` values',
   );
@@ -16,11 +16,27 @@ function getKeyCode() {
 
 export { getCode, getKeyCode, getMouseCode, keyResponder, onKey };
 
-export { keyDown, keyUp, keyPress } from './listeners/key-events.js';
-export { click, mouseDown, mouseUp } from './listeners/mouse-events.js';
-export { touchStart, touchEnd } from './listeners/touch-events.js';
+export { keyDown, keyUp, keyPress } from './listeners/key-events.ts';
+export { click, mouseDown, mouseUp } from './listeners/mouse-events.ts';
+export { touchStart, touchEnd } from './listeners/touch-events.ts';
 export {
   triggerKeyDown,
   triggerKeyPress,
   triggerKeyUp,
-} from './utils/trigger-event.js';
+} from './utils/trigger-event.ts';
+
+export type {
+  EmberKeyboardConfig,
+  EmberKeyboardDOMEvent,
+  EmberKeyboardEvent,
+  KeyboardHandler,
+  KeyboardResponder,
+  KeyEventName,
+  KeyResponderOptions,
+  OnKeyOptions,
+  ResponderHandler,
+} from './types.ts';
+export type { default as KeyboardService } from './services/keyboard.ts';
+export type { OnKeyModifierSignature } from './modifiers/on-key.ts';
+export type { OnKeyHelperSignature } from './helpers/on-key.ts';
+export type { IfKeySignature } from './helpers/if-key.ts';

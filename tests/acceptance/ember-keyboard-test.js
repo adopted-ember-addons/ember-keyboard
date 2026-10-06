@@ -7,7 +7,7 @@ import {
   keyUp,
   keyDown,
   touchStart,
-} from '#src/test-support/test-helpers.js';
+} from '#src/test-support/test-helpers.ts';
 
 import { hook } from '../helpers/hook';
 

@@ -1,15 +1,25 @@
 import { runInDebug } from '@ember/debug';
 
-let platform;
+export type Platform =
+  | 'Windows'
+  | 'Macintosh'
+  | 'Linux'
+  | 'Android'
+  | 'iOS'
+  | 'Unknown OS';
 
-export default function getPlatform(userAgent = navigator.userAgent) {
+let platform: Platform | null | undefined;
+
+export default function getPlatform(
+  userAgent: string = navigator.userAgent,
+): Platform {
   // allow mocking of userAgent in tests, memoize for speed in production
   runInDebug(() => {
     platform = null;
   });
 
   if (!platform) {
-    let osName = 'Unknown OS';
+    let osName: Platform = 'Unknown OS';
     if (userAgent.indexOf('Win') != -1) osName = 'Windows';
     if (userAgent.indexOf('Mac') != -1) osName = 'Macintosh';
     if (userAgent.indexOf('Linux') != -1) osName = 'Linux';

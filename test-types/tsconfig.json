@@ -1,0 +1,9 @@
+{
+  "extends": "@ember/app-tsconfig",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "types": ["ember-source/types", "@glint/ember-tsc/types"]
+  }
+}

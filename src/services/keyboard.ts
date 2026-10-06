@@ -2,42 +2,56 @@ import Service from '@ember/service';
 import { getOwner } from '@ember/application';
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
-import { keyDown, keyPress, keyUp } from '../listeners/key-events.js';
-import { handleKeyEventWithPropagation } from '../utils/handle-key-event.js';
-import { reverseCompareProp } from '../utils/sort.js';
+import type EngineInstance from '@ember/engine/instance';
+import { keyDown, keyPress, keyUp } from '../listeners/key-events.ts';
+import { handleKeyEventWithPropagation } from '../utils/handle-key-event.ts';
+import { reverseCompareProp } from '../utils/sort.ts';
+import type {
+  EmberKeyboardConfig,
+  EmberKeyboardDOMEvent,
+  KeyboardResponder,
+} from '../types.ts';
+
+// Event handlers here are bound with `@action`
+/* eslint-disable @typescript-eslint/unbound-method */
 
 export default class KeyboardService extends Service {
-  registeredResponders = new Set();
+  registeredResponders = new Set<KeyboardResponder>();
 
-  get activeResponders() {
-    let { registeredResponders } = this;
+  get activeResponders(): KeyboardResponder[] {
+    const { registeredResponders } = this;
     return Array.from(registeredResponders).filter((r) => r.keyboardActivated);
   }
 
-  get sortedResponders() {
+  get sortedResponders(): KeyboardResponder[] {
     return this.activeResponders.sort((a, b) => {
       return reverseCompareProp(a, b, 'keyboardPriority');
     });
   }
 
-  get firstResponders() {
+  get firstResponders(): KeyboardResponder[] {
     return this.sortedResponders.filter((r) => r.keyboardFirstResponder);
   }
 
-  get normalResponders() {
+  get normalResponders(): KeyboardResponder[] {
     return this.sortedResponders.filter((r) => !r.keyboardFirstResponder);
   }
 
-  constructor(...args) {
+  _disableOnInput?: boolean;
+  _listeners: string[] = [];
+
+  constructor(...args: ConstructorParameters<typeof Service>) {
     super(...args);
 
     if (typeof FastBoot !== 'undefined') {
       return;
     }
 
-    const config =
-      getOwner(this).resolveRegistration('config:environment') || {};
-    let emberKeyboardConfig = config.emberKeyboard || {};
+    const owner = getOwner(this) as EngineInstance | undefined;
+    const config = (owner?.resolveRegistration('config:environment') || {}) as {
+      emberKeyboard?: EmberKeyboardConfig;
+    };
+    const emberKeyboardConfig = config.emberKeyboard || {};
 
     if (emberKeyboardConfig.disableOnInputFields) {
       this._disableOnInput = true;
@@ -55,8 +69,8 @@ export default class KeyboardService extends Service {
     });
   }
 
-  willDestroy(...args) {
-    super.willDestroy(...args);
+  willDestroy(): void {
+    super.willDestroy();
 
     if (typeof FastBoot !== 'undefined') {
       return;
@@ -68,9 +82,9 @@ export default class KeyboardService extends Service {
   }
 
   @action
-  _respond(event) {
+  _respond(event: Event): void {
     if (this._disableOnInput && event.target) {
-      const target = event.composedPath()[0] ?? event.target;
+      const target = (event.composedPath()[0] ?? event.target) as Element;
       const tag = target.tagName;
       const isContentEditable =
         target.getAttribute && target.getAttribute('contenteditable') != null;
@@ -81,31 +95,37 @@ export default class KeyboardService extends Service {
 
     // eslint-disable-next-line ember/no-runloop
     run(() => {
-      let { firstResponders, normalResponders } = this;
-      handleKeyEventWithPropagation(event, {
+      const { firstResponders, normalResponders } = this;
+      handleKeyEventWithPropagation(event as EmberKeyboardDOMEvent, {
         firstResponders,
         normalResponders,
       });
     });
   }
 
-  register(responder) {
+  register(responder: KeyboardResponder): void {
     this.registeredResponders.add(responder);
   }
 
-  unregister(responder) {
+  unregister(responder: KeyboardResponder): void {
     this.registeredResponders.delete(responder);
   }
 
-  keyDown(...args) {
-    return keyDown(...args);
+  keyDown(keyCombo?: string): string {
+    return keyDown(keyCombo);
   }
 
-  keyPress(...args) {
-    return keyPress(...args);
+  keyPress(keyCombo?: string): string {
+    return keyPress(keyCombo);
   }
 
-  keyUp(...args) {
-    return keyUp(...args);
+  keyUp(keyCombo?: string): string {
+    return keyUp(keyCombo);
+  }
+}
+
+declare module '@ember/service' {
+  interface Registry {
+    keyboard: KeyboardService;
   }
 }

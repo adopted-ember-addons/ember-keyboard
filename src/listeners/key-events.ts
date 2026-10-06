@@ -1,13 +1,13 @@
-import listenerName from '../utils/listener-name.js';
+import listenerName from '../utils/listener-name.ts';
 
-export function keyDown(keyCombo) {
+export function keyDown(keyCombo?: string): string {
   return listenerName('keydown', keyCombo);
 }
 
-export function keyPress(keyCombo) {
+export function keyPress(keyCombo?: string): string {
   return listenerName('keypress', keyCombo);
 }
 
-export function keyUp(keyCombo) {
+export function keyUp(keyCombo?: string): string {
   return listenerName('keyup', keyCombo);
 }

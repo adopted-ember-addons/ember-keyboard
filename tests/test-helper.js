@@ -6,7 +6,7 @@ import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';
 import { start as qunitStart, setupEmberOnerrorValidation } from 'ember-qunit';
 import { setTesting } from '@embroider/macros';
-import KeyboardService from '#src/services/keyboard.js';
+import KeyboardService from '#src/services/keyboard.ts';
 
 class Router extends EmberRouter {
   location = 'none';

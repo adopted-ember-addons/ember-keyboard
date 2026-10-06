@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
-import listenerName from '#src/utils/listener-name.js';
-import getCmdKey from '#src/utils/get-cmd-key.js';
+import listenerName from '#src/utils/listener-name.ts';
+import getCmdKey from '#src/utils/get-cmd-key.ts';
 
 module('Unit | Utility | listener name', function () {
   test('it returns a sorted list of keys (with modifier) after the event name', function (assert) {

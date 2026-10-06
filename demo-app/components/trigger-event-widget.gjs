@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { set } from '@ember/object';
-import { keyResponder, onKey } from '#src/index.js';
+import { keyResponder, onKey } from '#src/index.ts';
 
 @keyResponder({ activated: true })
 export default class TriggerEventWidget extends Component {

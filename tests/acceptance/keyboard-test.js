@@ -1,7 +1,7 @@
 import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { keyDown, keyUp, keyPress } from '#src/test-support/test-helpers.js';
+import { keyDown, keyUp, keyPress } from '#src/test-support/test-helpers.ts';
 import { textChanged } from '../helpers/text-changed';
 
 module('Acceptance | ember keyboard | keyboard', function (hooks) {
