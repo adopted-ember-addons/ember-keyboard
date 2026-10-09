@@ -1,5 +1,25 @@
 # Changelog
 
+## Release (2026-10-09)
+
+* ember-keyboard 10.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-keyboard`
+  * [#796](https://github.com/adopted-ember-addons/ember-keyboard/pull/796) feat: new v2 addon format ([@aklkv](https://github.com/aklkv))
+
+#### :rocket: Enhancement
+* `ember-keyboard`
+  * [#798](https://github.com/adopted-ember-addons/ember-keyboard/pull/798) Convert src to TypeScript and test the published types ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* `ember-keyboard`
+  * [#799](https://github.com/adopted-ember-addons/ember-keyboard/pull/799) Require the fixed @embroider releases ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- Alexey Kulakov ([@aklkv](https://github.com/aklkv))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2025-10-03)
 
 * ember-keyboard 9.0.4 (patch)
