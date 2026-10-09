@@ -1,7 +1,7 @@
 import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { mouseDown } from '#src/test-support/test-helpers.js';
+import { mouseDown } from '#src/test-support/test-helpers.ts';
 import { textChanged } from '../helpers/text-changed';
 
 module('Acceptance | ember keyboard | mouseDown', function (hooks) {

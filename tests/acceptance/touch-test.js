@@ -1,7 +1,7 @@
 import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
-import { touchStart } from '#src/test-support/test-helpers.js';
+import { touchStart } from '#src/test-support/test-helpers.ts';
 import { textChanged } from '../helpers/text-changed';
 
 module('Acceptance | ember keyboard | touch', function (hooks) {

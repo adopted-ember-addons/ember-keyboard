@@ -7,47 +7,47 @@ import { module, test } from 'qunit';
  */
 module('Unit | SSR Safety', function () {
   test('all public modules can be imported', async function (assert) {
-    const index = await import('#src/index.js');
+    const index = await import('#src/index.ts');
     assert.ok(index, 'index module loads');
   });
 
   test('helpers can be imported', async function (assert) {
-    const onKeyHelper = await import('#src/helpers/on-key.js');
+    const onKeyHelper = await import('#src/helpers/on-key.ts');
     assert.ok(onKeyHelper, 'on-key helper loads');
 
-    const ifKeyHelper = await import('#src/helpers/if-key.js');
+    const ifKeyHelper = await import('#src/helpers/if-key.ts');
     assert.ok(ifKeyHelper, 'if-key helper loads');
   });
 
   test('modifiers can be imported', async function (assert) {
-    const onKeyMod = await import('#src/modifiers/on-key.js');
+    const onKeyMod = await import('#src/modifiers/on-key.ts');
     assert.ok(onKeyMod, 'on-key modifier loads');
   });
 
   test('decorators can be imported', async function (assert) {
-    const keyResponder = await import('#src/decorators/key-responder.js');
+    const keyResponder = await import('#src/decorators/key-responder.ts');
     assert.ok(keyResponder, 'key-responder decorator loads');
 
-    const onKey = await import('#src/decorators/on-key.js');
+    const onKey = await import('#src/decorators/on-key.ts');
     assert.ok(onKey, 'on-key decorator loads');
   });
 
   test('services can be imported', async function (assert) {
-    const keyboard = await import('#src/services/keyboard.js');
+    const keyboard = await import('#src/services/keyboard.ts');
     assert.ok(keyboard, 'keyboard service loads');
   });
 
   test('utils do not access browser globals at import time', async function (assert) {
-    const isKey = await import('#src/utils/is-key.js');
+    const isKey = await import('#src/utils/is-key.ts');
     assert.ok(isKey, 'is-key util loads');
 
-    const listenerName = await import('#src/utils/listener-name.js');
+    const listenerName = await import('#src/utils/listener-name.ts');
     assert.ok(listenerName, 'listener-name util loads');
 
-    const sort = await import('#src/utils/sort.js');
+    const sort = await import('#src/utils/sort.ts');
     assert.ok(sort, 'sort util loads');
 
-    const handleKeyEvent = await import('#src/utils/handle-key-event.js');
+    const handleKeyEvent = await import('#src/utils/handle-key-event.ts');
     assert.ok(handleKeyEvent, 'handle-key-event util loads');
   });
 });

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { keyResponder, onKey } from '#src/index.js';
+import { keyResponder, onKey } from '#src/index.ts';
 
 @keyResponder
 export default class DecoratorExample1 extends Component {

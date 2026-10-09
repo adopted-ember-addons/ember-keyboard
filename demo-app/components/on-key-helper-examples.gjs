@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { fn } from '@ember/helper';
 import { tracked } from '@glimmer/tracking';
-import onKey from '#src/helpers/on-key.js';
+import onKey from '#src/helpers/on-key.ts';
 
 function setTrue(obj, key) {
   obj[key] = true;

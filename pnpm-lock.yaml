@@ -283,6 +283,39 @@ importers:
         specifier: ^5.86.0
         version: 5.106.2
 
+  test-types:
+    devDependencies:
+      '@ember/app-tsconfig':
+        specifier: ^2.0.0
+        version: 2.0.0
+      '@ember/test-helpers':
+        specifier: ^5.4.2
+        version: 5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7)
+      '@glimmer/component':
+        specifier: ^2.1.1
+        version: 2.1.1
+      '@glint/ember-tsc':
+        specifier: ^1.5.0
+        version: 1.5.0(typescript@6.0.3)
+      '@glint/template':
+        specifier: ^1.7.7
+        version: 1.7.7
+      ember-keyboard:
+        specifier: workspace:*
+        version: link:..
+      ember-modifier:
+        specifier: ^4.3.0
+        version: 4.3.0(@babel/core@7.29.0)
+      ember-source:
+        specifier: ^6.12.0
+        version: 6.12.0(@glimmer/component@2.1.1)(rsvp@4.8.5)
+      expect-type:
+        specifier: ^1.4.0
+        version: 1.4.0
+      typescript:
+        specifier: ~6.0.3
+        version: 6.0.3
+
 packages:
 
   '@asamuzakjp/css-color@3.2.0':
@@ -4274,6 +4307,10 @@ packages:
   expand-tilde@2.0.2:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
+
+  expect-type@1.4.0:
+    resolution: {integrity: sha512-KfYbmpRm0VbLjEvVa9yGwCi9GI34xvi7A/HXYWQO65CSD2u3MczUJSuwXKFIxlGsgBQizV9q5J9NHj4VG0n+pA==}
+    engines: {node: '>=12.0.0'}
 
   express@4.22.1:
     resolution: {integrity: sha512-F2X8g9P1X7uCPZMA3MVf9wcTqlyNp7IhH5qPCI0izhaOIYXaW9L535tGA3qmjRzpH+bZczqq7hVKxTR4NWnu+g==}
@@ -14092,6 +14129,8 @@ snapshots:
   expand-tilde@2.0.2:
     dependencies:
       homedir-polyfill: 1.0.3
+
+  expect-type@1.4.0: {}
 
   express@4.22.1:
     dependencies:

@@ -1,4 +1,4 @@
-import getPlatform from './platform.js';
+import getPlatform from './platform.ts';
 
 const ALT_REGEX = /^alt$/i;
 const SHIFT_REGEX = /^shift$/i;
@@ -7,28 +7,28 @@ const META_REGEX = /^meta$/i;
 const CMD_REGEX = /^cmd$/i;
 
 export default class KeyboardListener {
-  type; // keydown, keyup, keypress
+  type!: string; // keydown, keyup, keypress
   altKey = false;
   ctrlKey = false;
   shiftKey = false;
   metaKey = false;
-  keyOrCode;
-  platform;
+  keyOrCode?: string;
+  platform: string;
 
-  constructor(platform = getPlatform()) {
+  constructor(platform: string = getPlatform()) {
     this.platform = platform;
   }
 
-  static parse(s, platform = getPlatform()) {
-    let keyboardListener = new KeyboardListener(platform);
-    let [eventType, ...keyCombo] = s.split(':');
-    keyCombo = keyCombo.join(':'); // allow keyCombo contain semicolon
+  static parse(s: string, platform: string = getPlatform()): KeyboardListener {
+    const keyboardListener = new KeyboardListener(platform);
+    const [eventType = '', ...keyComboParts] = s.split(':');
+    const keyCombo = keyComboParts.join(':'); // allow keyCombo contain semicolon
     keyboardListener.type = eventType;
 
     let maybePlus = false;
     keyCombo
       .split('+')
-      .reduce((result, part) => {
+      .reduce<string[]>((result, part) => {
         if (part === '') {
           if (maybePlus) {
             result.push('+');
@@ -64,7 +64,7 @@ export default class KeyboardListener {
     return keyboardListener;
   }
 
-  createMatchingKeyboardEvent(opts = {}) {
+  createMatchingKeyboardEvent(opts: KeyboardEventInit = {}): KeyboardEvent {
     return new KeyboardEvent(
       this.type,
       Object.assign(

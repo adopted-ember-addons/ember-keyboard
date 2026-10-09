@@ -1,12 +1,23 @@
-import isKey from './is-key.js';
+import isKey from './is-key.ts';
+import type {
+  EmberKeyboardDOMEvent,
+  EmberKeyboardEvent,
+  KeyboardResponder,
+} from '../types.ts';
 
 export function handleKeyEventWithPropagation(
-  event,
-  { firstResponders, normalResponders },
-) {
+  event: EmberKeyboardDOMEvent,
+  {
+    firstResponders,
+    normalResponders,
+  }: {
+    firstResponders: KeyboardResponder[];
+    normalResponders: KeyboardResponder[];
+  },
+): void {
   let isImmediatePropagationStopped = false;
   let isPropagationStopped = false;
-  const ekEvent = {
+  const ekEvent: EmberKeyboardEvent = {
     stopImmediatePropagation() {
       isImmediatePropagationStopped = true;
     },
@@ -53,7 +64,11 @@ export function handleKeyEventWithPropagation(
   }
 }
 
-function triggerResponderListener(responder, event, ekEvent = null) {
+function triggerResponderListener(
+  responder: KeyboardResponder,
+  event: EmberKeyboardDOMEvent,
+  ekEvent: EmberKeyboardEvent,
+): void {
   if (responder.handleKeyboardEvent) {
     if (
       responder.canHandleKeyboardEvent &&
@@ -65,14 +80,11 @@ function triggerResponderListener(responder, event, ekEvent = null) {
     return;
   }
 
-  if (responder.keyboardHandlers) {
-    Object.keys(responder.keyboardHandlers).forEach((responderListenerName) => {
+  const { keyboardHandlers } = responder;
+  if (keyboardHandlers) {
+    Object.keys(keyboardHandlers).forEach((responderListenerName) => {
       if (isKey(responderListenerName, event)) {
-        if (ekEvent) {
-          responder.keyboardHandlers[responderListenerName](event, ekEvent);
-        } else {
-          responder.keyboardHandlers[responderListenerName](event);
-        }
+        keyboardHandlers[responderListenerName]!(event, ekEvent);
       }
     });
     return;

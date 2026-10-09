@@ -1,4 +1,4 @@
-import { keyDown, keyUp } from '#src/index.js';
+import { keyDown, keyUp } from '#src/index.ts';
 import { module, test } from 'qunit';
 
 module('Unit | Listener | key events', function () {

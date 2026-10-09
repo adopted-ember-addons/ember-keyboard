@@ -1,8 +1,8 @@
 import { action } from '@ember/object';
 import { run } from '@ember/runloop';
-import KeyboardService from '#src/services/keyboard.js';
-import isKey from '#src/utils/is-key.js';
-import { reverseCompareProp } from '#src/utils/sort.js';
+import KeyboardService from '#src/services/keyboard.ts';
+import isKey from '#src/utils/is-key.ts';
+import { reverseCompareProp } from '#src/utils/sort.ts';
 
 function handleKeyEventWithLaxPriorities(event, sortedResponders) {
   let currentPriorityLevel;

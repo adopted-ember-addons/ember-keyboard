@@ -1,4 +1,4 @@
-export const SHIFT_KEY_MAP = {
+export const SHIFT_KEY_MAP: Record<string, string | undefined> = {
   A: 'a',
   B: 'b',
   C: 'c',
@@ -48,7 +48,7 @@ export const SHIFT_KEY_MAP = {
   '|': '\\',
 };
 
-export const MAC_ALT_KEY_MAP = {
+export const MAC_ALT_KEY_MAP: Record<string, string | undefined> = {
   å: 'a',
   b: 'b',
   ç: 'c',
@@ -98,7 +98,7 @@ export const MAC_ALT_KEY_MAP = {
   '«': '\\',
 };
 
-export const MAC_SHIFT_ALT_KEY_MAP = {
+export const MAC_SHIFT_ALT_KEY_MAP: Record<string, string | undefined> = {
   Å: 'a',
   ı: 'b',
   // 'Dead': 'c',

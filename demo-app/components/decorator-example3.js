@@ -3,7 +3,7 @@
 /* eslint-disable ember/no-classic-components */
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { keyResponder, onKey } from '#src/index.js';
+import { keyResponder, onKey } from '#src/index.ts';
 
 export default keyResponder(
   Component.extend({

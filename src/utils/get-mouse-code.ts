@@ -1,6 +1,8 @@
 import { isNone } from '@ember/utils';
 
-export default function getMouseName(buttonCode) {
+export default function getMouseName(
+  buttonCode?: string | null,
+): 0 | 1 | 2 | undefined {
   if (isNone(buttonCode)) return;
 
   switch (buttonCode) {

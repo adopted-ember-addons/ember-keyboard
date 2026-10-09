@@ -4,8 +4,8 @@ import { focus, render, triggerEvent } from '@ember/test-helpers';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import { tracked } from '@glimmer/tracking';
-import onKeyModifier from '#src/modifiers/on-key.js';
-import { keyDown, keyPress, keyUp } from '#src/test-support/test-helpers.js';
+import onKeyModifier from '#src/modifiers/on-key.ts';
+import { keyDown, keyPress, keyUp } from '#src/test-support/test-helpers.ts';
 
 class TestState {
   @tracked isActivated = false;

@@ -1,4 +1,4 @@
-import getCmdKey from '#src/utils/get-cmd-key.js';
+import getCmdKey from '#src/utils/get-cmd-key.ts';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | get cmd key', function () {

@@ -8,7 +8,7 @@ import {
   triggerEvent,
 } from '@ember/test-helpers';
 import { on } from '@ember/modifier';
-import ifKey from '#src/helpers/if-key.js';
+import ifKey from '#src/helpers/if-key.ts';
 
 module('Integration | Helper | if-key', function (hooks) {
   setupRenderingTest(hooks);

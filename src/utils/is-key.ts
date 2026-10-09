@@ -1,21 +1,29 @@
-import KeyboardListener from './keyboard-listener.js';
-import getPlatform from './platform.js';
+import KeyboardListener from './keyboard-listener.ts';
+import getPlatform from './platform.ts';
 import {
   SHIFT_KEY_MAP,
   MAC_ALT_KEY_MAP,
   MAC_SHIFT_ALT_KEY_MAP,
-} from '../fixtures/key-maps.js';
-import ALL_MODIFIERS from '../fixtures/modifiers-array.js';
-import getMouseName from './get-mouse-name.js';
+} from '../fixtures/key-maps.ts';
+import ALL_MODIFIERS, {
+  type ModifierName,
+} from '../fixtures/modifiers-array.ts';
+import getMouseName from './get-mouse-name.ts';
+import type { EmberKeyboardDOMEvent } from '../types.ts';
+
+type ModifierFlags = Pick<
+  KeyboardListener,
+  'altKey' | 'ctrlKey' | 'metaKey' | 'shiftKey'
+>;
 
 const ALL_SYMBOL = '_all';
 
 export default function isKey(
-  listenerOrListenerName,
-  event,
-  platform = getPlatform(),
-) {
-  let listener;
+  listenerOrListenerName: KeyboardListener | string,
+  event: Event,
+  platform: string = getPlatform(),
+): boolean {
+  let listener: KeyboardListener;
   if (listenerOrListenerName instanceof KeyboardListener) {
     listener = listenerOrListenerName;
   } else if (typeof listenerOrListenerName === 'string') {
@@ -35,16 +43,16 @@ export default function isKey(
   }
 
   if (
-    modifiersMatch(listener, event) &&
+    modifiersMatch(listener, event as EmberKeyboardDOMEvent) &&
     (keyOrCodeMatches(listener, event) || mouseButtonMatches(listener, event))
   ) {
     return true;
   }
 
-  return specialCaseMatches(listener, event, platform);
+  return specialCaseMatches(listener, event as KeyboardEvent, platform);
 }
 
-function isAll(listener) {
+function isAll(listener: KeyboardListener): boolean {
   return (
     listener.keyOrCode === ALL_SYMBOL &&
     listener.altKey === false &&
@@ -54,7 +62,10 @@ function isAll(listener) {
   );
 }
 
-function modifiersMatch(listener, keyboardEvent) {
+function modifiersMatch(
+  listener: KeyboardListener,
+  keyboardEvent: EmberKeyboardDOMEvent,
+): boolean {
   return (
     listener.type === keyboardEvent.type &&
     listener.altKey === keyboardEvent.altKey &&
@@ -64,7 +75,10 @@ function modifiersMatch(listener, keyboardEvent) {
   );
 }
 
-function keyOrCodeMatches(listener, keyboardEvent) {
+function keyOrCodeMatches(
+  listener: KeyboardListener,
+  keyboardEvent: Event,
+): boolean {
   if (!(keyboardEvent instanceof KeyboardEvent)) {
     return false;
   }
@@ -77,7 +91,10 @@ function keyOrCodeMatches(listener, keyboardEvent) {
   );
 }
 
-function mouseButtonMatches(listener, mouseEvent) {
+function mouseButtonMatches(
+  listener: KeyboardListener,
+  mouseEvent: Event,
+): boolean {
   if (!(mouseEvent instanceof MouseEvent)) {
     return false;
   }
@@ -87,7 +104,11 @@ function mouseButtonMatches(listener, mouseEvent) {
   return listener.keyOrCode === getMouseName(mouseEvent.button);
 }
 
-function specialCaseMatches(keyboardListener, keyboardEvent, platform) {
+function specialCaseMatches(
+  keyboardListener: KeyboardListener,
+  keyboardEvent: KeyboardEvent,
+  platform: string,
+): boolean {
   if (
     onlyModifiers([], keyboardListener) &&
     onlyModifiers(['shift'], keyboardEvent)
@@ -123,27 +144,30 @@ function specialCaseMatches(keyboardListener, keyboardEvent, platform) {
   return false;
 }
 
-const ALL_MODIFIERS_EXCEPT_CMD = ALL_MODIFIERS.filter((m) => m != 'cmd');
-function onlyModifiers(names, obj) {
-  for (let modifier of ALL_MODIFIERS_EXCEPT_CMD) {
-    if (names.includes(modifier) && !obj[`${modifier}Key`]) {
+const ALL_MODIFIERS_EXCEPT_CMD = ALL_MODIFIERS.filter(
+  (m): m is Exclude<ModifierName, 'cmd'> => m != 'cmd',
+);
+function onlyModifiers(names: string[], obj: ModifierFlags): boolean {
+  for (const modifier of ALL_MODIFIERS_EXCEPT_CMD) {
+    const flag = `${modifier}Key` as const;
+    if (names.includes(modifier) && !obj[flag]) {
       return false;
     }
-    if (!names.includes(modifier) && obj[`${modifier}Key`]) {
+    if (!names.includes(modifier) && obj[flag]) {
       return false;
     }
   }
   return true;
 }
 
-function rootKeyForShiftKey(key) {
+function rootKeyForShiftKey(key: string): string {
   return SHIFT_KEY_MAP[key] || key;
 }
 
-function rootKeyForMacAltKey(key) {
+function rootKeyForMacAltKey(key: string): string {
   return MAC_ALT_KEY_MAP[key] || key;
 }
 
-function rootKeyForMacShiftAltKey(key) {
+function rootKeyForMacShiftAltKey(key: string): string {
   return MAC_SHIFT_ALT_KEY_MAP[key] || key;
 }

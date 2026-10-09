@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
-import { keyResponder, onKey } from '#src/index.js';
+import { keyResponder, onKey } from '#src/index.ts';
 import { tracked } from '@glimmer/tracking';
 import pick from '../helpers/pick.js';
 
