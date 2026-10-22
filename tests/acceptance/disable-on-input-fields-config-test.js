@@ -39,6 +39,33 @@ module('Acceptance | disableOnInputFields config', function (hooks) {
     assert.deepEqual(getValues(), [0, 0, 0], 'responders do not respond');
   });
 
+  test('contenteditable descendants are ignored but contenteditable=false is not', async function (assert) {
+    await visit('/test-scenario');
+
+    const editable = document.createElement('div');
+    editable.setAttribute('contenteditable', 'true');
+    const editableChild = document.createElement('span');
+    editable.append(editableChild);
+
+    const nonEditable = document.createElement('div');
+    nonEditable.setAttribute('contenteditable', 'false');
+    this.element.append(editable, nonEditable);
+
+    await keyDownWithElement('ArrowRight', editableChild);
+    assert.deepEqual(
+      getValues(),
+      [0, 0, 0],
+      'editable descendants do not respond',
+    );
+
+    await keyDownWithElement('ArrowRight', nonEditable);
+    assert.deepEqual(
+      getValues(),
+      [1, 1, 1],
+      'non-editable elements still respond',
+    );
+  });
+
   test('test event does not propagate on input field in open shadow DOM', async function (assert) {
     assert.expect(1);
 

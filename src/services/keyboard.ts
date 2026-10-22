@@ -86,8 +86,7 @@ export default class KeyboardService extends Service {
     if (this._disableOnInput && event.target) {
       const target = (event.composedPath()[0] ?? event.target) as Element;
       const tag = target.tagName;
-      const isContentEditable =
-        target.getAttribute && target.getAttribute('contenteditable') != null;
+      const isContentEditable = (target as HTMLElement).isContentEditable;
       if (isContentEditable || tag === 'TEXTAREA' || tag === 'INPUT') {
         return;
       }
