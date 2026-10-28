@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2026-10-28)
+
+* ember-keyboard 10.0.1 (patch)
+
+#### :house: Internal
+* `ember-keyboard`
+  * [#781](https://github.com/adopted-ember-addons/ember-keyboard/pull/781) [test-app]: No pods or classic template locations (fixes failing tests for ember 6) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-10-09)
 
 * ember-keyboard 10.0.0 (major)
