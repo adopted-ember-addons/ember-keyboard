@@ -1,19 +1,11 @@
 {
   "solution": {
     "ember-keyboard": {
-      "impact": "major",
-      "oldVersion": "9.0.4",
-      "newVersion": "10.0.0",
+      "impact": "patch",
+      "oldVersion": "10.0.0",
+      "newVersion": "10.0.1",
       "tagName": "latest",
       "constraints": [
-        {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
-        },
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :house: Internal"
@@ -22,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-10-09)\n\n* ember-keyboard 10.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-keyboard`\n  * [#796](https://github.com/adopted-ember-addons/ember-keyboard/pull/796) feat: new v2 addon format ([@aklkv](https://github.com/aklkv))\n\n#### :rocket: Enhancement\n* `ember-keyboard`\n  * [#798](https://github.com/adopted-ember-addons/ember-keyboard/pull/798) Convert src to TypeScript and test the published types ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `ember-keyboard`\n  * [#799](https://github.com/adopted-ember-addons/ember-keyboard/pull/799) Require the fixed @embroider releases ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- Alexey Kulakov ([@aklkv](https://github.com/aklkv))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-10-28)\n\n* ember-keyboard 10.0.1 (patch)\n\n#### :house: Internal\n* `ember-keyboard`\n  * [#781](https://github.com/adopted-ember-addons/ember-keyboard/pull/781) [test-app]: No pods or classic template locations (fixes failing tests for ember 6) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
